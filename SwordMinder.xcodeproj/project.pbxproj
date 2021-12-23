@@ -16,6 +16,7 @@
 		6574E8ED277426B700D462BD /* SwordMinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6574E8EC277426B700D462BD /* SwordMinderTests.swift */; };
 		6574E8F7277426B700D462BD /* SwordMinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6574E8F6277426B700D462BD /* SwordMinderUITests.swift */; };
 		6574E8F9277426B700D462BD /* SwordMinderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6574E8F8277426B700D462BD /* SwordMinderUITestsLaunchTests.swift */; };
+		6574E9072774317600D462BD /* Requirements.md in Resources */ = {isa = PBXBuildFile; fileRef = 6574E90627742A8E00D462BD /* Requirements.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,7 @@
 			files = (
 				6574E8DE277426B700D462BD /* Preview Assets.xcassets in Resources */,
 				6574E8DB277426B700D462BD /* Assets.xcassets in Resources */,
+				6574E9072774317600D462BD /* Requirements.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
