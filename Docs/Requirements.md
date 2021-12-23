@@ -17,16 +17,16 @@
 16. Profile viewing and storage
 17. Friends challenges (I challenge you to memorize the book of Romans by x date)
 18. Verse status (maintain, learn, new) - auto changes based on number of correct interactions with the verse.
-18. Accuracy of verse recall (could be part of challenges or individually set goals)
+19. Accuracy of verse recall (could be part of challenges or individually set goals)
     - Easy = 80%
     - Medium = 90%
     - Hard = 95%
     - Master = 100%
-19. Achievements give you more swords
-20. Levels of armor
+20. Achievements give you more swords
+21. Levels of armor
     - Damascus steel
     - Gems as decorations?
-21. Unlockables
+22. Unlockables
     - Bible mini-games
     - Word search based on one of verses in the goal list; after word is found, it comes out of the grid in animated way down to fill in a blank in the verse below the word search grid.
     - Jumble - words from one of hte verses they are memorizing; player unscrambles the word to increase score
