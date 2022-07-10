@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654A2C04285CD3B5006A7652 /* Requirements.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A2C02285CD3B5006A7652 /* Requirements.md */; };
+		654A2C05285CD3B5006A7652 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A2C03285CD3B5006A7652 /* README.md */; };
 		65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */; };
 		65AB526A285CC10F00FF1038 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5269285CC10F00FF1038 /* ContentView.swift */; };
 		65AB526C285CC11100FF1038 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AB526B285CC11100FF1038 /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		654A2C02285CD3B5006A7652 /* Requirements.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Requirements.md; sourceTree = "<group>"; };
+		654A2C03285CD3B5006A7652 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		65AB5264285CC10F00FF1038 /* SwordMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwordMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinderApp.swift; sourceTree = "<group>"; };
 		65AB5269285CC10F00FF1038 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		654A2C01285CD3B5006A7652 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				654A2C02285CD3B5006A7652 /* Requirements.md */,
+				654A2C03285CD3B5006A7652 /* README.md */,
+			);
+			path = Docs;
+			sourceTree = "<group>";
+		};
 		65AB525B285CC10F00FF1038 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +111,7 @@
 		65AB5266285CC10F00FF1038 /* SwordMinder */ = {
 			isa = PBXGroup;
 			children = (
+				654A2C01285CD3B5006A7652 /* Docs */,
 				65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */,
 				65AB5269285CC10F00FF1038 /* ContentView.swift */,
 				65AB526B285CC11100FF1038 /* Assets.xcassets */,
@@ -238,6 +252,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */,
+				654A2C05285CD3B5006A7652 /* README.md in Resources */,
+				654A2C04285CD3B5006A7652 /* Requirements.md in Resources */,
 				65AB526C285CC11100FF1038 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
