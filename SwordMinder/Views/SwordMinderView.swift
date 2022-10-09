@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  SwordMinderView.swift
 //  SwordMinder
 //
 //  Created by John Delano on 7/10/22.
@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct SwordMinderView: View {
+    @ObservedObject var swordMinder: SwordMinder
     var body: some View {
         TabView {
             HomeView()
                 .tabItem {
                     Label("Home", systemImage:"house")
                 }
-            MemorizeView()
+            MemorizeView(bibleVM: swordMinder)
                 .tabItem {
                     Label("Memorize", systemImage: "brain")
                 }
@@ -26,6 +27,11 @@ struct SwordMinderView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
+            Text("More")
+                .tabItem {
+                    Label("More", systemImage: "ellipsis")
+                }
+
         }
         
     }
@@ -33,6 +39,6 @@ struct SwordMinderView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        SwordMinderView()
+        SwordMinderView(swordMinder: SwordMinder())
     }
 }

@@ -9,12 +9,10 @@ import SwiftUI
 
 @main
 struct SwordMinderApp: App {
-    let persistenceController = PersistenceController.shared
-
+    let bible = Bible(translation: .kjv, url: Bundle.main.url(forResource: "kjv", withExtension: "json")!)
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            SwordMinderView(swordMinder: SwordMinder())
         }
     }
 }

@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		650BD00E28E52441007034EA /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650BD00D28E52441007034EA /* ButtonView.swift */; };
+		650BD01028E529F7007034EA /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650BD00F28E529F7007034EA /* ButtonStyle.swift */; };
+		650BD12E28F0C3D2007034EA /* kjv.json in Resources */ = {isa = PBXBuildFile; fileRef = 650BD12C28F0C3D2007034EA /* kjv.json */; };
+		650BD12F28F0C3D2007034EA /* Bible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650BD12D28F0C3D2007034EA /* Bible.swift */; };
+		650BD13128F0C43B007034EA /* references.json in Resources */ = {isa = PBXBuildFile; fileRef = 650BD13028F0C43B007034EA /* references.json */; };
+		650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650BD13228F0F82E007034EA /* Int+Extensions.swift */; };
+		650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650BD13828F11DF7007034EA /* SwordMinder.swift */; };
+		650BD13B28F24BED007034EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650BD13A28F24BED007034EA /* Player.swift */; };
+		650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650BD13C28F3087D007034EA /* Leaderboard.swift */; };
 		654A2C04285CD3B5006A7652 /* Requirements.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A2C02285CD3B5006A7652 /* Requirements.md */; };
 		654A2C05285CD3B5006A7652 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A2C03285CD3B5006A7652 /* README.md */; };
+		654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */; };
 		65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */; };
-		65AB526A285CC10F00FF1038 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5269285CC10F00FF1038 /* ContentView.swift */; };
 		65AB526C285CC11100FF1038 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AB526B285CC11100FF1038 /* Assets.xcassets */; };
 		65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AB526E285CC11100FF1038 /* Preview Assets.xcassets */; };
-		65AB5271285CC11100FF1038 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5270285CC11100FF1038 /* Persistence.swift */; };
-		65AB5274285CC11100FF1038 /* SwordMinder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5272285CC11100FF1038 /* SwordMinder.xcdatamodeld */; };
 		65AB527E285CC11100FF1038 /* SwordMinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB527D285CC11100FF1038 /* SwordMinderTests.swift */; };
 		65AB5288285CC11100FF1038 /* SwordMinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5287285CC11100FF1038 /* SwordMinderUITests.swift */; };
 		65AB528A285CC11200FF1038 /* SwordMinderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5289285CC11200FF1038 /* SwordMinderUITestsLaunchTests.swift */; };
@@ -43,15 +50,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		650BD00D28E52441007034EA /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		650BD00F28E529F7007034EA /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		650BD12C28F0C3D2007034EA /* kjv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = kjv.json; sourceTree = "<group>"; };
+		650BD12D28F0C3D2007034EA /* Bible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bible.swift; sourceTree = "<group>"; };
+		650BD13028F0C43B007034EA /* references.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = references.json; sourceTree = "<group>"; };
+		650BD13228F0F82E007034EA /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		650BD13828F11DF7007034EA /* SwordMinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinder.swift; sourceTree = "<group>"; };
+		650BD13A28F24BED007034EA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		650BD13C28F3087D007034EA /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		654A2C02285CD3B5006A7652 /* Requirements.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Requirements.md; sourceTree = "<group>"; };
 		654A2C03285CD3B5006A7652 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
 		65AB5264285CC10F00FF1038 /* SwordMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwordMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinderApp.swift; sourceTree = "<group>"; };
-		65AB5269285CC10F00FF1038 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		65AB526B285CC11100FF1038 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65AB526E285CC11100FF1038 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		65AB5270285CC11100FF1038 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		65AB5273285CC11100FF1038 /* SwordMinder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwordMinder.xcdatamodel; sourceTree = "<group>"; };
 		65AB5279285CC11100FF1038 /* SwordMinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwordMinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AB527D285CC11100FF1038 /* SwordMinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinderTests.swift; sourceTree = "<group>"; };
 		65AB5283285CC11100FF1038 /* SwordMinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwordMinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +175,7 @@
 		65EB9D60287B3C9500FAF612 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				650BD13228F0F82E007034EA /* Int+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -168,12 +183,14 @@
 		65EB9D75287B837800FAF612 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				65AB5269285CC10F00FF1038 /* ContentView.swift */,
 				65EB9D78287B9C6300FAF612 /* SwordMinderView.swift */,
 				65EB9D7A287B9D1F00FAF612 /* HomeView.swift */,
 				65EB9D7C287B9D2E00FAF612 /* MemorizeView.swift */,
 				65EB9D7E287B9D4E00FAF612 /* GameView.swift */,
 				65EB9D80287B9E5600FAF612 /* SettingsView.swift */,
+				654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */,
+				650BD00D28E52441007034EA /* ButtonView.swift */,
+				650BD00F28E529F7007034EA /* ButtonStyle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,8 +198,11 @@
 		65EB9D76287B839400FAF612 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				65AB5270285CC11100FF1038 /* Persistence.swift */,
-				65AB5272285CC11100FF1038 /* SwordMinder.xcdatamodeld */,
+				650BD12D28F0C3D2007034EA /* Bible.swift */,
+				650BD13028F0C43B007034EA /* references.json */,
+				650BD12C28F0C3D2007034EA /* kjv.json */,
+				650BD13A28F24BED007034EA /* Player.swift */,
+				650BD13C28F3087D007034EA /* Leaderboard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,6 +210,7 @@
 		65EB9D77287B83B900FAF612 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				650BD13828F11DF7007034EA /* SwordMinder.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -301,6 +322,8 @@
 				65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */,
 				654A2C05285CD3B5006A7652 /* README.md in Resources */,
 				654A2C04285CD3B5006A7652 /* Requirements.md in Resources */,
+				650BD12E28F0C3D2007034EA /* kjv.json in Resources */,
+				650BD13128F0C43B007034EA /* references.json in Resources */,
 				65AB526C285CC11100FF1038 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,13 +349,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65AB5271285CC11100FF1038 /* Persistence.swift in Sources */,
-				65AB526A285CC10F00FF1038 /* ContentView.swift in Sources */,
-				65AB5274285CC11100FF1038 /* SwordMinder.xcdatamodeld in Sources */,
+				654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */,
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
 				65EB9D7B287B9D1F00FAF612 /* HomeView.swift in Sources */,
+				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
+				650BD00E28E52441007034EA /* ButtonView.swift in Sources */,
 				65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */,
+				650BD12F28F0C3D2007034EA /* Bible.swift in Sources */,
+				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,
+				650BD13B28F24BED007034EA /* Player.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
+				650BD01028E529F7007034EA /* ButtonStyle.swift in Sources */,
+				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
 				65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */,
 			);
@@ -490,23 +518,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwordMinder/Preview Content\"";
-				DEVELOPMENT_TEAM = P2R93EDFRL;
+				DEVELOPMENT_TEAM = ZRJ36BS2MW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sword Minder";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.drjdelano.SwordMinder;
+				PRODUCT_BUNDLE_IDENTIFIER = org.thedigitalpath.SwordMinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -519,23 +551,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwordMinder/Preview Content\"";
-				DEVELOPMENT_TEAM = P2R93EDFRL;
+				DEVELOPMENT_TEAM = ZRJ36BS2MW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sword Minder";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.drjdelano.SwordMinder;
+				PRODUCT_BUNDLE_IDENTIFIER = org.thedigitalpath.SwordMinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -659,19 +695,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		65AB5272285CC11100FF1038 /* SwordMinder.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				65AB5273285CC11100FF1038 /* SwordMinder.xcdatamodel */,
-			);
-			currentVersion = 65AB5273285CC11100FF1038 /* SwordMinder.xcdatamodel */;
-			path = SwordMinder.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 65AB525C285CC10F00FF1038 /* Project object */;
 }
