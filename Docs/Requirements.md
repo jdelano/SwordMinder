@@ -1,5 +1,5 @@
 # ``SwordMinder`` Requirements
-1. Time based competition with friends 
+1. Time based competition with friends
 2. League support
 3. Peer group support
 4. Leaderboards (for both peers and global)
