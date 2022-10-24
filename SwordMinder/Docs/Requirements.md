@@ -29,7 +29,7 @@
 22. Unlockables
     - Bible mini-games
     - Word search based on one of verses in the goal list; after word is found, it comes out of the grid in animated way down to fill in a blank in the verse below the word search grid.
-    - Jumble - words from one of hte verses they are memorizing; player unscrambles the word to increase score
+    - Jumble - words from one of the verses they are memorizing; player unscrambles the word to increase score
     - Bible flappy bird; show reference and blanks for verse at bottom of screen; User hits go; Needs to tap the button of the next correct word in the verse to move the bird into position to go through the gap in the pipe; Word shows up in blank in verse in green if correct but red otherwise. If wrong, the user has to retry by tapping one of the remaining buttons; otherwise, bird hits head and game ends.
     - Easy/Med/Hard/Master levels - Easy=no background scrolling, except after button press, so user has time to think about the next correct word; Med=scrolling, but slow and a couple more option buttons to choose from; Hard=faster scrolling; more buttons; Master=faster scrolling; more buttons?; have to tap on the screen above to open doors for the bird to fly through.
     - Option to recycle or end at last verse in the goal list, or only include new/learning verses.
