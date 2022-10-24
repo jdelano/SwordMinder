@@ -8,13 +8,91 @@
 import SwiftUI
 
 struct GameView: View {
+    @Binding var currentApp: Apps
+    
     var body: some View {
-        Text("Game")
+        ScrollView {
+            Grid(horizontalSpacing: 10, verticalSpacing: 10) {
+                GridRow {
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                }
+                GridRow {
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                }
+                GridRow {
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                }
+                GridRow {
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                }
+                GridRow {
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                }
+                GridRow {
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                    SampleAppIconView {
+                        withAnimation {
+                            currentApp = .sampleApp
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
     }
 }
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(currentApp: .constant(.swordMinder))
     }
 }

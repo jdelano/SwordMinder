@@ -9,19 +9,12 @@ import SwiftUI
 
 struct MemorizeView: View {
 
-    @ObservedObject var bibleVM: SwordMinder
+    @ObservedObject var swordMinder: SwordMinder
 
-    var passages: [Bible.Passage]
-
-    init(bibleVM: SwordMinder) {
-        self.bibleVM = bibleVM
-        self.passages = [bibleVM.bible.passage(from: Bible.Reference(fromString: "Genesis 1:1"))!]
-    }
-    
     var body: some View {
         NavigationView {
             List {
-                ForEach(passages) { passage in
+                ForEach(swordMinder.passageList()) { passage in
                     NavigationLink {
                         FlashCardView(passage: passage)
                     } label: {
@@ -45,23 +38,13 @@ struct MemorizeView: View {
     }
     
     private func addItem() {
-//        withAnimation {
-////            let newItem = Item(context: viewContext)
-////            newItem.timestamp = Date()
-//
-//            do {
-////                try viewContext.save()
-//            } catch {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
+        withAnimation {
+            swordMinder.addPassage(from: "John 3:16", to: "John 3:17")
+        }
     }
 
     private func deleteItems(offsets: IndexSet) {
-//        withAnimation {
+        withAnimation {
 //            offsets.map { items[$0] }.forEach(viewContext.delete)
 //
 //            do {
@@ -72,12 +55,19 @@ struct MemorizeView: View {
 //                let nsError = error as NSError
 //                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
 //            }
-//        }
+        }
     }
 }
 
 struct MemorizeView_Previews: PreviewProvider {
     static var previews: some View {
-        MemorizeView(bibleVM: SwordMinder())
+        let bible = Bible(translation: .kjv)
+        MemorizeView(swordMinder: SwordMinder(player: Player(passages: [
+            bible.passage(from: Bible.Reference(fromString: "John 3:16"))!,
+            bible.passage(from: Bible.Reference(fromString: "Genesis 1:1"))!,
+            bible.passage(from: Bible.Reference(fromString: "John 1:12"))!,
+            bible.passage(from: Bible.Reference(fromString: "Romans 5:8"))!,
+            bible.passage(from: Bible.Reference(fromString: "Jeremiah 9:23"))!
+        ])))
     }
 }

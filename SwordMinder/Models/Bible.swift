@@ -15,13 +15,15 @@ struct Bible {
     
     /// Array of Verse structs that contain the all the references and text of all the verses in the Bible
     private var verses: [Verse] = []
-    
-    /// Contains the URL where the JSON file is located that contains the text of the current translation
-    private var url: URL
-    
+
+    /// Retrieves the URL for the KJV translation of the Bible
+    private static var kjvURL: URL {
+        Bundle.main.url(forResource: "kjv", withExtension: "json")!
+    }
+
     /// Used internally to store the number of chapters in each book and the number of verses in each chapter
-    lazy private var books: [BibleBook] = {
-        if let fileLocation = Bundle.main.url(forResource: "bible", withExtension: "json") {
+    private static var books: [BibleBook] {
+        if let fileLocation = Bundle.main.url(forResource: "references", withExtension: "json") {
             do {
                 let data = try Data(contentsOf: fileLocation)
                 return try JSONDecoder().decode([BibleBook].self, from: data)
@@ -30,19 +32,20 @@ struct Bible {
             }
         }
         return []
-    }()
+    }
+    
+    
     
     /// Initialize a new instance of the Bible struct
     /// - Parameters:
     ///   - translation: One of the supported translations of the Bible (KJV is currently the only one supported)
     ///   - url: URL pointing to the location of the JSON file that contains the text of the specified translation
-    init(translation: Translation, url: URL) {
+    init(translation: Translation) {
         self.translation = translation
-        self.url = url
         switch translation {
             case .kjv:
                 do {
-                    let data = try Data(contentsOf: url)
+                    let data = try Data(contentsOf: Bible.kjvURL)
                     self.verses = try JSONDecoder().decode([Verse].self, from: data)
                 } catch {
                     print(error.localizedDescription)
@@ -81,7 +84,7 @@ struct Bible {
     /// Gets the number of chapters in the specified book of the Bible
     /// - Parameter book: The full Bible book name in String format
     /// - Returns: The total number of chapters in the specified book; returns nil if book is invalid or not found.
-    mutating func chapters(in book: String) -> Int? {
+    static func chapters(in book: String) -> Int? {
         books.first(where: { $0.book == book })?.chapters.count
     }
     
@@ -90,7 +93,7 @@ struct Bible {
     ///   - book: The full Bible book name in String format
     ///   - chapter: The chapter number in the book
     /// - Returns: The total number of verses in the specified book and chapter; returns nil if the book is invalid or not found or if the number of chapters specified is invalid for the specified book.
-    mutating func verses(in book: String, chapter: Int) -> Int? {
+    static func verses(in book: String, chapter: Int) -> Int? {
         books.first(where: { $0.book == book })?.chapters[chapter - 1].verses
     }
     

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "damascusHelmet.png",
+      "filename" : "linenBody.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "damascusHelmet@2x.png",
+      "filename" : "linenBody@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "damascusHelmet@3x.png",
+      "filename" : "linenBody@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

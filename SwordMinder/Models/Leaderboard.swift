@@ -8,13 +8,19 @@
 import Foundation
 
 struct Leaderboard {
-    var entries: [Entry] = []
+    private(set) var entries: [Entry] = []
     
-    struct Entry {
+    mutating func add(app: String, score: Int) {
+        entries.append(Entry(app: app, score: score))
+    }
+    
+    mutating func update(index: Int, score: Int) {
+        entries[index].score = score
+    }
+    
+    struct Entry: Identifiable {
+        var id = UUID()
         var app: String = ""
         var score: Int = 0
     }
-    
-    
-    
 }

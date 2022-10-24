@@ -16,7 +16,7 @@ struct FlashCardView: View {
                 .fill(.white)
             RoundedRectangle(cornerRadius: 20)
                 .strokeBorder(.black, lineWidth: 3)
-            Text(isFaceUp ? .init(passage.text) : .init(passage.reference))
+            Text(!isFaceUp ? .init(passage.text) : .init(passage.reference))
                 .padding()
         }
         .aspectRatio(5/3, contentMode: .fit)
@@ -32,7 +32,7 @@ struct FlashCardView: View {
 
 struct FlashCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let bible = Bible(translation: .kjv, url: Bundle.main.url(forResource: "kjv", withExtension: "json")!)
+        let bible = Bible(translation: .kjv)
         let passage = bible.passage(from: Bible.Reference(fromString: "John 3:16"))!
         FlashCardView(passage: passage)
     }

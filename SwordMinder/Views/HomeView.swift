@@ -8,65 +8,107 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject var swordMinder: SwordMinder
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    
     var body: some View {
-        GeometryReader { geometry in
-//            let rect = geometry.frame(in: .local)
+        ZStack {
+            background
+                .ignoresSafeArea(edges: [.top, .leading, .trailing])
             VStack {
-                HStack(alignment: .top) {
-                    GeometryReader { knightGeometry in
-                        let rect = knightGeometry.frame(in: .local)
-                        ZStack(alignment: .top) {
-                            Image("knightBody")
+                if verticalSizeClass == .regular {
+                    HStack {
+                        Text("Level: \(swordMinder.player.level)")
+                            .font(.title)
+                            .fontWeight(.black)
+                            .foregroundColor(.white)
+                        GemView(amount: swordMinder.player.gems)
+                            .frame(width: 50, height: 50)
+                    }
+                }
+                Spacer()
+                Grid(alignment: .bottom) {
+                    GridRow(alignment: .top) {
+                        if verticalSizeClass == .compact {
+                            HStack {
+                                Text("Level: \(swordMinder.player.level)")
+                                    .font(.title)
+                                    .fontWeight(.black)
+                                    .foregroundColor(.white)
+                                GemView(amount: swordMinder.player.gems)
+                                    .frame(width: 50, height: 50)
+                            }
+                        }
+                        VStack {
+                            Image(swordMinder.player.imageName)
                                 .resizable()
-                                .frame(width:rect.width, height: rect.height * 0.88)
                                 .aspectRatio(contentMode: .fit)
-                            Image("damascusHelmet")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .position(x: rect.midX - 3, y:40)
-                            Image("damascusChestplate")
-                                .resizable()
-                                .frame(width: rect.width, height: 190)
-                                .position(x: rect.midX + 4, y:145)
-                            Image("damascusBelt")
-                                .resizable()
-                                .scaledToFit()
-                                .position(x:rect.midX + 3, y:278)
-                            Image("damascusShoes")
-                                .resizable()
-                                .scaledToFit()
-                                .position(x:rect.midX + 3, y:388)
+                                .padding(.leading)
+                            SMButtonView(caption: "Upgrade", glyph: { }) {
+                                swordMinder.player.upgradeArmor()
+                            }
+                            .padding(.horizontal)
+                            .opacity(swordMinder.player.canUpgradeArmorMaterial ? 1 : 0)
                             
+                        }
+                        VStack(spacing: 0) {
+                            ForEach(swordMinder.player.armor) { armor in
+                                ArmorUpgradeView(currentLevel: armor.level,
+                                                 upgradeCost: armor.costToLevelUp(),
+                                                 imageName: armor.imageName,
+                                                 enabled: swordMinder.player.canLevelUp(armorPiece: armor.piece)) {
+                                    withAnimation {
+                                        swordMinder.player.levelUp(piece: armor.piece)
+                                    }
+                                }
+                            }
                         }
                         .padding()
+                        .background(Color.white.opacity(0.8))
+                        .gridCellUnsizedAxes([.vertical])
                     }
-                    VStack(alignment: .leading) {
-                        Text("Gems: 0")
-                            .font(.title)
-                        ButtonView(glyph: "arrow.up", caption: "Upgrade Helmet") {
-                            
-                        }
-                        ButtonView(glyph: "arrow.up", caption: "Upgrade Chest") {
-                            
-                        }
-                        ButtonView(glyph: "arrow.up", caption: "Upgrade Belt") {
-                            
-                        }
-                        ButtonView(glyph: "arrow.up", caption: "Upgrade Shoes") {
-                            print()
-                        }
-                    }
-                    .padding()
                 }
-                .frame(height: geometry.size.height * 2/3)
             }
         }
     }
+    
+    private var background: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .bottom) {
+                VStack(spacing: 0) {
+                    Rectangle()
+                        .fill(.blue)
+                        .frame(height: geometry.size.height * DrawingConstants.skyHeightProportion)
+                    Rectangle()
+                        .fill(.green)
+                }
+                Text("🏰")
+                    .font(.system(size: min(geometry.size.width, geometry.size.height) * DrawingConstants.castleScalingFactor))
+                    .position(x: geometry.size.width * DrawingConstants.castleXLocationScale, y: geometry.size.height * DrawingConstants.castleYLocationScale)
+            }
+        }
+    }
+    
+    private struct DrawingConstants {
+        static let castleScalingFactor: CGFloat = 1/3
+        static let castleXLocationScale: CGFloat = 3/4
+        static let castleYLocationScale: CGFloat = 1/4
+        static let skyHeightProportion: CGFloat = 1/4
+    }
 }
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(swordMinder: SwordMinder(player: Player(withArmor: [
+            Player.Armor(level: 40, piece: .helmet),
+            Player.Armor(level: 40, piece: .breastplate),
+            Player.Armor(level: 40, piece: .belt),
+            Player.Armor(level: 40, piece: .shoes),
+        ], gems: 5000)))
+//        HomeView(swordMinder: SwordMinder(player: Player(withArmor: [], gems: 5000)))
+//            .previewInterfaceOrientation(.landscapeLeft)
+        
     }
 }
 
