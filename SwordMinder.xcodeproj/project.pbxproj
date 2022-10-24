@@ -27,7 +27,6 @@
 		65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D54A2901E849001584F2 /* Color+Extensions.swift */; };
 		65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D54C2901FA4F001584F2 /* ArmorUpgradeView.swift */; };
 		65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D54E2902EBFE001584F2 /* GemView.swift */; };
-		65A5D551290300E1001584F2 /* GemShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D550290300E1001584F2 /* GemShape.swift */; };
 		65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D55229036983001584F2 /* LeaderboardView.swift */; };
 		65A5D55529036E29001584F2 /* LeaderboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D55429036E29001584F2 /* LeaderboardTests.swift */; };
 		65A5D55829037609001584F2 /* SampleAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D55729037609001584F2 /* SampleAppIconView.swift */; };
@@ -83,7 +82,6 @@
 		65A5D54A2901E849001584F2 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		65A5D54C2901FA4F001584F2 /* ArmorUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmorUpgradeView.swift; sourceTree = "<group>"; };
 		65A5D54E2902EBFE001584F2 /* GemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemView.swift; sourceTree = "<group>"; };
-		65A5D550290300E1001584F2 /* GemShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemShape.swift; sourceTree = "<group>"; };
 		65A5D55229036983001584F2 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		65A5D55429036E29001584F2 /* LeaderboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTests.swift; sourceTree = "<group>"; };
 		65A5D55729037609001584F2 /* SampleAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppIconView.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 				650BD00F28E529F7007034EA /* SMButtonStyle.swift */,
 				6506B2412901D682003FA77C /* SMGauge.swift */,
 				65A5D54E2902EBFE001584F2 /* GemView.swift */,
-				65A5D550290300E1001584F2 /* GemShape.swift */,
 				65A5D556290375F2001584F2 /* AppIconViews */,
 			);
 			path = Views;
@@ -421,7 +418,6 @@
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
-				65A5D551290300E1001584F2 /* GemShape.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
