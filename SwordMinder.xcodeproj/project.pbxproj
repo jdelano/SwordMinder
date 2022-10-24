@@ -31,6 +31,7 @@
 		65A5D55529036E29001584F2 /* LeaderboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D55429036E29001584F2 /* LeaderboardTests.swift */; };
 		65A5D55829037609001584F2 /* SampleAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D55729037609001584F2 /* SampleAppIconView.swift */; };
 		65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D55A2903795A001584F2 /* SampleAppView.swift */; };
+		65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D55C2906D340001584F2 /* FlashCardify.swift */; };
 		65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */; };
 		65AB526C285CC11100FF1038 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AB526B285CC11100FF1038 /* Assets.xcassets */; };
 		65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65AB526E285CC11100FF1038 /* Preview Assets.xcassets */; };
@@ -86,6 +87,7 @@
 		65A5D55429036E29001584F2 /* LeaderboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTests.swift; sourceTree = "<group>"; };
 		65A5D55729037609001584F2 /* SampleAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppIconView.swift; sourceTree = "<group>"; };
 		65A5D55A2903795A001584F2 /* SampleAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppView.swift; sourceTree = "<group>"; };
+		65A5D55C2906D340001584F2 /* FlashCardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardify.swift; sourceTree = "<group>"; };
 		65AB5264285CC10F00FF1038 /* SwordMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwordMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinderApp.swift; sourceTree = "<group>"; };
 		65AB526B285CC11100FF1038 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				65A5D55229036983001584F2 /* LeaderboardView.swift */,
 				65EB9D80287B9E5600FAF612 /* SettingsView.swift */,
 				654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */,
+				65A5D55C2906D340001584F2 /* FlashCardify.swift */,
 				65A5D54C2901FA4F001584F2 /* ArmorUpgradeView.swift */,
 				650BD00D28E52441007034EA /* SMButtonView.swift */,
 				650BD00F28E529F7007034EA /* SMButtonStyle.swift */,
@@ -407,6 +410,7 @@
 				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGauge.swift in Sources */,
+				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */,
 				650BD12F28F0C3D2007034EA /* Bible.swift in Sources */,

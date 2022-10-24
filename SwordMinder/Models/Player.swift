@@ -201,13 +201,16 @@ struct Player {
     }
     
     
-    mutating func removePassage(_ passage: Bible.Passage) {
-        if let index = passages.firstIndex(where: { $0.reference == passage.reference }) {
-            passages.remove(at: index)
-        }
+//    mutating func removePassage(_ passage: Bible.Passage) {
+//        if let index = passages.firstIndex(where: { $0.reference == passage.reference }) {
+//            passages.remove(at: index)
+//        }
+//    }
+    
+    mutating func removePassages(atOffsets offsets: IndexSet) {
+        passages.remove(atOffsets: offsets)
     }
-    
-    
+
     struct Armor: Identifiable {
         var id = UUID()
         private(set) var level: Int = 1

@@ -8,25 +8,22 @@
 import SwiftUI
 
 struct FlashCardView: View {
-    @State var isFaceUp: Bool = true
+    @State var isFaceUp: Bool = false
+    @State var flipped: Bool = false
     var passage: Bible.Passage
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.white)
-            RoundedRectangle(cornerRadius: 20)
-                .strokeBorder(.black, lineWidth: 3)
-            Text(!isFaceUp ? .init(passage.text) : .init(passage.reference))
-                .padding()
+            Text(.init(passage.reference))
+                .opacity(flipped ? 1 : 0)
+            Text(.init(passage.text))
+                .opacity(flipped ? 0 : 1)
         }
-        .aspectRatio(5/3, contentMode: .fit)
-        .padding()
+        .flashCardify(isFaceUp: isFaceUp, flipped: $flipped)
         .onTapGesture {
-            withAnimation {
+            withAnimation(.linear(duration: 0.8)) {
                 isFaceUp.toggle()
             }
         }
-        
     }
 }
 

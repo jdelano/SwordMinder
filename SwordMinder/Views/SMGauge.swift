@@ -26,3 +26,8 @@ struct SMGauge: View {
     }
 }
  
+struct SMGauge_Previews: PreviewProvider {
+    static var previews: some View {
+        SMGauge(current: 32, minimum: 1, maximum: 40, imageName: "head.fill")
+    }
+}

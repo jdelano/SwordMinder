@@ -33,7 +33,7 @@ class SwordMinder: ObservableObject {
         player.armor.first(where: { $0.piece == piece })?.level ?? 1
     }
 
-    func passageList() -> [Passage] {
+    var passages: [Passage] {
         player.passages
     }
     
@@ -43,10 +43,8 @@ class SwordMinder: ObservableObject {
         }
     }
     
-    func removePassage(from startReference: String, to endReference: String) {
-        if let passage = bible.passage(from: Reference(fromString: startReference), to: Reference(fromString: endReference)) {
-            player.removePassage(passage)
-        }
+    func removePassages(atOffsets offsets: IndexSet) {
+        player.removePassages(atOffsets: offsets)
     }
 
     

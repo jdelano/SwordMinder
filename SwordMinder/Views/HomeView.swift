@@ -17,40 +17,15 @@ struct HomeView: View {
                 .ignoresSafeArea(edges: [.top, .leading, .trailing])
             VStack {
                 if verticalSizeClass == .regular {
-                    HStack {
-                        Text("Level: \(swordMinder.player.level)")
-                            .font(.title)
-                            .fontWeight(.black)
-                            .foregroundColor(.white)
-                        GemView(amount: swordMinder.player.gems)
-                            .frame(width: 50, height: 50)
-                    }
+                    levelAndGem
                 }
                 Spacer()
                 Grid(alignment: .bottom) {
                     GridRow(alignment: .top) {
                         if verticalSizeClass == .compact {
-                            HStack {
-                                Text("Level: \(swordMinder.player.level)")
-                                    .font(.title)
-                                    .fontWeight(.black)
-                                    .foregroundColor(.white)
-                                GemView(amount: swordMinder.player.gems)
-                                    .frame(width: 50, height: 50)
-                            }
+                            levelAndGem
                         }
-                        VStack {
-                            Image(swordMinder.player.imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .padding(.leading)
-                            SMButtonView(caption: "Upgrade", glyph: { }) {
-                                swordMinder.player.upgradeArmor()
-                            }
-                            .padding(.horizontal)
-                            .opacity(swordMinder.player.canUpgradeArmorMaterial ? 1 : 0)
-                            
-                        }
+                        character
                         VStack(spacing: 0) {
                             ForEach(swordMinder.player.armor) { armor in
                                 ArmorUpgradeView(currentLevel: armor.level,
@@ -89,6 +64,35 @@ struct HomeView: View {
         }
     }
     
+    private var levelAndGem: some View {
+        HStack {
+            Text("Level: \(swordMinder.player.level)")
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(.white)
+            GemView(amount: swordMinder.player.gems)
+                .frame(width: 50, height: 50)
+        }
+    }
+    
+    private var character: some View {
+        VStack {
+            Image(swordMinder.player.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding(.leading)
+            SMButtonView(caption: "Upgrade", glyph: {
+                GemView(amount: 0)
+                    .frame(width: 35, height: 35)
+            }) {
+                swordMinder.player.upgradeArmor()
+            }
+            .padding()
+            .opacity(swordMinder.player.canUpgradeArmorMaterial ? 1 : 0)
+            
+        }
+    }
+    
     private struct DrawingConstants {
         static let castleScalingFactor: CGFloat = 1/3
         static let castleXLocationScale: CGFloat = 3/4
@@ -106,9 +110,6 @@ struct HomeView_Previews: PreviewProvider {
             Player.Armor(level: 40, piece: .belt),
             Player.Armor(level: 40, piece: .shoes),
         ], gems: 5000)))
-//        HomeView(swordMinder: SwordMinder(player: Player(withArmor: [], gems: 5000)))
-//            .previewInterfaceOrientation(.landscapeLeft)
-        
     }
 }
 

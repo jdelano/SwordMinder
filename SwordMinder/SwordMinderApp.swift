@@ -13,11 +13,11 @@ struct SwordMinderApp: App {
     var body: some Scene {
         WindowGroup {
             SwordMinderView(swordMinder: SwordMinder(player: Player(withArmor: [
-                Player.Armor(level: 40, piece: .helmet),
-                Player.Armor(level: 40, piece: .breastplate),
-                Player.Armor(level: 40, piece: .belt),
-                Player.Armor(level: 40, piece: .shoes),
-            ], armorMaterial: .damascusSteel, gems: 5000)))
+                Player.Armor(level: 30, piece: .helmet),
+                Player.Armor(level: 30, piece: .breastplate),
+                Player.Armor(level: 30, piece: .belt),
+                Player.Armor(level: 30, piece: .shoes),
+            ], armorMaterial: .linen, gems: 5000)))
         }
     }
 }
