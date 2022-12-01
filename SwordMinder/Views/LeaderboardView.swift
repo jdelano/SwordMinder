@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LeaderboardView: View {
-    @ObservedObject var swordMinder: SwordMinder
+    @EnvironmentObject var swordMinder: SwordMinder
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,7 +28,8 @@ struct LeaderboardView: View {
 
 struct LeaderboardView_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardView(swordMinder: SwordMinder(leaderboard: Leaderboard(entries: [
+        LeaderboardView()
+            .environmentObject(SwordMinder(leaderboard: Leaderboard(entries: [
             SwordMinder.Entry(app:"Bible Trivia", score: 500),
             SwordMinder.Entry(app:"Bible Tetris", score: 1000),
             SwordMinder.Entry(app:"Speak'n'Say", score: 1500),

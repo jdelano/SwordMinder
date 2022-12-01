@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var swordMinder: SwordMinder
+    @EnvironmentObject var swordMinder: SwordMinder
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
@@ -104,7 +104,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(swordMinder: SwordMinder(player: Player(withArmor: [
+        HomeView()
+            .environmentObject(SwordMinder(player: Player(withArmor: [
             Player.Armor(level: 40, piece: .helmet),
             Player.Armor(level: 40, piece: .breastplate),
             Player.Armor(level: 40, piece: .belt),

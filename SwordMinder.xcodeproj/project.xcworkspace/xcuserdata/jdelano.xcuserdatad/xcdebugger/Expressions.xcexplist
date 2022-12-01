@@ -3,15 +3,38 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "Player.reward(gems:):Player.swift">
-      </ContextState>
-      <ContextState
          contextName = "PlayerTests.testEligibleLessThan5In24Hours():PlayerTests.swift">
          <PersistentStrings>
             <PersistentString
                value = "player.eligible">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BibleTests.testBibleBookLookup():BibleTests.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.reward(gems:):Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Bible.reference(fromString:):Bible.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BibleTests.testVersetoString():BibleTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gen11.verses[0]">
+            </PersistentString>
+            <PersistentString
+               value = "bible.passage(fromString: &quot;Genesis 1:1&quot;)!">
+            </PersistentString>
+            <PersistentString
+               value = "gen11.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BibleTests.testBibleInit():BibleTests.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

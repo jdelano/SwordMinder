@@ -10,109 +10,184 @@ import XCTest
 
 final class BibleTests: XCTestCase {
 
-    private var bibleJSON: String = """
-    [
-      {
-        "book": "Genesis",
-        "chapter": 1,
-        "verse": 1,
-        "text": "In the beginning God created the heaven and the earth."
-      },
-      {
-        "book": "Genesis",
-        "chapter": 1,
-        "verse": 2,
-        "text": "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters."
-      }
-    ]
-    """
-    private let kjvURL: URL = Bundle.main.url(forResource: "kjv", withExtension: "json")!
-    private var verses: [Bible.Verse] = []
+    // MARK: - Bible Tests
     
-    override func setUpWithError() throws {
-        self.verses = try JSONDecoder().decode([Bible.Verse].self, from: bibleJSON.data(using:.utf8)!)
+    func testBibleInit() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        XCTAssert(bible.books(matching: "Gen").first!.chapters.count == 50)
+    }
+    
+    
+    func testBibleReferences() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let ref = bible.reference(fromString: "Gen 1:1")!
+        XCTAssert(ref.chapter == 1)
+        XCTAssert(ref.verse == 1)
+        XCTAssert(ref.book.name == "Genesis")
+        let ref2 = bible.reference(fromString: "First John 2:3")!
+        XCTAssert(ref2.chapter == 2)
+        XCTAssert(ref2.verse == 3)
+        XCTAssert(ref2.book.name == "1 John")
+        let ref3 = bible.reference(fromString: "1st Pet 5:3")!
+        XCTAssert(ref3.chapter == 5)
+        XCTAssert(ref3.verse == 3)
+        XCTAssert(ref3.book.name == "1 Peter")
+        let ref4 = bible.reference(fromString: "Rev 22:20-21")
+        XCTAssert(ref4 == nil)
+    }
+    
+    func testBibleBookLookup() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let books = bible.books(matching: "joh")
+        XCTAssert(books.count == 4)
+    }
+    
+    func testChaptersInBook() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let genesis = bible.books(matching: "Gen").first!
+        XCTAssert(bible.chapters(in: genesis)! == 50)
+        let exodus = bible.books(matching: "Exo").first!
+        XCTAssert(bible.chapters(in: exodus)! == 40)
+        let malachi = bible.books(matching: "Mal").first!
+        XCTAssert(bible.chapters(in: malachi)! == 4)
+        let matthew = bible.books(matching: "Matt").first!
+        XCTAssert(bible.chapters(in: matthew)! == 28)
+        let revelation = bible.books(matching: "Rev").first!
+        XCTAssert(bible.chapters(in: revelation)! == 22)
+    }
+    
+    func testChaptersMatchingBook() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        XCTAssert(bible.chapters(matching: "Gen")! == 50)
+        XCTAssert(bible.chapters(matching: "Exo")! == 40)
+        XCTAssert(bible.chapters(matching: "Mal")! == 4)
+        XCTAssert(bible.chapters(matching: "Matt")! == 28)
+        XCTAssert(bible.chapters(matching: "Rev")! == 22)
     }
 
+    func testVerseInChapterCount() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let genesis = bible.books(matching: "Gen").first!
+        XCTAssert(bible.verses(in: genesis, chapter: 1)! == 31)
+        let exodus = bible.books(matching: "Exo").first!
+        XCTAssert(bible.verses(in: exodus, chapter: 5)! == 23)
+        let psalms = bible.books(matching: "Psa").first!
+        XCTAssert(bible.verses(in: psalms, chapter: 119)! == 176)
+        let malachi = bible.books(matching: "Mal").first!
+        XCTAssert(bible.verses(in: malachi, chapter: 4)! == 6)
+        let matthew = bible.books(matching: "Matt").first!
+        XCTAssert(bible.verses(in: matthew, chapter: 28)! == 20)
+        let romans = bible.books(matching: "Rom").first!
+        XCTAssert(bible.verses(in: romans, chapter: 12)! == 21)
+        let revelation = bible.books(matching: "Rev").first!
+        XCTAssert(bible.verses(in: revelation, chapter: 22)! == 21)
+    }
+    
+    func testVerseMatchingBookChapterCount() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        XCTAssert(bible.verses(matching: "Gen", chapter: 1)! == 31)
+        XCTAssert(bible.verses(matching: "Exo", chapter: 5)! == 23)
+        XCTAssert(bible.verses(matching: "Psa", chapter: 119)! == 176)
+        XCTAssert(bible.verses(matching: "Mal", chapter: 4)! == 6)
+        XCTAssert(bible.verses(matching: "Matt", chapter: 28)! == 20)
+        XCTAssert(bible.verses(matching: "Rom", chapter: 12)! == 21)
+        XCTAssert(bible.verses(matching: "Rev", chapter: 22)! == 21)
+    }
+
+    
     // MARK: - Verse Tests
     
-    func testVerseDecoding() throws {
-        XCTAssert(verses.count == 2)
-        let gen11 = verses.first!
-        XCTAssert(gen11.reference.book == "Genesis")
-        XCTAssert(gen11.reference.chapter == 1)
-        XCTAssert(gen11.reference.verse == 1)
+    func testVersesInBook() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let gen = bible.books(matching: "Genesis").first!
+        XCTAssert(bible.verses(in: gen, chapter: 1) == 31)
+    }
+    
+    func testVersetoString() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let gen11 = bible.passage(fromString: "Genesis 1:1")!
+        XCTAssert(gen11.text == "\(1.superscriptString)In the beginning God created the heaven and the earth.")
     }
 
-    func testVersetoString() throws {
-        let gen11 = verses.first!
-        XCTAssert(gen11.toString() == "\(gen11.reference.verse.superscriptString)\(gen11.text)")
-    }
     
     // MARK: - Reference Tests
     
-    func testReferenceInitFromString() throws {
-        let gen11Ref = Bible.Reference(fromString: "Genesis 1:1")
-        XCTAssert(gen11Ref.book == "Genesis")
-        XCTAssert(gen11Ref.chapter == 1)
-        XCTAssert(gen11Ref.verse == 1)
-    }
-    
-    func testReferenceInitFromParts() throws {
-        let gen11Ref = Bible.Reference(book: "Genesis", chapter: 1, verse: 1)
-        XCTAssert(gen11Ref.book == "Genesis")
-        XCTAssert(gen11Ref.chapter == 1)
-        XCTAssert(gen11Ref.verse == 1)
-    }
-    
-    func testReferencetoString() throws {
-        let gen11Ref = Bible.Reference(book: "Genesis", chapter: 1, verse: 1)
-        XCTAssert(gen11Ref.toString() == "Genesis 1:1")
+    func testReferenceInitFromString() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let gen11Ref = bible.reference(fromString: "Genesis 1:1")
+        XCTAssert(gen11Ref?.book.name == "Genesis")
+        XCTAssert(gen11Ref?.chapter == 1)
+        XCTAssert(gen11Ref?.verse == 1)
     }
 
-    // MARK: - Bible Tests
-    
-    func testChapterCount() throws {
-        XCTAssert(Bible.chapters(in: "Genesis")! == 50)
-        XCTAssert(Bible.chapters(in: "Exodus")! == 40)
-        XCTAssert(Bible.chapters(in: "Malachi")! == 4)
-        XCTAssert(Bible.chapters(in: "Matthew")! == 28)
-        XCTAssert(Bible.chapters(in: "Revelation")! == 22)
+    func testReferencetoString() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let gen11Ref = bible.reference(fromString: "Genesis 1:1")
+        XCTAssert(gen11Ref?.toString() == "Genesis 1:1")
+        let john121Ref = bible.reference(fromString: "john 1:21")
+        XCTAssert(john121Ref?.toString() == "John 1:21")
+        let firstjohn121Ref = bible.reference(fromString: "1st john 1:21")
+        XCTAssert(firstjohn121Ref?.toString() == "1 John 1:21")
     }
-    
-    func testVerseinChapterCount() throws {
-        XCTAssert(Bible.verses(in: "Genesis", chapter: 1)! == 31)
-        XCTAssert(Bible.verses(in: "Exodus", chapter: 5)! == 23)
-        XCTAssert(Bible.verses(in: "Malachi", chapter: 4)! == 6)
-        XCTAssert(Bible.verses(in: "Psalms", chapter: 119)! == 176)
-        XCTAssert(Bible.verses(in: "Matthew", chapter: 28)! == 20)
-        XCTAssert(Bible.verses(in: "Romans", chapter: 12)! == 21)
-        XCTAssert(Bible.verses(in: "Revelation", chapter: 22)! == 21)
-    }
-    
+
     // MARK: - Passage Tests
-    
-    func testBiblePassageOnlyBegin() throws {
-        let bible = Bible(translation: .kjv)
-        let gen11Ref = Bible.Reference(book: "Genesis", chapter: 1, verse: 1)
+
+    func testBiblePassageOnlyBegin() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let gen11Ref = bible.reference(fromString: "Genesis 1:1")!
         let passage = bible.passage(from: gen11Ref)
-        XCTAssert(passage?.text == verses.first!.toString())
+        XCTAssert(passage?.text == "\(1.superscriptString)In the beginning God created the heaven and the earth.")
         XCTAssert(passage?.reference == "Genesis 1:1")
     }
-    
-    func testBiblePassageRange() throws {
-        let bible = Bible(translation: .kjv)
-        let gen11Ref = Bible.Reference(book: "Genesis", chapter: 1, verse: 1)
-        let gen12Ref = Bible.Reference(book: "Genesis", chapter: 1, verse: 2)
+
+    func testBiblePassageRange() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let gen11Ref = bible.reference(fromString: "Genesis 1:1")!
+        let gen12Ref = bible.reference(fromString: "Genesis 1:2")!
         let passage = bible.passage(from: gen11Ref, to: gen12Ref)
-        XCTAssert(passage?.text == verses.first!.toString() + " " + verses[1].toString())
+        XCTAssert(passage?.text == "\(1.superscriptString)In the beginning God created the heaven and the earth. \(2.superscriptString)And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.")
         XCTAssert(passage?.reference == "Genesis 1:1-2")
     }
-    
-    func testBiblePassageRangeCrossChapter() throws {
-        let bible = Bible(translation: .kjv)
-        let gen11Ref = Bible.Reference(book: "Genesis", chapter: 1, verse: 1)
-        let gen215Ref = Bible.Reference(book: "Genesis", chapter: 2, verse: 15)
+
+    func testBiblePassageRangeCrossChapter() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let gen11Ref = bible.reference(fromString: "Genesis 1:1")!
+        let gen215Ref = bible.reference(fromString: "Genesis 2:15")!
         let passage = bible.passage(from: gen11Ref, to: gen215Ref)
         XCTAssert(passage?.reference == "Genesis 1:1-2:15")
     }
+
+    func testBibleReferenceFromString() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        let ref = bible.reference(fromString: "I Sam 2:23")
+        XCTAssert(ref?.book.name == "1 Samuel")
+        XCTAssert(ref?.chapter == 2)
+        XCTAssert(ref?.verse == 23)
+    }
+
+    
+    func testBibleBookMatching() async throws {
+        var bible = Bible(translation: .kjv)
+        await bible.initBible()
+        // 8 books with a "first" prefix (1 Samuel, 1 Kings, 1 Chronicles, 1 Corinthians, 1 Thessalonians, 1 Timothy, 1 Peter, 1 John)
+        XCTAssert(bible.books(matching: "1").count == 8)
+        // 4 books with Jo in them (Joshua, Job, Joel, Jonah, John, 1, 2, 3 John)
+        XCTAssert(bible.books(matching: "Jo").count == 8)
+        XCTAssert(bible.books(matching: "Rom").count == 1)
+    }    
 }

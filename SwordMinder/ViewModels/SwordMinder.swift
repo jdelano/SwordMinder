@@ -15,14 +15,21 @@ class SwordMinder: ObservableObject {
     
     @Published var bible: Bible
     @Published var player: Player
-    @Published private var leaderboard: Leaderboard
-    
-    init(bible: Bible = Bible(translation: .kjv), player: Player = Player(), leaderboard: Leaderboard = Leaderboard()) {
-        self.bible = bible
+    @Published var leaderboard: Leaderboard
+
+    var isLoaded: Bool {
+        bible.isLoaded
+    }
+
+    init(translation: Bible.Translation = .kjv, player: Player = Player(), leaderboard: Leaderboard = Leaderboard()) {
         self.player = player
         self.leaderboard = leaderboard
+        self.bible = Bible(translation: translation)
+        Task {
+            await bible.initBible()
+        }
     }
-    
+               
     // MARK: - Player Intent
     
     func completeTask(difficulty: Int) {
@@ -37,8 +44,8 @@ class SwordMinder: ObservableObject {
         player.passages
     }
     
-    func addPassage(from startReference: String, to endReference: String) {
-        if let passage = bible.passage(from: Reference(fromString: startReference), to: Reference(fromString: endReference)) {
+    func addPassage(from startReference: String, to endReference: String? = nil) {
+        if let passage = bible.passage(fromString: startReference, toString: endReference) {
             player.addPassage(passage)
         }
     }

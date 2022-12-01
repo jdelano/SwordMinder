@@ -12,55 +12,112 @@ import Foundation
 struct Bible {
     /// Determines which translation of the Bible this struct represents; only translation currently supported is KJV
     private(set) var translation: Translation
+    private var abbreviations: Dictionary<String, String> = [:]
+    private var books: [Book] = []
     
     /// Array of Verse structs that contain the all the references and text of all the verses in the Bible
     private var verses: [Verse] = []
+    
+    var isLoaded: Bool = false
 
-    /// Retrieves the URL for the KJV translation of the Bible
-    private static var kjvURL: URL {
-        Bundle.main.url(forResource: "kjv", withExtension: "json")!
-    }
-
-    /// Used internally to store the number of chapters in each book and the number of verses in each chapter
-    private static var books: [BibleBook] {
-        if let fileLocation = Bundle.main.url(forResource: "references", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: fileLocation)
-                return try JSONDecoder().decode([BibleBook].self, from: data)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return []
-    }
-    
-    
-    
     /// Initialize a new instance of the Bible struct
+    ///
     /// - Parameters:
     ///   - translation: One of the supported translations of the Bible (KJV is currently the only one supported)
-    ///   - url: URL pointing to the location of the JSON file that contains the text of the specified translation
     init(translation: Translation) {
         self.translation = translation
-        switch translation {
-            case .kjv:
-                do {
-                    let data = try Data(contentsOf: Bible.kjvURL)
-                    self.verses = try JSONDecoder().decode([Verse].self, from: data)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            default: break
+    }
+    
+    /// Asynchronously initializes the bible contents.
+    /// Repeatedly calling this function on the same instance has no affect
+    /// To force a reload of Bible contents, set isLoaded = false before calling
+    @MainActor
+    mutating func initBible() async {
+        if !isLoaded {
+            self.abbreviations = await URL.decode("abbreviations") ?? [:]
+            self.books = await URL.decode("books") ?? []
+            switch translation {
+                case .kjv:
+                    self.verses = await URL.decode("kjv") ?? []
+                default: break
+            }
         }
+        isLoaded = true
     }
     
-    /// Used internally to find the index in the verses array of the specified reference
-    /// - Parameter reference: Reference of the verse to locate
-    /// - Returns: The index position of the specified reference in the verses array if found; otherwise returns nil
-    private func indexOfVerse(forReference reference: Reference) -> Int? {
-        verses.firstIndex { $0.reference == reference }
+    
+    /// Retrieves an array of Book items
+    ///
+    /// - Parameter pattern: A string pattern that can be used to match a Bible book name
+    /// - Returns: Array of Books that have a name matching the pattern provided
+    func books(matching pattern: String) -> [Book] {
+        books.filter({ abbreviations.filter({ $0.key.lowercased().contains(pattern.lowercased()) }).values.contains($0.name) })
     }
     
+    /// Gets the number of chapters in the specified book of the Bible
+    ///
+    /// - Parameter book: The `Book` struct you are looking up
+    /// - Returns: The total number of chapters in the specified book; returns nil if the book is invalid or not found.
+    func chapters(in book: Book) -> Int? {
+        books.first(where: { $0 == book })?.chapters.count
+    }
+    
+    /// Gets the number of chapters in the specified book of the Bible
+    ///
+    /// - Parameter book: The `Book` struct you are looking up
+    /// - Returns: The total number of chapters in the specified book; returns nil if the book is invalid or not found.
+    func chapters(matching book: String) -> Int? {
+        let matchingBooks = books(matching: book)
+        if !matchingBooks.isEmpty {
+            return chapters(in: matchingBooks.first!)
+        }
+        return nil
+    }
+
+    
+    /// Gets the number of verses in the specified book and chapter of the Bible
+    /// - Parameters:
+    ///   - book: The `Book` struct you are looking up
+    ///   - chapter: The chapter number in the book
+    /// - Returns: The total number of verses in the specified book and chapter; returns nil if the book is invalid or not found or if the number of chapters specified is invalid for the specified book.
+    func verses(in book: Book, chapter: Int) -> Int? {
+        books.first(where: { $0 == book })?.chapters[chapter - 1].verses
+    }
+    
+    
+    /// Gets the number of verses in the specified book and chapter of the Bible
+    /// - Parameters:
+    ///   - book: The name of the book in String format you are looking up
+    ///   - chapter: The chapter number in the book
+    /// - Returns: The total number of verses in the specified book and chapter; returns nil if the book is invalid or not found or if the number of chapters specified is invalid for the specified book.
+    func verses(matching book: String, chapter: Int) -> Int? {
+        let matchingBooks = books(matching: book)
+        if !matchingBooks.isEmpty {
+            return books.first(where: { $0 == matchingBooks.first! })?.chapters[chapter - 1].verses
+        }
+        return nil
+    }
+
+    
+    /// Initializes a new `Reference` based on a String representation of a verse's reference
+    ///
+    /// Only supports a reference to a single verse in the Bible (i.e., ranges are not supported and will return nil)
+    /// 
+    /// - Parameter reference: should contain the name or abbreviation of the Bible book followed by a space,
+    /// and then the chapter number, followed by a colon, and then the verse number.
+    func reference(fromString reference: String) -> Reference? {
+        let pattern = /\b(?:(?<seq>I+|1st|2nd|3rd|First|Second|Third|[123]) )?(?<bk>\w+)\b(?:[ .)\n|](?<ch>\d+)(?::(?<vs>\d+)){0,2}\b)?/
+        if let result = try? pattern.wholeMatch(in: reference), let chap = result.ch, let ch = Int(chap), let vrs = result.vs, let vs = Int(vrs) {
+            let bk = String((result.seq == nil ? "" : result.seq! + " ") + result.bk)
+            let books = books(matching: bk)
+            if books.count >= 1 {
+                return (Reference(book: books.first!, chapter: ch, verse: vs))
+            }
+        }
+        return nil
+    
+    }
+
     
     /// Retrieves a `Passage` containing all the verses starting from the beginning reference up to and including the ending reference.
     ///
@@ -69,8 +126,8 @@ struct Bible {
     ///   - end: Ending reference to include in the Passage. If nil, then the Passage will only contain the verse at the starting reference.
     /// - Returns: A Passage containing all the verses identified by the range of references specified. Returns nil if references cannot be found or are invalid.
     func passage(from begin: Reference, to end: Reference? = nil) -> Passage? {
-        if let beginIndex = indexOfVerse(forReference: begin) {
-            if let end = end, let endIndex = indexOfVerse(forReference: end) {
+        if let beginIndex = verses.firstIndex(where: { $0.reference == begin }) {
+            if let end, let endIndex = verses.firstIndex(where: { $0.reference == end }) {
                 return Passage(verses: Array(verses[beginIndex...endIndex]))
             } else {
                 return Passage(verses: [verses[beginIndex]])
@@ -81,21 +138,27 @@ struct Bible {
     }
     
     
-    /// Gets the number of chapters in the specified book of the Bible
-    /// - Parameter book: The full Bible book name in String format
-    /// - Returns: The total number of chapters in the specified book; returns nil if book is invalid or not found.
-    static func chapters(in book: String) -> Int? {
-        books.first(where: { $0.book == book })?.chapters.count
+    /// Retrieves a `Passage` containing all the verses starting from the beginning reference up to and including the ending reference.
+    ///
+    /// - Parameters:
+    ///   - begin: Starting reference in string format to include in the Passage
+    ///   - end: Ending reference in string format to include in the Passage. If nil, then the Passage will only contain the verse at the starting reference.
+    /// - Returns: A Passage containing all the verses identified by the range of references specified. Returns nil if references cannot be found or are invalid.
+    func passage(fromString begin: String, toString end: String? = nil) -> Passage? {
+        if let beginReference = reference(fromString: begin),
+           let beginIndex = verses.firstIndex(where: { $0.reference == beginReference }) {
+            if let end,
+                let endReference = reference(fromString: end),
+                let endIndex = verses.firstIndex(where: { $0.reference == endReference }) {
+                return Passage(verses: Array(verses[beginIndex...endIndex]))
+            } else {
+                return Passage(verses: [verses[beginIndex]])
+            }
+        } else {
+            return nil
+        }
     }
     
-    /// Gets the number of verses in the specified book and chapter of the Bible
-    /// - Parameters:
-    ///   - book: The full Bible book name in String format
-    ///   - chapter: The chapter number in the book
-    /// - Returns: The total number of verses in the specified book and chapter; returns nil if the book is invalid or not found or if the number of chapters specified is invalid for the specified book.
-    static func verses(in book: String, chapter: Int) -> Int? {
-        books.first(where: { $0.book == book })?.chapters[chapter - 1].verses
-    }
     
     /// Translation enumeration containing the different possible translations that this API intends to support over time
     /// Currently, the KJV translation is the only one supported.
@@ -106,10 +169,12 @@ struct Bible {
         case csb
     }
     
+    // MARK: - Reference
+    
     /// Represents a Bible reference containing book, chapter, and verse for a **single** verse
     struct Reference: Decodable, Equatable {
         /// The Bible book name represented in the reference. The book name should be the full name of the Bible book in string format.
-        var book: String
+        var book: Book
         
         /// The chapter number represented in the reference
         var chapter: Int
@@ -117,52 +182,41 @@ struct Bible {
         /// The verse number represented in the reference
         var verse: Int
         
+        /// Initializes a new `Reference` based on the book, chapter, and verse number of the reference
+        ///
+        /// - Parameters:
+        ///   - book: Should contain the full name of the book (no abbreviations are supported)
+        ///   - chapter: Should contain the chapter number of the reference
+        ///   - verse: Should contain the verse number of the reference
+        fileprivate init(book: Book, chapter: Int, verse: Int) {
+            self.book = book
+            self.chapter = chapter
+            self.verse = verse
+        }
         
-        /// CodingKeys for importing references from JSON
         enum CodingKeys: CodingKey {
             case book
             case chapter
             case verse
         }
         
-        /// Decoding init for importing references from JSON
-        /// - Parameter decoder: decoder used to import file
         init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: Bible.Reference.CodingKeys.self)
-            self.book = try container.decode(String.self, forKey: Bible.Reference.CodingKeys.book)
-            self.chapter = try container.decode(Int.self, forKey: Bible.Reference.CodingKeys.chapter)
-            self.verse = try container.decode(Int.self, forKey: Bible.Reference.CodingKeys.verse)
+            let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
+            self.book = try decoder.singleValueContainer().decode(Book.self)
+            self.chapter = try container.decode(Int.self, forKey: .chapter)
+            self.verse = try container.decode(Int.self, forKey: .verse)
         }
         
-        /// Initializes a new `Reference` based on a String representation of a verse's reference
-        /// - Parameter reference: should contain the full name of the Bible book (no abbreviations are supported) followed by a space,
-        /// and then the chapter number, followed by a colon, and then the verse number.
-        init(fromString reference: String) {
-            let refSplit = reference.split(separator: " ")
-            self.book = String(refSplit.first!)
-            let chapVerse = refSplit.last!.split(separator: ":")
-            self.chapter = Int(chapVerse[0])!
-            self.verse = Int(chapVerse[1])!
-        }
-        
-        /// Initializes a new `Reference` based on the book, chapter, and verse number of the reference
-        /// - Parameters:
-        ///   - book: Should contain the full name of the book (no abbreviations are supported)
-        ///   - chapter: Should contain the chapter number of the reference
-        ///   - verse: Should contain the verse number of the reference
-        init(book: String, chapter: Int, verse: Int) {
-            self.book = book
-            self.chapter = chapter
-            self.verse = verse
-        }
         
         /// Produces a String representation of the Reference
+        ///
         /// - Returns: A String representation of the verse's reference (e.g., "John 3:16")
         func toString() -> String {
-            "\(book) \(chapter):\(verse)"
+            "\(book.name) \(chapter):\(verse)"
         }
     }
     
+    // MARK: - Verse
     
     /// Represents a **single** verse in the Bible
     struct Verse: Decodable {
@@ -175,6 +229,7 @@ struct Bible {
          
         
         /// Initializer used to import verses from a file
+        ///
         /// - Parameter decoder: decoder used to import the verse
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -188,12 +243,15 @@ struct Bible {
         }
         
         /// Produces a string representation of the verse
+        ///
         /// - Returns: A string representation of the verse text, preceded by a superscripted verse number
         func toString() -> String {
             "\(reference.verse.superscriptString)\(text)"
         }
     }
     
+    // MARK: - Passage
+        
     /// Represents a passage of scripture, containing one or more verses. Passages should not extend across book boundaries.
     struct Passage: Identifiable {
         /// id used by Identifiable
@@ -234,23 +292,39 @@ struct Bible {
         fileprivate init(verses: [Verse]) {
             self.verses = verses
         }
-    }
-    
-    
-    /// Used internally to represent the total number verses in each chapter.
-    private struct ChapterVerses: Codable, Hashable {
-        var chapter: Int
-        var verses: Int
-    }
-
-    /// Used internally to represent the total number of chapters and verses within each book of the Bible.
-    private struct BibleBook: Codable, Hashable, Equatable {
-        var abbr: String
-        var book: String
-        var chapters: [ChapterVerses]
         
-        static func == (lhs: BibleBook, rhs: BibleBook) -> Bool {
-            lhs.book == rhs.book
+    }
+    
+    // MARK: - Book
+    
+    /// Used  to represent a book of the Bible.
+    struct Book: Decodable, Equatable {
+        var abbr: String
+        var name: String
+        var chapters: [ChapterVerse] = []
+        
+        static func ==(lhs: Book, rhs: Book) -> Bool {
+            lhs.name == rhs.name
         }
+        
+        private enum CodingKeys: String, CodingKey {
+            case abbr
+            case name = "book"
+            case chapters
+        }
+                      
+        init(from decoder: Decoder) throws {
+            let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
+            self.abbr = try container.decodeIfPresent(String.self, forKey: .abbr) ?? ""
+            self.name = try container.decode(String.self, forKey: .name)
+            self.chapters = try container.decodeIfPresent([ChapterVerse].self, forKey: .chapters) ?? []
+        }
+        
+        
+        struct ChapterVerse: Decodable {
+            var chapter : Int
+            var verses : Int
+        }
+        
     }
 }

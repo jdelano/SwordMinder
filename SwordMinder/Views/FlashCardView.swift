@@ -27,10 +27,10 @@ struct FlashCardView: View {
     }
 }
 
-struct FlashCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        let bible = Bible(translation: .kjv)
-        let passage = bible.passage(from: Bible.Reference(fromString: "John 3:16"))!
-        FlashCardView(passage: passage)
-    }
-}
+//struct FlashCardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let bible = Bible(translation: .kjv)
+//        let passage = bible.passage(from: (try? Bible.Reference(fromString: "John 3:16"))!)!
+//        FlashCardView(passage: passage)
+//    }
+//}

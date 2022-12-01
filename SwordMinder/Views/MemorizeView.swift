@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MemorizeView: View {
 
-    @ObservedObject var swordMinder: SwordMinder
+    @EnvironmentObject var swordMinder: SwordMinder
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(swordMinder.passages) { passage in
                     NavigationLink {
@@ -35,6 +35,7 @@ struct MemorizeView: View {
                 }
             }
         }
+        .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
     }
     
     private func addItem() {
@@ -52,13 +53,8 @@ struct MemorizeView: View {
 
 struct MemorizeView_Previews: PreviewProvider {
     static var previews: some View {
-        let bible = Bible(translation: .kjv)
-        MemorizeView(swordMinder: SwordMinder(player: Player(passages: [
-            bible.passage(from: Bible.Reference(fromString: "John 3:16"))!,
-            bible.passage(from: Bible.Reference(fromString: "Genesis 1:1"))!,
-            bible.passage(from: Bible.Reference(fromString: "John 1:12"))!,
-            bible.passage(from: Bible.Reference(fromString: "Romans 5:8"))!,
-            bible.passage(from: Bible.Reference(fromString: "Jeremiah 9:23"))!
-        ])))
+        let swordMinder = SwordMinder()
+        return MemorizeView()
+            .environmentObject(swordMinder)
     }
 }

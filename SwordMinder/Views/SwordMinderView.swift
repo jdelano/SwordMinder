@@ -14,7 +14,7 @@ enum Apps {
 
 
 struct SwordMinderView: View {
-    @ObservedObject var swordMinder: SwordMinder
+    @EnvironmentObject var swordMinder: SwordMinder
     @State var currentApp: Apps = .swordMinder
     
     
@@ -27,11 +27,11 @@ struct SwordMinderView: View {
 
     var swordMinderMainView : some View {
         TabView {
-            HomeView(swordMinder: swordMinder)
+            HomeView()
                 .tabItem {
                     Label("Home", systemImage:"house")
                 }
-            MemorizeView(swordMinder: swordMinder)
+            MemorizeView()
                 .tabItem {
                     Label("Memorize", systemImage: "brain")
                 }
@@ -39,7 +39,7 @@ struct SwordMinderView: View {
                 .tabItem {
                     Label("Game", systemImage: "gamecontroller")
                 }
-            LeaderboardView(swordMinder: swordMinder)
+            LeaderboardView()
                 .tabItem {
                     Label("Leaderboard", systemImage: "list.star")
                 }
@@ -53,12 +53,12 @@ struct SwordMinderView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        SwordMinderView(swordMinder: SwordMinder(player: Player(withArmor: [], gems: 5000), leaderboard: Leaderboard(entries: [
-            SwordMinder.Entry(app:"Bible Trivia", score: 500),
-            SwordMinder.Entry(app:"Bible Tetris", score: 1000),
-            SwordMinder.Entry(app:"Speak'n'Say", score: 1500),
-            SwordMinder.Entry(app:"Talk it Out", score: 250),
-            SwordMinder.Entry(app:"Block Book", score: 100)
-        ])))
+        SwordMinderView()
+            .environmentObject(SwordMinder(player: Player(withArmor: [
+                Player.Armor(level: 30, piece: .helmet),
+                Player.Armor(level: 30, piece: .breastplate),
+                Player.Armor(level: 30, piece: .belt),
+                Player.Armor(level: 30, piece: .shoes),
+            ], armorMaterial: .linen, gems: 100)))
     }
 }

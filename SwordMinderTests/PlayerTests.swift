@@ -10,17 +10,20 @@ import XCTest
 
 final class PlayerTests: XCTestCase {
     private var player: Player = Player()
-    private var bible: Bible = Bible(translation: .kjv)
+    private var bible: Bible?
     
     override func setUpWithError() throws {
+        Task {
+            await self.bible = Bible(translation: .kjv)
+        }
         player = Player(withArmor: [
             Player.Armor(piece: .helmet),
             Player.Armor(piece: .breastplate),
             Player.Armor(piece: .belt),
             Player.Armor(piece: .shoes),
         ], armorMaterial: .linen, gems: 5000, passages: [
-            bible.passage(from: Bible.Reference(fromString: "Genesis 1:1"))!,
-            bible.passage(from: Bible.Reference(fromString: "John 3:16"))!
+//            bible?.passage(from: try Bible.Reference(fromString: "Genesis 1:1"))!,
+//            bible?.passage(from: try Bible.Reference(fromString: "John 3:16"))!
             ])
     }
     
@@ -112,8 +115,8 @@ final class PlayerTests: XCTestCase {
             Player.Armor(piece: .shoes),
             Player.Armor(piece: .shoes),
         ], gems: 50, passages: [
-            bible.passage(from: Bible.Reference(fromString: "Genesis 1:1"))!,
-            bible.passage(from: Bible.Reference(fromString: "John 3:16"))!
+//            bible.passage(from: try Bible.Reference(fromString: "Genesis 1:1"))!,
+//            bible.passage(from: try Bible.Reference(fromString: "John 3:16"))!
             ])
         // Should only accept the first of each armor piece
         XCTAssert(player.armor.count == 4)
