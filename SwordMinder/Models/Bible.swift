@@ -19,7 +19,7 @@ struct Bible {
     private var verses: [Verse] = []
     
     var isLoaded: Bool = false
-
+    
     /// Initialize a new instance of the Bible struct
     ///
     /// - Parameters:
@@ -34,17 +34,21 @@ struct Bible {
     @MainActor
     mutating func initBible() async {
         if !isLoaded {
-            self.abbreviations = await URL.decode("abbreviations") ?? [:]
-            self.books = await URL.decode("books") ?? []
+            self.abbreviations = await URL.decode("abbreviations")!
+            self.books = await URL.decode("books")!
             switch translation {
                 case .kjv:
-                    self.verses = await URL.decode("kjv") ?? []
+                    self.verses = await URL.decode("kjv")!
                 default: break
             }
         }
         isLoaded = true
     }
     
+    
+    var bookNames: [String] {
+        books.map( { $0.name })
+    }
     
     /// Retrieves an array of Book items
     ///
@@ -58,30 +62,39 @@ struct Bible {
     ///
     /// - Parameter book: The `Book` struct you are looking up
     /// - Returns: The total number of chapters in the specified book; returns nil if the book is invalid or not found.
-    func chapters(in book: Book) -> Int? {
-        books.first(where: { $0 == book })?.chapters.count
+    func chapters(in book: Book) -> [Int] {
+        var chapterArray = [Int]()
+        if let chapters = books.first(where: { $0 == book })?.chapters {
+            for ch in 1...chapters.count { chapterArray.append(ch) }
+        }
+        return chapterArray
     }
     
     /// Gets the number of chapters in the specified book of the Bible
     ///
     /// - Parameter book: The `Book` struct you are looking up
     /// - Returns: The total number of chapters in the specified book; returns nil if the book is invalid or not found.
-    func chapters(matching book: String) -> Int? {
+    func chapters(matching book: String) -> [Int] {
         let matchingBooks = books(matching: book)
         if !matchingBooks.isEmpty {
             return chapters(in: matchingBooks.first!)
         }
-        return nil
+        return []
     }
-
+    
     
     /// Gets the number of verses in the specified book and chapter of the Bible
     /// - Parameters:
     ///   - book: The `Book` struct you are looking up
     ///   - chapter: The chapter number in the book
     /// - Returns: The total number of verses in the specified book and chapter; returns nil if the book is invalid or not found or if the number of chapters specified is invalid for the specified book.
-    func verses(in book: Book, chapter: Int) -> Int? {
-        books.first(where: { $0 == book })?.chapters[chapter - 1].verses
+    func verses(in book: Book, chapter: Int) -> [Int] {
+        var versesArray = [Int]()
+        if chapter <= chapters(in: book).count,
+           let verses = books.first(where: { $0 == book })?.chapters[chapter - 1].verses {
+            for vs in 1...verses { versesArray.append(vs) }
+        }
+        return versesArray
     }
     
     
@@ -90,19 +103,26 @@ struct Bible {
     ///   - book: The name of the book in String format you are looking up
     ///   - chapter: The chapter number in the book
     /// - Returns: The total number of verses in the specified book and chapter; returns nil if the book is invalid or not found or if the number of chapters specified is invalid for the specified book.
-    func verses(matching book: String, chapter: Int) -> Int? {
+    func verses(matching book: String, chapter: Int) -> [Int] {
         let matchingBooks = books(matching: book)
         if !matchingBooks.isEmpty {
-            return books.first(where: { $0 == matchingBooks.first! })?.chapters[chapter - 1].verses
+            return verses(in: matchingBooks.first!, chapter: chapter)
         }
-        return nil
+        return []
     }
-
+    
+    
+    /// Creates a new reference for Genesis 1:1
+    ///
+    /// - Returns: A reference to Genesis 1:1
+    static func reference() -> Reference {
+        Reference(book: Book(name: "Genesis"), chapter: 1, verse: 1)
+    }
     
     /// Initializes a new `Reference` based on a String representation of a verse's reference
     ///
     /// Only supports a reference to a single verse in the Bible (i.e., ranges are not supported and will return nil)
-    /// 
+    ///
     /// - Parameter reference: should contain the name or abbreviation of the Bible book followed by a space,
     /// and then the chapter number, followed by a colon, and then the verse number.
     func reference(fromString reference: String) -> Reference? {
@@ -115,9 +135,38 @@ struct Bible {
             }
         }
         return nil
-    
     }
-
+    
+    
+    /// Initializes a new `Reference` based on a `Book`, chapter, and verse
+    ///
+    /// - Parameters:
+    ///   - book: The `Book` of the Bible
+    ///   - chapter: The chapter number of the reference
+    ///   - verse: The verse number of the reference
+    /// - Returns: A reference corresponding to the provided book, chapter, and verse
+    func reference(book: Book, chapter: Int, verse: Int) -> Reference {
+        Reference(book: book, chapter: chapter, verse: verse)
+    }
+    
+    
+    /// Initializes a new `Reference` based on a String representation of the book, a chapter, and verse number
+    ///
+    /// Only supports a reference to a single verse in the Bible (i.e., ranges are not supported and will return nil)
+    ///
+    /// - Parameters:
+    ///   -  book: The name or abbreviation of the book; If the abbreviation matches multiple book names, the first matching book is used
+    ///   - chapter: The chapter number of the reference
+    ///   - verse: The verse number of the reference
+    /// - Returns: A reference corresponding to the provided book name, chapter, and verse
+    /// and then the chapter number, followed by a colon, and then the verse number.
+    func reference(matching book: String, chapter: Int, verse: Int) -> Reference? {
+        if let book = books(matching: book).first {
+            return reference(book: book, chapter: chapter, verse: verse)
+        }
+        return nil
+    }
+    
     
     /// Retrieves a `Passage` containing all the verses starting from the beginning reference up to and including the ending reference.
     ///
@@ -128,13 +177,13 @@ struct Bible {
     func passage(from begin: Reference, to end: Reference? = nil) -> Passage? {
         if let beginIndex = verses.firstIndex(where: { $0.reference == begin }) {
             if let end, let endIndex = verses.firstIndex(where: { $0.reference == end }) {
-                return Passage(verses: Array(verses[beginIndex...endIndex]))
-            } else {
-                return Passage(verses: [verses[beginIndex]])
+                if beginIndex <= endIndex {
+                    return Passage(verses: Array(verses[beginIndex...endIndex]))
+                }
             }
-        } else {
-            return nil
+            return Passage(verses: [verses[beginIndex]])
         }
+        return nil
     }
     
     
@@ -148,15 +197,15 @@ struct Bible {
         if let beginReference = reference(fromString: begin),
            let beginIndex = verses.firstIndex(where: { $0.reference == beginReference }) {
             if let end,
-                let endReference = reference(fromString: end),
-                let endIndex = verses.firstIndex(where: { $0.reference == endReference }) {
-                return Passage(verses: Array(verses[beginIndex...endIndex]))
-            } else {
-                return Passage(verses: [verses[beginIndex]])
+               let endReference = reference(fromString: end),
+               let endIndex = verses.firstIndex(where: { $0.reference == endReference }) {
+                if beginIndex <= endIndex {
+                    return Passage(verses: Array(verses[beginIndex...endIndex]))
+                }
             }
-        } else {
-            return nil
+            return Passage(verses: [verses[beginIndex]])
         }
+        return nil
     }
     
     
@@ -226,7 +275,7 @@ struct Bible {
         
         /// The text of the verse
         var text: String
-         
+        
         
         /// Initializer used to import verses from a file
         ///
@@ -251,7 +300,7 @@ struct Bible {
     }
     
     // MARK: - Passage
-        
+    
     /// Represents a passage of scripture, containing one or more verses. Passages should not extend across book boundaries.
     struct Passage: Identifiable {
         /// id used by Identifiable
@@ -262,18 +311,17 @@ struct Bible {
         
         /// Provides a nicely formatted reference representing the passage, (e.g., John 3:16-17 or Romans 5:12-6:2)
         var reference: String {
+            var referenceString = ""
             if let beginReference = verses.first?.reference,
                let endReference = verses.last?.reference {
-                var referenceString = beginReference.toString()
+                referenceString = beginReference.toString()
                 if endReference.chapter > beginReference.chapter {
                     referenceString += "-\(endReference.chapter):\(endReference.verse)"
                 } else if endReference.verse > beginReference.verse {
                     referenceString += "-\(endReference.verse)"
                 }
-                return referenceString
-            } else {
-                return ""
             }
+            return referenceString
         }
         
         /// Retrieve the passage of scripture corresponding to the range of verses specified.
@@ -298,7 +346,8 @@ struct Bible {
     // MARK: - Book
     
     /// Used  to represent a book of the Bible.
-    struct Book: Decodable, Equatable {
+    struct Book: Decodable, Equatable, Identifiable {
+        var id: UUID = UUID()
         var abbr: String
         var name: String
         var chapters: [ChapterVerse] = []
@@ -312,12 +361,19 @@ struct Bible {
             case name = "book"
             case chapters
         }
-                      
+        
+        init(abbr: String = "", name: String, chapters: [ChapterVerse] = []) {
+            self.abbr = abbr
+            self.name = name
+            self.chapters = chapters
+        }
+        
         init(from decoder: Decoder) throws {
             let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
             self.abbr = try container.decodeIfPresent(String.self, forKey: .abbr) ?? ""
             self.name = try container.decode(String.self, forKey: .name)
             self.chapters = try container.decodeIfPresent([ChapterVerse].self, forKey: .chapters) ?? []
+            self.id = UUID()
         }
         
         

@@ -10,7 +10,10 @@ import SwiftUI
 struct MemorizeView: View {
 
     @EnvironmentObject var swordMinder: SwordMinder
-
+    @State private var reference: Bible.Reference = Bible.reference()
+    @State private var endReference: Bible.Reference = Bible.reference()
+    @State private var pickVerse: Bool = false
+    
     var body: some View {
         NavigationStack {
             List {
@@ -36,11 +39,15 @@ struct MemorizeView: View {
             }
         }
         .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
+        .sheet(isPresented: $pickVerse) {
+            PassagePicker(startReference: $reference, endReference: $endReference)
+        }
     }
     
     private func addItem() {
         withAnimation {
-            swordMinder.addPassage(from: "John 3:16", to: "John 3:17")
+            pickVerse = true
+//            swordMinder.addPassage(from: "John 3:16", to: "John 3:17")
         }
     }
 

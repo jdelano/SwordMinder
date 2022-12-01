@@ -45,6 +45,7 @@ struct HomeView: View {
                 }
             }
         }
+        .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
     }
     
     private var background: some View {

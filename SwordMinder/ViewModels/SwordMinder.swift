@@ -12,6 +12,7 @@ class SwordMinder: ObservableObject {
     typealias Entry = Leaderboard.Entry
     typealias Passage = Bible.Passage
     typealias Reference = Bible.Reference
+    typealias Book = Bible.Book
     
     @Published var bible: Bible
     @Published var player: Player
@@ -25,7 +26,7 @@ class SwordMinder: ObservableObject {
         self.player = player
         self.leaderboard = leaderboard
         self.bible = Bible(translation: translation)
-        Task {
+        Task { @MainActor in
             await bible.initBible()
         }
     }
