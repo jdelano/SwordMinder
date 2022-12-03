@@ -22,7 +22,7 @@ struct ArmorUpgradeView: View {
     var body: some View {
         let layout = isLandscape ? AnyLayout(HStackLayout()) : AnyLayout(VStackLayout())
         layout {
-            SMGauge(current: Double(currentLevel), minimum: 1, maximum: 40, imageName: imageName)
+            SMGaugeView(current: Double(currentLevel), minimum: 1, maximum: 40, imageName: imageName)
                 .padding(.horizontal)
             SMButtonView(caption: "Level Up") {
                 if enabled {

@@ -10,27 +10,19 @@ import XCTest
 
 final class PlayerTests: XCTestCase {
     private var player: Player = Player()
-    private var bible: Bible?
     
     override func setUpWithError() throws {
-        Task {
-            await self.bible = Bible(translation: .kjv)
-        }
         player = Player(withArmor: [
             Player.Armor(piece: .helmet),
             Player.Armor(piece: .breastplate),
             Player.Armor(piece: .belt),
             Player.Armor(piece: .shoes),
         ], armorMaterial: .linen, gems: 5000, passages: [
-//            bible?.passage(from: try Bible.Reference(fromString: "Genesis 1:1"))!,
-//            bible?.passage(from: try Bible.Reference(fromString: "John 3:16"))!
-            ])
+            Passage(from: Reference()),
+            Passage(from: Reference(book: Book(named: "John")!, chapter: 3, verse: 16))
+        ])
     }
-    
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-    
+        
     func testInitNoParams() throws {
         XCTAssert(player.armor.count == 4)
         XCTAssert(player.armorMaterial == .linen)
@@ -115,8 +107,8 @@ final class PlayerTests: XCTestCase {
             Player.Armor(piece: .shoes),
             Player.Armor(piece: .shoes),
         ], gems: 50, passages: [
-//            bible.passage(from: try Bible.Reference(fromString: "Genesis 1:1"))!,
-//            bible.passage(from: try Bible.Reference(fromString: "John 3:16"))!
+            Passage(from: Reference()),
+            Passage(from: Reference(book: Book(named: "John")!, chapter: 3, verse: 16))
             ])
         // Should only accept the first of each armor piece
         XCTAssert(player.armor.count == 4)
@@ -130,9 +122,18 @@ final class PlayerTests: XCTestCase {
         XCTAssert(shoes?.level == 1)
         XCTAssert(player.gems == 50)
         XCTAssert(player.passages.count == 2)
-        XCTAssert(player.passages.first!.reference == "Genesis 1:1")
+        XCTAssert(player.passages.first!.referenceFormatted == "Genesis 1:1")
     }
 
+    func testInitWithDecoder() throws {
+        var player = Player()
+        player.addPassage(Passage())
+        let json = try! player.json()
+        print(String(data: json, encoding: .utf8)!)
+        let player2 = try! JSONDecoder().decode(Player.self, from: json)
+        XCTAssert(player2.passages.count == 1)
+    }
+    
 //    func testArmorLevelForPiece() throws {
 //        player.levelUp(piece: .helmet)
 //        XCTAssert(player.armorLevel(for: .helmet) == 2)

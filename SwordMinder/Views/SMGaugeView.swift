@@ -1,5 +1,5 @@
 //
-//  SMGauge.swift
+//  SMGaugeView.swift
 //  SwordMinder
 //
 //  Created by John Delano on 10/20/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SMGauge: View {
+struct SMGaugeView: View {
     var current: Double
     var minimum: Double
     var maximum: Double
@@ -28,6 +28,6 @@ struct SMGauge: View {
  
 struct SMGauge_Previews: PreviewProvider {
     static var previews: some View {
-        SMGauge(current: 32, minimum: 1, maximum: 40, imageName: "head.fill")
+        SMGaugeView(current: 32, minimum: 1, maximum: 40, imageName: "head.fill")
     }
 }

@@ -6,6 +6,17 @@
          contextName = "Bible.reference(fromString:):Bible.swift">
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in PassagePicker.body.getter:PassagePicker.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "endReference">
+            </PersistentString>
+            <PersistentString
+               value = "startReference">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "BibleTests.testVersetoString():BibleTests.swift">
          <PersistentStrings>
             <PersistentString

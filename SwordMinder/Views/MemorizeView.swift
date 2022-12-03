@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct MemorizeView: View {
-
     @EnvironmentObject var swordMinder: SwordMinder
-    @State private var reference: Bible.Reference = Bible.reference()
-    @State private var endReference: Bible.Reference = Bible.reference()
-    @State private var pickVerse: Bool = false
+    @State private var editorConfig = EditorConfig()
+    @State private var addPassage: Passage = Passage()
     
     var body: some View {
         NavigationStack {
@@ -21,33 +19,40 @@ struct MemorizeView: View {
                     NavigationLink {
                         FlashCardView(passage: passage)
                     } label: {
-                        Text(.init(passage.reference ))
+                        Text(.init(passage.referenceFormatted))
                     }
                 }
                 .onDelete(perform: deleteItems)
             }
             .navigationTitle("My Passages")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
+            .toolbar { toolbar }
         }
         .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
-        .sheet(isPresented: $pickVerse) {
-            PassagePicker(startReference: $reference, endReference: $endReference)
+        .sheet(isPresented: $editorConfig.isPresented, onDismiss: {
+            if editorConfig.needsSaving {
+                swordMinder.addPassage(addPassage)
+            }
+        }) {
+            PassagePickerView(editorConfig: $editorConfig, passage: $addPassage)
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private var toolbar: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            EditButton()
+        }
+        ToolbarItem {
+            Button(action: addItem) {
+                Image(systemName: "plus")
+            }
         }
     }
     
     private func addItem() {
         withAnimation {
-            pickVerse = true
-//            swordMinder.addPassage(from: "John 3:16", to: "John 3:17")
+            addPassage = Passage()
+            editorConfig.present()
         }
     }
 

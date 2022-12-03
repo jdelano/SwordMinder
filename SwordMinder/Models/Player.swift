@@ -11,14 +11,14 @@ import Foundation
 /// Represents the Player within the SwordMinder game
 ///
 ///
-struct Player {
+struct Player : Codable {
     private(set) var gems: Int = 0
     private var lastRewardReset: Date?
     private var hoursSinceLastRewardsReset: Int? {
         lastRewardReset?.hours(since: Date())
     }
     private var rewardsSinceReset: Int = 0
-    private(set) var passages: [Bible.Passage]
+    private(set) var passages: [Passage]
     private(set) var armor: [Armor]
     private(set) var armorMaterial: ArmorMaterial
 
@@ -60,7 +60,7 @@ struct Player {
     
     /// Identifies the different types of armor that a Player can wear. The armor pieces that a player wears must all come from the same set (i.e., the same material)
     /// The raw value assigned to each case is a multiplier used in determining the overall player level.
-    enum ArmorMaterial: Int {
+    enum ArmorMaterial: Int, Codable {
         case linen = 0
         case leather = 1
         case damascusSteel = 2
@@ -76,7 +76,7 @@ struct Player {
     ///   - armor: An array containing up to four armor pieces.
     ///   - gems: The count of gems that the player has
     ///   - passages: An array of Bible passages that the player has selected for their passage list
-    init(withArmor armor: [Armor] = [], armorMaterial: ArmorMaterial = .linen, gems: Int = 0, passages: [Bible.Passage] = []) {
+    init(withArmor armor: [Armor] = [], armorMaterial: ArmorMaterial = .linen, gems: Int = 0, passages: [Passage] = []) {
         self.armor = []
         // Use only the first of each armor piece; if piece not present, use default armor for that piece
         if let helmet = armor.first(where: { $0.piece == .helmet }) {
@@ -104,6 +104,46 @@ struct Player {
         self.passages = passages
     }
 
+    func json() throws -> Data {
+        try JSONEncoder().encode(self)
+    }
+    
+    init(json: Data) throws {
+        self = try JSONDecoder().decode(Player.self, from: json)
+    }
+    
+    init(url: URL) throws {
+        let data = try Data(contentsOf: url)
+        self = try Player(json: data)
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case gems
+        case lastRewardReset
+        case rewardsSinceReset
+        case passages
+        case armor
+        case armorMaterial
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.gems = try container.decode(Int.self, forKey: .gems)
+        self.lastRewardReset = try container.decodeIfPresent(Date.self, forKey: .lastRewardReset)
+        self.rewardsSinceReset = try container.decodeIfPresent(Int.self, forKey: .rewardsSinceReset) ?? 0
+        self.passages = try container.decode([Passage].self, forKey: .passages)
+        self.armor = try container.decode([Player.Armor].self, forKey: .armor)
+        self.armorMaterial = try container.decode(Player.ArmorMaterial.self, forKey: .armorMaterial)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(gems, forKey: .gems)
+        try container.encode(lastRewardReset, forKey: .lastRewardReset)
+        try container.encode(passages, forKey: .passages)
+        try container.encode(armor, forKey: .armor)
+        try container.encode(armorMaterial, forKey: .armorMaterial)
+    }
         
 //    func costToLevelUp(for piece: Armor.ArmorPiece) -> Int {
 //        armor.filter( { $0.piece == piece }).first?.costToLevelUp() ?? 9999
@@ -196,7 +236,7 @@ struct Player {
     }
     
     
-    mutating func addPassage(_ passage: Bible.Passage) {
+    mutating func addPassage(_ passage: Passage) {
         passages.append(passage)
     }
     
@@ -211,7 +251,7 @@ struct Player {
         passages.remove(atOffsets: offsets)
     }
 
-    struct Armor: Identifiable {
+    struct Armor: Identifiable, Codable {
         var id = UUID()
         private(set) var level: Int = 1
         private(set) var charged = false
@@ -225,7 +265,7 @@ struct Player {
             }
         }
                 
-        enum ArmorPiece: String {
+        enum ArmorPiece: String, Codable {
             case helmet = "helmet"
             case breastplate = "breastplate"
             case belt = "belt"
@@ -251,7 +291,7 @@ struct Player {
     }
     
     
-    struct PlayerConstants {
+    struct PlayerConstants : Codable {
         // Larger numbers increase difficulty early; lower numbers flattens the growth curve
         static let levelUpFactor: Double = 3.0
         // Even small increases dramatically increase cost of leveling up
