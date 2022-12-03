@@ -37,7 +37,7 @@ struct Bible {
     /// Repeatedly calling this function on the same instance has no affect
     /// To force a reload of Bible contents, set isLoaded = false before calling
     @MainActor
-    mutating func initBible() async {
+    mutating func loadBible() async {
         if !isLoaded {
             self.abbreviations = await URL.decode("abbreviations")!
             self.books = await URL.decode("books")!

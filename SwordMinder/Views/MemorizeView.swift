@@ -19,7 +19,12 @@ struct MemorizeView: View {
                     NavigationLink {
                         FlashCardView(passage: passage)
                     } label: {
-                        Text(.init(passage.referenceFormatted))
+                        HStack {
+                            Text(.init(passage.referenceFormatted))
+                            Spacer()
+                            Image(systemName: swordMinder.isPassageReviewedToday(passage) ? "checkmark" : "")
+                                .foregroundColor(.green)
+                        }
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -65,7 +70,7 @@ struct MemorizeView: View {
 
 struct MemorizeView_Previews: PreviewProvider {
     static var previews: some View {
-        let swordMinder = SwordMinder()
+        let swordMinder = SwordMinder(player: Player(passages: [Passage()]))
         return MemorizeView()
             .environmentObject(swordMinder)
     }

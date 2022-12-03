@@ -9,8 +9,9 @@ import SwiftUI
 
 struct FlashCardView: View {
     @EnvironmentObject var swordMinder: SwordMinder
-    @State var isFaceUp: Bool = false
-    @State var flipped: Bool = false
+    @State private var isFaceUp: Bool = false
+    @State private var flipped: Bool = false
+    @State private var flippedCount: Int = 0
     var passage: Passage
     var body: some View {
         ZStack {
@@ -23,15 +24,23 @@ struct FlashCardView: View {
         .onTapGesture {
             withAnimation(.linear(duration: 0.8)) {
                 isFaceUp.toggle()
+                if isFaceUp {
+                    flippedCount += 1
+                }
+            }
+        }
+        .onChange(of: flippedCount) { count in
+            swordMinder.reviewPassage(passage)
+            if count == 3 {
+                swordMinder.completeTask(difficulty: 1)
             }
         }
     }
 }
 
-//struct FlashCardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let bible = Bible()
-//        let passage = bible.passage(from: (try? Bible.Reference(fromString: "John 3:16"))!)!
-//        FlashCardView(passage: passage)
-//    }
-//}
+struct FlashCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        FlashCardView(passage: Passage())
+            .environmentObject(SwordMinder())
+    }
+}

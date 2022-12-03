@@ -40,7 +40,7 @@ struct FlashCardify: AnimatableModifier {
                 .padding()
         }
         .foregroundColor(rotationAngle < 90 ? .black : .white)
-        .aspectRatio(5/3, contentMode: .fit)
+//        .aspectRatio(5/3, contentMode: .fit)
         .padding()
         .modifier(FlipEffect(flipped: $flipped, angle: rotationAngle))
     }
@@ -57,7 +57,7 @@ struct FlashCardify: AnimatableModifier {
         var angle: Double
         
         func effectValue(size: CGSize) -> ProjectionTransform {
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 self.flipped = self.angle >= 90 && self.angle < 270
             }
             let tweakedAngle = flipped ? -180 + angle : angle

@@ -9,8 +9,6 @@ import Foundation
 
 
 /// Represents the Player within the SwordMinder game
-///
-///
 struct Player : Codable {
     private(set) var gems: Int = 0
     private var lastRewardReset: Date?
@@ -21,6 +19,7 @@ struct Player : Codable {
     private(set) var passages: [Passage]
     private(set) var armor: [Armor]
     private(set) var armorMaterial: ArmorMaterial
+    private(set) var reviewedPassages: Dictionary<UUID, [Date]> = [:]
 
     /// The player's level calculated by the average level of each armor piece, taking into account the material of each armor set
     var level: Int {
@@ -117,6 +116,8 @@ struct Player : Codable {
         self = try Player(json: data)
     }
 
+    // MARK: - Codable
+    
     private enum CodingKeys: String, CodingKey {
         case gems
         case lastRewardReset
@@ -124,6 +125,7 @@ struct Player : Codable {
         case passages
         case armor
         case armorMaterial
+        case reviewedPassages
     }
     
     init(from decoder: Decoder) throws {
@@ -134,6 +136,7 @@ struct Player : Codable {
         self.passages = try container.decode([Passage].self, forKey: .passages)
         self.armor = try container.decode([Player.Armor].self, forKey: .armor)
         self.armorMaterial = try container.decode(Player.ArmorMaterial.self, forKey: .armorMaterial)
+        self.reviewedPassages = try container.decodeIfPresent(Dictionary<UUID, [Date]>.self, forKey: .reviewedPassages) ?? [:]
     }
     
     func encode(to encoder: Encoder) throws {
@@ -143,6 +146,7 @@ struct Player : Codable {
         try container.encode(passages, forKey: .passages)
         try container.encode(armor, forKey: .armor)
         try container.encode(armorMaterial, forKey: .armorMaterial)
+        try container.encode(reviewedPassages, forKey: .reviewedPassages)
     }
         
 //    func costToLevelUp(for piece: Armor.ArmorPiece) -> Int {
@@ -236,21 +240,36 @@ struct Player : Codable {
     }
     
     
+    // MARK: - Passages
+    
+    /// Adds a `Passage` to the player's list of selected Bible passages for memorization
+    /// - Parameter passage: The `Passage` object to add to the player's list of selected passages
     mutating func addPassage(_ passage: Passage) {
         passages.append(passage)
     }
     
-    
-//    mutating func removePassage(_ passage: Bible.Passage) {
-//        if let index = passages.firstIndex(where: { $0.reference == passage.reference }) {
-//            passages.remove(at: index)
-//        }
-//    }
-    
+        
+    /// Removes the `Passage` objects from the player's list of selected passages at the specified offsets
+    /// - Parameter offsets: The index offsets corresponding to the selected passages to remove
     mutating func removePassages(atOffsets offsets: IndexSet) {
         passages.remove(atOffsets: offsets)
     }
 
+    
+    mutating func reviewPassage(_ passage: Passage) {
+        if reviewedPassages[passage.id] != nil {
+            reviewedPassages[passage.id]!.append(Date())
+        } else {
+            reviewedPassages[passage.id] = [Date()]
+        }
+    }
+    
+    func passageReviewedToday(_ passage: Passage) -> Bool {
+        let today = Calendar.current.startOfDay(for: Date())
+        return (reviewedPassages[passage.id]?.filter( { $0 > today}).count ?? 0) >= 3
+    }
+    
+    // MARK: - Armor
     struct Armor: Identifiable, Codable {
         var id = UUID()
         private(set) var level: Int = 1
@@ -290,7 +309,7 @@ struct Player : Codable {
         }
     }
     
-    
+    // MARK: - PlayerConstants
     struct PlayerConstants : Codable {
         // Larger numbers increase difficulty early; lower numbers flattens the growth curve
         static let levelUpFactor: Double = 3.0

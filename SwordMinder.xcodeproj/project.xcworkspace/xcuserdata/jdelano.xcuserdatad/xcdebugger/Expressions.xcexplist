@@ -3,35 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "Bible.reference(fromString:):Bible.swift">
+         contextName = "SwordMinder.init(translation:player:leaderboard:):SwordMinder.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in PassagePicker.body.getter:PassagePicker.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "endReference">
-            </PersistentString>
-            <PersistentString
-               value = "startReference">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "BibleTests.testVersetoString():BibleTests.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "gen11.verses[0]">
-            </PersistentString>
-            <PersistentString
-               value = "bible.passage(fromString: &quot;Genesis 1:1&quot;)!">
-            </PersistentString>
-            <PersistentString
-               value = "gen11.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "BibleTests.testBibleInit():BibleTests.swift">
+         contextName = "Player.reward(gems:):Player.swift">
       </ContextState>
       <ContextState
          contextName = "VersePicker.refresh():VersePicker.swift">
@@ -48,13 +23,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Player.reward(gems:):Player.swift">
+         contextName = "Reference.encode(to:):Reference.swift">
       </ContextState>
       <ContextState
-         contextName = "BibleTests.testReferencetoString():BibleTests.swift">
+         contextName = "BibleTests.testVersetoString():BibleTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gen11.verses[0]">
+            </PersistentString>
+            <PersistentString
+               value = "bible.passage(fromString: &quot;Genesis 1:1&quot;)!">
+            </PersistentString>
+            <PersistentString
+               value = "gen11.text">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "BibleTests.testBibleBookLookup():BibleTests.swift">
+         contextName = "Bible.reference(fromString:):Bible.swift">
       </ContextState>
       <ContextState
          contextName = "PlayerTests.testEligibleLessThan5In24Hours():PlayerTests.swift">
@@ -63,6 +49,37 @@
                value = "player.eligible">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in PassagePicker.body.getter:PassagePicker.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "startReference">
+            </PersistentString>
+            <PersistentString
+               value = "endReference">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BibleTests.testBibleInit():BibleTests.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BibleTests.testReferencetoString():BibleTests.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.init(url:):Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.reviewPassage(_:):Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "reviewedPassages">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BibleTests.testBibleBookLookup():BibleTests.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

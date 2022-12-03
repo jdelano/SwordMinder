@@ -99,12 +99,13 @@ final class BookTests: XCTestCase {
         XCTAssert(book.name == "Joshua")
         XCTAssert(book.abbr == "Josh")
         XCTAssert(book.chapters.isEmpty)
-        
+                
         // Book struct does not attempt to validate appropriate book name
         let xyzBook = Book(named: "XYZBook")
         XCTAssert(xyzBook == nil)
     }
     
+
     func testBookInitFromDecoder() throws {
         let data = try! JSONSerialization.data(withJSONObject: bibleJSON, options: [])
         let books = try! JSONDecoder().decode([Book].self, from: data)
@@ -144,4 +145,10 @@ final class BookTests: XCTestCase {
         XCTAssert(book1 == book2)
     }
 
+    func testBookChangeName() throws {
+        var book = Book()!
+        book.name = "Joshua"
+        XCTAssert(book.name == "Joshua")
+        XCTAssert(book.abbr == "Josh")
+    }
 }

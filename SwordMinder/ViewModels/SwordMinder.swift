@@ -44,7 +44,7 @@ class SwordMinder: ObservableObject {
         }
         self.bible = Bible(translation: translation)
         Task { @MainActor in
-            await bible.initBible()
+            await bible.loadBible()
         }
     }
            
@@ -98,6 +98,10 @@ class SwordMinder: ObservableObject {
     
     // MARK: - Player Intent
     
+    var taskEligible: Bool {
+        player.eligible
+    }
+    
     func completeTask(difficulty: Int) {
         player.reward(gems: difficulty)
     }
@@ -118,6 +122,13 @@ class SwordMinder: ObservableObject {
         player.removePassages(atOffsets: offsets)
     }
 
+    func reviewPassage(_ passage: Passage) {
+        player.reviewPassage(passage)
+    }
+    
+    func isPassageReviewedToday(_ passage: Passage) -> Bool {
+        player.passageReviewedToday(passage)
+    }
     
     // MARK: - Bible Intent
     

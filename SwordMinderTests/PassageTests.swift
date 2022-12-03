@@ -14,7 +14,7 @@ final class PassageTests: XCTestCase {
     
     func testPassageOnlyBegin() async throws {
         var bible = Bible()
-        await bible.initBible()
+        await bible.loadBible()
         let passage = Passage()
         XCTAssert(bible.text(for: passage) == "\(1.superscriptString)In the beginning God created the heaven and the earth.")
         XCTAssert(passage.referenceFormatted == "Genesis 1:1")
@@ -22,7 +22,7 @@ final class PassageTests: XCTestCase {
     
     func testPassageRange() async throws {
         var bible = Bible()
-        await bible.initBible()
+        await bible.loadBible()
         let gen11Ref = Reference()
         let gen12Ref = bible.reference(fromString: "Genesis 1:2")!
         let passage = Passage(from: gen11Ref, to: gen12Ref)
@@ -31,7 +31,7 @@ final class PassageTests: XCTestCase {
     
     func testPassageBadReference() async throws {
         var bible = Bible()
-        await bible.initBible()
+        await bible.loadBible()
         let gen511Ref = bible.reference(fromString: "Genesis 51:1")!
         let gen512Ref = bible.reference(fromString: "Genesis 51:2")!
         let passage = Passage(from: gen511Ref, to: gen512Ref)
@@ -40,7 +40,7 @@ final class PassageTests: XCTestCase {
     
     func testPassageRangeCrossChapter() async throws {
         var bible = Bible()
-        await bible.initBible()
+        await bible.loadBible()
         let gen11Ref = Reference()
         let gen215Ref = bible.reference(fromString: "Genesis 2:15")!
         let passage = Passage(from: gen11Ref, to: gen215Ref)
