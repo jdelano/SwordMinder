@@ -264,9 +264,12 @@ struct Player : Codable {
         }
     }
     
+    /// Indicates whether or not the player has reviewed the specified passage at least the minimum number of times today
+    /// - Parameter passage: The `Passage` being reviewed
+    /// - Returns: A `Bool` indicating whether or not the player has reviewed the passage the minimum number of times today.
     func passageReviewedToday(_ passage: Passage) -> Bool {
         let today = Calendar.current.startOfDay(for: Date())
-        return (reviewedPassages[passage.id]?.filter( { $0 > today}).count ?? 0) >= 3
+        return (reviewedPassages[passage.id]?.filter( { $0 > today}).count ?? 0) >= PlayerConstants.minReviewsPerDay
     }
     
     // MARK: - Armor
@@ -320,6 +323,7 @@ struct Player : Codable {
         // Larger numbers shifts the curve downard
         static let levelDampening: Double = 2.0
         static let maxLevel: Int = 40
+        static let minReviewsPerDay: Int = 3
     }
     
     

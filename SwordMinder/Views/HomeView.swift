@@ -39,7 +39,7 @@ struct HomeView: View {
                             }
                         }
                         .padding()
-                        .background(Color.white.opacity(0.8))
+                        .background(Color("AliceBlue"))
                         .gridCellUnsizedAxes([.vertical])
                     }
                 }
@@ -52,11 +52,10 @@ struct HomeView: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
-                    Rectangle()
-                        .fill(.blue)
+                    LinearGradient(colors: [Color("SkyBlue"), .accentColor], startPoint: .top, endPoint: .bottom)
                         .frame(height: geometry.size.height * DrawingConstants.skyHeightProportion)
-                    Rectangle()
-                        .fill(.green)
+                    LinearGradient(colors: [Color("GrassGreenDark"), Color("GrassGreen")], startPoint: .topLeading, endPoint: .bottomTrailing)
+
                 }
                 Text("🏰")
                     .font(.system(size: min(geometry.size.width, geometry.size.height) * DrawingConstants.castleScalingFactor))

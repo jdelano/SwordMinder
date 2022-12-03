@@ -14,11 +14,13 @@ struct FlashCardView: View {
     @State private var flippedCount: Int = 0
     var passage: Passage
     var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             Text(.init(passage.referenceFormatted))
                 .opacity(flipped ? 1 : 0)
-            Text(.init(swordMinder.bible.text(for: passage)))
-                .opacity(flipped ? 0 : 1)
+            ScrollView {
+                Text(.init(swordMinder.bible.text(for: passage)))
+                    .opacity(flipped ? 0 : 1)
+            }
         }
         .flashCardify(isFaceUp: isFaceUp, flipped: $flipped)
         .onTapGesture {

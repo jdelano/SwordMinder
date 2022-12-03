@@ -176,12 +176,12 @@
 			path = AppIconViews;
 			sourceTree = "<group>";
 		};
-		65A5D55929037925001584F2 /* SampleApp */ = {
+		65A5D55929037925001584F2 /* SampleAppViews */ = {
 			isa = PBXGroup;
 			children = (
 				65A5D55A2903795A001584F2 /* SampleAppView.swift */,
 			);
-			path = SampleApp;
+			path = SampleAppViews;
 			sourceTree = "<group>";
 		};
 		65AB525B285CC10F00FF1038 = {
@@ -214,7 +214,7 @@
 				65EB9D76287B839400FAF612 /* Models */,
 				65EB9D77287B83B900FAF612 /* ViewModels */,
 				65EB9D75287B837800FAF612 /* Views */,
-				65A5D55929037925001584F2 /* SampleApp */,
+				65A5D55929037925001584F2 /* SampleAppViews */,
 				65AB526D285CC11100FF1038 /* Preview Content */,
 			);
 			path = SwordMinder;

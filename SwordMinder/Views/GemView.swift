@@ -16,8 +16,8 @@ struct GemView: View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
                 GemShape()
+                    .fill(LinearGradient(colors: [.accentColor3, .accentColor2], startPoint: .top, endPoint: .bottom))
                     .aspectRatio(1, contentMode: .fit)
-                    .foregroundColor(.accentColor3)
                     .shadow(radius: DrawingConstants.shadowRadius)
                 Text("\(amount)")
                     .font(.system(size: DrawingConstants.fontSize))

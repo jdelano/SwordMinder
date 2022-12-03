@@ -54,11 +54,6 @@ struct SwordMinderView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         SwordMinderView()
-            .environmentObject(SwordMinder(player: Player(withArmor: [
-                Player.Armor(level: 30, piece: .helmet),
-                Player.Armor(level: 30, piece: .breastplate),
-                Player.Armor(level: 30, piece: .belt),
-                Player.Armor(level: 30, piece: .shoes),
-            ], armorMaterial: .linen, gems: 100)))
+            .environmentObject(SwordMinder())
     }
 }
