@@ -3,7 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "WordSearchView.body.getter:WordSearchView.swift">
+      </ContextState>
+      <ContextState
          contextName = "SwordMinder.init(translation:player:leaderboard:):SwordMinder.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in WordSearchView.body.getter:WordSearchView.swift">
       </ContextState>
       <ContextState
          contextName = "Player.reward(gems:):Player.swift">
@@ -47,6 +53,14 @@
          <PersistentStrings>
             <PersistentString
                value = "player.eligible">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in WordSearchView.body.getter:WordSearchView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "wordSearch.words">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

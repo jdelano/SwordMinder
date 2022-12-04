@@ -16,4 +16,8 @@ extension String {
             return self
         }
     }
+    
+    func alphaOnly() -> String {
+        self.replacingOccurrences(of:"[^a-zA-Z\\s]", with: "", options: .regularExpression)
+    }
 }

@@ -175,16 +175,24 @@ struct Bible {
     }
     
     
-    /// Retrieves a `String` containing the text of the specified `Passage`
+    /// Retrieves a `String` containing the text of the specified `Reference`
     ///
-    /// - Parameter passage: The `Passage` for which the verse text is being retrieved
-    /// - Returns: The verse text of the requested passage
+    /// - Parameter reference: The `Reference` for which the verse text is being retrieved
+    /// - Returns: The verse text of the requested reference
     func text(for reference: Reference) -> String {
         var text = ""
         if let index = self.verses.firstIndex(where: { $0.reference == reference }) {
             text = self.verses[index].toString()
         }
         return text
+    }
+
+    /// Retrieves an `Array<String>` that contains the unformatted words of the verse for the specified reference
+    ///
+    /// - Parameter reference: The `Reference` for which the array of words is being retrieved
+    /// - Returns: An array containing the words of the verse text for the requested reference
+    func words(for reference: Reference) -> [String] {
+        text(for: reference).alphaOnly().components(separatedBy: " ")
     }
 
     
@@ -208,7 +216,14 @@ struct Bible {
         return text
     }
     
-    
+    /// Retrieves an `Array<String>` that contains the unformatted words of the verse for the specified passage
+    ///
+    /// - Parameter passage: The `Passage` for which the array of words is being retrieved
+    /// - Returns: An array containing the words of the verse text for the requested reference
+    func words(for passage: Passage) -> [String] {
+        text(for: passage).alphaOnly().components(separatedBy: " ")
+    }
+
 
     
     /// Translation enumeration containing the different possible translations that this API intends to support over time

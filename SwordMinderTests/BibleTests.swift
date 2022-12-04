@@ -232,6 +232,28 @@ final class BibleTests: XCTestCase {
     }
 
     
+    func testBibleWordsForReference() async throws {
+        var bible = Bible()
+        await bible.loadBible()
+        let words = bible.words(for: Reference())
+        XCTAssert(words.count == 10)
+        XCTAssert(words[0] == "In")
+        XCTAssert(words[2] == "beginning")
+        XCTAssert(words[6] == "heaven")
+        XCTAssert(words[9] == "earth")
+    }
     
+    func testBibleWordsforPassage() async throws {
+        var bible = Bible()
+        await bible.loadBible()
+        let words = bible.words(for: Passage(from: Reference(), to: Reference(verse: 2))) // Genesis 1:1-2
+        print(words)
+        XCTAssert(words.count == 39)
+        XCTAssert(words[0] == "In")
+        XCTAssert(words[2] == "beginning")
+        XCTAssert(words[6] == "heaven")
+        XCTAssert(words[38] == "waters")
+
+    }
 
 }

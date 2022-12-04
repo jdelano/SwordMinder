@@ -14,9 +14,9 @@ struct GameView: View {
         ScrollView {
             Grid(horizontalSpacing: 10, verticalSpacing: 10) {
                 GridRow {
-                    SampleAppIconView {
+                    WordSearchAppIconView {
                         withAnimation {
-                            currentApp = .sampleApp
+                            currentApp = .wordSearchApp
                         }
                     }
                     SampleAppIconView {

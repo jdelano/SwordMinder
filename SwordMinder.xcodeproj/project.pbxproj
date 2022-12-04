@@ -51,6 +51,13 @@
 		65C7C800293A964C00301285 /* ReferenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C7FF293A964C00301285 /* ReferenceTests.swift */; };
 		65C7C802293ACD2300301285 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C801293ACD2300301285 /* String+Extensions.swift */; };
 		65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C803293ADA8A00301285 /* EditorConfig.swift */; };
+		65C7C80A293BDCA100301285 /* PlacementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C809293BDCA100301285 /* PlacementType.swift */; };
+		65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C80B293BDD9600301285 /* Difficulty.swift */; };
+		65C7C80E293BDE1800301285 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C80D293BDE1800301285 /* Word.swift */; };
+		65C7C810293BDE5400301285 /* WordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C80F293BDE5400301285 /* WordSearch.swift */; };
+		65C7C812293BE26500301285 /* WordSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C811293BE26500301285 /* WordSearchView.swift */; };
+		65C7C815293C266700301285 /* WordSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C814293C266700301285 /* WordSearchTests.swift */; };
+		65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C816293C281500301285 /* WordSearchAppIconView.swift */; };
 		65CB7EBF29240C1F00809F7B /* abbreviations.json in Resources */ = {isa = PBXBuildFile; fileRef = 65CB7EBE29240C1F00809F7B /* abbreviations.json */; };
 		65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CB7EF1292D5C2500809F7B /* URL+Extensions.swift */; };
 		65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D78287B9C6300FAF612 /* SwordMinderView.swift */; };
@@ -125,6 +132,13 @@
 		65C7C7FF293A964C00301285 /* ReferenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceTests.swift; sourceTree = "<group>"; };
 		65C7C801293ACD2300301285 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		65C7C803293ADA8A00301285 /* EditorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorConfig.swift; sourceTree = "<group>"; };
+		65C7C809293BDCA100301285 /* PlacementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementType.swift; sourceTree = "<group>"; };
+		65C7C80B293BDD9600301285 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		65C7C80D293BDE1800301285 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		65C7C80F293BDE5400301285 /* WordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearch.swift; sourceTree = "<group>"; };
+		65C7C811293BE26500301285 /* WordSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchView.swift; sourceTree = "<group>"; };
+		65C7C814293C266700301285 /* WordSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchTests.swift; sourceTree = "<group>"; };
+		65C7C816293C281500301285 /* WordSearchAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchAppIconView.swift; sourceTree = "<group>"; };
 		65CB7EBE29240C1F00809F7B /* abbreviations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = abbreviations.json; sourceTree = "<group>"; };
 		65CB7EF1292D5C2500809F7B /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		65EB9D78287B9C6300FAF612 /* SwordMinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinderView.swift; sourceTree = "<group>"; };
@@ -172,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				65A5D55729037609001584F2 /* SampleAppIconView.swift */,
+				65C7C816293C281500301285 /* WordSearchAppIconView.swift */,
 			);
 			path = AppIconViews;
 			sourceTree = "<group>";
@@ -207,9 +222,10 @@
 		65AB5266285CC10F00FF1038 /* SwordMinder */ = {
 			isa = PBXGroup;
 			children = (
-				654A2C01285CD3B5006A7652 /* Docs */,
 				65AB5267285CC10F00FF1038 /* SwordMinderApp.swift */,
 				65AB526B285CC11100FF1038 /* Assets.xcassets */,
+				654A2C01285CD3B5006A7652 /* Docs */,
+				65C7C818293D40E100301285 /* MiniGames */,
 				65EB9D60287B3C9500FAF612 /* Extensions */,
 				65EB9D76287B839400FAF612 /* Models */,
 				65EB9D77287B83B900FAF612 /* ViewModels */,
@@ -231,6 +247,7 @@
 		65AB527C285CC11100FF1038 /* SwordMinderTests */ = {
 			isa = PBXGroup;
 			children = (
+				65C7C813293C264700301285 /* WordSearchTests */,
 				65AB527D285CC11100FF1038 /* SwordMinderTests.swift */,
 				6504DC6F28F3101500D8D5B4 /* BibleTests.swift */,
 				6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */,
@@ -251,6 +268,58 @@
 				65AB5289285CC11200FF1038 /* SwordMinderUITestsLaunchTests.swift */,
 			);
 			path = SwordMinderUITests;
+			sourceTree = "<group>";
+		};
+		65C7C805293BDC5500301285 /* WordSearchApp */ = {
+			isa = PBXGroup;
+			children = (
+				65C7C808293BDC7F00301285 /* Models */,
+				65C7C807293BDC7500301285 /* ViewModels */,
+				65C7C806293BDC6C00301285 /* Views */,
+			);
+			path = WordSearchApp;
+			sourceTree = "<group>";
+		};
+		65C7C806293BDC6C00301285 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				65C7C811293BE26500301285 /* WordSearchView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		65C7C807293BDC7500301285 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				65C7C80F293BDE5400301285 /* WordSearch.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		65C7C808293BDC7F00301285 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				65C7C809293BDCA100301285 /* PlacementType.swift */,
+				65C7C80B293BDD9600301285 /* Difficulty.swift */,
+				65C7C80D293BDE1800301285 /* Word.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		65C7C813293C264700301285 /* WordSearchTests */ = {
+			isa = PBXGroup;
+			children = (
+				65C7C814293C266700301285 /* WordSearchTests.swift */,
+			);
+			path = WordSearchTests;
+			sourceTree = "<group>";
+		};
+		65C7C818293D40E100301285 /* MiniGames */ = {
+			isa = PBXGroup;
+			children = (
+				65C7C805293BDC5500301285 /* WordSearchApp */,
+			);
+			path = MiniGames;
 			sourceTree = "<group>";
 		};
 		65EB9D60287B3C9500FAF612 /* Extensions */ = {
@@ -452,9 +521,11 @@
 			files = (
 				654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */,
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
+				65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */,
 				65EB9D7B287B9D1F00FAF612 /* HomeView.swift in Sources */,
 				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
 				65C7C802293ACD2300301285 /* String+Extensions.swift in Sources */,
+				65C7C812293BE26500301285 /* WordSearchView.swift in Sources */,
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
@@ -465,18 +536,22 @@
 				65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */,
 				650BD12F28F0C3D2007034EA /* Bible.swift in Sources */,
 				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,
+				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,
 				65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */,
 				65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */,
+				65C7C80A293BDCA100301285 /* PlacementType.swift in Sources */,
 				6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */,
 				650BD13B28F24BED007034EA /* Player.swift in Sources */,
+				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
+				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
@@ -499,6 +574,7 @@
 				65AB527E285CC11100FF1038 /* SwordMinderTests.swift in Sources */,
 				65C7C7FA293A664300301285 /* PassageTests.swift in Sources */,
 				65423E2628F8B04D007B2C2B /* ArmorTests.swift in Sources */,
+				65C7C815293C266700301285 /* WordSearchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
