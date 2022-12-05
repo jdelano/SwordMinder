@@ -23,7 +23,7 @@ struct SwordMinderView: View {
         switch currentApp {
             case .swordMinder: swordMinderMainView
             case .sampleApp: SampleAppView(currentApp: $currentApp)
-            case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp)
+            case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
         }
     }
 

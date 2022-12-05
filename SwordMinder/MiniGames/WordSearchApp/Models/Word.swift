@@ -7,6 +7,11 @@
 
 import Foundation
 
-struct Word : Decodable {
+struct Word : Decodable, Identifiable, Comparable, Hashable {
+    static func < (lhs: Word, rhs: Word) -> Bool {
+        lhs.text < rhs.text
+    }
+    
     var text: String
+    var id = UUID()
 }

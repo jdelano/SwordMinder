@@ -11,29 +11,54 @@ struct WordSearchView: View {
     @ObservedObject var wordSearch: WordSearch
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
+    var passage: Passage
+    
+    @State var selectedTiles = Set<UUID>()
+    
     var body: some View {
         VStack {
-            Grid {
+            Text("Reference: \(passage.referenceFormatted)")
+                .font(.headline)
+            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                 ForEach(wordSearch.grid, id: \.self) { row in
                     GridRow {
-                        ForEach(row, id: \.self) { column in
-                            Text(String("\(column)"))
-                                .font(.largeTitle)
+                        ForEach(row) { cell in
+                            Rectangle()
+                                .foregroundColor(selectedTiles.contains(cell.id) ? .blue : .white)
+                                .border(.black, width: 1)
+                                .overlay(
+                                    Text(String("\(cell.letter)"))
+                                        .font(.largeTitle)
+                                        .foregroundColor(selectedTiles.contains(cell.id) ? .white : .black)
+                                )
+                                .onTapGesture {
+                                    selectedTiles.toggleMembership(for: cell.id)
+                                }
                         }
                     }
+                }
+            }
+            .padding()
+            Text("Words to Find:")
+                .font(.headline)
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
+                ForEach(wordSearch.wordsUsed) { word in
+                    Text(word.text.uppercased())
                 }
             }
             Button {
                 currentApp = .swordMinder
             } label: {
                 Text("Return to Sword Minder")
+                    .padding()
             }
             .padding()
             .buttonStyle(SMButtonStyle())
         }
         .onAppear {
-            let verseText = swordMinder.bible.text(for: Passage())
-            wordSearch.words = verseText.split(separator: " ").map { Word(text: String($0)) }
+            wordSearch.words = swordMinder.bible.words(for: passage)
+                .filter { $0.count > 3 }
+                .map { Word(text: $0) }
             wordSearch.makeGrid()
         }
     }
@@ -41,7 +66,7 @@ struct WordSearchView: View {
 
 struct WordSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        WordSearchView(wordSearch: WordSearch(), currentApp: .constant(.wordSearchApp))
+        WordSearchView(wordSearch: WordSearch(), currentApp: .constant(.wordSearchApp), passage: Passage())
             .environmentObject(SwordMinder())
     }
 }

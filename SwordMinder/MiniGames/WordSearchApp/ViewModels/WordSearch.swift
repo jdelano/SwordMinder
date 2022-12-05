@@ -8,7 +8,7 @@
 import Foundation
 
 class WSLabel {
-    var letter: Character = " "
+    var tile: Tile = Tile(letter: " ")
 }
 
 class WordSearch : ObservableObject {
@@ -17,8 +17,8 @@ class WordSearch : ObservableObject {
     var labels = [[WSLabel]]()
     var difficulty = Difficulty.hard
     let allLetters = (65...90).map { Character(UnicodeScalar($0)) }
-    @Published var grid = [[Character]]()
-    
+    @Published var grid = [[Tile]]()
+    @Published var wordsUsed = [Word]()
     
     func makeGrid() {
         labels = (0..<gridSize).map { _ in
@@ -26,7 +26,11 @@ class WordSearch : ObservableObject {
                 WSLabel()
             }
         }
-        _ = placeWords()
+        wordsUsed = placeWords().removingDuplicates(for: { element in
+            element.text.uppercased()
+        }).sorted(by: { word1, word2 in
+            word1.text.uppercased() < word2.text.uppercased()
+        })
         fillGaps()
         updateGrid()
         printGrid()
@@ -35,8 +39,8 @@ class WordSearch : ObservableObject {
     private func fillGaps() {
         for column in labels {
             for label in column {
-                if label.letter == " " {
-                    label.letter = allLetters.randomElement()!
+                if label.tile.letter == " " {
+                    label.tile.letter = allLetters.randomElement()!
                 }
             }
         }
@@ -46,7 +50,7 @@ class WordSearch : ObservableObject {
         if labels.endIndex >= gridSize {
             grid = (0..<gridSize).map { row in
                 (0..<gridSize).map { col in
-                    labels[row][col].letter
+                    labels[row][col].tile
                 }
             }
         }
@@ -55,7 +59,7 @@ class WordSearch : ObservableObject {
     private func printGrid() {
         for column in labels {
             for row in column {
-                print(row.letter, terminator: "")
+                print(row.tile.letter, terminator: "")
             }
             print("")
         }
@@ -70,7 +74,7 @@ class WordSearch : ObservableObject {
         for letter in word {
             let label = labels[xPosition][yPosition]
             
-            if label.letter == " " || label.letter == letter {
+            if label.tile.letter == " " || label.tile.letter == letter {
                 returnValue.append(label)
                 xPosition += movement.x
                 yPosition += movement.y
@@ -97,15 +101,13 @@ class WordSearch : ObservableObject {
                 if finalX >= 0 && finalX < gridSize && finalY >= 0 && finalY < gridSize {
                     if let returnValue = labels(fromX: col, y: row, word: word, movement: movement) {
                         for (index, letter) in word.enumerated() {
-                            returnValue[index].letter = letter
+                            returnValue[index].tile.letter = letter
                         }
-                        
                         return true
                     }
                 }
             }
         }
-        
         return false
     }
     
@@ -118,7 +120,7 @@ class WordSearch : ObservableObject {
     }
     
     private func placeWords() -> [Word] {
-        return words.shuffled().filter(place)
+        words.shuffled().filter(place)
     }
 
 }

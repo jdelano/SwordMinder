@@ -58,6 +58,11 @@
 		65C7C812293BE26500301285 /* WordSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C811293BE26500301285 /* WordSearchView.swift */; };
 		65C7C815293C266700301285 /* WordSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C814293C266700301285 /* WordSearchTests.swift */; };
 		65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C816293C281500301285 /* WordSearchAppIconView.swift */; };
+		65C7C81A293E460800301285 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C819293E460800301285 /* Tile.swift */; };
+		65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C81B293E546500301285 /* Set+Extensions.swift */; };
+		65C7C81E293E79EF00301285 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C81D293E79EF00301285 /* Sequence+Extensions.swift */; };
+		65C7C820293E7DD500301285 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C81F293E7DD500301285 /* Array+Extensions.swift */; };
+		65C7C822293E830F00301285 /* Array+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7C821293E830F00301285 /* Array+ExtensionsTests.swift */; };
 		65CB7EBF29240C1F00809F7B /* abbreviations.json in Resources */ = {isa = PBXBuildFile; fileRef = 65CB7EBE29240C1F00809F7B /* abbreviations.json */; };
 		65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CB7EF1292D5C2500809F7B /* URL+Extensions.swift */; };
 		65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D78287B9C6300FAF612 /* SwordMinderView.swift */; };
@@ -139,6 +144,11 @@
 		65C7C811293BE26500301285 /* WordSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchView.swift; sourceTree = "<group>"; };
 		65C7C814293C266700301285 /* WordSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchTests.swift; sourceTree = "<group>"; };
 		65C7C816293C281500301285 /* WordSearchAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchAppIconView.swift; sourceTree = "<group>"; };
+		65C7C819293E460800301285 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		65C7C81B293E546500301285 /* Set+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Extensions.swift"; sourceTree = "<group>"; };
+		65C7C81D293E79EF00301285 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
+		65C7C81F293E7DD500301285 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		65C7C821293E830F00301285 /* Array+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+ExtensionsTests.swift"; sourceTree = "<group>"; };
 		65CB7EBE29240C1F00809F7B /* abbreviations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = abbreviations.json; sourceTree = "<group>"; };
 		65CB7EF1292D5C2500809F7B /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		65EB9D78287B9C6300FAF612 /* SwordMinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinderView.swift; sourceTree = "<group>"; };
@@ -257,6 +267,7 @@
 				65C7C7FB293A6C2000301285 /* BookTests.swift */,
 				65C7C7FD293A933500301285 /* VerseTests.swift */,
 				65C7C7FF293A964C00301285 /* ReferenceTests.swift */,
+				65C7C821293E830F00301285 /* Array+ExtensionsTests.swift */,
 			);
 			path = SwordMinderTests;
 			sourceTree = "<group>";
@@ -302,6 +313,7 @@
 				65C7C809293BDCA100301285 /* PlacementType.swift */,
 				65C7C80B293BDD9600301285 /* Difficulty.swift */,
 				65C7C80D293BDE1800301285 /* Word.swift */,
+				65C7C819293E460800301285 /* Tile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,6 +343,9 @@
 				65CB7EF1292D5C2500809F7B /* URL+Extensions.swift */,
 				65C7C7EF2939934C00301285 /* Collection+Extensions.swift */,
 				65C7C801293ACD2300301285 /* String+Extensions.swift */,
+				65C7C81B293E546500301285 /* Set+Extensions.swift */,
+				65C7C81D293E79EF00301285 /* Sequence+Extensions.swift */,
+				65C7C81F293E7DD500301285 /* Array+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -546,7 +561,10 @@
 				650BD13B28F24BED007034EA /* Player.swift in Sources */,
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
+				65C7C81A293E460800301285 /* Tile.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
+				65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */,
+				65C7C81E293E79EF00301285 /* Sequence+Extensions.swift in Sources */,
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
@@ -557,6 +575,7 @@
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
 				65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */,
+				65C7C820293E7DD500301285 /* Array+Extensions.swift in Sources */,
 				65A5D55829037609001584F2 /* SampleAppIconView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65A5D55529036E29001584F2 /* LeaderboardTests.swift in Sources */,
+				65C7C822293E830F00301285 /* Array+ExtensionsTests.swift in Sources */,
 				65C7C7FC293A6C2000301285 /* BookTests.swift in Sources */,
 				6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */,
 				65C7C7FE293A933500301285 /* VerseTests.swift in Sources */,

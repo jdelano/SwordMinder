@@ -29,7 +29,16 @@ final class WordSearchTests: XCTestCase {
 
     }
     
-    
+    func testWordSearchMakeGridWordsUsed() async throws {
+        var bible = Bible()
+        await bible.loadBible()
+        let wordSearch = WordSearch()
+
+        wordSearch.words = bible.words(for: Passage()).map { Word(text: $0) }
+        wordSearch.makeGrid()
+        print(wordSearch.wordsUsed)
+
+    }
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
