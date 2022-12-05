@@ -34,5 +34,5 @@
     - Easy/Med/Hard/Master levels - Easy=no background scrolling, except after button press, so user has time to think about the next correct word; Med=scrolling, but slow and a couple more option buttons to choose from; Hard=faster scrolling; more buttons; Master=faster scrolling; more buttons?; have to tap on the screen above to open doors for the bird to fly through.
     - Option to recycle or end at last verse in the goal list, or only include new/learning verses.
     - Block drop mini-game
-
+23. Test
 
