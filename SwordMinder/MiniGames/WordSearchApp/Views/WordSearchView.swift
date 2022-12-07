@@ -11,29 +11,31 @@ struct WordSearchView: View {
     @ObservedObject var wordSearch: WordSearch
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
+    @State private var settingsShown: Bool = false
     var passage: Passage
     
     @State var selectedTiles = Set<UUID>()
     
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                Button {
+                    settingsShown = true
+                } label: {
+                    Image(systemName: "gear")
+                        .padding(5)
+                }
+                .buttonStyle(SMButtonStyle())
+                .padding()
+            }
             Text("Reference: \(passage.referenceFormatted)")
                 .font(.headline)
             Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                 ForEach(wordSearch.grid, id: \.self) { row in
                     GridRow {
                         ForEach(row) { cell in
-                            Rectangle()
-                                .foregroundColor(selectedTiles.contains(cell.id) ? .blue : .white)
-                                .border(.black, width: 1)
-                                .overlay(
-                                    Text(String("\(cell.letter)"))
-                                        .font(.largeTitle)
-                                        .foregroundColor(selectedTiles.contains(cell.id) ? .white : .black)
-                                )
-                                .onTapGesture {
-                                    selectedTiles.toggleMembership(for: cell.id)
-                                }
+                            square(for: cell)
                         }
                     }
                 }
@@ -55,12 +57,32 @@ struct WordSearchView: View {
             .padding()
             .buttonStyle(SMButtonStyle())
         }
+        .background(LinearGradient(colors: [.accentColor2, .accentColor3], startPoint: .topLeading, endPoint: .bottomTrailing))
         .onAppear {
             wordSearch.words = swordMinder.bible.words(for: passage)
                 .filter { $0.count > 3 }
                 .map { Word(text: $0) }
             wordSearch.makeGrid()
         }
+        .sheet(isPresented: $settingsShown, onDismiss: { settingsShown = false }) {
+            WordSearchSettingsView(difficulty: $wordSearch.difficulty)
+        }
+    }
+    
+    func square(for tile: Tile) -> some View {
+        Rectangle()
+            .foregroundColor(selectedTiles.contains(tile.id) ? .blue : .white)
+            .border(.black, width: 1)
+            .overlay(
+                Text(String("\(tile.letter)"))
+                    .font(.largeTitle)
+                    .foregroundColor(selectedTiles.contains(tile.id) ? .white : .black)
+            )
+            .onTapGesture {
+                withAnimation {
+                    selectedTiles.toggleMembership(for: tile.id)
+                }
+            }
     }
 }
 

@@ -14,9 +14,13 @@ class WSLabel {
 class WordSearch : ObservableObject {
     var words = [Word]()
     var gridSize = 10
-    var labels = [[WSLabel]]()
-    var difficulty = Difficulty.hard
-    let allLetters = (65...90).map { Character(UnicodeScalar($0)) }
+    private var labels = [[WSLabel]]()
+    @Published var difficulty = Difficulty.hard {
+        didSet {
+            makeGrid()
+        }
+    }
+    private let allLetters = (65...90).map { Character(UnicodeScalar($0)) }
     @Published var grid = [[Tile]]()
     @Published var wordsUsed = [Word]()
     
@@ -33,7 +37,6 @@ class WordSearch : ObservableObject {
         })
         fillGaps()
         updateGrid()
-        printGrid()
     }
     
     private func fillGaps() {
@@ -55,16 +58,7 @@ class WordSearch : ObservableObject {
             }
         }
     }
-    
-    private func printGrid() {
-        for column in labels {
-            for row in column {
-                print(row.tile.letter, terminator: "")
-            }
-            print("")
-        }
-    }
-    
+        
     private func labels(fromX x: Int, y: Int, word: String, movement: (x: Int, y: Int)) -> [WSLabel]? {
         var returnValue = [WSLabel]()
         

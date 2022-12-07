@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum Difficulty {
-    case easy
-    case medium
-    case hard
+enum Difficulty : String, CaseIterable {
+    case easy = "Easy"
+    case medium = "Medium"
+    case hard = "Hard"
     
     var placementTypes: [PlacementType] {
         switch self {
