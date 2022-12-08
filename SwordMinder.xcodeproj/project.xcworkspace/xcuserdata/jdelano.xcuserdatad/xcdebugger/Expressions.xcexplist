@@ -3,7 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "WordSearchView.body.getter:WordSearchView.swift">
+         contextName = "BibleTests.testBibleBookLookup():BibleTests.swift">
       </ContextState>
       <ContextState
          contextName = "SwordMinder.init(translation:player:leaderboard:):SwordMinder.swift">
@@ -68,10 +68,10 @@
          contextName = "closure #1 in closure #1 in closure #2 in closure #1 in PassagePicker.body.getter:PassagePicker.swift">
          <PersistentStrings>
             <PersistentString
-               value = "startReference">
+               value = "endReference">
             </PersistentString>
             <PersistentString
-               value = "endReference">
+               value = "startReference">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -85,15 +85,15 @@
          contextName = "Player.init(url:):Player.swift">
       </ContextState>
       <ContextState
+         contextName = "WordSearchView.body.getter:WordSearchView.swift">
+      </ContextState>
+      <ContextState
          contextName = "Player.reviewPassage(_:):Player.swift">
          <PersistentStrings>
             <PersistentString
                value = "reviewedPassages">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "BibleTests.testBibleBookLookup():BibleTests.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
