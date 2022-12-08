@@ -256,4 +256,16 @@ final class BibleTests: XCTestCase {
 
     }
 
+    func testBibleRandomReference() async throws {
+        var bible = Bible()
+        await bible.loadBible()
+        let reference = bible.randomReference(matching: "Genesis")
+        XCTAssert(reference!.book.name == "Genesis")
+        XCTAssert(reference!.chapter >= 1 && reference!.chapter <= 50)
+        let ref2 = bible.randomReference(matching: "John", chapter: 3)
+        XCTAssert(ref2!.book.name == "John")
+        XCTAssert(ref2!.chapter == 3)
+        XCTAssert(ref2!.verse >= 1 && ref2!.verse <= 36)
+    }
+    
 }

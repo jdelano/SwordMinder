@@ -156,6 +156,29 @@ struct Bible {
         return nil
     }
     
+    /// Selects a random reference from the specified book and optionally chapter
+    ///
+    /// - Parameters:
+    ///   -  book: The name or abbreviation of the book; If the abbreviation matches multiple book names, the first matching book is used
+    ///   - chapter: The chapter number of the reference (optional)
+    /// - Returns: A random reference corresponding to the provided book name and optional chapter; May return nil if book and/or chapter are invalid for the reference
+    func randomReference(matching book: String, chapter: Int? = nil) -> Reference? {
+        if let book = self.book(matching: book) {
+            if let chapter {
+                let numVerses = verses(in: book, chapter: chapter).count
+                let verse = Int.random(in: 1...numVerses)
+                return Reference(book: book, chapter: chapter, verse: verse)
+            } else {
+                let numChapters = chapters(in: book).count
+                let chap = Int.random(in: 1...numChapters)
+                let numVerses = verses(in: book, chapter: chap).count
+                let verse = Int.random(in: 1...numVerses)
+                return Reference(book: book, chapter: chap, verse: verse)
+            }
+        }
+        return nil
+    }
+
     
     /// Retrieves a `Passage` containing all the verses starting from the beginning reference up to and including the ending reference.
     ///
