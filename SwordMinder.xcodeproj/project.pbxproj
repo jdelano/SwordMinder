@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25928C8E2947A69E0021818E /* ScriptureTyper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C832947A69E0021818E /* ScriptureTyper.swift */; };
+		25928C8F2947A69E0021818E /* ScriptureTyperDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C852947A69E0021818E /* ScriptureTyperDifficulty.swift */; };
+		25928C922947A69E0021818E /* ScriptureTyperVerses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C8A2947A69E0021818E /* ScriptureTyperVerses.swift */; };
+		25928C932947A69E0021818E /* ScriptureTyperGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C8B2947A69E0021818E /* ScriptureTyperGame.swift */; };
+		25928C942947A69E0021818E /* ScriptureTyperCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C8C2947A69E0021818E /* ScriptureTyperCardView.swift */; };
+		25928C952947A69E0021818E /* ScriptureTyperRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C8D2947A69E0021818E /* ScriptureTyperRules.swift */; };
+		25928C972947A7110021818E /* ScriptureTyperAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C962947A7110021818E /* ScriptureTyperAppIconView.swift */; };
 		6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC6F28F3101500D8D5B4 /* BibleTests.swift */; };
 		6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */; };
 		6504DC7428F33CA400D8D5B4 /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */; };
@@ -91,6 +98,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25928C832947A69E0021818E /* ScriptureTyper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptureTyper.swift; sourceTree = "<group>"; };
+		25928C852947A69E0021818E /* ScriptureTyperDifficulty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptureTyperDifficulty.swift; sourceTree = "<group>"; };
+		25928C8A2947A69E0021818E /* ScriptureTyperVerses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptureTyperVerses.swift; sourceTree = "<group>"; };
+		25928C8B2947A69E0021818E /* ScriptureTyperGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptureTyperGame.swift; sourceTree = "<group>"; };
+		25928C8C2947A69E0021818E /* ScriptureTyperCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptureTyperCardView.swift; sourceTree = "<group>"; };
+		25928C8D2947A69E0021818E /* ScriptureTyperRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptureTyperRules.swift; sourceTree = "<group>"; };
+		25928C962947A7110021818E /* ScriptureTyperAppIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptureTyperAppIconView.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
 		6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
@@ -185,6 +199,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25928C812947A69E0021818E /* ScriptureTyperApp */ = {
+			isa = PBXGroup;
+			children = (
+				25928C822947A69E0021818E /* ViewModels */,
+				25928C842947A69E0021818E /* Models */,
+				25928C892947A69E0021818E /* Views */,
+			);
+			path = ScriptureTyperApp;
+			sourceTree = "<group>";
+		};
+		25928C822947A69E0021818E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				25928C832947A69E0021818E /* ScriptureTyper.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		25928C842947A69E0021818E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				25928C852947A69E0021818E /* ScriptureTyperDifficulty.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		25928C892947A69E0021818E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				25928C8A2947A69E0021818E /* ScriptureTyperVerses.swift */,
+				25928C8B2947A69E0021818E /* ScriptureTyperGame.swift */,
+				25928C8C2947A69E0021818E /* ScriptureTyperCardView.swift */,
+				25928C8D2947A69E0021818E /* ScriptureTyperRules.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		654A2C01285CD3B5006A7652 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				65A5D55729037609001584F2 /* SampleAppIconView.swift */,
+				25928C962947A7110021818E /* ScriptureTyperAppIconView.swift */,
 				65C7C816293C281500301285 /* WordSearchAppIconView.swift */,
 			);
 			path = AppIconViews;
@@ -332,6 +384,7 @@
 		65C7C818293D40E100301285 /* MiniGames */ = {
 			isa = PBXGroup;
 			children = (
+				25928C812947A69E0021818E /* ScriptureTyperApp */,
 				65C7C805293BDC5500301285 /* WordSearchApp */,
 			);
 			path = MiniGames;
@@ -538,6 +591,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */,
+				25928C942947A69E0021818E /* ScriptureTyperCardView.swift in Sources */,
+				25928C8F2947A69E0021818E /* ScriptureTyperDifficulty.swift in Sources */,
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
 				65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */,
 				65EB9D7B287B9D1F00FAF612 /* HomeView.swift in Sources */,
@@ -547,7 +602,9 @@
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
+				25928C952947A69E0021818E /* ScriptureTyperRules.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
+				25928C932947A69E0021818E /* ScriptureTyperGame.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
@@ -566,6 +623,7 @@
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				65C7C81A293E460800301285 /* Tile.swift in Sources */,
+				25928C922947A69E0021818E /* ScriptureTyperVerses.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
 				65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */,
 				65C7C81E293E79EF00301285 /* Sequence+Extensions.swift in Sources */,
@@ -573,11 +631,13 @@
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
+				25928C8E2947A69E0021818E /* ScriptureTyper.swift in Sources */,
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
+				25928C972947A7110021818E /* ScriptureTyperAppIconView.swift in Sources */,
 				65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */,
 				65C7C820293E7DD500301285 /* Array+Extensions.swift in Sources */,
 				65A5D55829037609001584F2 /* SampleAppIconView.swift in Sources */,
