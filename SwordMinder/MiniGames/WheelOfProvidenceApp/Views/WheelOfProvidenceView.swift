@@ -7,14 +7,36 @@
 
 import SwiftUI
 
+enum gameState {
+    case wheel
+    case guesser
+}
 struct WheelOfProvidenceView: View {
+    @State var currentGameState = gameState.wheel
+    @EnvironmentObject var swordMinder: SwordMinder
+    @Binding var currentApp: Apps
+    
+    var verses: [Verse]
     var body: some View {
         VStack{
-            ScoreView()
-            Spacer()
-            WordView()
-            Spacer()
-            BottomMenu()
+            switch currentGameState {
+                    case .wheel:
+                WheelView(verse1: verses[0].reference.toString(), verse2: verses[1].reference.toString(), verse3: verses[2].reference.toString(), verse4: verses[3].reference.toString())
+                    case .guesser:
+                        VStack{
+                            ScoreView()
+                            WordView()
+                            BottomMenu()
+                        }
+                    }
+                Button {
+                    currentApp = .swordMinder
+                } label: {
+                    Text("Return to Sword Minder")
+                        .padding()
+                }
+                .padding()
+                .buttonStyle(SMButtonStyle())
         }
     }
 }
@@ -82,9 +104,10 @@ struct BottomMenu: View{
     }
 }
 
+
 struct WheelOfProvidenceView_Previews: PreviewProvider {
     static var previews: some View {
-        WheelOfProvidenceView()
+        WheelOfProvidenceView(currentApp: .constant(.wheelOfProvidenceApp), verses: [Verse(), Verse(from: <#Decoder#>), Verse(), Verse()])
     }
 }
 

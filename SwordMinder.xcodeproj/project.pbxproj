@@ -76,6 +76,7 @@
 		B412F1972943D78A00B7EF0F /* SpinScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1962943D78A00B7EF0F /* SpinScreenView.swift */; };
 		B412F1992943D7A400B7EF0F /* WheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1982943D7A400B7EF0F /* WheelView.swift */; };
 		B412F19B2943D7BE00B7EF0F /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */; };
+		B412F19D2943E9E700B7EF0F /* WheelOfProvidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,7 @@
 		B412F1962943D78A00B7EF0F /* SpinScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinScreenView.swift; sourceTree = "<group>"; };
 		B412F1982943D7A400B7EF0F /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
 		B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
+		B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -433,6 +435,7 @@
 		B412F1902943D6C300B7EF0F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				650BD12F28F0C3D2007034EA /* Bible.swift in Sources */,
 				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,
 				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
+				B412F19D2943E9E700B7EF0F /* WheelOfProvidence.swift in Sources */,
 				B412F1932943D6E700B7EF0F /* String + Extensions.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,
