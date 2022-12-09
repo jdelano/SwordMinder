@@ -11,6 +11,7 @@ enum Apps {
     case swordMinder
     case sampleApp
     case wordSearchApp
+    case spokenWordApp
 }
 
 
@@ -23,7 +24,8 @@ struct SwordMinderView: View {
         switch currentApp {
             case .swordMinder: swordMinderMainView
             case .sampleApp: SampleAppView(currentApp: $currentApp)
-            case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
+            case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp)
+            case .spokenWordApp: ContentView(currentApp: $currentApp, passage: .constant(Passage(from: Reference(book: Book(named: "Psalms")!, chapter: 119, verse: 100))))
         }
     }
 

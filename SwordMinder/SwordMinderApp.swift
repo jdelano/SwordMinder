@@ -8,6 +8,7 @@
 import SwiftUI
 
 @main
+
 struct SwordMinderApp: App {
     @StateObject var swordMinder = SwordMinder(player: Player(withArmor: [
         Player.Armor(level: 30, piece: .helmet),
