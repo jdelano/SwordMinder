@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D349EE02942E0B400D9537B /* Models in Resources */ = {isa = PBXBuildFile; fileRef = 4D349EDF2942E0B400D9537B /* Models */; };
+		4D349EE42942E0D700D9537B /* Views in Resources */ = {isa = PBXBuildFile; fileRef = 4D349EE32942E0D700D9537B /* Views */; };
+		4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */; };
 		6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC6F28F3101500D8D5B4 /* BibleTests.swift */; };
 		6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */; };
 		6504DC7428F33CA400D8D5B4 /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */; };
@@ -91,6 +94,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D349EDF2942E0B400D9537B /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
+		4D349EE32942E0D700D9537B /* Views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Views; sourceTree = "<group>"; };
+		4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeAppIconView.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
 		6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
@@ -185,6 +191,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D349EDB2942E05800D9537B /* JustMemorize */ = {
+			isa = PBXGroup;
+			children = (
+				4D349EDF2942E0B400D9537B /* Models */,
+				4D349EDE2942E0A000D9537B /* ViewModels */,
+				4D349EE32942E0D700D9537B /* Views */,
+			);
+			path = JustMemorize;
+			sourceTree = "<group>";
+		};
+		4D349EDE2942E0A000D9537B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		654A2C01285CD3B5006A7652 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +222,7 @@
 			children = (
 				65A5D55729037609001584F2 /* SampleAppIconView.swift */,
 				65C7C816293C281500301285 /* WordSearchAppIconView.swift */,
+				4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */,
 			);
 			path = AppIconViews;
 			sourceTree = "<group>";
@@ -332,6 +356,7 @@
 		65C7C818293D40E100301285 /* MiniGames */ = {
 			isa = PBXGroup;
 			children = (
+				4D349EDB2942E05800D9537B /* JustMemorize */,
 				65C7C805293BDC5500301285 /* WordSearchApp */,
 			);
 			path = MiniGames;
@@ -506,8 +531,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D349EE42942E0D700D9537B /* Views in Resources */,
 				65CB7EBF29240C1F00809F7B /* abbreviations.json in Resources */,
 				65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */,
+				4D349EE02942E0B400D9537B /* Models in Resources */,
 				654A2C05285CD3B5006A7652 /* README.md in Resources */,
 				654A2C04285CD3B5006A7652 /* Requirements.md in Resources */,
 				650BD12E28F0C3D2007034EA /* kjv.json in Resources */,
@@ -558,6 +585,7 @@
 				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,
+				4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */,
 				65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */,
 				65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */,
 				65C7C80A293BDCA100301285 /* PlacementType.swift in Sources */,

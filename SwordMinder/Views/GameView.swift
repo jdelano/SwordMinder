@@ -31,9 +31,9 @@ struct GameView: View {
                             currentApp = .sampleApp
                         }
                     }
-                    SampleAppIconView {
+                    JustMemorizeAppIconView {
                         withAnimation {
-                            currentApp = .sampleApp
+                            currentApp = .justMemorizeApp
                         }
                     }
                 }

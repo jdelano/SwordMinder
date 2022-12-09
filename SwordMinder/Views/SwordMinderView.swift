@@ -11,6 +11,7 @@ enum Apps {
     case swordMinder
     case sampleApp
     case wordSearchApp
+    case justMemorizeApp
 }
 
 
@@ -24,6 +25,7 @@ struct SwordMinderView: View {
             case .swordMinder: swordMinderMainView
             case .sampleApp: SampleAppView(currentApp: $currentApp)
             case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
+            case .justMemorizeApp: JM_MainMenu(currentApp: $currentApp)
         }
     }
 
