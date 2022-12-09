@@ -8,16 +8,26 @@
 import SwiftUI
 
 struct ScriptureTyperRules: View {
+    @ObservedObject var ScriptureTyper: ScriptureTyper
+    @EnvironmentObject var swordMinder: SwordMinder
+    @Binding var currentApp: Apps
     var body: some View {
-        VStack {
-            Spacer()
-            howToPlay
-            Spacer()
-            moveOn
-            Spacer()
+            VStack {
+                Spacer()
+                howToPlay
+                Spacer()
+                HStack {
+                    moveOn
+                    Button {
+                        currentApp = .swordMinder
+                    } label: {
+                        Text("Return to Sword Minder")
+                    }
+                }
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
-    }
     ///When the mini-game is tapped on the home screen of Sword Minder, a “How to play” list will appear with a continue button
     var howToPlay: some View {
         ZStack {
@@ -50,8 +60,8 @@ struct ScriptureTyperRules: View {
             RoundedRectangle(cornerRadius: 15)
                 .foregroundColor(.green)
                 .frame(width: DrawingConstraints.moveOnWidth, height: DrawingConstraints.moveOnHeight)
-            NavigationLink(destination: ScriptureTyperVerses()) {Text("Continue")
-                .foregroundColor(Color.black)}
+//            NavigationLink(destination: ScriptureTyperGame()) { Text("Continue")
+//                .foregroundColor(Color.black)}
         }
     }
     
@@ -67,6 +77,7 @@ struct ScriptureTyperRules: View {
 
 struct ScriptureTyperRules_Previews: PreviewProvider {
     static var previews: some View {
-        ScriptureTyperRules()
+        ScriptureTyperRules(ScriptureTyper: ScriptureTyper(), currentApp: .constant(.scriptureTyperApp))
+            .environmentObject(SwordMinder())
     }
 }

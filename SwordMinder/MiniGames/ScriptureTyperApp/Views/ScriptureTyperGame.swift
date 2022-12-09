@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ScriptureTyperGame: View {
+    @ObservedObject var ScriptureTyper: ScriptureTyper
+    @EnvironmentObject var swordMinder: SwordMinder
+    @Binding var currentApp: Apps
+    
     @State private var typedVerse: String = ""
     @State private var isFaceDown: Bool = false
     @State private var verse: String = "Jesus wept"
@@ -25,12 +29,14 @@ struct ScriptureTyperGame: View {
     
     
     var body: some View {
-        stopWatch
-        Spacer()
-        verseCard
-        Spacer()
-        textBox
-        Spacer()
+        NavigationView {
+            stopWatch
+            Spacer()
+            verseCard
+            Spacer()
+            textBox
+            Spacer()
+        }
     }
     var stopWatch: some View {
         HStack {
@@ -143,6 +149,7 @@ private struct DrawingConstraints {
 
 struct ScriptureTyperGame_Previews: PreviewProvider {
     static var previews: some View {
-        ScriptureTyperGame()
+        ScriptureTyperGame(ScriptureTyper: ScriptureTyper(), currentApp: .constant(.scriptureTyperApp))
+            .environmentObject(SwordMinder())
     }
 }
