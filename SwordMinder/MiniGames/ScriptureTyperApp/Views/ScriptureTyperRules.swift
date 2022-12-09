@@ -16,17 +16,15 @@ struct ScriptureTyperRules: View {
             RoundedRectangle(cornerRadius: 25)
                 .foregroundColor(.teal)
                 .frame(width: DrawingConstraints.howToPlayWidth, height: DrawingConstraints.howToPlayHeight)
-            VStack {
-                Spacer()
-                Text(" - In the next screen, choose a verse to practice")
+            List {
+                Text("In the next screen, choose a verse to practice")
                     .font(.subheadline)
-                Text(" - After a verse has been selected, Memorize the verse")
+                Text("After a verse has been selected, Memorize the verse")
                     .font(.subheadline)
-                Text(" - Flip the Verse Card to Begin Typing")
+                Text("Flip the Verse Card to Begin Typing")
                     .font(.subheadline)
-                Text(" - When you are Finished Typing Tap Submit to Stop the Clock")
+                Text("When you are Finished Typing Tap Submit to Stop the Clock")
                     .font(.subheadline)
-                Spacer()
             }
             .padding()
             .frame(width: DrawingConstraints.howToPlayWidth, height: DrawingConstraints.howToPlayHeight)

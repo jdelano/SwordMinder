@@ -9,5 +9,5 @@ import Foundation
 
 
 class ScriptureTyper: ObservableObject {
-    
+    var difficulty = ScriptureTyperDifficulty.hard
 }
