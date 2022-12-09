@@ -25,7 +25,7 @@ struct SwordMinderView: View {
         case .swordMinder: swordMinderMainView
         case .sampleApp: SampleAppView(currentApp: $currentApp)
         case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp)
-        case .scriptureTyperApp: ScriptureTyperRules(ScriptureTyper: ScriptureTyper(), currentApp: $currentApp)
+        case .scriptureTyperApp: ScriptureTyperVerses(currentApp: $currentApp)
         }
     }
     

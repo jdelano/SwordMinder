@@ -11,9 +11,16 @@ struct ScriptureTyperVerses: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @State private var editorConfig = EditorConfig()
     @State private var addPassage: Passage = Passage()
-    
+    @Binding var currentApp: Apps
     var body: some View {
         NavigationStack {
+            Button {
+                withAnimation {
+                    currentApp = .swordMinder
+                }
+            } label:{
+                Image(systemName: "house")
+            }
             List {
                 ForEach(swordMinder.passages) { passage in
                     NavigationLink {
@@ -22,15 +29,11 @@ struct ScriptureTyperVerses: View {
                         HStack {
                             Text(.init(passage.referenceFormatted))
                             Spacer()
-                            Image(systemName: swordMinder.isPassageReviewedToday(passage) ? "checkmark" : "")
-                                .foregroundColor(.green)
                         }
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
             .navigationTitle("My Passages")
-            .toolbar { toolbar }
         }
         .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
         .sheet(isPresented: $editorConfig.isPresented, onDismiss: {
@@ -41,35 +44,10 @@ struct ScriptureTyperVerses: View {
             PassagePickerView(editorConfig: $editorConfig, passage: $addPassage)
         }
     }
-    
-    @ToolbarContentBuilder
-    private var toolbar: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            EditButton()
-        }
-        ToolbarItem {
-            Button(action: addItem) {
-                Image(systemName: "plus")
-            }
-        }
-    }
-    
-    private func addItem() {
-        withAnimation {
-            addPassage = Passage()
-            editorConfig.present()
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            swordMinder.removePassages(atOffsets: offsets)
-        }
-    }
 }
-
 struct ScriptureTyperVerses_Previews: PreviewProvider {
     static var previews: some View {
-        ScriptureTyperVerses()
+        ScriptureTyperVerses(currentApp: .constant(.scriptureTyperApp))
+            .environmentObject(SwordMinder())
     }
 }

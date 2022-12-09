@@ -16,7 +16,7 @@ struct ScriptureTyperRules: View {
             RoundedRectangle(cornerRadius: 25)
                 .foregroundColor(.teal)
                 .frame(width: DrawingConstraints.howToPlayWidth, height: DrawingConstraints.howToPlayHeight)
-            VStack(alignment: .center) {
+            VStack {
                 Spacer()
                 Text(" - In the next screen, choose a verse to practice")
                     .font(.subheadline)
