@@ -5,44 +5,71 @@
 //  Created by Jacob Baird on 12/7/22.
 //
 //
-//import SwiftUI
-//
-//struct ScriptureTyperVerses: View {
-//    @State var verses = ["John 11:35","John 11:35","John 11:35","John 11:35","John 11:35","John 11:35"]
-//    ///Requirement: The mini-game will be able to access the verses used in the flashcards for Sword Minder
-//    ///Requirement: When the continue button is selected, a series of verse cards will be displayed
-//    var body: some View {
-//        VStack {
-//            Text("Choose your Verse!").font(.largeTitle).fontWeight(.heavy)
-//            ScrollView{
-//                ForEach(verses, id: \.self, content: { verses in
-//                    CardView(cardContent: verses)
-//                        .aspectRatio(3/2, contentMode: .fit)
-//                        .foregroundColor(.black)
-//                })
-//            }
-//        }.padding()
-//    }
-//}
-//
-//struct CardView: View {
-//    var cardContent: String
-//    var body: some View {
-//        ZStack {
-//            let cardShape = RoundedRectangle(cornerRadius: 15)
-//            cardShape.fill(.teal)
-//            cardShape.strokeBorder(lineWidth: 3)
-//            NavigationLink(destination:  ScriptureTyperGame(ScriptureTyper: ScriptureTyper(), currentApp: )
-//            ) {Text(cardContent)
-//                .foregroundColor(.white) .font(.largeTitle)}
-//            //Requirement -- edited for ease of use
-//            ///When a verse is chosen and selected, a start button will be displayed.
-//        }
-//    }
-//}
-//
-//struct ScriptureTyperVerses_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScriptureTyperVerses()
-//    }
-//}
+import SwiftUI
+
+struct ScriptureTyperVerses: View {
+    @EnvironmentObject var swordMinder: SwordMinder
+    @State private var editorConfig = EditorConfig()
+    @State private var addPassage: Passage = Passage()
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(swordMinder.passages) { passage in
+                    NavigationLink {
+                        FlashCardView(passage: passage)
+                    } label: {
+                        HStack {
+                            Text(.init(passage.referenceFormatted))
+                            Spacer()
+                            Image(systemName: swordMinder.isPassageReviewedToday(passage) ? "checkmark" : "")
+                                .foregroundColor(.green)
+                        }
+                    }
+                }
+                .onDelete(perform: deleteItems)
+            }
+            .navigationTitle("My Passages")
+            .toolbar { toolbar }
+        }
+        .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
+        .sheet(isPresented: $editorConfig.isPresented, onDismiss: {
+            if editorConfig.needsSaving {
+                swordMinder.addPassage(addPassage)
+            }
+        }) {
+            PassagePickerView(editorConfig: $editorConfig, passage: $addPassage)
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private var toolbar: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            EditButton()
+        }
+        ToolbarItem {
+            Button(action: addItem) {
+                Image(systemName: "plus")
+            }
+        }
+    }
+    
+    private func addItem() {
+        withAnimation {
+            addPassage = Passage()
+            editorConfig.present()
+        }
+    }
+
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            swordMinder.removePassages(atOffsets: offsets)
+        }
+    }
+}
+
+struct ScriptureTyperVerses_Previews: PreviewProvider {
+    static var previews: some View {
+        ScriptureTyperVerses()
+    }
+}

@@ -12,6 +12,7 @@
 		25175837294104BB004FE76B /* ScriptureTyperVerses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25175836294104BB004FE76B /* ScriptureTyperVerses.swift */; };
 		25D293342942BCFC007BEE06 /* ScriptureTyperAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D293332942BCFC007BEE06 /* ScriptureTyperAppIconView.swift */; };
 		25D293362942BEDF007BEE06 /* ScriptureTyper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D293352942BEDF007BEE06 /* ScriptureTyper.swift */; };
+		25EE70AC29439B8400520030 /* ScriptureTyperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EE70AB29439B8400520030 /* ScriptureTyperModel.swift */; };
 		6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC6F28F3101500D8D5B4 /* BibleTests.swift */; };
 		6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */; };
 		6504DC7428F33CA400D8D5B4 /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */; };
@@ -95,6 +96,7 @@
 		25175836294104BB004FE76B /* ScriptureTyperVerses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperVerses.swift; sourceTree = "<group>"; };
 		25D293332942BCFC007BEE06 /* ScriptureTyperAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperAppIconView.swift; sourceTree = "<group>"; };
 		25D293352942BEDF007BEE06 /* ScriptureTyper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyper.swift; sourceTree = "<group>"; };
+		25EE70AB29439B8400520030 /* ScriptureTyperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperModel.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
 		6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		2517582F2941045D004FE76B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				25EE70AB29439B8400520030 /* ScriptureTyperModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
 				65C7C802293ACD2300301285 /* String+Extensions.swift in Sources */,
 				65C7C812293BE26500301285 /* WordSearchView.swift in Sources */,
+				25EE70AC29439B8400520030 /* ScriptureTyperModel.swift in Sources */,
 				25D293342942BCFC007BEE06 /* ScriptureTyperAppIconView.swift in Sources */,
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,

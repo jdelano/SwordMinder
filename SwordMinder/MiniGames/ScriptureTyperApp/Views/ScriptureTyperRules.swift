@@ -12,31 +12,11 @@ struct ScriptureTyperRules: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
     var body: some View {
-            VStack {
-                Spacer()
-                howToPlay
-                Spacer()
-                HStack {
-                    moveOn
-                    Button {
-                        currentApp = .swordMinder
-                    } label: {
-                        Text("Return to Sword Minder")
-                    }
-                }
-                Spacer()
-            }
-            .padding()
-        }
-    ///When the mini-game is tapped on the home screen of Sword Minder, a “How to play” list will appear with a continue button
-    var howToPlay: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25)
                 .foregroundColor(.teal)
                 .frame(width: DrawingConstraints.howToPlayWidth, height: DrawingConstraints.howToPlayHeight)
             VStack(alignment: .center) {
-                Spacer()
-                Text("RULES OF PLAY").font(.largeTitle).multilineTextAlignment(.leading)
                 Spacer()
                 Text(" - In the next screen, choose a verse to practice")
                     .font(.subheadline)
@@ -51,17 +31,6 @@ struct ScriptureTyperRules: View {
             .padding()
             .frame(width: DrawingConstraints.howToPlayWidth, height: DrawingConstraints.howToPlayHeight)
             
-            
-        }
-    }
-    
-    var moveOn: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 15)
-                .foregroundColor(.green)
-                .frame(width: DrawingConstraints.moveOnWidth, height: DrawingConstraints.moveOnHeight)
-//            NavigationLink(destination: ScriptureTyperGame()) { Text("Continue")
-//                .foregroundColor(Color.black)}
         }
     }
     
