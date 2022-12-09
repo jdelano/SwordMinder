@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D349EE02942E0B400D9537B /* Models in Resources */ = {isa = PBXBuildFile; fileRef = 4D349EDF2942E0B400D9537B /* Models */; };
-		4D349EE42942E0D700D9537B /* Views in Resources */ = {isa = PBXBuildFile; fileRef = 4D349EE32942E0D700D9537B /* Views */; };
 		4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */; };
+		4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */; };
+		4DF7B4462943BA4D00F15C50 /* JM_QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */; };
+		4DF7B4482943BABB00F15C50 /* JM_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4472943BABB00F15C50 /* JM_Results.swift */; };
+		4DF7B44A2943BAD500F15C50 /* JM_VersePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4492943BAD500F15C50 /* JM_VersePreview.swift */; };
+		4DF7B44D2943BB0600F15C50 /* JM_Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B44C2943BB0600F15C50 /* JM_Instructions.swift */; };
+		4DF7B44F2943BB1100F15C50 /* JM_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B44E2943BB1100F15C50 /* JM_Settings.swift */; };
 		6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC6F28F3101500D8D5B4 /* BibleTests.swift */; };
 		6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */; };
 		6504DC7428F33CA400D8D5B4 /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */; };
@@ -94,9 +98,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4D349EDF2942E0B400D9537B /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
-		4D349EE32942E0D700D9537B /* Views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Views; sourceTree = "<group>"; };
 		4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeAppIconView.swift; sourceTree = "<group>"; };
+		4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_MainMenu.swift; sourceTree = "<group>"; };
+		4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_QuizView.swift; sourceTree = "<group>"; };
+		4DF7B4472943BABB00F15C50 /* JM_Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Results.swift; sourceTree = "<group>"; };
+		4DF7B4492943BAD500F15C50 /* JM_VersePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_VersePreview.swift; sourceTree = "<group>"; };
+		4DF7B44C2943BB0600F15C50 /* JM_Instructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Instructions.swift; sourceTree = "<group>"; };
+		4DF7B44E2943BB1100F15C50 /* JM_Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Settings.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
 		6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
@@ -191,21 +199,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4D349EDB2942E05800D9537B /* JustMemorize */ = {
-			isa = PBXGroup;
-			children = (
-				4D349EDF2942E0B400D9537B /* Models */,
-				4D349EDE2942E0A000D9537B /* ViewModels */,
-				4D349EE32942E0D700D9537B /* Views */,
-			);
-			path = JustMemorize;
-			sourceTree = "<group>";
-		};
 		4D349EDE2942E0A000D9537B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4DF7B4412943B73200F15C50 /* JustMemorize */ = {
+			isa = PBXGroup;
+			children = (
+				4DF7B4422943B9E400F15C50 /* Views */,
+				4D349EDE2942E0A000D9537B /* ViewModels */,
+			);
+			path = JustMemorize;
+			sourceTree = "<group>";
+		};
+		4DF7B4422943B9E400F15C50 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4DF7B44B2943BAEF00F15C50 /* MenuViews */,
+				4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */,
+				4DF7B4492943BAD500F15C50 /* JM_VersePreview.swift */,
+				4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */,
+				4DF7B4472943BABB00F15C50 /* JM_Results.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4DF7B44B2943BAEF00F15C50 /* MenuViews */ = {
+			isa = PBXGroup;
+			children = (
+				4DF7B44C2943BB0600F15C50 /* JM_Instructions.swift */,
+				4DF7B44E2943BB1100F15C50 /* JM_Settings.swift */,
+			);
+			path = MenuViews;
 			sourceTree = "<group>";
 		};
 		654A2C01285CD3B5006A7652 /* Docs */ = {
@@ -356,7 +384,7 @@
 		65C7C818293D40E100301285 /* MiniGames */ = {
 			isa = PBXGroup;
 			children = (
-				4D349EDB2942E05800D9537B /* JustMemorize */,
+				4DF7B4412943B73200F15C50 /* JustMemorize */,
 				65C7C805293BDC5500301285 /* WordSearchApp */,
 			);
 			path = MiniGames;
@@ -531,10 +559,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D349EE42942E0D700D9537B /* Views in Resources */,
 				65CB7EBF29240C1F00809F7B /* abbreviations.json in Resources */,
 				65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */,
-				4D349EE02942E0B400D9537B /* Models in Resources */,
 				654A2C05285CD3B5006A7652 /* README.md in Resources */,
 				654A2C04285CD3B5006A7652 /* Requirements.md in Resources */,
 				650BD12E28F0C3D2007034EA /* kjv.json in Resources */,
@@ -566,6 +592,8 @@
 			files = (
 				654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */,
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
+				4DF7B4462943BA4D00F15C50 /* JM_QuizView.swift in Sources */,
+				4DF7B4482943BABB00F15C50 /* JM_Results.swift in Sources */,
 				65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */,
 				65EB9D7B287B9D1F00FAF612 /* HomeView.swift in Sources */,
 				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
@@ -575,6 +603,7 @@
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
+				4DF7B44D2943BB0600F15C50 /* JM_Instructions.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
@@ -584,6 +613,7 @@
 				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,
 				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
+				4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,
 				4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */,
 				65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */,
@@ -603,11 +633,13 @@
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
+				4DF7B44F2943BB1100F15C50 /* JM_Settings.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
 				65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */,
 				65C7C820293E7DD500301285 /* Array+Extensions.swift in Sources */,
+				4DF7B44A2943BAD500F15C50 /* JM_VersePreview.swift in Sources */,
 				65A5D55829037609001584F2 /* SampleAppIconView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,7 +737,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -759,7 +791,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -788,7 +820,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -821,7 +853,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -37,7 +37,7 @@ struct JM_VersePreview: View {
                 .padding()
             Spacer()
             HStack {
-                NavigationLink("Instructions", destination: Instructions())
+                NavigationLink("Instructions", destination: JM_Instructions())
                 Spacer()
                 NavigationLink("Start", destination: JM_QuizView())
             }

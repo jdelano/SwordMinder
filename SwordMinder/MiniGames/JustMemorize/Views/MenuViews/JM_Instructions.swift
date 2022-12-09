@@ -8,7 +8,7 @@
 import SwiftUI
 
 // This will later serve as the menu where the user selects verses fromt he swordminder API.
-struct Instructions: View {
+struct JM_Instructions: View {
     var body: some View {
         VStack {
             Text("(Just Memorize Logo)")
@@ -36,6 +36,6 @@ struct Instructions: View {
 
 struct Instructions_Previews: PreviewProvider {
     static var previews: some View {
-        Instructions()
+        JM_Instructions()
     }
 }

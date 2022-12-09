@@ -1,8 +1,8 @@
 //
-//  ContentView.swift
-//  JustMemorize
+//  JM_MainMenu.swift
+//  SwordMinder
 //
-//  Created by Jared Waltz on 11/14/22.
+//  Created by Jared Waltz on 12/9/22.
 //
 
 import SwiftUI
@@ -18,34 +18,35 @@ struct JM_MainMenu: View {
     
     var body: some View {
         ZStack {
+            Text("Test")
             //Color("Background")
-            VStack {
-                // A basic navigation stack.
-                NavigationStack{
-                    VStack {
-                        Text("(Just Memorize Logo)")
-                            .padding()
-                            .border(.black)
-                        Spacer()
-                        Text("Just Memorize.")
-                            .font(.largeTitle)
-                        Spacer()
-                        HStack{
-                            NavigationLink("Instructions", destination: Instructions())
-                            Spacer()
-                            NavigationLink("Play", destination: JM_VersePreview())
-                            Spacer()
-                            NavigationLink("Settings", destination: Settings())
-                        }
+//            VStack {
+//                // A basic navigation stack.
+//                NavigationStack{
+//                    VStack {
+//                        Text("(Just Memorize Logo)")
+//                            .padding()
+//                            .border(.black)
+//                        Spacer()
+//                        Text("Just Memorize.")
+//                            .font(.largeTitle)
+//                        Spacer()
+//                        HStack{
+//                            NavigationLink("Instructions", destination: Instructions())
+//                            Spacer()
+//                            NavigationLink("Play", destination: JM_VersePreview())
+//                            Spacer()
+//                            NavigationLink("Settings", destination: Settings())
+//                        }
                     }
                 }
                 //Spacer()
-                JM_BackToAppView()
-            }
-            .padding()
+//                JM_BackToAppView()
+//            }
+//            .padding()
         }
-    }
-}//ContentView
+//    }
+//}//ContentView
 
 // TODO
 // See requirements. Ensure integration.
@@ -53,30 +54,32 @@ struct JM_MainMenu: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        JM_MainMenu()
+        JM_MainMenu(currentApp: .constant(.justMemorizeApp))
+            .environmentObject(SwordMinder())
+        
             //.environment(\.colorScheme, .dark)
         
         //MARK: Borders still appear white?
     }
 }
 
-struct JM_BackToAppView: View {
-    var body: some View {
-        HStack {
-            Spacer()
-            Button("Return to SwordMinder!") {
-                withAnimation {
-                    /// To return to SwordMinder, simply set the currentApp binding back to .swordMinder
-                    currentApp = .swordMinder
-                }
-            }
-            Spacer()
-            Button("Add High Score Entry") {
-                /// To add a high score entry, use the view model's highScore function
-                ///  and pass in the name of your app, along with the user's current high score.
-                swordMinder.highScore(app: "Sample App", score: 5000)
-            }
-            Spacer()
-        }
-    }
-}
+//struct JM_BackToAppView: View {
+//    var body: some View {
+//        HStack {
+//            Spacer()
+//            Button("Return to SwordMinder!") {
+//                withAnimation {
+//                    /// To return to SwordMinder, simply set the currentApp binding back to .swordMinder
+//                    currentApp = .swordMinder
+//                }
+//            }
+//            Spacer()
+//            Button("Add High Score Entry") {
+//                /// To add a high score entry, use the view model's highScore function
+//                ///  and pass in the name of your app, along with the user's current high score.
+//                swordMinder.highScore(app: "Sample App", score: 5000)
+//            }
+//            Spacer()
+//        }
+//    }
+//}

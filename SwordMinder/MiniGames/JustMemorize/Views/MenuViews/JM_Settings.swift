@@ -8,7 +8,7 @@
 import SwiftUI
 
 // later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
-struct Settings: View {
+struct JM_Settings: View {
     @State private var toggleTest: Bool = false
     
     //Will likely be an enum or something.
@@ -72,6 +72,6 @@ private func nothing() {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        JM_Settings()
     }
 }
