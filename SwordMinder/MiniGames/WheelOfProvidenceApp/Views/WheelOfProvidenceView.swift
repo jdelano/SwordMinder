@@ -17,13 +17,13 @@ struct WheelOfProvidenceView: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
     
-    var verses: [Verse]
+    var passage: Passage
     var body: some View {
         VStack{
             switch currentGameState {
                     case .wheel:
                 VStack {
-                    WheelView(verse1: verses[0].reference.toString(), verse2: verses[1].reference.toString(), verse3: verses[2].reference.toString(), verse4: verses[3].reference.toString())
+                    WheelView()
                                         .rotationEffect(wheelOfProvidence.wheel.isSpun ? Angle.degrees(0) : Angle.radians(wheelOfProvidence.wheelSpinDouble() * (Double.pi / 2.0)))
                     Button("Spin!", action: {
                         withAnimation(.easeInOut, {
@@ -46,6 +46,9 @@ struct WheelOfProvidenceView: View {
                 }
                 .padding()
                 .buttonStyle(SMButtonStyle())
+        }
+        .onAppear{
+            wheelOfProvidence.verse = swordMinder.bible.text(for: passage)
         }
     }
 }
@@ -116,7 +119,7 @@ struct BottomMenu: View{
 
 struct WheelOfProvidenceView_Previews: PreviewProvider {
     static var previews: some View {
-        WheelOfProvidenceView(currentApp: .constant(.wheelOfProvidenceApp), verses: [Verse(), Verse(from: <#Decoder#>), Verse(), Verse()])
+        WheelOfProvidenceView(wheelOfProvidence: WheelOfProvidence(), currentApp: .constant(.wheelOfProvidenceApp), passage: Passage())
     }
 }
 

@@ -8,10 +8,10 @@
 import Foundation
 
 struct PieWheel {
-    var ref1: String
-    var ref2: String
-    var ref3: String
-    var ref4: String
+    var text1: String
+    var text2: String
+    var text3: String
+    var text4: String
     
     var isSpun: Bool
 }

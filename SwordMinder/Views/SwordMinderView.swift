@@ -25,7 +25,7 @@ struct SwordMinderView: View {
             case .swordMinder: swordMinderMainView
             case .sampleApp: SampleAppView(currentApp: $currentApp)
             case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
-        case .wheelOfProvidenceApp: WheelOfProvidenceView(currentApp: $currentApp, verses:)
+        case .wheelOfProvidenceApp: WheelOfProvidenceView(wheelOfProvidence: WheelOfProvidence(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
         }
     }
 
