@@ -12,6 +12,7 @@ enum gameState {
     case guesser
 }
 struct WheelOfProvidenceView: View {
+    @ObservedObject var wheelOfProvidence: WheelOfProvidence
     @State var currentGameState = gameState.wheel
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
@@ -21,7 +22,15 @@ struct WheelOfProvidenceView: View {
         VStack{
             switch currentGameState {
                     case .wheel:
-                WheelView(verse1: verses[0].reference.toString(), verse2: verses[1].reference.toString(), verse3: verses[2].reference.toString(), verse4: verses[3].reference.toString())
+                VStack {
+                    WheelView(verse1: verses[0].reference.toString(), verse2: verses[1].reference.toString(), verse3: verses[2].reference.toString(), verse4: verses[3].reference.toString())
+                                        .rotationEffect(wheelOfProvidence.wheel.isSpun ? Angle.degrees(0) : Angle.radians(wheelOfProvidence.wheelSpinDouble() * (Double.pi / 2.0)))
+                    Button("Spin!", action: {
+                        withAnimation(.easeInOut, {
+                            wheelOfProvidence.wheel.isSpun = true
+                        })
+                    })
+                }
                     case .guesser:
                         VStack{
                             ScoreView()

@@ -77,6 +77,7 @@
 		B412F1992943D7A400B7EF0F /* WheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1982943D7A400B7EF0F /* WheelView.swift */; };
 		B412F19B2943D7BE00B7EF0F /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */; };
 		B412F19D2943E9E700B7EF0F /* WheelOfProvidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */; };
+		B412F19F29440A4F00B7EF0F /* PieWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19E29440A4F00B7EF0F /* PieWheel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +171,7 @@
 		B412F1982943D7A400B7EF0F /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
 		B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidence.swift; sourceTree = "<group>"; };
+		B412F19E29440A4F00B7EF0F /* PieWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieWheel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -428,6 +430,7 @@
 		B412F18F2943D6BB00B7EF0F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B412F19E29440A4F00B7EF0F /* PieWheel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
+				B412F19F29440A4F00B7EF0F /* PieWheel.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
