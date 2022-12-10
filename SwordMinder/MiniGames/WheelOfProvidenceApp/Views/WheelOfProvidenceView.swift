@@ -10,12 +10,16 @@ import SwiftUI
 enum gameState {
     case wheel
     case guesser
+    case complete
 }
 struct WheelOfProvidenceView: View {
     @ObservedObject var wheelOfProvidence: WheelOfProvidence
     @State var currentGameState = gameState.wheel
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
+    @State private var presentLetterAlert = false
+    @State private var presentPhraseAlert = false
+    @State var guess = ""
     
     var passage: Passage
     var body: some View {
@@ -24,19 +28,79 @@ struct WheelOfProvidenceView: View {
                     case .wheel:
                 VStack {
                     WheelView()
-                                        .rotationEffect(wheelOfProvidence.wheel.isSpun ? Angle.degrees(0) : Angle.radians(wheelOfProvidence.wheelSpinDouble() * (Double.pi / 2.0)))
-                    Button("Spin!", action: {
+                                        .rotationEffect(wheelOfProvidence.wheel.isSpun ? Angle.degrees(0) : Angle.radians(wheelOfProvidence.spinDouble * (Double.pi / 2.0)))
+                    HStack{
+                        Button("Spin!", action: {
                         withAnimation(.easeInOut, {
+                            if(!wheelOfProvidence.wheel.isSpun){
+                                wheelOfProvidence.spinWheel()
+                            }
                             wheelOfProvidence.wheel.isSpun = true
                         })
-                    })
+                        })
+                        Button(wheelOfProvidence.wheel.isSpun ? "Start!" : " ", action: {
+                            if(wheelOfProvidence.wheel.isSpun == true){
+                                currentGameState = .guesser
+                            }
+                        })
+                    }
                 }
                     case .guesser:
                         VStack{
                             ScoreView()
-                            WordView()
-                            BottomMenu()
+                            
+                            /// WordView
+                            var word = wheelOfProvidence.grid
+                            let length: Int = word.count
+                            LazyVGrid(columns:[GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50))]){
+                                Spacer()
+                                ForEach(0..<length, id: \.self){index in
+                                    LetterView(letter: word[index].isShown ? word[index].letter : Character(" "))
+                                        .aspectRatio(2/3, contentMode: .fill)
+                                }
+                                Spacer()
+                            }
+                            
+                            ///BottomMenu
+                            HStack{
+                                Spacer()
+                                Button("Guess", action:{
+                                    presentLetterAlert = true
+                                }).foregroundColor(.white).padding().alert("Guess Letter:", isPresented: $presentLetterAlert, actions: {
+                                    TextField("Capital Letter", text: $guess)
+                                    
+                                    Button("Submit", action: {
+                                        wheelOfProvidence.guessedLetter = guess
+                                        if(wheelOfProvidence.containsGuessedLetter()){
+                                            wheelOfProvidence.updateGrid(guess)
+                                        }
+                                        presentLetterAlert = false
+                                    })
+                                })
+                                Spacer()
+                                Button("Complete", action:{
+                                    presentPhraseAlert = true
+                                }).foregroundColor(.white).padding().alert("Guess Letter:", isPresented: $presentPhraseAlert, actions: {
+                                    TextField("Capital Letter", text: $guess)
+                                    
+                                    Button("Submit", action: {
+                                        wheelOfProvidence.guessedPhrase = guess
+                                        if(wheelOfProvidence.guessedPhraseIsCorrect()){
+                                            currentGameState = .complete
+                                        }
+                                        presentPhraseAlert = false
+                                    })
+                                })
+                                Spacer()
+                            }.background(Color.blue)
+                            
                         }
+                        case .complete:
+                            VStack {
+                                Text("Correct!").font(.largeTitle)
+                                Text("Score: \(wheelOfProvidence.score)").font(.title)
+                                Text("You received \(wheelOfProvidence.award) gems!").font(.title2)
+                            }
                     }
                 Button {
                     currentApp = .swordMinder
@@ -55,29 +119,20 @@ struct WheelOfProvidenceView: View {
 struct WordView: View {
     var body: some View {
         GeometryReader { geometry in
-            let word: String = "Test Phrase" //This is a let constant to remove the warning; will shift to var when needed
-            let length: Int = word.count
-            LazyVGrid(columns:[GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50))]){
-                Spacer()
-                ForEach(0..<length, id: \.self){index in
-                    LetterView(letter: word[index])
-                        .aspectRatio(2/3, contentMode: .fill)
-                }
-                Spacer()
-            }
+            
         }
     }
 }
 
 struct LetterView: View{
-    var letter: String
+    var letter: Character
     //will allow for a boolean: "isGuessed" or something of that nature, determining whether or not the letter shows. Think of a "flipped card", almost.
     var body: some View {
         GeometryReader { geometry in
             ZStack{
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(letter == " " ? .white:.blue)
-                Text(letter).font(.system(size: geometry.size.width))
+                Text(String(letter)).font(.system(size: geometry.size.width))
             }
         }
     }
@@ -99,10 +154,6 @@ struct ScoreView: View{
 struct BottomMenu: View{
     var body: some View{
         HStack{
-            Spacer()
-            Button("New Game", action:{
-                //Start a new game
-            }).foregroundColor(.white).padding()
             Spacer()
             Button("Guess", action:{
                 //Allow entry of one letter, check if it applies to the phrase

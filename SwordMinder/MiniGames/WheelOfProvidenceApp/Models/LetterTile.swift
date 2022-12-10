@@ -15,4 +15,8 @@ struct LetterTile {
         self.letter = letter
         self.isShown = false
     }
+    
+    mutating func flip() {
+        self.isShown = true
+    }
 }

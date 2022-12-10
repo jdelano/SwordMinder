@@ -13,6 +13,9 @@ class WheelOfProvidence: ObservableObject {
     var guessedPhrase: String?
     var wheel: PieWheel
     var grid = [LetterTile]()
+    var score = 1000
+    var award = 1
+    var spinDouble = 0.0
     
     init() {
         self.guessedLetter = nil
@@ -29,12 +32,14 @@ class WheelOfProvidence: ObservableObject {
         verse == guessedPhrase
     }
     
-    func wheelSpinDouble() -> Double{
-        return Double.random(in: 0.0 ..< 4.0)
+    func spinWheel(){
+        spinDouble = Double.random(in: 0.0 ..< 4.0)
+        award = Int(spinDouble.rounded())
     }
     
     func guessLetter(guess: String) {
         guessedLetter = guess
+        score -= 50
     }
     
     func guessPhrase(guess: String) {
@@ -44,6 +49,14 @@ class WheelOfProvidence: ObservableObject {
     func createGrid(verse: String) {
         for i in verse{
             grid.append(LetterTile(letter: i))
+        }
+    }
+    
+    func updateGrid(_ guess: String) {
+        for (tile, _) in grid.enumerated() {
+            if(grid[tile].letter == Character(guess)){
+                grid[tile].flip()
+            }
         }
     }
 }
