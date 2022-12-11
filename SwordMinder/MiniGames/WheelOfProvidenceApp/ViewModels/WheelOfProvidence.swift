@@ -11,7 +11,7 @@ class WheelOfProvidence: ObservableObject {
     var verse: String = ""
     var guessedLetter: String?
     var guessedPhrase: String?
-    var wheel: PieWheel
+    @Published var wheel: PieWheel
     var grid = [LetterTile]()
     var score = 1000
     var award = 1
@@ -35,9 +35,10 @@ class WheelOfProvidence: ObservableObject {
     func spinWheel(){
         spinDouble = Double.random(in: 0.0 ..< 4.0)
         award = Int(spinDouble.rounded())
+        wheel.isSpun = true
     }
     
-    func guessLetter(guess: String) {
+    func guessLetter(_ guess: String) {
         guessedLetter = guess
         score -= 50
     }

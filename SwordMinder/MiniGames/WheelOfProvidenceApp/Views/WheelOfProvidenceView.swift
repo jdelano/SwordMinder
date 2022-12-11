@@ -28,14 +28,13 @@ struct WheelOfProvidenceView: View {
                     case .wheel:
                 VStack {
                     WheelView()
-                                        .rotationEffect(wheelOfProvidence.wheel.isSpun ? Angle.degrees(0) : Angle.radians(wheelOfProvidence.spinDouble * (Double.pi / 2.0)))
+                        .rotationEffect(Angle.radians(wheelOfProvidence.spinDouble * (Double.pi / 2.0)))
                     HStack{
                         Button("Spin!", action: {
                         withAnimation(.easeInOut, {
-                            if(!wheelOfProvidence.wheel.isSpun){
+                            if(wheelOfProvidence.wheel.isSpun == false){
                                 wheelOfProvidence.spinWheel()
                             }
-                            wheelOfProvidence.wheel.isSpun = true
                         })
                         })
                         Button(wheelOfProvidence.wheel.isSpun ? "Start!" : " ", action: {
@@ -70,7 +69,7 @@ struct WheelOfProvidenceView: View {
                                     TextField("Capital Letter", text: $guess)
                                     
                                     Button("Submit", action: {
-                                        wheelOfProvidence.guessedLetter = guess
+                                        wheelOfProvidence.guessLetter(guess)
                                         if(wheelOfProvidence.containsGuessedLetter()){
                                             wheelOfProvidence.updateGrid(guess)
                                         }
@@ -87,13 +86,15 @@ struct WheelOfProvidenceView: View {
                                         wheelOfProvidence.guessedPhrase = guess
                                         if(wheelOfProvidence.guessedPhraseIsCorrect()){
                                             currentGameState = .complete
+                                            if(swordMinder.taskEligible) {
+                                                swordMinder.completeTask(difficulty: wheelOfProvidence.award)
+                                            }
                                         }
                                         presentPhraseAlert = false
                                     })
                                 })
                                 Spacer()
                             }.background(Color.blue)
-                            
                         }
                         case .complete:
                             VStack {

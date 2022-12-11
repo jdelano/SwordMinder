@@ -21,7 +21,7 @@ struct GameView: View {
                     }
                     SampleAppIconView {
                         withAnimation {
-                            currentApp = .sampleApp
+                            currentApp = .wheelOfProvidenceApp
                         }
                     }
                 }
