@@ -4,7 +4,7 @@
 //
 //  Created by Jared Waltz on 12/9/22.
 //
-
+/*
 import SwiftUI
 
 struct JM_MainMenu: View {
@@ -20,7 +20,7 @@ struct JM_MainMenu: View {
         ZStack {
             VStack {
                 // A basic navigation stack.
-                NavigationView {
+                NavigationStack{
                     VStack {
                         Text("(Just Memorize Logo)")
                             .padding()
@@ -41,9 +41,9 @@ struct JM_MainMenu: View {
                                 Spacer()
                                 NavigationLink("Settings", destination: JM_Settings())
                                     .foregroundColor(Color("JMLightGold"))
-//                                Button("TestButton") {
-//                                    JustMemorizeView(currentJMView: .instructions)
-//                                }
+                                Button("TestButton") {
+                                    JM_Instructions()
+                                }
                             }
                             .padding()
                             HStack {
@@ -91,4 +91,4 @@ struct ContentView_Previews: PreviewProvider {
         
         //MARK: Borders still appear white?
     }
-}
+}*/
