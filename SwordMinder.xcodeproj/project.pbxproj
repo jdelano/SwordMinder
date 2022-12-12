@@ -11,7 +11,6 @@
 		25175835294104A1004FE76B /* ScriptureTyperGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25175834294104A1004FE76B /* ScriptureTyperGame.swift */; };
 		25175837294104BB004FE76B /* ScriptureTyperVerses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25175836294104BB004FE76B /* ScriptureTyperVerses.swift */; };
 		25928C7D29476F1A0021818E /* ScriptureTyperCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C7C29476F1A0021818E /* ScriptureTyperCardView.swift */; };
-		25928C80294772810021818E /* ScriptureTyperColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25928C7F294772810021818E /* ScriptureTyperColor+Extensions.swift */; };
 		25D293342942BCFC007BEE06 /* ScriptureTyperAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D293332942BCFC007BEE06 /* ScriptureTyperAppIconView.swift */; };
 		25D293362942BEDF007BEE06 /* ScriptureTyper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D293352942BEDF007BEE06 /* ScriptureTyper.swift */; };
 		25EE70AC29439B8400520030 /* ScriptureTyperDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EE70AB29439B8400520030 /* ScriptureTyperDifficulty.swift */; };
@@ -97,7 +96,6 @@
 		25175834294104A1004FE76B /* ScriptureTyperGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperGame.swift; sourceTree = "<group>"; };
 		25175836294104BB004FE76B /* ScriptureTyperVerses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperVerses.swift; sourceTree = "<group>"; };
 		25928C7C29476F1A0021818E /* ScriptureTyperCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperCardView.swift; sourceTree = "<group>"; };
-		25928C7F294772810021818E /* ScriptureTyperColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScriptureTyperColor+Extensions.swift"; sourceTree = "<group>"; };
 		25D293332942BCFC007BEE06 /* ScriptureTyperAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperAppIconView.swift; sourceTree = "<group>"; };
 		25D293352942BEDF007BEE06 /* ScriptureTyper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyper.swift; sourceTree = "<group>"; };
 		25EE70AB29439B8400520030 /* ScriptureTyperDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptureTyperDifficulty.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 		2517582E2941043A004FE76B /* ScriptureTyperApp */ = {
 			isa = PBXGroup;
 			children = (
-				25928C7E294772650021818E /* Extensions */,
 				251758312941046D004FE76B /* Views */,
 				2517583029410464004FE76B /* ViewModels */,
 				2517582F2941045D004FE76B /* Models */,
@@ -225,14 +222,6 @@
 				25928C7C29476F1A0021818E /* ScriptureTyperCardView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		25928C7E294772650021818E /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				25928C7F294772810021818E /* ScriptureTyperColor+Extensions.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		654A2C01285CD3B5006A7652 /* Docs */ = {
@@ -618,7 +607,6 @@
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				25928C7D29476F1A0021818E /* ScriptureTyperCardView.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
-				25928C80294772810021818E /* ScriptureTyperColor+Extensions.swift in Sources */,
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,

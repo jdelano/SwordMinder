@@ -17,13 +17,13 @@ struct ScriptureTyperRules: View {
                 .foregroundColor(.teal)
                 .frame(width: DrawingConstraints.howToPlayWidth, height: DrawingConstraints.howToPlayHeight)
             List {
-                Text("In the next screen, choose a verse to practice")
+                Text("Memorize the verse")
                     .font(.subheadline)
-                Text("After a verse has been selected, Memorize the verse")
+                Text("After you have memorized the verse, flip the verse card over")
                     .font(.subheadline)
-                Text("Flip the Verse Card to Begin Typing")
+                Text("The time will not start until the verse card us flipped")
                     .font(.subheadline)
-                Text("When you are Finished Typing Tap Submit to Stop the Clock")
+                Text("When you are finished typing tap submit to stop the clock")
                     .font(.subheadline)
             }
             .padding()
