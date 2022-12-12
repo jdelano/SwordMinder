@@ -8,6 +8,7 @@
 import Foundation
 
 class WheelOfProvidence: ObservableObject {
+    var words = [String]()
     var verse: String = ""
     var guessedLetter: String?
     var guessedPhrase: String?
@@ -25,11 +26,16 @@ class WheelOfProvidence: ObservableObject {
 
     
     func containsGuessedLetter() -> Bool {
-        verse.contains(guessedLetter ?? "1")
+        verse.localizedCaseInsensitiveContains(guessedLetter ?? "1")
     }
     
     func guessedPhraseIsCorrect() -> Bool {
-        verse == guessedPhrase
+        if(verse.caseInsensitiveCompare(guessedPhrase ?? "1") == .orderedSame){
+            return true
+        }
+        else{
+            return false
+        }
     }
     
     func spinWheel(){
@@ -49,15 +55,25 @@ class WheelOfProvidence: ObservableObject {
     
     func createGrid(verse: String) {
         for i in verse{
-            grid.append(LetterTile(letter: i))
+            if(true){
+                grid.append(LetterTile(letter: i))
+            }
         }
     }
     
     func updateGrid(_ guess: String) {
         for (tile, _) in grid.enumerated() {
-            if(grid[tile].letter == Character(guess)){
+            if(String(grid[tile].letter).caseInsensitiveCompare(guess) == .orderedSame){
                 grid[tile].flip()
             }
         }
+    }
+    
+    func convertWordsToVerse() {
+        for i in words {
+            verse.append(i)
+            verse.append(" ")
+        }
+        verse.removeLast()
     }
 }
