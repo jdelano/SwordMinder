@@ -22,10 +22,19 @@ struct JM_MainMenu: View {
                 // A basic navigation stack.
                 NavigationView {
                     VStack {
-                        Text("(Just Memorize Logo)")
-                            .padding()
-                            .border(Color("JMDarkGold"))
-                            .foregroundColor(Color("JMDarkGold"))
+                        HStack {
+                            Text("(Just Memorize Logo)")
+                                .padding()
+                                .border(Color("JMDarkGold"))
+                                .foregroundColor(Color("JMDarkGold"))
+                            Spacer()
+                            ZStack {
+                                NavigationLink("    ", destination: JM_Settings())
+                                Image(systemName: "gear")
+                                    .foregroundColor(Color("JMLightGold"))
+                                    .padding()
+                            }
+                        }
                         Spacer()
                         Text("Just Memorize.")
                             .font(.largeTitle)
@@ -33,19 +42,25 @@ struct JM_MainMenu: View {
                         Spacer()
                         VStack {
                             HStack{
-                                NavigationLink("Instructions", destination: JM_Instructions())
+                                NavigationLink("Learn", destination: JM_Instructions())
                                     .foregroundColor(Color("JMLightGold"))
+                                    .padding(.leading)
+                                    .padding(.leading)
                                 Spacer()
                                 NavigationLink("Play", destination: JM_VersePreview())
                                     .foregroundColor(Color("JMLightGold"))
+                                    .padding(.trailing)
+                                    .padding(.trailing)
+                                    .padding(.trailing)
+                                    .padding(.trailing)
                                 Spacer()
-                                NavigationLink("Settings", destination: JM_Settings())
-                                    .foregroundColor(Color("JMLightGold"))
+                                
 //                                Button("TestButton") {
 //                                    JustMemorizeView(currentJMView: .instructions)
 //                                }
                             }
-                            .padding()
+                            .frame(width: 400, height: 50)
+                            .border(Color("JMDarkGold"))
                             HStack {
                                 Spacer()
                                 Button("Return to SwordMinder!") {
@@ -64,6 +79,9 @@ struct JM_MainMenu: View {
                                 .foregroundColor(Color("JMLightGold"))
                                 Spacer()
                             }// HStack
+                            .frame(width: 400, height: 50)
+                            .border(Color("JMDarkGold"))
+                            .padding()
                         }
                     }
                     .background(Color("JMBlack"))

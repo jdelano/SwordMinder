@@ -9,7 +9,9 @@ import SwiftUI
 
 // later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
 struct JM_Settings: View {
-    @State private var toggleTest: Bool = false
+    @State private var toggleVerse: Bool = true
+    
+    @State private var toggleTimer: Bool = true
     
     //Will likely be an enum or something.
     private var difficulties = ["Easy", "Medium", "Hard"]
@@ -20,50 +22,63 @@ struct JM_Settings: View {
     
     // Consider a scroll view if necessary.
     var body: some View {
-        VStack {
-            VStack{
-                Text("(Just Memorize Logo)")
-                    .padding()
-                    .border(.black)
-                // Difficulty Selection
-                Text("Difficulty")
-                Picker ("Difficulty Picker", selection: $selectedDifficulty) {
-                    ForEach(difficulties, id: \.self) {
-                        Text($0)
+        ZStack {
+            VStack {
+                VStack{
+                    Text("(Just Memorize Logo)")
+                        .padding()
+                        .border(.black)
+                        .foregroundColor(Color("JMLightGold"))
+                    Spacer()
+                    // Difficulty Selection
+                    Text("Difficulty")
+                        .foregroundColor(Color("JMLightGold"))
+                    Picker ("Difficulty Picker", selection: $selectedDifficulty) {
+                        ForEach(difficulties, id: \.self) {
+                            Text($0)
+                        }
+                        .foregroundColor(Color("JMLightGold"))
                     }
-                }
-                .pickerStyle(WheelPickerStyle())
-                
-                //Input Type
-                Text("Input Type:")
-                Picker ("Input Picker", selection: $selectedInput) {
-                    ForEach(inputTypes, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .pickerStyle(WheelPickerStyle())
-            }
-                // Input Selection
-                /*HStack {
+                    .pickerStyle(SegmentedPickerStyle())
+                    Spacer()
+                    //Input Type
                     Text("Input Type:")
+                        .foregroundColor(Color("JMLightGold"))
                     Picker ("Input Picker", selection: $selectedInput) {
                         ForEach(inputTypes, id: \.self) {
                             Text($0)
                         }
+                        .foregroundColor(Color("JMLightGold"))
                     }
-                }*/
-            
-            // Show verse?
-            HStack {
-                Toggle(isOn: $toggleTest) {
-                    Text("Show Verse First")
-                    // Text modifiers may go here
+                    .pickerStyle(SegmentedPickerStyle())
+                    Spacer()
                 }
-                .tint(.blue)
-                .padding()
+                
+                // Show verse?
+                HStack {
+                    Toggle(isOn: $toggleVerse) {
+                        Text("Show Verse First")
+                            .foregroundColor(Color("JMLightGold"))
+                    }
+                    .tint(Color("JMLightGold"))
+                    .padding()
+                }
+                //Show timer?
+                HStack {
+                    Toggle(isOn: $toggleTimer) {
+                        Text("Show Timer")
+                            .foregroundColor(Color("JMLightGold"))
+                    }
+                    .tint(Color("JMLightGold"))
+                    .padding()
+                }
+                .background(Color("JMBlack"))
             }
-        }
-    }
+            .background(Color("JMBlack"))
+        }//zstack
+        .frame(maxWidth: 100000, maxHeight: 100000)
+        .background(Color("JMBlack"))
+    }//Body
 }//Settings Struct
 
 // It may be easier to not have this but I keep getting errors in button. It also serves as a good placeholder for later.

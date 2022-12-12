@@ -22,11 +22,14 @@ struct JM_Results: View {
         VStack {
             HStack {
                 Text("(Just Memorize Logo)")
+                    .foregroundColor(Color("JMLightGold"))
                     Spacer()
                 VStack {
                     Text("Points: 200")
+                        .foregroundColor(Color("JMLightGold"))
                     Text("Points Gained: 100")
                         .padding()
+                        .foregroundColor(Color("JMLightGold"))
                 }
             }
             .padding()
@@ -34,27 +37,34 @@ struct JM_Results: View {
             Text("Accuracy: \(sampleResults)")
                 .font(.largeTitle)
                 .padding()
+                .foregroundColor(Color("JMWhite"))
             
             Text("\(sampleReference)")
+                .foregroundColor(Color("JMLightGold"))
             
             //INTERPOLATION!
             Text("\(sampleVerse1)")
-                .foregroundColor(.black)
+                .foregroundColor(Color("JMLightGold"))
                 + Text("\(sampleVerse2)")
                     .foregroundColor(.green)
             //.padding()
             //MARK: Padding here does not work
             Spacer()
             HStack {
-                //NavigationLink("Home", destination: JM_MainMenu(currentApp: $currentApp))
+                NavigationLink("Home", destination: JM_MainMenu(currentApp: .constant(.justMemorizeApp)))
+                    .foregroundColor(Color("JMLightGold"))
+                    .padding()
                 Spacer()
                 NavigationLink("Play Again", destination: JM_VersePreview())
+                    .foregroundColor(Color("JMLightGold"))
+                    .padding()
             }
-            //.frame(width: 200, height: 20)
-            .border(.black)
+            .frame(width: 400, height: 50)
+            .border(Color("JMLightGold"))
             .padding()
         }
-    }
+        .background(Color("JMBlack"))
+    }//body
 }
 
 struct Results_Previews: PreviewProvider {

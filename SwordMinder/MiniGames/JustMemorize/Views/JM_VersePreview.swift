@@ -22,27 +22,39 @@ struct JM_VersePreview: View {
             //Title and points
             HStack {
                 Text("(Just Memorize Logo)")
+                    .foregroundColor(Color("JMLightGold"))
                     Spacer()
                 Text("Points: 100")
                     .padding()
+                    .foregroundColor(Color("JMLightGold"))
             }
             .padding(.leading)
             
             //Body
             Text("VERSE PREVIEW")
                 .font(.headline)
-            .padding()
+                .padding()
+                .foregroundColor(Color("JMLightGold"))
             Text("\(sampleReference)")
+                .foregroundColor(Color("JMLightGold"))
             Text("\(sampleVerse)")
                 .padding()
+                .foregroundColor(Color("JMLightGold"))
             Spacer()
             HStack {
                 NavigationLink("Instructions", destination: JM_Instructions())
+                .foregroundColor(Color("JMLightGold"))
+                .padding()
                 Spacer()
                 NavigationLink("Start", destination: JM_QuizView())
+                .foregroundColor(Color("JMLightGold"))
+                .padding()
             }
+            .frame(width: 400, height: 50)
+            .border(Color("JMLightGold"))
             .padding()
         }
+        .background(Color("JMBlack"))
     }
 }
 

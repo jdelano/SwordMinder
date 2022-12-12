@@ -24,11 +24,14 @@ struct JM_QuizView: View {
         VStack {
             HStack {
                 Text("(Just Memorize Logo)")
+                    .foregroundColor(Color("JMLightGold"))
                     Spacer()
                 VStack {
                     Text("Points: 100")
+                        .foregroundColor(Color("JMLightGold"))
                     Text("Timer: \(timeRemaining)")
                         .font(.title)
+                        .foregroundColor(Color("JMLightGold"))
                         .onReceive(timer) { _ in
                             if timeRemaining > 0 { timeRemaining -= 1 }
                             if timeRemaining == 0 {
@@ -44,18 +47,24 @@ struct JM_QuizView: View {
             }
             .padding()
             Text("\(sampleReference)")
+                .foregroundColor(Color("JMLightGold"))
             Text("\(sampleVerseMedium)")
                 .padding()
+                .foregroundColor(Color("JMLightGold"))
             Spacer()
             HStack {
-                Spacer()
                 NavigationLink("Done", destination: JM_Results())
                     .border(.black)
+                    .foregroundColor(Color("JMLightGold"))
+                    .padding()
             }
+            .frame(width: 400, height: 50)
+            .border(Color("JMLightGold"))
             .padding()
         }
-    }
-}
+        .background(Color("JMBlack"))
+    }//body
+}//view
 
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
