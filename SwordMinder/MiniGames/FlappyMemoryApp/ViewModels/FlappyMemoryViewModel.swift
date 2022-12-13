@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import SwiftUI
 
 class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var player: SKSpriteNode!
@@ -15,9 +16,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var gameOver: SKSpriteNode!
     var gameState = GameState.showingLogo
     
-    var score = Score()
-
-    var scoreLabel: SKLabelNode!
+    var score = Score() {
+            didSet {
+                score.scoreLabel.text = "SCORE: \(score)"
+            }
+        }
 
     override func didMove(to view: SKView) {
         createPlayer()
@@ -64,7 +67,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
 
     func createPlayer() {
-        let playerTexture = SKTexture(imageNamed: "player-1")
+        let playerTexture = SKTexture(imageNamed: "truck")
         player = SKSpriteNode(texture: playerTexture)
         player.setScale(0.5)
         player.zPosition = 10
@@ -151,6 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     func createLogos() {
         logo = SKSpriteNode(imageNamed: "logo")
         logo.position = CGPoint(x: frame.midX, y: frame.midY)
+        logo.setScale(1.8)
         addChild(logo)
     }
 

@@ -211,8 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				4CCD4A322948D10E00DBF037 /* Contents */,
-				4CCD4A382948D10E00DBF037 /* ViewModels */,
 				4CCD4A3A2948D10E00DBF037 /* Models */,
+				4CCD4A382948D10E00DBF037 /* ViewModels */,
 				4CCD4A3D2948D10E00DBF037 /* Views */,
 			);
 			path = FlappyMemoryApp;

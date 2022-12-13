@@ -11,11 +11,7 @@ import SpriteKit
 class Score: SKScene {
     var scoreLabel: SKLabelNode!
     
-    var score = 0 {
-        didSet {
-            scoreLabel.text = "SCORE: \(score)"
-        }
-    }
+    var score = 0 
     
     func createScore() {
         scoreLabel = SKLabelNode(fontNamed: "Optima-ExtraBlack")

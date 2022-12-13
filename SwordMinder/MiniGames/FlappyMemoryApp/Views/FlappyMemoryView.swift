@@ -46,6 +46,7 @@ struct FlappyMemoryView: View {
             SpriteView(scene: scene)
                 .frame(width: 400, height: 700)
             VStack {
+                
                 HStack {
                     Spacer()
                     time
