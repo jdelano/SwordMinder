@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */; };
-		4D8AA7672946D0D50062BF7E /* JustMemorizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA7662946D0D50062BF7E /* JustMemorizeView.swift */; };
-		4D8AA7692946D3470062BF7E /* JM_MainMenuBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA7682946D3470062BF7E /* JM_MainMenuBackup.swift */; };
 		4D8AA76B2946DB070062BF7E /* JustMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76A2946DB070062BF7E /* JustMemorize.swift */; };
 		4D8AA76D2946DB330062BF7E /* JMDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */; };
 		4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */; };
@@ -103,8 +101,6 @@
 
 /* Begin PBXFileReference section */
 		4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeAppIconView.swift; sourceTree = "<group>"; };
-		4D8AA7662946D0D50062BF7E /* JustMemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeView.swift; sourceTree = "<group>"; };
-		4D8AA7682946D3470062BF7E /* JM_MainMenuBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_MainMenuBackup.swift; sourceTree = "<group>"; };
 		4D8AA76A2946DB070062BF7E /* JustMemorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorize.swift; sourceTree = "<group>"; };
 		4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMDifficulty.swift; sourceTree = "<group>"; };
 		4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_MainMenu.swift; sourceTree = "<group>"; };
@@ -237,9 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				4DF7B44B2943BAEF00F15C50 /* MenuViews */,
-				4D8AA7662946D0D50062BF7E /* JustMemorizeView.swift */,
 				4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */,
-				4D8AA7682946D3470062BF7E /* JM_MainMenuBackup.swift */,
 				4DF7B4492943BAD500F15C50 /* JM_VersePreview.swift */,
 				4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */,
 				4DF7B4472943BABB00F15C50 /* JM_Results.swift */,
@@ -620,7 +614,6 @@
 				65C7C802293ACD2300301285 /* String+Extensions.swift in Sources */,
 				65C7C812293BE26500301285 /* WordSearchView.swift in Sources */,
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
-				4D8AA7672946D0D50062BF7E /* JustMemorizeView.swift in Sources */,
 				4D8AA76B2946DB070062BF7E /* JustMemorize.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
@@ -646,7 +639,6 @@
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				65C7C81A293E460800301285 /* Tile.swift in Sources */,
-				4D8AA7692946D3470062BF7E /* JM_MainMenuBackup.swift in Sources */,
 				4D8AA76D2946DB330062BF7E /* JMDifficulty.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
 				65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */,
