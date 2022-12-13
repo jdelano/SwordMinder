@@ -13,16 +13,18 @@ struct JustMemorizeAppIconView: View {
         Button {
             action()
         } label: {
+            /// This image currently does not fit aspect ratios.
+            //Image("JMLogo")
             ZStack(alignment: .center) {
                 RoundedRectangle(cornerRadius: 15)
-                    .fill(Color.black)
+                    .fill(Color("JMBlack"))
                 Text("JustMemorize")
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("JMLightGold"))
                     .multilineTextAlignment(.center)
                     .font(.largeTitle)
+            }// this curly brace is unneeded when using image
             }
             .aspectRatio(1, contentMode: .fit)
-        }
     }
 }
 
