@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CCD4A402948D10E00DBF037 /* PlayerExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A332948D10E00DBF037 /* PlayerExplosion.sks */; };
+		4CCD4A412948D10E00DBF037 /* music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A342948D10E00DBF037 /* music.m4a */; };
+		4CCD4A422948D10E00DBF037 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A352948D10E00DBF037 /* coin.wav */; };
+		4CCD4A432948D10E00DBF037 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A362948D10E00DBF037 /* explosion.wav */; };
+		4CCD4A442948D10E00DBF037 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A372948D10E00DBF037 /* README.txt */; };
+		4CCD4A452948D10E00DBF037 /* FlappyMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A392948D10E00DBF037 /* FlappyMemoryViewModel.swift */; };
+		4CCD4A462948D10E00DBF037 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3B2948D10E00DBF037 /* Score.swift */; };
+		4CCD4A472948D10E00DBF037 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3C2948D10E00DBF037 /* GameState.swift */; };
+		4CCD4A482948D10E00DBF037 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3E2948D10E00DBF037 /* RulesView.swift */; };
+		4CCD4A492948D10E00DBF037 /* FlappyMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3F2948D10E00DBF037 /* FlappyMemoryView.swift */; };
+		4CCD4A4B2948D14100DBF037 /* FlappyMemoryAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A4A2948D14100DBF037 /* FlappyMemoryAppIconView.swift */; };
 		6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC6F28F3101500D8D5B4 /* BibleTests.swift */; };
 		6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */; };
 		6504DC7428F33CA400D8D5B4 /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */; };
@@ -91,6 +102,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CCD4A332948D10E00DBF037 /* PlayerExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerExplosion.sks; sourceTree = "<group>"; };
+		4CCD4A342948D10E00DBF037 /* music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music.m4a; sourceTree = "<group>"; };
+		4CCD4A352948D10E00DBF037 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
+		4CCD4A362948D10E00DBF037 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		4CCD4A372948D10E00DBF037 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		4CCD4A392948D10E00DBF037 /* FlappyMemoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyMemoryViewModel.swift; sourceTree = "<group>"; };
+		4CCD4A3B2948D10E00DBF037 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		4CCD4A3C2948D10E00DBF037 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		4CCD4A3E2948D10E00DBF037 /* RulesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
+		4CCD4A3F2948D10E00DBF037 /* FlappyMemoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyMemoryView.swift; sourceTree = "<group>"; };
+		4CCD4A4A2948D14100DBF037 /* FlappyMemoryAppIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyMemoryAppIconView.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
 		6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
@@ -185,6 +207,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CCD4A312948D10E00DBF037 /* FlappyMemoryApp */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD4A322948D10E00DBF037 /* Contents */,
+				4CCD4A382948D10E00DBF037 /* ViewModels */,
+				4CCD4A3A2948D10E00DBF037 /* Models */,
+				4CCD4A3D2948D10E00DBF037 /* Views */,
+			);
+			path = FlappyMemoryApp;
+			sourceTree = "<group>";
+		};
+		4CCD4A322948D10E00DBF037 /* Contents */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD4A332948D10E00DBF037 /* PlayerExplosion.sks */,
+				4CCD4A342948D10E00DBF037 /* music.m4a */,
+				4CCD4A352948D10E00DBF037 /* coin.wav */,
+				4CCD4A362948D10E00DBF037 /* explosion.wav */,
+				4CCD4A372948D10E00DBF037 /* README.txt */,
+			);
+			path = Contents;
+			sourceTree = "<group>";
+		};
+		4CCD4A382948D10E00DBF037 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD4A392948D10E00DBF037 /* FlappyMemoryViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4CCD4A3A2948D10E00DBF037 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD4A3B2948D10E00DBF037 /* Score.swift */,
+				4CCD4A3C2948D10E00DBF037 /* GameState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4CCD4A3D2948D10E00DBF037 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD4A3E2948D10E00DBF037 /* RulesView.swift */,
+				4CCD4A3F2948D10E00DBF037 /* FlappyMemoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		654A2C01285CD3B5006A7652 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				65A5D55729037609001584F2 /* SampleAppIconView.swift */,
+				4CCD4A4A2948D14100DBF037 /* FlappyMemoryAppIconView.swift */,
 				65C7C816293C281500301285 /* WordSearchAppIconView.swift */,
 			);
 			path = AppIconViews;
@@ -332,6 +404,7 @@
 		65C7C818293D40E100301285 /* MiniGames */ = {
 			isa = PBXGroup;
 			children = (
+				4CCD4A312948D10E00DBF037 /* FlappyMemoryApp */,
 				65C7C805293BDC5500301285 /* WordSearchApp */,
 			);
 			path = MiniGames;
@@ -506,12 +579,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCD4A402948D10E00DBF037 /* PlayerExplosion.sks in Resources */,
 				65CB7EBF29240C1F00809F7B /* abbreviations.json in Resources */,
+				4CCD4A412948D10E00DBF037 /* music.m4a in Resources */,
+				4CCD4A432948D10E00DBF037 /* explosion.wav in Resources */,
 				65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */,
 				654A2C05285CD3B5006A7652 /* README.md in Resources */,
+				4CCD4A422948D10E00DBF037 /* coin.wav in Resources */,
 				654A2C04285CD3B5006A7652 /* Requirements.md in Resources */,
 				650BD12E28F0C3D2007034EA /* kjv.json in Resources */,
 				650BD13128F0C43B007034EA /* books.json in Resources */,
+				4CCD4A442948D10E00DBF037 /* README.txt in Resources */,
 				65AB526C285CC11100FF1038 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,6 +619,7 @@
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
 				65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */,
 				65EB9D7B287B9D1F00FAF612 /* HomeView.swift in Sources */,
+				4CCD4A4B2948D14100DBF037 /* FlappyMemoryAppIconView.swift in Sources */,
 				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
 				65C7C802293ACD2300301285 /* String+Extensions.swift in Sources */,
 				65C7C812293BE26500301285 /* WordSearchView.swift in Sources */,
@@ -556,6 +635,7 @@
 				650BD12F28F0C3D2007034EA /* Bible.swift in Sources */,
 				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,
 				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
+				4CCD4A492948D10E00DBF037 /* FlappyMemoryView.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,
 				65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */,
@@ -569,17 +649,21 @@
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
 				65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */,
 				65C7C81E293E79EF00301285 /* Sequence+Extensions.swift in Sources */,
+				4CCD4A482948D10E00DBF037 /* RulesView.swift in Sources */,
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
+				4CCD4A462948D10E00DBF037 /* Score.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
+				4CCD4A472948D10E00DBF037 /* GameState.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
 				65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */,
 				65C7C820293E7DD500301285 /* Array+Extensions.swift in Sources */,
+				4CCD4A452948D10E00DBF037 /* FlappyMemoryViewModel.swift in Sources */,
 				65A5D55829037609001584F2 /* SampleAppIconView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

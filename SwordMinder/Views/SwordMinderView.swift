@@ -11,6 +11,7 @@ enum Apps {
     case swordMinder
     case sampleApp
     case wordSearchApp
+    case flappyMemoryApp
 }
 
 
@@ -21,12 +22,13 @@ struct SwordMinderView: View {
     
     var body: some View {
         switch currentApp {
-            case .swordMinder: swordMinderMainView
-            case .sampleApp: SampleAppView(currentApp: $currentApp)
-            case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
+        case .swordMinder: swordMinderMainView
+        case .sampleApp: SampleAppView(currentApp: $currentApp)
+        case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
+        case .flappyMemoryApp: RulesView(currentApp: $currentApp, verseReference: Reference())
         }
     }
-
+    
     var swordMinderMainView : some View {
         TabView {
             HomeView()
