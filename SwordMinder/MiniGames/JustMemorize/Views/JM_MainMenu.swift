@@ -22,79 +22,91 @@ struct JM_MainMenu: View {
                 // A basic navigation stack.
                 NavigationView {
                     VStack {
-                        HStack {
-                            Text("(Just Memorize Logo)")
-                                .padding()
-                                .border(Color("JMDarkGold"))
-                                .foregroundColor(Color("JMDarkGold"))
-                            Spacer()
-                            ZStack {
-                                NavigationLink("    ", destination: JM_Settings())
-                                Image(systemName: "gear")
-                                    .foregroundColor(Color("JMLightGold"))
-                                    .padding()
-                            }
-                        }
+                        topMenu
                         Spacer()
+                        //Title
                         Text("Just Memorize.")
                             .font(.largeTitle)
                             .foregroundColor(Color("JMWhite"))
                         Spacer()
                         VStack {
-                            HStack{
-                                NavigationLink("Learn", destination: JM_Instructions())
-                                    .foregroundColor(Color("JMLightGold"))
-                                    .padding(.leading)
-                                    .padding(.leading)
-                                Spacer()
-                                NavigationLink("Play", destination: JM_VersePreview())
-                                    .foregroundColor(Color("JMLightGold"))
-                                    .padding(.trailing)
-                                    .padding(.trailing)
-                                    .padding(.trailing)
-                                    .padding(.trailing)
-                                Spacer()
-                                
-//                                Button("TestButton") {
-//                                    JustMemorizeView(currentJMView: .instructions)
-//                                }
-                            }
-                            .frame(width: 400, height: 50)
-                            .border(Color("JMDarkGold"))
-                            HStack {
-                                Spacer()
-                                Button("Return to SwordMinder!") {
-                                    withAnimation {
-                                        /// To return to SwordMinder, simply set the currentApp binding back to .swordMinder
-                                        currentApp = .swordMinder
-                                    }
-                                }
-                                .foregroundColor(Color("JMLightGold"))
-                                Spacer()
-                                Button("Add High Score Entry") {
-                                    /// To add a high score entry, use the view model's highScore function
-                                    ///  and pass in the name of your app, along with the user's current high score.
-                                    swordMinder.highScore(app: "Just Memorize", score: 5000)
-                                }
-                                .foregroundColor(Color("JMLightGold"))
-                                Spacer()
-                            }// HStack
-                            .frame(width: 400, height: 50)
-                            .border(Color("JMDarkGold"))
-                            .padding()
+                            playAndLearn
+                            bottomMenu
                         }
                     }
                     .background(Color("JMBlack"))
                 }// Navigation Stack
-                //Spacer()
-                //Return to swordminder settings
-                
             }// VStack
             .padding()
         }// ZStack
         .background(Color("JMBlack"))
     }// Body
-}//ContentView
+    
+    var topMenu: some View {
+        HStack {
+            Text("(Just Memorize Logo)")
+                .padding()
+                .border(Color("JMDarkGold"))
+                .foregroundColor(Color("JMDarkGold"))
+            Spacer()
+            ZStack {
+                    NavigationLink("       ", destination: JM_Settings())
+                    .foregroundColor(Color("JMLightGold"))
+                    Image(systemName: "gear")
+                        .foregroundColor(Color("JMLightGold"))
+                        .padding()
+            }
+        }
+    }
+    
+    var playAndLearn: some View {
+            HStack{
+                NavigationLink("Learn", destination: JM_Instructions())
+                    .foregroundColor(Color("JMLightGold"))
+                    .padding(.leading)
+                    .padding(.leading)
+                Spacer()
+                NavigationLink("Play", destination: JM_VersePreview(verseReference: Reference()))
+                    .foregroundColor(Color("JMLightGold"))
+                    .padding(.trailing)
+                    .padding(.trailing)
+                    .padding(.trailing)
+                    .padding(.trailing)
+                    .padding(.trailing)
+                Spacer()
+                
+//                                Button("TestButton") {
+//                                    JustMemorizeView(currentJMView: .instructions)
+//                                }
+            }
+            .frame(width: 400, height: 50)
+            .border(Color("JMDarkGold"))
+    }
+    
+    var bottomMenu: some View {
+        HStack {
+            Spacer()
+            Button("Return to SwordMinder!") {
+                withAnimation {
+                    /// To return to SwordMinder, simply set the currentApp binding back to .swordMinder
+                    currentApp = .swordMinder
+                }
+            }
+            .foregroundColor(Color("JMLightGold"))
+            Spacer()
+            Button("Add High Score Entry") {
+                /// To add a high score entry, use the view model's highScore function
+                ///  and pass in the name of your app, along with the user's current high score.
+                swordMinder.highScore(app: "Just Memorize", score: 5000)
+            }
+            .foregroundColor(Color("JMLightGold"))
+            Spacer()
+        }// HStack
+        .frame(width: 400, height: 50)
+        .border(Color("JMDarkGold"))
+    }
+    
+}//Struct
 
 // TODO
 /// See requirements. Ensure integration.

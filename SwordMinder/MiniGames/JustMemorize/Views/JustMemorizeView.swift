@@ -5,7 +5,7 @@
 //  Created by Jared Waltz on 12/11/22.
 //
 
-import SwiftUI
+/*import SwiftUI
 
 struct JustMemorizeView: View {
     /// may have to use an optional here in the case that state does not default to main menu.
@@ -30,7 +30,7 @@ struct JustMemorizeView: View {
             case .mainMenu:
                 JM_MainMenu(currentApp: .constant(.justMemorizeApp))
             case .versePreview:
-                JM_VersePreview()
+                JM_VersePreview(verseReference: Reference())
             case .quizView:
                 JM_QuizView()
             case .results:
@@ -47,4 +47,4 @@ struct JustMemorizeView_Previews: PreviewProvider {
     static var previews: some View {
         JustMemorizeView(currentJMView: .mainMenu)
     }
-}
+}*/

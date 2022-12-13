@@ -55,7 +55,7 @@ struct JM_Results: View {
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
                 Spacer()
-                NavigationLink("Play Again", destination: JM_VersePreview())
+                NavigationLink("Play Again", destination: JM_VersePreview(verseReference: Reference()))
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
             }
