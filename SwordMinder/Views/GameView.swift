@@ -19,7 +19,7 @@ struct GameView: View {
                             currentApp = .wordSearchApp
                         }
                     }
-                    SampleAppIconView {
+                    WheelOfProvidenceAppIconView {
                         withAnimation {
                             currentApp = .wheelOfProvidenceApp
                         }

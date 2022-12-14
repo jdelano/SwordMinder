@@ -11,7 +11,6 @@ struct SpinScreenView: View {
     var body: some View {
         VStack{
             Spacer()
-            WheelView()
             Button("Spin!", action: {
                 
             })

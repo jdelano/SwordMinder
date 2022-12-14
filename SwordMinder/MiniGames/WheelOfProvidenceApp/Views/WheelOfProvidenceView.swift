@@ -23,100 +23,114 @@ struct WheelOfProvidenceView: View {
     
     var passage: Passage
     var body: some View {
-        VStack{
-            switch currentGameState {
-            case .wheel:
-                VStack {
-                    WheelView()
-                        .rotationEffect(Angle.radians(wheelOfProvidence.spinDouble * (Double.pi / 2.0)), anchor: UnitPoint(x: 0.5, y: 0.3))
-                    HStack{
-                        Button("Spin!", action: {
-                            withAnimation(.easeInOut, {
-                                if(wheelOfProvidence.wheel.isSpun == false){
-                                    wheelOfProvidence.spinWheel()
-                                }
-                            })
-                        })
-                        Button(wheelOfProvidence.wheel.isSpun ? "Start!" : " ", action: {
-                            if(wheelOfProvidence.wheel.isSpun == true){
-                                currentGameState = .guesser
+        GeometryReader { geometry in
+            VStack{
+                switch currentGameState {
+                case .wheel:
+                    ZStack{
+                        VStack {
+                            WheelView(pieWheel: wheelOfProvidence.wheel)
+                                .rotationEffect(Angle.degrees(((wheelOfProvidence.spinDouble) * 360)+1080), anchor: UnitPoint(x: 0.5, y: 0.31))
+                            HStack{
+                                Button("Spin!(\(wheelOfProvidence.spinDouble))", action: {
+                                    withAnimation(.easeInOut(duration: 3), {
+                                        if(wheelOfProvidence.wheel.isSpun == false){
+                                            wheelOfProvidence.spinWheel()
+                                        }
+                                    })
+                                })
+                                Button(wheelOfProvidence.wheel.isSpun ? "Start \(wheelOfProvidence.award) gems!" : " ", action: {
+                                    if(wheelOfProvidence.wheel.isSpun == true){
+                                        currentGameState = .guesser
+                                    }
+                                })
                             }
-                        })
+                        }
+                        RoundedRectangle(cornerRadius:0.1).frame(maxWidth: 70, maxHeight: 70).position(x: geometry.size.width-35, y: 35).foregroundColor(.red)
+                    }
+                case .guesser:
+                    VStack{
+                        /// ScoreView
+                        let score = wheelOfProvidence.score
+                        HStack{
+                            Text("Score: ")
+                            Text(String(score))
+                            Spacer()
+                            Text("Reference: \(passage.referenceFormatted)")
+                        }.font(.system(size: 20)).padding(.horizontal).background(Color.blue).foregroundColor(Color("AccentColor2"))
+                        
+                        /// WordView
+                        let length: Int = wheelOfProvidence.grid.count
+                        ScrollView{
+                            LazyVGrid(columns:[GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50))]){ //TODO: Make grid items adaptive (w/ minSize)
+                                Spacer()
+                                ForEach(0..<length, id: \.self){index in
+                                    LetterView(letter: wheelOfProvidence.grid[index].isShown ? wheelOfProvidence.grid[index].letter : Character(" "), color: wheelOfProvidence.grid[index].letter == " " ? .white : .blue)
+                                        .aspectRatio(2/3, contentMode: .fill)
+                                }
+                                Spacer()
+                            }
+                        }
+                        
+                        
+                        ///BottomMenu
+                        HStack{
+                            Spacer()
+                            Button("Guess", action:{
+                                presentLetterAlert = true
+                            }).foregroundColor(.white).padding().alert("Guess Letter:", isPresented: $presentLetterAlert, actions: {
+                                TextField("Single Letter", text: $guess)
+                                
+                                Button("Submit", action: {
+                                    wheelOfProvidence.guessLetter(guess)
+                                    if(wheelOfProvidence.containsGuessedLetter()){
+                                        wheelOfProvidence.updateGrid(guess)
+                                    }
+                                    presentLetterAlert = false
+                                    guess = ""
+                                })
+                            })
+                            Spacer()
+                            Button("Complete", action:{
+                                presentPhraseAlert = true
+                            }).foregroundColor(.white).padding().alert("Guess Letter:", isPresented: $presentPhraseAlert, actions: {
+                                TextField("Completed Phrase without punctuation", text: $guess)
+                                
+                                Button("Submit", action: {
+                                    wheelOfProvidence.guessedPhrase = guess
+                                    if(wheelOfProvidence.guessedPhraseIsCorrect()){
+                                        currentGameState = .complete
+                                        if(swordMinder.taskEligible) {
+                                            swordMinder.completeTask(difficulty: wheelOfProvidence.award)
+                                        }
+                                        
+                                        else{
+                                            wheelOfProvidence.award = 0
+                                        }
+                                        var highScore = 0
+                                        for i in swordMinder.highScoreEntries{
+                                            if i.app == "Wheel Of Providence"{
+                                                highScore = i.score
+                                            }
+                                            else{
+                                                highScore = wheelOfProvidence.score
+                                            }
+                                        }
+                                        swordMinder.highScore(app: "Wheel Of Providence", score: highScore)
+                                    }
+                                    presentPhraseAlert = false
+                                    guess = ""
+                                })
+                            })
+                            Spacer()
+                        }.background(Color.blue)
+                    }
+                case .complete:
+                    VStack {
+                        Text("Correct!").font(.largeTitle)
+                        Text("Score: \(wheelOfProvidence.score)").font(.title)
                     }
                 }
-            case .guesser:
-                VStack{
-                    /// ScoreView
-                    let score = wheelOfProvidence.score
-                    HStack{
-                        Text("Score: ")
-                        Text(String(score))
-                        Spacer()
-                        Text("Reference: \(passage.referenceFormatted)")
-                    }.font(.system(size: 20)).padding(.horizontal).background(Color.blue)
-                
-                /// WordView
-                    let length: Int = wheelOfProvidence.grid.count
-                    ScrollView{
-                        LazyVGrid(columns:[GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50))]){
-                                            Spacer()
-                                            ForEach(0..<length, id: \.self){index in
-                                                LetterView(letter: wheelOfProvidence.grid[index].isShown ? wheelOfProvidence.grid[index].letter : Character(" "), color: wheelOfProvidence.grid[index].letter == " " ? .white : .blue) //TODO: if isShown false, show Character(" ")
-                                                    .aspectRatio(2/3, contentMode: .fill)
-                                            }
-                                            Spacer()
-                                        }
-                    }
-                
-                
-                ///BottomMenu
-                HStack{
-                    Spacer()
-                    Button("Guess", action:{
-                        presentLetterAlert = true
-                    }).foregroundColor(.white).padding().alert("Guess Letter:", isPresented: $presentLetterAlert, actions: {
-                        TextField("Single Letter", text: $guess)
-                        
-                        Button("Submit", action: {
-                            wheelOfProvidence.guessLetter(guess)
-                            if(wheelOfProvidence.containsGuessedLetter()){
-                                wheelOfProvidence.updateGrid(guess)
-                            }
-                            presentLetterAlert = false
-                            guess = ""
-                        })
-                    })
-                    Spacer()
-                    Button("Complete", action:{
-                        presentPhraseAlert = true
-                    }).foregroundColor(.white).padding().alert("Guess Letter:", isPresented: $presentPhraseAlert, actions: {
-                        TextField("Completed Phrase without punctuation", text: $guess)
-                        
-                        Button("Submit", action: {
-                            wheelOfProvidence.guessedPhrase = guess
-                            if(wheelOfProvidence.guessedPhraseIsCorrect()){
-                                currentGameState = .complete
-                                if(swordMinder.taskEligible) {
-                                    swordMinder.completeTask(difficulty: wheelOfProvidence.award)
-                                }
-                                else{
-                                    wheelOfProvidence.award = 0
-                                }
-                            }
-                            presentPhraseAlert = false
-                            guess = ""
-                        })
-                    })
-                    Spacer()
-                }.background(Color.blue)
-            }
-                        case .complete:
-                            VStack {
-                                Text("Correct!").font(.largeTitle)
-                                Text("Score: \(wheelOfProvidence.score)").font(.title)
-                                Text("You received \(wheelOfProvidence.award) gems!").font(.title2)
-                            }
-                    }
                 Button {
                     currentApp = .swordMinder
                 } label: {
@@ -125,11 +139,12 @@ struct WheelOfProvidenceView: View {
                 }
                 .padding()
                 .buttonStyle(SMButtonStyle())
-        }
-        .onAppear{
-            wheelOfProvidence.words = swordMinder.bible.words(for: passage)
-            wheelOfProvidence.convertWordsToVerse()
-            wheelOfProvidence.createGrid(verse: wheelOfProvidence.verse)
+            }
+            .onAppear{
+                wheelOfProvidence.words = swordMinder.bible.words(for: passage)
+                wheelOfProvidence.convertWordsToVerse()
+                wheelOfProvidence.createGrid(verse: wheelOfProvidence.verse)
+            }
         }
     }
 }
@@ -149,7 +164,7 @@ struct LetterView: View{
             ZStack{
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(color)
-                Text(String(letter)).font(.system(size: geometry.size.width))
+                Text(String(letter)).font(.system(size: geometry.size.width)).foregroundColor(Color("AccentColor2"))
             }
         }
     }

@@ -21,7 +21,7 @@ class WheelOfProvidence: ObservableObject {
     init() {
         self.guessedLetter = nil
         self.guessedPhrase = nil
-        self.wheel = PieWheel(text1: "1 Gem", text2: "2 Gems", text3: "3 Gems", text4: "4 Gems", isSpun: false)
+        self.wheel = PieWheel(text1: "4 Gems", text2: "3 Gems", text3: "2 Gems", text4: "1 Gem", isSpun: false)
     }
 
     
@@ -30,17 +30,12 @@ class WheelOfProvidence: ObservableObject {
     }
     
     func guessedPhraseIsCorrect() -> Bool {
-        if(verse.caseInsensitiveCompare(guessedPhrase ?? "1") == .orderedSame){
-            return true
-        }
-        else{
-            return false
-        }
+        verse.caseInsensitiveCompare(guessedPhrase ?? "1") == .orderedSame
     }
     
     func spinWheel(){
-        spinDouble = Double.random(in: 0.0 ..< 4.0)
-        award = Int(spinDouble.rounded())
+        spinDouble = Double.random(in: 0.125..<1.125)
+        award = Int((spinDouble*4.0).rounded())
         wheel.isSpun = true
     }
     

@@ -78,6 +78,7 @@
 		B412F19B2943D7BE00B7EF0F /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */; };
 		B412F19D2943E9E700B7EF0F /* WheelOfProvidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */; };
 		B412F19F29440A4F00B7EF0F /* PieWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19E29440A4F00B7EF0F /* PieWheel.swift */; };
+		B49ADED1294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49ADED0294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift */; };
 		B4F23B8E2945164C00E37C80 /* LetterTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F23B8D2945164C00E37C80 /* LetterTile.swift */; };
 /* End PBXBuildFile section */
 
@@ -173,6 +174,7 @@
 		B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidence.swift; sourceTree = "<group>"; };
 		B412F19E29440A4F00B7EF0F /* PieWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieWheel.swift; sourceTree = "<group>"; };
+		B49ADED0294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidenceAppIconView.swift; sourceTree = "<group>"; };
 		B4F23B8D2945164C00E37C80 /* LetterTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterTile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,6 +217,7 @@
 			children = (
 				65A5D55729037609001584F2 /* SampleAppIconView.swift */,
 				65C7C816293C281500301285 /* WordSearchAppIconView.swift */,
+				B49ADED0294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift */,
 			);
 			path = AppIconViews;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				B4F23B8E2945164C00E37C80 /* LetterTile.swift in Sources */,
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
+				B49ADED1294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
 				B412F19F29440A4F00B7EF0F /* PieWheel.swift in Sources */,
