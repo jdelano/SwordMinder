@@ -26,13 +26,8 @@ struct SwordMinderView: View {
             case .swordMinder: swordMinderMainView
             case .sampleApp: SampleAppView(currentApp: $currentApp)
             case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
-        case .wheelOfProvidenceApp: WheelOfProvidenceView(wheelOfProvidence: WheelOfProvidence(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
-
-        case .swordMinder: swordMinderMainView
-        case .sampleApp: SampleAppView(currentApp: $currentApp)
-        case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
-        case .flappyMemoryApp: RulesView(currentApp: $currentApp, passage: Passage(), flappyMemoryViewModel: GameScene())
-
+            case .wheelOfProvidenceApp: WheelOfProvidenceView(wheelOfProvidence: WheelOfProvidence(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
+            case .flappyMemoryApp: RulesView(currentApp: $currentApp, passage: Passage(), flappyMemoryViewModel: GameScene())
         }
     }
     
