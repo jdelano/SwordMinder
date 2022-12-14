@@ -41,12 +41,10 @@ struct ScriptureTyperGame: View {
                 Spacer()
                 Text(String(ScriptureTyper.secondsElapsed))
             }.padding()
-            ZStack {
-                ScriptureTyperCardView(passage: passage)
-                    .onTapGesture {
-                        isFaceUp = false
-                    }
-            }.padding()
+            ScriptureTyperCardView(passage: passage).padding()
+                .onTapGesture {
+                    ScriptureTyper.start()
+                }
             Spacer()
             HStack{
                 TextField("Type Verse Here", text: $typedVerse, axis: .vertical).textFieldStyle(.roundedBorder).padding()
