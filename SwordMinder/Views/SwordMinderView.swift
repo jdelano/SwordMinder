@@ -19,7 +19,6 @@ struct SwordMinderView: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @State var currentApp: Apps = .swordMinder
     
-    
     var body: some View {
         switch currentApp {
             case .swordMinder: swordMinderMainView

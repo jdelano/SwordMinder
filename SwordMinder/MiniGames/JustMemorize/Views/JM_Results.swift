@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct JM_Results: View {
+    //@ObservedObject var justMemorize: JustMemorize
     
     var sampleResults = "80%"
     
@@ -69,6 +70,7 @@ struct JM_Results: View {
 
 struct Results_Previews: PreviewProvider {
     static var previews: some View {
+        //let justMemorize = JustMemorize()
         JM_Results()
     }
 }

@@ -9,16 +9,14 @@ import SwiftUI
 
 // later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
 struct JM_Settings: View {
-    //@EnvironmentObject var justMemorize: JustMemorize
-    
     @State var toggleVerse: Bool = true
     
     @State var toggleTimer: Bool = true
     
-    private var difficulties = ["Easy", "Medium", "Hard"]
+    var difficulties = ["Easy", "Medium", "Hard"]
     @State var selectedDifficulty = "Easy"
     
-    private var inputTypes = ["Dictation", "Typing"]
+    var inputTypes = ["Dictation", "Typing"]
     @State var selectedInput = "Typing"
     
     // Consider a scroll view if necessary.
@@ -91,6 +89,7 @@ private func nothing() {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
+        //let justMemorize = JustMemorize()
         JM_Settings()
     }
 }
