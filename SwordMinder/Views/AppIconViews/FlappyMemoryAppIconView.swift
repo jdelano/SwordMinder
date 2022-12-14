@@ -14,14 +14,14 @@ struct FlappyMemoryAppIconView: View {
             action()
         } label: {
             ZStack(alignment: .center) {
-                Image("player-3")
+                Image("logo")
                     .resizable()
 //                RoundedRectangle(cornerRadius: 15)
 //                    .fill(Color.accentColor3)
-                Text("Flappy Memory")
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .font(.largeTitle)
+//                Text("Flappy Memory")
+//                    .foregroundColor(.white)
+//                    .multilineTextAlignment(.center)
+//                    .font(.largeTitle)
             }
             .aspectRatio(1, contentMode: .fit)
         }

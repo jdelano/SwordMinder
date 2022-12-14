@@ -66,7 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
 
         case .playing:
             player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20 ))
+            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15 ))
 
         case .dead:
             let scene = GameScene(fileNamed: "GameScene")!
