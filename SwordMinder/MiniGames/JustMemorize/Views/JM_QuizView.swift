@@ -12,7 +12,7 @@ struct JM_QuizView: View {
     @EnvironmentObject var swordMinder: SwordMinder
     
     // Timer graciously given by Michael Smithers.
-    @State private var timeRemaining = 10
+    @State private var timeRemaining = 100
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var sampleVerse = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, and to put on the new self, created after the likeness of God in true righteousness and holiness."
@@ -28,8 +28,10 @@ struct JM_QuizView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("(Just Memorize Logo)")
-                    .foregroundColor(Color("JMLightGold"))
+                Image("JMLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100)
                     Spacer()
                 VStack {
                     Text("Points: 100")

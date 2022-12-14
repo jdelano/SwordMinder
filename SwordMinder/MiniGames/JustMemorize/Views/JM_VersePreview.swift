@@ -34,9 +34,11 @@ struct JM_VersePreview: View {
         VStack {
             //Title and points
             HStack {
-                Text("(Just Memorize Logo)")
-                    .foregroundColor(Color("JMLightGold"))
-                    Spacer()
+                Image("JMLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100)
+                Spacer()
                 Text("Points: 100")
                     .padding()
                     .foregroundColor(Color("JMLightGold"))

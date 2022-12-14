@@ -47,10 +47,14 @@ struct JM_MainMenu: View {
     
     var topMenu: some View {
         HStack {
-            Text("(Just Memorize Logo)")
-                .padding()
-                .border(Color("JMDarkGold"))
-                .foregroundColor(Color("JMDarkGold"))
+//            Text("(Just Memorize Logo)")
+//                .padding()
+//                .border(Color("JMDarkGold"))
+//                .foregroundColor(Color("JMDarkGold"))
+            Image("JMLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100)
             Spacer()
             ZStack {
                 NavigationLink("       ", destination: JM_Settings(justMemorize: JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: toggleVerse, toggleTimer: toggleTimer)))

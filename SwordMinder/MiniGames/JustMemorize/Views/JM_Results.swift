@@ -34,8 +34,10 @@ struct JM_Results: View {
     var body: some View {
         VStack {
             HStack {
-                Text("(Just Memorize Logo)")
-                    .foregroundColor(Color("JMLightGold"))
+                Image("JMLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100)
                     Spacer()
                 VStack {
                     Text("Points: \(score + (Int((wholeVerse.distanceJaroWinkler(between: answer)*100))))")
@@ -65,6 +67,7 @@ struct JM_Results: View {
             //.padding()
             Spacer()
             HStack {
+                Spacer()
                 NavigationLink("Home", destination: JM_MainMenu(justMemorize: JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true), currentApp: .constant(.justMemorizeApp), toggleVerse: .constant(true), toggleTimer: .constant(true)))
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
@@ -72,6 +75,7 @@ struct JM_Results: View {
                 NavigationLink("Play Again", destination: JM_VersePreview(justMemorize: justMemorize, toggleVerse: $toggleVerse, toggleTimer: $toggleTimer))
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
+                Spacer()
             }
             .frame(width: 400, height: 50)
             .border(Color("JMLightGold"))
