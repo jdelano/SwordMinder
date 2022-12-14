@@ -19,16 +19,16 @@ struct GameView: View {
                             currentApp = .wordSearchApp
                         }
                     }
-                    WheelOfProvidenceAppIconView {
+                    FlappyMemoryAppIconView {
                         withAnimation {
-                            currentApp = .wheelOfProvidenceApp
+                            currentApp = .flappyMemoryApp
                         }
                     }
                 }
                 GridRow {
-                    SampleAppIconView {
+                    WheelOfProvidenceAppIconView {
                         withAnimation {
-                            currentApp = .sampleApp
+                            currentApp = .wheelOfProvidenceApp
                         }
                     }
                     SampleAppIconView {
