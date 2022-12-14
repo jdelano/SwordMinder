@@ -11,6 +11,7 @@ struct RulesView: View {
     @Binding var currentApp: Apps
     @State var passage: Passage
     @State private var settingsShown: Bool = false
+    @ObservedObject var flappyMemoryViewModel: GameScene
     @EnvironmentObject var swordMinder: SwordMinder
     
     var body: some View {
@@ -20,7 +21,17 @@ struct RulesView: View {
                     Spacer(minLength: 170)
                     rulesLabel
                     Spacer()
-                    settings
+                    Button {
+                        settingsShown = true
+                    } label: {
+                        Image(systemName: "gear")
+                            .padding(5)
+                    }
+                    .buttonStyle(SMButtonStyle())
+                    .padding()
+                }.sheet(isPresented: $settingsShown, onDismiss: { settingsShown = false }) {
+                    FlappyMemorySettingsView(difficultyFlappy: $flappyMemoryViewModel.difficultyFlappy)
+
                 }
                 rules
                 verseTitle
@@ -35,17 +46,6 @@ struct RulesView: View {
                 toGameView
             }
         }
-    }
-    
-    var settings: some View {
-        Button {
-            settingsShown = true
-        } label: {
-            Image(systemName: "gear")
-                .padding(5)
-        }
-        .buttonStyle(SMButtonStyle())
-        .padding()
     }
     
     var rulesLabel: some View {
@@ -119,7 +119,7 @@ struct RulesView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RulesView(currentApp: .constant(.flappyMemoryApp), passage: Passage())
+        RulesView(currentApp: .constant(.flappyMemoryApp), passage: Passage(), flappyMemoryViewModel: GameScene())
             .environmentObject(SwordMinder())
     }
 }

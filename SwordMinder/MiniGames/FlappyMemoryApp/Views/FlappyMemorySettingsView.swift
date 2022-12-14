@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct FlappyMemorySettingsView: View {
-    @Binding var difficulty: Difficulty
+    @Binding var difficultyFlappy: DifficultyFlappy
     @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationStack {
             Form {
                 Section("Difficulty") {
-                    Picker("Difficulty", selection: $difficulty) {
+                    Picker("Difficulty", selection: $difficultyFlappy) {
                         ForEach(DifficultyFlappy.allCases, id: \.self) { value in
                             Text(value.rawValue)
                                 .tag(value)
@@ -36,6 +36,6 @@ struct FlappyMemorySettingsView: View {
 
 struct FlappyMemorySettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        FlappyMemorySettingsView(difficulty: .constant(.hard))
+        FlappyMemorySettingsView(difficultyFlappy: .constant(.hard))
     }
 }

@@ -5,6 +5,8 @@
 //  Created by Michael Smithers on 12/12/22.
 //
 
+//https://www.hackingwithswift.com/read/36/overview
+
 import SpriteKit
 import SwiftUI
 
@@ -16,8 +18,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var gameOver: SKSpriteNode!
     var gameState = GameState.showingLogo
     
+    //Attepting to read the yPosition Variable in createRocks()
+    var collisionYPosition = CGFloat(0)
+    
     //I was unable to fully implement this. The funtionality should go on line 203
-    @Published var difficulty = DifficultyFlappy.hard
+    @Published var difficultyFlappy = DifficultyFlappy.hard
     
     var score = Score() {
             didSet {
@@ -33,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         createScore()
         createLogos()
 
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
         physicsWorld.contactDelegate = self
 
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "m4a") {
@@ -60,10 +65,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             logo.run(sequence)
 
         case .playing:
-            
             player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20 ))
-            player.position = CGPoint(x: 0.0, y: 0.0)
 
         case .dead:
             let scene = GameScene(fileNamed: "GameScene")!
@@ -73,9 +76,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
 
     func createPlayer() {
-        let playerTexture = SKTexture(imageNamed: "player-1")
+        let playerTexture = SKTexture(imageNamed: "bird")
         player = SKSpriteNode(texture: playerTexture)
-        player.setScale(0.4)
         player.zPosition = 10
         player.position = CGPoint(x: frame.width / 6, y: frame.height * 0.50)
 
@@ -86,13 +88,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         player.physicsBody?.isDynamic = false
 
         player.physicsBody?.collisionBitMask = 0
-
-//        let frame2 = SKTexture(imageNamed: "player-2")
-//        let frame3 = SKTexture(imageNamed: "player-3")
-//        let animation = SKAction.animate(with: [playerTexture, frame2, frame3, frame2], timePerFrame: 0.01)
-//        let runForever = SKAction.repeatForever(animation)
-//
-//        player.run(runForever)
     }
 
     func createSky() {
@@ -199,7 +194,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         let yPosition = CGFloat.random(in: -50...max)
 
         // this next value affects the width of the gap between rocks
-        // make it smaller to make your game harder – if you're feeling evil!
         let rockDistance: CGFloat = 70
 
         // 4
