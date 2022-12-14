@@ -16,11 +16,11 @@ struct WheelOfProvidenceAppIconView: View {
             ZStack(alignment: .center) {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(Color.accentColor)
+                WheelView(pieWheel: PieWheel(text1: "", text2: "", text3: "", text4: "", isSpun: false))
                 VStack{
                     Text("Wheel")
                     Text("Of")
                     Text("Providence")
-                    
                 }
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
