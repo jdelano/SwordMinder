@@ -13,15 +13,12 @@ struct DictationView: View {
     @State private var height: CGFloat = 0
     var reference: Reference
     
+    @State var textFieldText: String = ""
+    
     var body: some View {
         VStack {
             ZStack (alignment: .top) {
                 VStack {
-                    Text("Verse Set 1:")//will call the set that was selected and to which is being pulled from
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
-
                     Text(reference.toString()) //will be one of the objects in the array of verses
                         .font(.largeTitle)
                         .padding(8)
@@ -30,42 +27,50 @@ struct DictationView: View {
                                 .stroke(lineWidth: 3)
                         )
                         Spacer()
+                    Text("Type or dictate the reference below:")
                 }
             }
-            Spacer()
-            Spacer()
             ZStack{
-                RoundedRectangle (cornerRadius: 15).stroke(.gray, lineWidth: 5)
-                    .frame(width: 375, height:500)
-                Text("Dictated text will show up here")
-                //
-                //the user will be able to edit this text as well, very similar to a text dictation on imessage, in fact I'd like it to be almost identical to this. 
-            }
-//            Spacer()
+                TextField("Type something here...", text: $textFieldText, axis: .vertical)
+                    .lineLimit(8...)
+                    .padding()
+                    .background(Color.gray.opacity(0.3).cornerRadius(10))
+                    .foregroundColor(.red)
+                    .font(.headline)
+            }.padding()
             VStack {
-//                Spacer()
-//                GeometryReader { geometry in
-//                    Button {
-//                    } label: {
-//                        Image(systemName:"mic")
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-//                    }
-//                }
                 Spacer()
-                Button {
-                } label: {
-                    Text("Submit")
-                        .frame(height:55)
-                        .frame(maxWidth: .infinity)
-                }
                 
-                .buttonStyle(.borderedProminent)
-                .tint(Color("#587099"))
-                .padding(10)
+                ScoreSet(setTitle: "Submit", buttonColor: "#587099"){
+                    ScoreView(reference: reference, answer: textFieldText)
+                }
             }
         }
+    }
+}
+
+struct ScoreSet<Destination : View>: View {
+    var setTitle: String
+    var buttonColor: String
+    var destination: Destination
+    
+    init(setTitle: String, buttonColor: String, @ViewBuilder destination: () -> Destination) {
+        self.setTitle = setTitle
+        self.buttonColor = buttonColor
+        self.destination = destination()
+    }
+    
+    var body: some View{
+        NavigationLink {
+            destination
+        } label: {
+            Text(setTitle)
+                .frame(height:55)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(Color(buttonColor))
+        .padding(10)
     }
 }
 

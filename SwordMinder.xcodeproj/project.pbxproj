@@ -71,6 +71,8 @@
 		65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D7C287B9D2E00FAF612 /* MemorizeView.swift */; };
 		65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D7E287B9D4E00FAF612 /* GameView.swift */; };
 		65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D80287B9E5600FAF612 /* SettingsView.swift */; };
+		E66D1A1B294965DD0026615B /* StringMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D1A1A294965DD0026615B /* StringMetric.swift */; };
+		E66D1A1D2949661D0026615B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D1A1C2949661D0026615B /* String+Extension.swift */; };
 		E6BB0C272941168F0080776D /* DictationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB0C162941168F0080776D /* DictationView.swift */; };
 		E6BB0C292941168F0080776D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6BB0C192941168F0080776D /* Preview Assets.xcassets */; };
 		E6BB0C2A2941168F0080776D /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB0C1B2941168F0080776D /* HexColor.swift */; };
@@ -108,7 +110,7 @@
 		650BD12D28F0C3D2007034EA /* Bible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bible.swift; sourceTree = "<group>"; };
 		650BD13028F0C43B007034EA /* books.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = books.json; sourceTree = "<group>"; };
 		650BD13228F0F82E007034EA /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
-		650BD13828F11DF7007034EA /* SwordMinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinder.swift; sourceTree = "<group>"; };
+		650BD13828F11DF7007034EA /* SwordMinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwordMinder.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		650BD13A28F24BED007034EA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		650BD13C28F3087D007034EA /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		65423E2528F8B04D007B2C2B /* ArmorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmorTests.swift; sourceTree = "<group>"; };
@@ -165,6 +167,8 @@
 		65EB9D7C287B9D2E00FAF612 /* MemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeView.swift; sourceTree = "<group>"; };
 		65EB9D7E287B9D4E00FAF612 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		65EB9D80287B9E5600FAF612 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E66D1A1A294965DD0026615B /* StringMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringMetric.swift; sourceTree = "<group>"; };
+		E66D1A1C2949661D0026615B /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E6BB0C162941168F0080776D /* DictationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictationView.swift; sourceTree = "<group>"; };
 		E6BB0C192941168F0080776D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E6BB0C1B2941168F0080776D /* HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
@@ -427,6 +431,7 @@
 				E6BB0C1D2941168F0080776D /* ScoreView.swift */,
 				E6BB0C1E2941168F0080776D /* ContentView.swift */,
 				E6BB0C1F2941168F0080776D /* CustomSetView.swift */,
+				E66D1A1A294965DD0026615B /* StringMetric.swift */,
 			);
 			path = TheSpokenWord;
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 		E6BB0C1A2941168F0080776D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E66D1A1C2949661D0026615B /* String+Extension.swift */,
 				E6BB0C1B2941168F0080776D /* HexColor.swift */,
 			);
 			path = Extensions;
@@ -614,6 +620,8 @@
 				650BD13B28F24BED007034EA /* Player.swift in Sources */,
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
 				E6BB0C2C2941168F0080776D /* ScoreView.swift in Sources */,
+				E66D1A1B294965DD0026615B /* StringMetric.swift in Sources */,
+				E66D1A1D2949661D0026615B /* String+Extension.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				65C7C81A293E460800301285 /* Tile.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,

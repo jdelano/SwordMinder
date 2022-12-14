@@ -16,9 +16,6 @@ struct ContentView: View {
     @State private var addPassage: Passage = Passage()
     @Binding var passage: Passage
     
-    
-    
-    
     var body: some View {
         NavigationStack {
             VStack{
@@ -30,36 +27,40 @@ struct ContentView: View {
                 }
                 Spacer()
                 VStack {
-                    VerseSet(setTitle: "John", buttonColor: "#3F5576") { () -> DictationView in
-                        let book = swordMinder.bible.book(matching: "John")!
-                        let numChapters = swordMinder.bible.chapters(in: book).count
-                        let chapter = Int.random(in: 1...numChapters)
-                        let numVerses = swordMinder.bible.verses(in: book, chapter: chapter).count
-                        let verse = Int.random(in: 1...numVerses)
-                        let reference = Reference(book: book, chapter: chapter, verse: verse)
-                        return DictationView(reference: reference)
-                        
-                        //For seasonal aspects, these verse sets will change based upon the seaon and different topics.
-                        //                    VerseSet(setTitle: "Romans", buttonColor: "#3F5576") {
-                        //
-                        //                    }
-                        //                    VerseSet(setTitle: "Psalms", buttonColor: "#3F5576") {
-                        //
-                        //                    }
-                        //                    Spacer()
-                        ////                    NavigationLink(destination: DictationView()) {
-                        ////                        VerseSet(setTitle: "Random", buttonColor: "#2F3148")
-                        ////                                    }
-                        ////                    VerseSet(setTitle: "Random", buttonColor: "#2F3148")
-                        //
-                        //                    VerseSet(setTitle: "Random", buttonColor: "#2F3148") {
-                        //
-                        //                    }
-                        //                    VerseSet(setTitle: "Custom Verse Set", buttonColor:"#101116")  {
-                        //
-                        
-                    }//this will be called via the user's verse set in swordminder itself
+                    VerseSet(setTitle:"John", buttonColor: "#3F5576") {
+                        if let reference = swordMinder.bible.randomReference(matching: "John") {
+                            DictationView(reference: reference)
+                        }
+                    }
+                    VerseSet(setTitle:"Luke", buttonColor: "#3F5576") {
+                        if let reference = swordMinder.bible.randomReference(matching: "Luke") {
+                            DictationView(reference: reference)
+                        }
+                    }
+                    VerseSet(setTitle:"Romans", buttonColor: "#3F5576") {
+                        if let reference = swordMinder.bible.randomReference(matching: "Romans") {
+                            DictationView(reference: reference)
+                        }
+                    }
+                }
+                Spacer()
+                VStack {
                     Spacer()
+                    VerseSet(setTitle:"Custom Set", buttonColor: "#101116") {
+                        if let reference = swordMinder.bible.randomReference(matching: "") {
+                            DictationView(reference: reference)
+                        } //I know this is not currently working. I couldnt figure out how to get it.
+                    }
+                    Spacer()
+                    VStack {
+                        VerseSet(setTitle:"Random", buttonColor: "#2F3148") {
+                            if let reference = swordMinder.bible.randomReference(matching: Book.names.randomElement()!) {
+                                DictationView(reference: reference)
+                            }
+                        }
+                    }
+                    Spacer()
+                    
                 }
                 Spacer()
                 HStack{
@@ -77,77 +78,45 @@ struct ContentView: View {
                         .frame(width:350, height: 50)
                     Text("Get 3 verses over 90% 3 times in a row!")
                 }
+                .navigationBarItems(
+                    leading: Button {
+                        currentApp = .swordMinder
+                    } label:{ Image(systemName: "chevron.backward")}.accentColor(Color(UIColor(named: "BackButton")!)))
             }
-            .navigationBarItems(
-                leading: Button {
-                    currentApp = .swordMinder
-                } label:{ Image(systemName: "chevron.backward")}.accentColor(Color(UIColor(named: "BackButton")!)))
-            
-            //trailing: Button("Settings",action: { }).accentColor(.red))
         }
     }
     
-    //    private func addItem() {
-    //        withAnimation {
-    //            addPassage = Passage()
-    //            editorConfig.present()
-    //        }
-    //    }
-    
-}
-
-struct VerseSet<Destination : View>: View {
-    var setTitle: String
-    var buttonColor: String
-    var destination: () -> Destination
-    
-    var body: some View{
-        NavigationLink {
-            destination()
-        } label: {
-            Text(setTitle)
-                .frame(height:55)
-                .frame(maxWidth: .infinity)
+    struct VerseSet<Destination : View>: View {
+        var setTitle: String
+        var buttonColor: String
+        var destination: Destination
+        
+        init(setTitle: String, buttonColor: String, @ViewBuilder destination: () -> Destination) {
+            self.setTitle = setTitle
+            self.buttonColor = buttonColor
+            self.destination = destination()
         }
-        .buttonStyle(.borderedProminent)
-        .tint(Color(buttonColor))
-        .padding(10)
-    }
-}
-
-struct RandomSet: View {
-    var setTitle: String
-    var buttonColor: String
-    
-    @EnvironmentObject var swordMinder: SwordMinder
-    @Binding var passage: Passage
-    @State var currentVerse: String
-    
-    
-    var body: some View{
-        Button {
-            currentVerse = passage.referenceFormatted
-//            ForEach(swordMinder.passages) { passage in
-//            }
-        } label: {
-            Text(setTitle)
-                .frame(height:55)
-                .frame(maxWidth: .infinity)
+        
+        var body: some View{
+            NavigationLink {
+                destination
+            } label: {
+                Text(setTitle)
+                    .frame(height:55)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color(buttonColor))
+            .padding(10)
         }
-        .buttonStyle(.borderedProminent)
-        .tint(Color(buttonColor))
-        .padding(10)
     }
-}
-
-
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-//        ContentView().preferredColorScheme(.light)
-//        ContentView().preferredColorScheme(.dark)
-        ContentView(currentApp: .constant(.spokenWordApp), passage: .constant(Passage(from: Reference(book: Book(named: "Psalms")!, chapter: 119, verse: 100))))
-            .environmentObject(SwordMinder()).preferredColorScheme(.dark)
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            //        ContentView().preferredColorScheme(.light)
+            //        ContentView().preferredColorScheme(.dark)
+            ContentView(currentApp: .constant(.spokenWordApp), passage: .constant(Passage(from: Reference(book: Book(named: "Psalms")!, chapter: 119, verse: 100))))
+                .environmentObject(SwordMinder()).preferredColorScheme(.dark)
+        }
     }
 }

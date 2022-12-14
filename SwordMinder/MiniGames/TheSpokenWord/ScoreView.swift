@@ -18,6 +18,8 @@ struct ScoreView: View {
     var answer: String
     
     var body: some View {
+        
+        
         VStack{
             ZStack (alignment: .top) {
                 VStack {
@@ -36,7 +38,7 @@ struct ScoreView: View {
                     Text("Your Spoken Word:")
                         .font(.title2)
                     Spacer()
-                    Text("For God so loved the world that he forgot the rest of the words to the verse") //will be the text submitted inside of DictationView
+                    Text(answer)
                     Spacer()
                 }.padding()
             }.padding(8)
@@ -51,9 +53,10 @@ struct ScoreView: View {
                 }.padding()
             }.padding(8)
             HStack{
-                Text("You scored a:")
+                Text("You scored:")
                     .font(.largeTitle)
-                Text("80%")
+                Text(String(format: "%.0f", (swordMinder.bible.text(for: reference).distanceJaroWinkler(between: answer)*100)))
+                //                Text("\(swordMinder.bible.text(for: reference).distanceJaroWinkler(between: answer)*100)")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.green)
@@ -61,32 +64,60 @@ struct ScoreView: View {
                 // this score will use a multiplier to add points to the player
             }
             VStack {
-                Button {
-                } label: {
-                    Text("Try Again")
-                        .frame(height:55)
-                        .frame(maxWidth: .infinity)
+                ScoreSet(setTitle: "Try Again", buttonColor: "#CB4C4E"){
+                    DictationView(reference: reference)
                 }
-                .buttonStyle(.borderedProminent)
-                .padding(10)
-                Button {
-                } label: {
-                    Text("Next Verse")
-                        .frame(height:55)
-                        .frame(maxWidth: .infinity)
+                ScoreSet(setTitle:"Next Verse", buttonColor: "#2F3148") {
+                    if let ref = swordMinder.bible.randomReference(matching: reference.toString().filter("qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".contains)) {
+                        DictationView(reference: ref)
+                    }
+                    
+                    //                Button {
+                    //                } label: {
+                    //                    Text("Next Verse")
+                    //                        .frame(height:55)
+                    //                        .frame(maxWidth: .infinity)
+                    //                }
+                    //                .buttonStyle(.borderedProminent)
+                    //                .padding(10)
+                    //                .tint(Color("#2F3148"))
+                    // this next verse button will add the verse to the completed verse list per the requirements list
                 }
-                .buttonStyle(.borderedProminent)
-                .padding(10)
-                // this next verse button will add the verse to the completed verse list per the requirements list
             }
         }
     }
-}
-
-struct ScoreView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScoreView(reference: Reference(book: Book(named: "John")!, chapter: 3, verse: 16), answer: "For God so loved the world.").preferredColorScheme(.light)
-            .environmentObject(SwordMinder())
-//        ScoreView().preferredColorScheme(.dark)
+    
+    struct BackSet<Destination : View>: View {
+        var setTitle: String
+        var buttonColor: String
+        var destination: Destination
+        
+        init(setTitle: String, buttonColor: String, @ViewBuilder destination: () -> Destination) {
+            self.setTitle = setTitle
+            self.buttonColor = buttonColor
+            self.destination = destination()
+        }
+        
+        var body: some View{
+            NavigationLink {
+                destination
+            } label: {
+                Text(setTitle)
+                    .frame(height:55)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color(buttonColor))
+            .padding(10)
+        }
+    }
+    
+    
+    struct ScoreView_Previews: PreviewProvider {
+        static var previews: some View {
+            ScoreView(reference: Reference(book: Book(named: "John")!, chapter: 3, verse: 16), answer: "For God so loved the world.").preferredColorScheme(.light)
+                .environmentObject(SwordMinder())
+            //        ScoreView().preferredColorScheme(.dark)
+        }
     }
 }
