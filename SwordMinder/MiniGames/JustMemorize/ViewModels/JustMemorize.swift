@@ -9,6 +9,8 @@ import SwiftUI
 
 class JustMemorize: ObservableObject {
     
+    //typealias Verse = JMVerse
+    //@Published private var verse: JMVerse
     
     ///This func accepts a string and returns a double of the relevant difficulty multiplier.
     func difficultyMultiplier(difficulty: String) -> Double {

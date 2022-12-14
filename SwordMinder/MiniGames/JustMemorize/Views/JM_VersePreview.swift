@@ -42,6 +42,7 @@ struct JM_VersePreview: View {
                 .foregroundColor(Color("JMLightGold"))
             
                 Text((swordMinder.bible.text(for: verseReference)))
+                //Text(JMVerse.verseArray)
                 //Text()
         //        LazyVGrid(columns: 5) {
         //            ForEach
