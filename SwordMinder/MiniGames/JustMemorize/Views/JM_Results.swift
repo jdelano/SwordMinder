@@ -69,7 +69,7 @@ struct JM_Results: View {
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
                 Spacer()
-                NavigationLink("Play Again", destination: JM_VersePreview(justMemorize: justMemorize, swordMinder: swordMinder, toggleVerse: toggleVerse, toggleTimer: toggleTimer))
+                NavigationLink("Play Again", destination: JM_VersePreview(justMemorize: justMemorize, toggleVerse: $toggleVerse, toggleTimer: $toggleTimer))
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
             }

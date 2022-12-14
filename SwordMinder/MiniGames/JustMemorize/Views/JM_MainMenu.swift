@@ -69,7 +69,7 @@ struct JM_MainMenu: View {
                     .foregroundColor(Color("JMLightGold"))
                 Spacer()
                 if toggleVerse == true {
-                    NavigationLink("Play", destination: JM_VersePreview(justMemorize: justMemorize, swordMinder: swordMinder, toggleVerse: toggleVerse, toggleTimer: toggleTimer))
+                    NavigationLink("Play", destination: JM_VersePreview(justMemorize: justMemorize, toggleVerse: $toggleVerse, toggleTimer: $toggleTimer))
                         .foregroundColor(Color("JMLightGold"))
                         .padding()
                 } else {

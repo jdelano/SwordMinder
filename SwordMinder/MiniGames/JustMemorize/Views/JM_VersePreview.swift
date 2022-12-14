@@ -19,12 +19,12 @@ struct JM_VersePreview: View {
     @State private var timeRemaining = 5
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    init(justMemorize: JustMemorize, swordMinder: SwordMinder, toggleVerse: Bool, toggleTimer: Bool, timeRemaining: Int = 5) {
-        self.justMemorize = justMemorize
-        self.toggleVerse = toggleVerse
-        self.toggleTimer = toggleTimer
-        self.timeRemaining = timeRemaining
-    }
+//    init(justMemorize: JustMemorize, toggleVerse: Bool, toggleTimer: Bool, timeRemaining: Int = 5) {
+//        self.justMemorize = justMemorize
+//        self.toggleVerse = toggleVerse
+//        self.toggleTimer = toggleTimer
+//        self.timeRemaining = timeRemaining
+//    }
     
     ///var sampleVerse = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, and to put on the new self, created after the likeness of God in true righteousness and holiness."
     ///var sampleReference = "Ephesians 4:20-24"
@@ -48,10 +48,11 @@ struct JM_VersePreview: View {
                 .font(.headline)
                 .padding()
                 .foregroundColor(Color("JMLightGold"))
-                 Text(verseReference.toString())
+                 //Text(verseReference.toString())
                 .foregroundColor(Color("JMLightGold"))
             
-                Text((swordMinder.bible.text(for: verseReference)))
+                //Text((swordMinder.bible.text(for: verseReference)))
+            
                 //Text(JMVerse.verseArray)
                 //Text()
         //        LazyVGrid(columns: 5) {
