@@ -52,7 +52,7 @@ struct JM_Results: View {
             //MARK: Padding here does not work
             Spacer()
             HStack {
-                NavigationLink("Home", destination: JM_MainMenu(currentApp: .constant(.justMemorizeApp), justMemorize: JustMemorize()))
+                NavigationLink("Home", destination: JM_MainMenu(justMemorize: JustMemorize(), currentApp: .constant(.justMemorizeApp)))
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
                 Spacer()
