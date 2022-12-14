@@ -12,6 +12,7 @@ enum Apps {
     case sampleApp
     case wordSearchApp
     case flappyMemoryApp
+    case wheelOfProvidenceApp
 }
 
 
@@ -22,10 +23,16 @@ struct SwordMinderView: View {
     
     var body: some View {
         switch currentApp {
+            case .swordMinder: swordMinderMainView
+            case .sampleApp: SampleAppView(currentApp: $currentApp)
+            case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
+        case .wheelOfProvidenceApp: WheelOfProvidenceView(wheelOfProvidence: WheelOfProvidence(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
+
         case .swordMinder: swordMinderMainView
         case .sampleApp: SampleAppView(currentApp: $currentApp)
         case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
         case .flappyMemoryApp: RulesView(currentApp: $currentApp, passage: Passage(), flappyMemoryViewModel: GameScene())
+
         }
     }
     
