@@ -17,9 +17,10 @@ struct ScoreView: View {
     var reference: Reference
     var answer: String
     
+    
+   
     var body: some View {
-        
-        
+       
         VStack{
             ZStack (alignment: .top) {
                 VStack {
@@ -55,7 +56,12 @@ struct ScoreView: View {
             HStack{
                 Text("You scored:")
                     .font(.largeTitle)
-                Text(String(format: "%.0f", (swordMinder.bible.text(for: reference).distanceJaroWinkler(between: answer)*100)))
+                let alpha = "QWERTYUIOPASDFGHJKLZXCVBNM"
+                let verse = swordMinder.bible.text(for: Reference())
+                let cleanedText = verse.uppercased().filter {
+                    alpha.contains($0)
+                }
+                Text(String(format: "%.0f", (cleanedText.distanceJaroWinkler(between: answer)*100)))
                 //                Text("\(swordMinder.bible.text(for: reference).distanceJaroWinkler(between: answer)*100)")
                     .font(.largeTitle)
                     .fontWeight(.bold)
