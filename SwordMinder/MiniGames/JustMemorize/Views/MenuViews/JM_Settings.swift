@@ -9,17 +9,17 @@ import SwiftUI
 
 // later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
 struct JM_Settings: View {
-    @EnvironmentObject var justMemorize: JustMemorize
+    //@EnvironmentObject var justMemorize: JustMemorize
     
-    @State private var toggleVerse: Bool = true
+    @State var toggleVerse: Bool = true
     
-    @State private var toggleTimer: Bool = true
+    @State var toggleTimer: Bool = true
     
     private var difficulties = ["Easy", "Medium", "Hard"]
-    @State private var selectedDifficulty = "Easy"
+    @State var selectedDifficulty = "Easy"
     
     private var inputTypes = ["Dictation", "Typing"]
-    @State private var selectedInput = "Typing"
+    @State var selectedInput = "Typing"
     
     // Consider a scroll view if necessary.
     var body: some View {
@@ -41,6 +41,9 @@ struct JM_Settings: View {
                         .foregroundColor(Color("JMLightGold"))
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    Text("Current Difficulty: \(selectedDifficulty)")
+                    //Text("Difficulty: \(justMemorize.difficultyMultiplier(difficulty: selectedDifficulty))")
+                        .foregroundColor(Color("JMLightGold"))
                     Spacer()
                     //Input Type
                     Text("Input Type:")
