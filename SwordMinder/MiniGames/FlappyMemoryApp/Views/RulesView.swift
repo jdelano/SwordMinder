@@ -80,7 +80,11 @@ struct RulesView: View {
                     .padding([.leading, .bottom, .trailing])
                 Spacer()
             }
-            
+            HStack {
+                Text("5. Recording will begina immediately")
+                    .padding([.leading, .bottom, .trailing])
+                Spacer()
+            }
             
         }
     }

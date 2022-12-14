@@ -65,8 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             logo.run(sequence)
 
         case .playing:
-//            player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-//            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15 ))
+            //sets location to the location between the rocks. This is supposed to happen when the player speaks
             player.position = CGPoint(x: frame.width / 6, y: yCollisionPos + 250)
 
         case .dead:
@@ -193,9 +192,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         let xPosition = frame.width + topRock.frame.width
 
         let max = CGFloat(frame.height / 3)
+        
+        //Allows me to use this vairable outside of the func
         yCollisionPos = CGFloat.random(in: -50...max)
 
-        // this next value affects the width of the gap between rocks
+        // this value affects the width of the gap between rocks and is supposed to be changed by the difficulty settings
         let rockDistance: CGFloat = 70
 
         // 4

@@ -5,6 +5,8 @@ Abstract:
 The root view controller that provides a button to start and stop recording, and which displays the speech recognition results.
 */
 
+//I was unable to fully implement this
+
 import UIKit
 import Speech
 
