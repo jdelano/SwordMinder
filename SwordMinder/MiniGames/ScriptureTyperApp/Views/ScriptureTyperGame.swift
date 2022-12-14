@@ -62,7 +62,11 @@ struct ScriptureTyperGame: View {
                 .popover(isPresented: $showingPopover3){
                     ZStack{
                         RoundedRectangle(cornerRadius: 25).foregroundColor(.green)
-                        Text("Congratulations").foregroundColor(.white)
+                        VStack{
+                            Text("Congratulations").foregroundColor(.white)
+                            Text("You've earned 3 gems").foregroundColor(.white)
+                        }
+                        
                     }
                 }
                 .popover(isPresented: $showingPopover2){
