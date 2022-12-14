@@ -16,6 +16,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var gameOver: SKSpriteNode!
     var gameState = GameState.showingLogo
     
+    //I was unable to fully implement this. The funtionality should go on line 203
+    @Published var difficulty = DifficultyFlappy.hard
+    
     var score = Score() {
             didSet {
                 score.scoreLabel.text = "SCORE: \(score)"
@@ -30,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         createScore()
         createLogos()
 
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         physicsWorld.contactDelegate = self
 
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "m4a") {
@@ -41,6 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch gameState {
+            
         case .showingLogo:
             gameState = .playing
 
@@ -56,8 +60,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             logo.run(sequence)
 
         case .playing:
+            
             player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
+            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20 ))
+            player.position = CGPoint(x: 0.0, y: 0.0)
 
         case .dead:
             let scene = GameScene(fileNamed: "GameScene")!
@@ -67,9 +73,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
 
     func createPlayer() {
-        let playerTexture = SKTexture(imageNamed: "truck")
+        let playerTexture = SKTexture(imageNamed: "player-1")
         player = SKSpriteNode(texture: playerTexture)
-        player.setScale(0.5)
+        player.setScale(0.4)
         player.zPosition = 10
         player.position = CGPoint(x: frame.width / 6, y: frame.height * 0.50)
 
@@ -176,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
 
 
         // 2
-        let rockCollision = SKSpriteNode(color: UIColor.red, size: CGSize(width: 32, height: frame.height))
+        let rockCollision = SKSpriteNode(color: UIColor.red, size: CGSize(width: 32, height: frame.height / 5))
         rockCollision.physicsBody = SKPhysicsBody(rectangleOf: rockCollision.size)
         rockCollision.physicsBody?.isDynamic = false
         rockCollision.name = "scoreDetect"
@@ -199,7 +205,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         // 4
         topRock.position = CGPoint(x: xPosition, y: yPosition + topRock.size.height + rockDistance)
         bottomRock.position = CGPoint(x: xPosition, y: yPosition - rockDistance)
-        rockCollision.position = CGPoint(x: xPosition + (rockCollision.size.width * 2), y: frame.midY)
+        rockCollision.position = CGPoint(x: xPosition + (rockCollision.size.width * 2), y: yPosition + 250)
 
         let endPosition = frame.width + (topRock.frame.width * 2)
 

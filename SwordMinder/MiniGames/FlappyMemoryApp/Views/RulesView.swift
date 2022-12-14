@@ -9,11 +9,19 @@ import SwiftUI
 
 struct RulesView: View {
     @Binding var currentApp: Apps
-    @State var verseReference: Reference
+    @State var passage: Passage
+    @State private var settingsShown: Bool = false
     @EnvironmentObject var swordMinder: SwordMinder
+    
     var body: some View {
         NavigationView {
             VStack {
+                HStack{
+                    Spacer(minLength: 170)
+                    rulesLabel
+                    Spacer()
+                    settings
+                }
                 rules
                 verseTitle
                 verse
@@ -29,16 +37,32 @@ struct RulesView: View {
         }
     }
     
+    var settings: some View {
+        Button {
+            settingsShown = true
+        } label: {
+            Image(systemName: "gear")
+                .padding(5)
+        }
+        .buttonStyle(SMButtonStyle())
+        .padding()
+    }
+    
+    var rulesLabel: some View {
+        Text("Rules:")
+            .font(.largeTitle)
+            .fontWeight(.medium)
+            .foregroundColor(Color.blue)
+    }
+    
     var rules: some View {
         VStack {
-            Text("Rules:")
-                .font(.largeTitle)
-                .fontWeight(.medium)
-                .foregroundColor(Color.blue)
             //Rules listing
-            Text("1. Speak the Verse to make the blird fly. Say the word before the mountain")
-                .padding([.leading, .bottom, .trailing])
-            
+            HStack {
+                Text("1. Speak the Verse to make the blird fly. Say the word before the mountain")
+                    .padding([.leading, .bottom, .trailing])
+                Spacer()
+            }
             HStack {
                 Text("2. You have 45 seconds")
                     .padding([.leading, .bottom, .trailing])
@@ -72,15 +96,15 @@ struct RulesView: View {
     
     var verse: some View {
         VStack {
-            Text(swordMinder.bible.text(for: verseReference))
+            Text(swordMinder.bible.text(for: passage))
                 .padding()
-            Text(verseReference.toString())
+            Text(passage.referenceFormatted)
                 .padding()
         }
     }
     
     var toGameView: some View {
-        NavigationLink(destination: FlappyMemoryView(game: GameScene(), currentApp: $currentApp)) {
+        NavigationLink(destination: FlappyMemoryView(game: GameScene(), currentApp: $currentApp, passage: Passage())) {
             Text("Continue")
                 .frame(minWidth: 0, maxWidth: 300)
                 .padding()
@@ -95,7 +119,7 @@ struct RulesView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RulesView(currentApp: .constant(.flappyMemoryApp), verseReference: Reference())
+        RulesView(currentApp: .constant(.flappyMemoryApp), passage: Passage())
             .environmentObject(SwordMinder())
     }
 }

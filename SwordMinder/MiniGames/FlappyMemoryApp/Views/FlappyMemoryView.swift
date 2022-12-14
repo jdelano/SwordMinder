@@ -12,6 +12,10 @@ import SwiftUI
 struct FlappyMemoryView: View {
     @ObservedObject var game: GameScene
     @Binding var currentApp: Apps
+    
+    @State var passage: Passage
+    @EnvironmentObject var swordMinder: SwordMinder
+    
     @State private var timeRemaining = 45
     @State var gamePassed = false
     
@@ -46,7 +50,6 @@ struct FlappyMemoryView: View {
             SpriteView(scene: scene)
                 .frame(width: 400, height: 700)
             VStack {
-                
                 HStack {
                     Spacer()
                     time
@@ -117,7 +120,7 @@ struct FlappyMemoryView: View {
 
 struct SpriteView_Previews: PreviewProvider {
     static var previews: some View {
-        FlappyMemoryView(game: GameScene(), currentApp: .constant(.flappyMemoryApp))
+        FlappyMemoryView(game: GameScene(), currentApp: .constant(.flappyMemoryApp), passage: Passage())
             .environmentObject(SwordMinder())
     }
 }

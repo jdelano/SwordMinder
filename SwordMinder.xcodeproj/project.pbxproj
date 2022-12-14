@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C9B2E3D294995A40022B2F8 /* FlappyMemorySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B2E3C294995A40022B2F8 /* FlappyMemorySettingsView.swift */; };
+		4C9B2E3F294996990022B2F8 /* DifficultyFlappy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B2E3E294996990022B2F8 /* DifficultyFlappy.swift */; };
+		4C9B2E41294997250022B2F8 /* RockDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B2E40294997250022B2F8 /* RockDistance.swift */; };
 		4CCD4A402948D10E00DBF037 /* PlayerExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A332948D10E00DBF037 /* PlayerExplosion.sks */; };
 		4CCD4A412948D10E00DBF037 /* music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A342948D10E00DBF037 /* music.m4a */; };
 		4CCD4A422948D10E00DBF037 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A352948D10E00DBF037 /* coin.wav */; };
@@ -102,6 +105,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C9B2E3C294995A40022B2F8 /* FlappyMemorySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyMemorySettingsView.swift; sourceTree = "<group>"; };
+		4C9B2E3E294996990022B2F8 /* DifficultyFlappy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyFlappy.swift; sourceTree = "<group>"; };
+		4C9B2E40294997250022B2F8 /* RockDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockDistance.swift; sourceTree = "<group>"; };
 		4CCD4A332948D10E00DBF037 /* PlayerExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerExplosion.sks; sourceTree = "<group>"; };
 		4CCD4A342948D10E00DBF037 /* music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music.m4a; sourceTree = "<group>"; };
 		4CCD4A352948D10E00DBF037 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
@@ -242,6 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				4CCD4A3B2948D10E00DBF037 /* Score.swift */,
+				4C9B2E40294997250022B2F8 /* RockDistance.swift */,
+				4C9B2E3E294996990022B2F8 /* DifficultyFlappy.swift */,
 				4CCD4A3C2948D10E00DBF037 /* GameState.swift */,
 			);
 			path = Models;
@@ -252,6 +260,7 @@
 			children = (
 				4CCD4A3E2948D10E00DBF037 /* RulesView.swift */,
 				4CCD4A3F2948D10E00DBF037 /* FlappyMemoryView.swift */,
+				4C9B2E3C294995A40022B2F8 /* FlappyMemorySettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -627,6 +636,7 @@
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
+				4C9B2E3F294996990022B2F8 /* DifficultyFlappy.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
@@ -641,6 +651,7 @@
 				65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */,
 				65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */,
 				65C7C80A293BDCA100301285 /* PlacementType.swift in Sources */,
+				4C9B2E41294997250022B2F8 /* RockDistance.swift in Sources */,
 				6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */,
 				650BD13B28F24BED007034EA /* Player.swift in Sources */,
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
@@ -661,6 +672,7 @@
 				4CCD4A472948D10E00DBF037 /* GameState.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
+				4C9B2E3D294995A40022B2F8 /* FlappyMemorySettingsView.swift in Sources */,
 				65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */,
 				65C7C820293E7DD500301285 /* Array+Extensions.swift in Sources */,
 				4CCD4A452948D10E00DBF037 /* FlappyMemoryViewModel.swift in Sources */,
@@ -834,7 +846,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwordMinder/Preview Content\"";
-				DEVELOPMENT_TEAM = ZRJ36BS2MW;
+				DEVELOPMENT_TEAM = 7873VNKXM7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sword Minder";
@@ -850,7 +862,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thedigitalpath.SwordMinder;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cedarville.itm3300.msmithers.SwordMinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -867,7 +879,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwordMinder/Preview Content\"";
-				DEVELOPMENT_TEAM = ZRJ36BS2MW;
+				DEVELOPMENT_TEAM = 7873VNKXM7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sword Minder";
@@ -883,7 +895,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.thedigitalpath.SwordMinder;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cedarville.itm3300.msmithers.SwordMinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
