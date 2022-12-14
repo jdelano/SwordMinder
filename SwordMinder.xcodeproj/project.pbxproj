@@ -10,6 +10,7 @@
 		4C9B2E3D294995A40022B2F8 /* FlappyMemorySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B2E3C294995A40022B2F8 /* FlappyMemorySettingsView.swift */; };
 		4C9B2E3F294996990022B2F8 /* DifficultyFlappy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B2E3E294996990022B2F8 /* DifficultyFlappy.swift */; };
 		4C9B2E41294997250022B2F8 /* RockDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B2E40294997250022B2F8 /* RockDistance.swift */; };
+		4CAA79B7294A2762001397BB /* FlappyMemoryDictation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA79B6294A2762001397BB /* FlappyMemoryDictation.swift */; };
 		4CCD4A402948D10E00DBF037 /* PlayerExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A332948D10E00DBF037 /* PlayerExplosion.sks */; };
 		4CCD4A412948D10E00DBF037 /* music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A342948D10E00DBF037 /* music.m4a */; };
 		4CCD4A422948D10E00DBF037 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A352948D10E00DBF037 /* coin.wav */; };
@@ -108,6 +109,7 @@
 		4C9B2E3C294995A40022B2F8 /* FlappyMemorySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlappyMemorySettingsView.swift; sourceTree = "<group>"; };
 		4C9B2E3E294996990022B2F8 /* DifficultyFlappy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyFlappy.swift; sourceTree = "<group>"; };
 		4C9B2E40294997250022B2F8 /* RockDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockDistance.swift; sourceTree = "<group>"; };
+		4CAA79B6294A2762001397BB /* FlappyMemoryDictation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyMemoryDictation.swift; sourceTree = "<group>"; };
 		4CCD4A332948D10E00DBF037 /* PlayerExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerExplosion.sks; sourceTree = "<group>"; };
 		4CCD4A342948D10E00DBF037 /* music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music.m4a; sourceTree = "<group>"; };
 		4CCD4A352948D10E00DBF037 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 		4CCD4A382948D10E00DBF037 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				4CAA79B6294A2762001397BB /* FlappyMemoryDictation.swift */,
 				4CCD4A392948D10E00DBF037 /* FlappyMemoryViewModel.swift */,
 			);
 			path = ViewModels;
@@ -658,6 +661,7 @@
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				65C7C81A293E460800301285 /* Tile.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
+				4CAA79B7294A2762001397BB /* FlappyMemoryDictation.swift in Sources */,
 				65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */,
 				65C7C81E293E79EF00301285 /* Sequence+Extensions.swift in Sources */,
 				4CCD4A482948D10E00DBF037 /* RulesView.swift in Sources */,
