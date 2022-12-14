@@ -49,7 +49,7 @@ struct ScriptureTyperGame: View {
             }.padding()
             Spacer()
             HStack{
-                TextField("Type Verse Here", text: $typedVerse).textFieldStyle(.roundedBorder).padding()
+                TextField("Type Verse Here", text: $typedVerse, axis: .vertical).textFieldStyle(.roundedBorder).padding()
                 Button("Submit"){
                     if typedVerse.uppercased() == swordMinder.bible.text(for: passage).uppercased().filter({letters.contains($0)}) {
                         swordMinder.completeTask(difficulty: 3)
@@ -63,8 +63,18 @@ struct ScriptureTyperGame: View {
                     ZStack{
                         RoundedRectangle(cornerRadius: 25).foregroundColor(.green)
                         VStack{
+                            Spacer()
+                            Button {
+                                withAnimation {
+                                    currentApp = .swordMinder
+                                }
+                            } label:{
+                                Text("Return to Sword Minder")
+                            }
+                            Spacer()
                             Text("Congratulations").foregroundColor(.white)
                             Text("You've earned 3 gems").foregroundColor(.white)
+                            Spacer()
                         }
                         
                     }
@@ -72,7 +82,13 @@ struct ScriptureTyperGame: View {
                 .popover(isPresented: $showingPopover2){
                     ZStack{
                         RoundedRectangle(cornerRadius: 25).foregroundColor(.red)
-                        Text("TRY AGAIN").foregroundColor(.white)
+                        VStack{
+                            Text("To return to game, swipe down")
+                            Spacer()
+                            Text("TRY AGAIN").foregroundColor(.white)
+                            Spacer()
+                        }
+                        
                     }
                 }
                 .padding()
