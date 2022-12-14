@@ -20,6 +20,7 @@ struct WheelOfProvidenceView: View {
     @State private var presentLetterAlert = false
     @State private var presentPhraseAlert = false
     @State var guess = ""
+    @State var finalScore = 0
     
     var passage: Passage
     var body: some View {
@@ -30,9 +31,9 @@ struct WheelOfProvidenceView: View {
                     ZStack{
                         VStack {
                             WheelView(pieWheel: wheelOfProvidence.wheel)
-                                .rotationEffect(Angle.degrees(((wheelOfProvidence.spinDouble) * 360)+1080), anchor: UnitPoint(x: 0.5, y: 0.31))
+                                .rotationEffect(Angle.degrees(((wheelOfProvidence.spinDouble) * 360)+1080), anchor: UnitPoint(x: 0.5, y: 0.26)).padding()
                             HStack{
-                                Button("Spin!", action: {
+                                Button(wheelOfProvidence.wheel.isSpun ? " " : "Spin!", action: {
                                     withAnimation(.easeInOut(duration: 3), {
                                         if(wheelOfProvidence.wheel.isSpun == false){
                                             wheelOfProvidence.spinWheel()
@@ -57,20 +58,25 @@ struct WheelOfProvidenceView: View {
                             Text(String(score))
                             Spacer()
                             Text("Reference: \(passage.referenceFormatted)")
-                        }.font(.system(size: 20)).padding(.horizontal).background(Color.blue).foregroundColor(Color("AccentColor2"))
+                            Spacer()
+                            Image(systemName: "house")
+                                .onTapGesture{
+                                    currentApp = .swordMinder
+                                }
+                        }.font(.system(size: 20)).padding(.horizontal).background(Color.blue).foregroundColor(Color.yellow)
                         
                         /// WordView
                         let length: Int = wheelOfProvidence.grid.count
+                        let gridItemLayout = [GridItem(.adaptive(minimum:50))]
                         ScrollView{
-                            LazyVGrid(columns:[GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50)),GridItem(.fixed(50))]){ //TODO: Make grid items adaptive (w/ minSize)
+                            LazyVGrid(columns: gridItemLayout, spacing:20){ //TODO: Make grid items adaptive (w/ minSize)
                                 Spacer()
                                 ForEach(0..<length, id: \.self){index in
                                     LetterView(letter: wheelOfProvidence.grid[index].isShown ? wheelOfProvidence.grid[index].letter : Character(" "), color: wheelOfProvidence.grid[index].letter == " " ? .white : .blue)
                                         .aspectRatio(2/3, contentMode: .fill)
                                 }
-                                Spacer()
                             }
-                        }
+                        }.padding()
                         
                         
                         ///BottomMenu
@@ -99,6 +105,7 @@ struct WheelOfProvidenceView: View {
                                 Button("Submit", action: {
                                     wheelOfProvidence.guessedPhrase = guess
                                     if(wheelOfProvidence.guessedPhraseIsCorrect()){
+                                        finalScore = wheelOfProvidence.score
                                         currentGameState = .complete
                                         if(swordMinder.taskEligible) {
                                             swordMinder.completeTask(difficulty: wheelOfProvidence.award)
@@ -128,18 +135,13 @@ struct WheelOfProvidenceView: View {
                 case .complete:
                     VStack {
                         Text("Correct!").font(.largeTitle)
-                        Text("Score: \(wheelOfProvidence.score)").font(.title)
+                        Text("Score: \(finalScore)").font(.title)
+                        Image(systemName: "house")
+                            .onTapGesture{
+                                currentApp = .swordMinder
+                            }
                     }
                 }
-            
-                Button {
-                    currentApp = .swordMinder
-                } label: {
-                    Text("Return to Sword Minder")
-                        .padding()
-                }
-                .padding()
-                .buttonStyle(SMButtonStyle())
             }
             .onAppear{
                 wheelOfProvidence.words = swordMinder.bible.words(for: passage)
@@ -165,7 +167,7 @@ struct LetterView: View{
             ZStack{
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(color)
-                Text(String(letter)).font(.system(size: geometry.size.width)).foregroundColor(Color("AccentColor2"))
+                Text(String(letter)).font(.system(size: geometry.size.width)).foregroundColor(Color.yellow)
             }
         }
     }
