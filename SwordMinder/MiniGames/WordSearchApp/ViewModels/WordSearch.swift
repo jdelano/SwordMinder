@@ -15,14 +15,16 @@ class WordSearch : ObservableObject {
     var words = [Word]()
     var gridSize = 10
     private var labels = [[WSLabel]]()
-    @Published var difficulty = Difficulty.hard {
+    @Published var difficulty = Difficulty.easy {
         didSet {
             makeGrid()
         }
     }
+    
     private let allLetters = (65...90).map { Character(UnicodeScalar($0)) }
     @Published var grid = [[Tile]]()
     @Published var wordsUsed = [Word]()
+    
     
     func makeGrid() {
         labels = (0..<gridSize).map { _ in
@@ -30,14 +32,13 @@ class WordSearch : ObservableObject {
                 WSLabel()
             }
         }
-        wordsUsed = placeWords().removingDuplicates(for: { element in
-            element.text.uppercased()
-        }).sorted(by: { word1, word2 in
-            word1.text.uppercased() < word2.text.uppercased()
-        })
+        wordsUsed = placeWords()
+            .removingDuplicates(for: { $0.text.uppercased() })
+            .sorted(by: { $0.text.uppercased() < $1.text.uppercased() })
         fillGaps()
         updateGrid()
     }
+    
     
     private func fillGaps() {
         for column in labels {
@@ -49,6 +50,7 @@ class WordSearch : ObservableObject {
         }
     }
     
+    
     private func updateGrid() {
         if labels.endIndex >= gridSize {
             grid = (0..<gridSize).map { row in
@@ -59,6 +61,7 @@ class WordSearch : ObservableObject {
         }
     }
         
+    
     private func labels(fromX x: Int, y: Int, word: String, movement: (x: Int, y: Int)) -> [WSLabel]? {
         var returnValue = [WSLabel]()
         
@@ -79,6 +82,7 @@ class WordSearch : ObservableObject {
         
         return returnValue
     }
+    
     
     private func tryPlacing(_ word: String, movement: (x: Int, y: Int)) -> Bool {
         let xLength = (movement.x * (word.count - 1))
@@ -115,6 +119,28 @@ class WordSearch : ObservableObject {
     
     private func placeWords() -> [Word] {
         words.shuffled().filter(place)
+    }
+
+    // MARK: - User Intent Functions
+    
+    func toggleSelect(_ tile: Tile) {
+        for row in 0..<gridSize {
+            for col in 0..<gridSize {
+                if grid[row][col].id == tile.id {
+                    grid[row][col].selected.toggle()
+                }
+            }
+        }
+    }
+
+    func unSelect(_ tile: Tile) {
+        for row in 0..<gridSize {
+            for col in 0..<gridSize {
+                if grid[row][col].id == tile.id {
+                    grid[row][col].selected = false
+                }
+            }
+        }
     }
 
 }

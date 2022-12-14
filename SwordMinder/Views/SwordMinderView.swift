@@ -56,7 +56,7 @@ struct SwordMinderView: View {
                 }
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: "gearshape")
+                    Label("Info", systemImage: "info.circle")
                 }
         }
     }

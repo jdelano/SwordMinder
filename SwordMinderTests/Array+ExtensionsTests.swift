@@ -16,11 +16,9 @@ final class Array_ExtensionsTests: XCTestCase {
     }
     
     func testArrayRemoveDuplicates() throws {
-        let tests = [Test(text: "HI"), Test(text: "HI"), Test(text: "HELLO"), Test(text: "HI")]
+        var tests = [Test(text: "HI"), Test(text: "HI"), Test(text: "HELLO"), Test(text: "HI")]
         print(tests.removingDuplicates(for: { element in
             element.text
         }))
     }
-    
-    
 }
