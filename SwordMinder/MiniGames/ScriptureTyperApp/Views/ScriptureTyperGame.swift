@@ -12,17 +12,14 @@ struct ScriptureTyperGame: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
     var passage: Passage
-    
+    let letters = " ABCDEFGHIJKLMNOPQRSTUVWXYZ,.;:'!"
     @State var isFaceUp = true
-    // For How To Play
+    //Popovers
     @State private var showingPopover1 = false
     @State private var showingPopover2 = false
+    @State private var showingPopover3 = false
     // to store the user input
     @State private var typedVerse: String = ""
-    
-    // For Timer
-    @State var timeRemaining = 120
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack{
@@ -42,24 +39,30 @@ struct ScriptureTyperGame: View {
                     ScriptureTyperRules(ScriptureTyper: ScriptureTyper, currentApp: $currentApp)
                 }
                 Spacer()
-                Text("\(timeRemaining)")
+                Text(String(ScriptureTyper.secondsElapsed))
             }.padding()
             ZStack {
                 ScriptureTyperCardView(passage: passage)
-                    .onReceive(timer) { _ in
-                        if timeRemaining > 0 {
-                            timeRemaining -= 1
-                        }
+                    .onTapGesture {
+                        isFaceUp = false
                     }
             }.padding()
             Spacer()
             HStack{
                 TextField("Type Verse Here", text: $typedVerse).textFieldStyle(.roundedBorder).padding()
                 Button("Submit"){
-                    if typedVerse == swordMinder.bible.text(for: passage) {
-                        self.timer.upstream.connect().cancel()
-                    } else {
+                    if typedVerse.uppercased() == swordMinder.bible.text(for: passage).uppercased().filter({letters.contains($0)}) {
+                        swordMinder.completeTask(difficulty: 3)
+                        ScriptureTyper.stop()
+                        showingPopover3 = true
+                    } else if typedVerse != swordMinder.bible.text(for: passage).uppercased().filter({letters.contains($0)}){
                         showingPopover2 = true
+                    }
+                }
+                .popover(isPresented: $showingPopover3){
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 25).foregroundColor(.green)
+                        Text("Congratulations").foregroundColor(.white)
                     }
                 }
                 .popover(isPresented: $showingPopover2){

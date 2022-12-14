@@ -24,7 +24,7 @@ struct ScriptureTyperVerses: View {
             List {
                 ForEach(swordMinder.passages) { passage in
                     NavigationLink {
-                        ScriptureTyperGame(ScriptureTyper: ScriptureTyper(), currentApp: $currentApp, passage: Passage())
+                        ScriptureTyperGame(ScriptureTyper: ScriptureTyper(), currentApp: $currentApp, passage: passage)
                     } label: {
                         HStack {
                             Text(.init(passage.referenceFormatted))
