@@ -33,5 +33,5 @@ struct JMVerse {
         reference.map { String($0) }
     }
     
-    init(verseReference: Reference)
+    //init(verseReference: Reference)
 }
