@@ -9,11 +9,11 @@ import SwiftUI
 
 // later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
 struct JM_Settings: View {
-    //@EnvironmentObject var justMemorize: JustMemorize
+    @ObservedObject var justMemorize: JustMemorize
     
-    @State var toggleVerse: Bool = true
+    @State private var toggleVerse: Bool = true
     
-    @State var toggleTimer: Bool = true
+    @State private var toggleTimer: Bool = true
     
     var difficulties = ["Easy", "Medium", "Hard"]
     @State var selectedDifficulty = "Easy"
@@ -61,6 +61,7 @@ struct JM_Settings: View {
                 // Show verse?
                 HStack {
                     Toggle(isOn: $toggleVerse) {
+                        JM_MainMenu(justMemorize: justMemorize, currentApp: .constant(.justMemorizeApp), toggleVerse: $toggleVerse, toggleTimer: $toggleTimer)
                         Text("Show Verse First")
                             .foregroundColor(Color("JMLightGold"))
                     }
@@ -91,7 +92,7 @@ private func nothing() {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        //let justMemorize = JustMemorize()
-        JM_Settings()
+        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
+        JM_Settings(justMemorize: justMemorize)
     }
 }

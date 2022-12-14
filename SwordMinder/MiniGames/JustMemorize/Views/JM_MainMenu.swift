@@ -16,6 +16,9 @@ struct JM_MainMenu: View {
     /// This is what connects your app back to the SwordMinder app. Change this binding to return to Sword Minder
     @Binding var currentApp: Apps
     
+    @Binding var toggleVerse: Bool
+    @Binding var toggleTimer: Bool
+    
     var body: some View {
         ZStack {
             VStack {
@@ -50,7 +53,7 @@ struct JM_MainMenu: View {
                 .foregroundColor(Color("JMDarkGold"))
             Spacer()
             ZStack {
-                NavigationLink("       ", destination: JM_Settings())
+                NavigationLink("       ", destination: JM_Settings(justMemorize: JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: toggleVerse, toggleTimer: toggleTimer)))
                     .foregroundColor(Color("JMLightGold"))
                                Image(systemName: "gear")
                         .foregroundColor(Color("JMLightGold"))
@@ -65,9 +68,15 @@ struct JM_MainMenu: View {
                 NavigationLink("Learn", destination: JM_Instructions())
                     .foregroundColor(Color("JMLightGold"))
                 Spacer()
-                //NavigationLink("Play", destination: JM_VersePreview(verseReference: Reference()))
-                    .foregroundColor(Color("JMLightGold"))
-                    .padding()
+                if toggleVerse == true {
+                    NavigationLink("Play", destination: JM_VersePreview(justMemorize: justMemorize, swordMinder: swordMinder, toggleVerse: toggleVerse, toggleTimer: toggleTimer))
+                        .foregroundColor(Color("JMLightGold"))
+                        .padding()
+                } else {
+                    NavigationLink("Play", destination: JM_QuizView(justMemorize: justMemorize, toggleVerse: $toggleVerse, toggleTimer: $toggleTimer))
+                        .foregroundColor(Color("JMLightGold"))
+                        .padding()
+                }
                 Spacer()
 //              Button("TestButton") {
 //              JustMemorizeView(currentJMView: .instructions)
@@ -110,14 +119,10 @@ struct JM_MainMenu: View {
     
 }//Struct
 
-// TODO
-/// See requirements. Ensure integration.
-/// Focus on functional integration first then "pretty it up."
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let justMemorize = JustMemorize()
-        JM_MainMenu(justMemorize: justMemorize, currentApp: .constant(.justMemorizeApp))
+        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
+        JM_MainMenu(justMemorize: justMemorize, currentApp: .constant(.justMemorizeApp), toggleVerse: .constant(true), toggleTimer: .constant(true))
             .environmentObject(SwordMinder())
             //.environment(\.colorScheme, .dark)
     }

@@ -9,11 +9,43 @@ import SwiftUI
 
 class JustMemorize: ObservableObject {
     
+    @State var verseReference: Reference
+    @EnvironmentObject var swordMinder: SwordMinder
+    
     //typealias Verse = JMVerse
     //@Published private var verse: JMVerse
     
+    @Published var selectedDifficulty: String
+    @Published var selectedInput: String
+    @Published var toggleVerse: Bool
+    @Published var toggleTimer: Bool
+    
+    var reference: String {
+        verseReference.toString()
+    }
+    var verse: String {
+        swordMinder.bible.text(for: verseReference)
+    }
+    var verseArray: [String] {
+        verse.map { String($0) }
+    }
+    var referenceArray: [String] {
+        reference.map { String($0) }
+    }
+    
+    init(difficulty: String, reference: Reference, input: String, toggleVerse: Bool, toggleTimer: Bool) {
+        self.verseReference = reference
+        self.selectedDifficulty = difficulty
+        self.selectedInput = input
+        self.toggleVerse = toggleVerse
+        self.toggleTimer = toggleTimer
+    }
+    
+    
+    //MARK: Intent
+    
     ///This func accepts a string and returns a double of the relevant difficulty multiplier.
-    func difficultyMultiplier(difficulty: String) -> Double {
+    func difficultyModifier(difficulty: String) -> Double {
         switch difficulty {
             case "Easy":
                 return 0.15
@@ -26,4 +58,8 @@ class JustMemorize: ObservableObject {
         }
     }
     
+    /// This func accepts a reference and returns a string of the reference.
+    func reference(reference: Reference) -> String {
+        verseReference.toString()
+    }
 }

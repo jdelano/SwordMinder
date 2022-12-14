@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct JM_QuizView: View {
+    @ObservedObject var justMemorize: JustMemorize
+    @EnvironmentObject var swordMinder: SwordMinder
     
     // Timer graciously given by Michael Smithers.
     @State private var timeRemaining = 10
@@ -19,6 +21,9 @@ struct JM_QuizView: View {
     var sampleVerseEasy = "But that __ ___ the way you ______ ______! ________ that you have heard about ___ and were taught in him, as the truth is in Jesus, to ___ off your old self, which _______ to your ______ manner of life and is _______ through deceitful ______, and to be renewed in the ______ of your minds, and to put on the ___ ____, created after the ________ of ___ in true righteousness and ________."
     
     var sampleVerseMedium = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, ___ __ ___ __ ___ ___ ____, ________ _____ ___ _________ __ ___ __ ____ ______________ ___ __________"
+    
+    @Binding var toggleVerse: Bool
+    @Binding var toggleTimer: Bool
     
     var body: some View {
         VStack {
@@ -53,7 +58,7 @@ struct JM_QuizView: View {
                 .foregroundColor(Color("JMLightGold"))
             Spacer()
             HStack {
-                NavigationLink("Done", destination: JM_Results())
+                NavigationLink("Done", destination: JM_Results(justMemorize: justMemorize, toggleVerse: $toggleVerse, toggleTimer: $toggleTimer))
                     .border(.black)
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
@@ -68,6 +73,7 @@ struct JM_QuizView: View {
 
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
-        JM_QuizView()
+        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
+        JM_QuizView(justMemorize: justMemorize, toggleVerse: .constant(true), toggleTimer: .constant(true))
     }
 }

@@ -11,6 +11,8 @@
 		4D8AA76B2946DB070062BF7E /* JustMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76A2946DB070062BF7E /* JustMemorize.swift */; };
 		4D8AA76D2946DB330062BF7E /* JMDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */; };
 		4DCEDE5C29497A64009120A0 /* JMVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE5B29497A64009120A0 /* JMVerse.swift */; };
+		4DCEDE6B294A4791009120A0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6A294A4791009120A0 /* StringExtension.swift */; };
+		4DCEDE6D294A47B8009120A0 /* StringMetirc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */; };
 		4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */; };
 		4DF7B4462943BA4D00F15C50 /* JM_QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */; };
 		4DF7B4482943BABB00F15C50 /* JM_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4472943BABB00F15C50 /* JM_Results.swift */; };
@@ -105,6 +107,8 @@
 		4D8AA76A2946DB070062BF7E /* JustMemorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorize.swift; sourceTree = "<group>"; };
 		4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMDifficulty.swift; sourceTree = "<group>"; };
 		4DCEDE5B29497A64009120A0 /* JMVerse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMVerse.swift; sourceTree = "<group>"; };
+		4DCEDE6A294A4791009120A0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringMetirc.swift; sourceTree = "<group>"; };
 		4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_MainMenu.swift; sourceTree = "<group>"; };
 		4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_QuizView.swift; sourceTree = "<group>"; };
 		4DF7B4472943BABB00F15C50 /* JM_Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Results.swift; sourceTree = "<group>"; };
@@ -222,9 +226,19 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		4DCEDE69294A477C009120A0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4DCEDE6A294A4791009120A0 /* StringExtension.swift */,
+				4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4DF7B4412943B73200F15C50 /* JustMemorize */ = {
 			isa = PBXGroup;
 			children = (
+				4DCEDE69294A477C009120A0 /* Extensions */,
 				4DF7B4422943B9E400F15C50 /* Views */,
 				4D8AA7652946C6BB0062BF7E /* Models */,
 				4D349EDE2942E0A000D9537B /* ViewModels */,
@@ -624,6 +638,7 @@
 				4DF7B44D2943BB0600F15C50 /* JM_Instructions.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
+				4DCEDE6B294A4791009120A0 /* StringExtension.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
 				65C7C7F6293A320000301285 /* Passage.swift in Sources */,
 				65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */,
@@ -638,6 +653,7 @@
 				65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */,
 				65C7C80A293BDCA100301285 /* PlacementType.swift in Sources */,
 				6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */,
+				4DCEDE6D294A47B8009120A0 /* StringMetirc.swift in Sources */,
 				650BD13B28F24BED007034EA /* Player.swift in Sources */,
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
