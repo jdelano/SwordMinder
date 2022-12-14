@@ -9,6 +9,8 @@ import SwiftUI
 
 // later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
 struct JM_Settings: View {
+    //@EnvironmentObject var justMemorize: JustMemorize
+    
     @State var toggleVerse: Bool = true
     
     @State var toggleTimer: Bool = true
