@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct JM_VersePreview: View {
-    @State var verseReference: Reference
     //@State var verse = swordMinder.bible.text(for: verseReference)
+    @State var verseReference: Reference
     @EnvironmentObject var swordMinder: SwordMinder
     
     // Timer graciously given by Michael Smithers.
@@ -40,7 +40,14 @@ struct JM_VersePreview: View {
                 .foregroundColor(Color("JMLightGold"))
                  Text(verseReference.toString())
                 .foregroundColor(Color("JMLightGold"))
-                 verseView
+            
+                Text((swordMinder.bible.text(for: verseReference)))
+                //Text()
+        //        LazyVGrid(columns: 5) {
+        //            ForEach
+        //        }
+            
+            
                 .padding()
                 .foregroundColor(Color("JMLightGold"))
             Spacer()
@@ -61,14 +68,6 @@ struct JM_VersePreview: View {
         }
         .background(Color("JMBlack"))
     }//body
-    
-    var verseView: some View {
-        Text((swordMinder.bible.text(for: verseReference)))
-        //.foregroundColor(Color("JMLightGold"))
-//        LazyVGrid(columns: 5) {
-//            ForEach
-//        }
-    }
 }
 
 struct Game_Previews: PreviewProvider {

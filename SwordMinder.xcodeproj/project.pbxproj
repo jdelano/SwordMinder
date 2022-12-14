@@ -10,6 +10,7 @@
 		4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */; };
 		4D8AA76B2946DB070062BF7E /* JustMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76A2946DB070062BF7E /* JustMemorize.swift */; };
 		4D8AA76D2946DB330062BF7E /* JMDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */; };
+		4DCEDE5C29497A64009120A0 /* JMVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE5B29497A64009120A0 /* JMVerse.swift */; };
 		4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */; };
 		4DF7B4462943BA4D00F15C50 /* JM_QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */; };
 		4DF7B4482943BABB00F15C50 /* JM_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4472943BABB00F15C50 /* JM_Results.swift */; };
@@ -103,6 +104,7 @@
 		4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeAppIconView.swift; sourceTree = "<group>"; };
 		4D8AA76A2946DB070062BF7E /* JustMemorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorize.swift; sourceTree = "<group>"; };
 		4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMDifficulty.swift; sourceTree = "<group>"; };
+		4DCEDE5B29497A64009120A0 /* JMVerse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMVerse.swift; sourceTree = "<group>"; };
 		4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_MainMenu.swift; sourceTree = "<group>"; };
 		4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_QuizView.swift; sourceTree = "<group>"; };
 		4DF7B4472943BABB00F15C50 /* JM_Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Results.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */,
+				4DCEDE5B29497A64009120A0 /* JMVerse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
+				4DCEDE5C29497A64009120A0 /* JMVerse.swift in Sources */,
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,

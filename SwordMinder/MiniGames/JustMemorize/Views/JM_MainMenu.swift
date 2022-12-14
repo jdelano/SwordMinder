@@ -11,7 +11,7 @@ struct JM_MainMenu: View {
     /// Need this in each of your views so that you can access the sword minder view model
     /// You can of course add your own EnvironmentObjects as well to access your own view models
     @EnvironmentObject var swordMinder: SwordMinder
-    //@ObservedObject var justMemorize: JustMemorize
+    @ObservedObject var justMemorize: JustMemorize
     
     /// This is what connects your app back to the SwordMinder app. Change this binding to return to Sword Minder
     @Binding var currentApp: Apps
@@ -65,7 +65,7 @@ struct JM_MainMenu: View {
                 NavigationLink("Learn", destination: JM_Instructions())
                     .foregroundColor(Color("JMLightGold"))
                 Spacer()
-                NavigationLink("Play", destination: JM_VersePreview(verseReference: Reference()))
+                //NavigationLink("Play", destination: JM_VersePreview(verseReference: Reference()))
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
                 Spacer()
@@ -116,12 +116,9 @@ struct JM_MainMenu: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        //let justMemorize = JustMemorize()
-        JM_MainMenu(currentApp: .constant(.justMemorizeApp))
+        let justMemorize = JustMemorize()
+        JM_MainMenu(justMemorize: justMemorize, currentApp: .constant(.justMemorizeApp))
             .environmentObject(SwordMinder())
-        
             //.environment(\.colorScheme, .dark)
-        
-        //MARK: Borders still appear white?
     }
 }
