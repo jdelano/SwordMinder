@@ -29,16 +29,32 @@ struct FlappyMemoryView: View {
     }
 
 
+//    var body: some View {
+//
+//        if timeRemaining == 0 || game.gameState == GameState.dead{
+//            gameFail
+//                .ignoresSafeArea()
+//        }
+//        else if timeRemaining > 0 && gamePassed == false {
+//            gameBody
+//        }
+//        else if timeRemaining > 0 && gamePassed == true {
+//            win
+//                .ignoresSafeArea()
+//        }
+//
+//    }
+    
     var body: some View {
         
-        if timeRemaining == 0 || game.gameState == GameState.dead{
+        if game.gameState == GameState.dead{
             gameFail
                 .ignoresSafeArea()
         }
-        else if timeRemaining > 0 && gamePassed == false {
+        else if timeRemaining > 0 {
             gameBody
         }
-        else if timeRemaining > 0 && gamePassed == true {
+        else if timeRemaining == 0 {
             win
                 .ignoresSafeArea()
         }
@@ -46,16 +62,24 @@ struct FlappyMemoryView: View {
     }
     
     var gameBody: some View {
-        ZStack {
-            SpriteView(scene: scene)
-                .frame(width: 400, height: 700)
-            VStack {
-                HStack {
+        
+        VStack {
+            ZStack {
+                SpriteView(scene: scene)
+                    .frame(width: 400, height: 700)
+                VStack {
+                    HStack {
+                        Spacer()
+                        time.padding()
+                    }
                     Spacer()
-                    time
+
                 }
-                Spacer()
             }
+            Text(swordMinder.bible.text(for: passage))
+                .padding([.leading, .trailing])
+            Text(passage.referenceFormatted)
+                .padding(.bottom)
         }
     }
     

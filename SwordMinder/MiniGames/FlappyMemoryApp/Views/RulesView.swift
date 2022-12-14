@@ -58,33 +58,38 @@ struct RulesView: View {
     var rules: some View {
         VStack {
             //Rules listing
-            HStack {
-                Text("1. Speak the Verse to make the blird fly. Say the word before the mountain")
-                    .padding([.leading, .bottom, .trailing])
-                Spacer()
-            }
-            HStack {
-                Text("2. You have 45 seconds")
-                    .padding([.leading, .bottom, .trailing])
-                Spacer()
-                
-            }
-            HStack {
-                Text("3. When an incorrect word is spoken, time will decrease 1 second")
-                    .padding([.leading, .bottom, .trailing])
-                Spacer()
-            }
             
             HStack {
-                Text("4. The game will start as soon as you press continue")
+                Text("1. The game will start as soon as you press continue")
                     .padding([.leading, .bottom, .trailing])
                 Spacer()
             }
             HStack {
-                Text("5. Recording will begin immediately")
+                Text("2. Recite scripture to yourself as you go. Honor system.")
                     .padding([.leading, .bottom, .trailing])
                 Spacer()
             }
+//            HStack {
+//                Text("3. Speak the Verse to make the blird fly. Say the word before the mountain")
+//                    .padding([.leading, .bottom, .trailing])
+//                Spacer()
+//            }
+//            HStack {
+//                Text("4. You have 45 seconds")
+//                    .padding([.leading, .bottom, .trailing])
+//                Spacer()
+//
+//            }
+//            HStack {
+//                Text("5. When an incorrect word is spoken, time will decrease 1 second")
+//                    .padding([.leading, .bottom, .trailing])
+//                Spacer()
+//            }
+//            HStack {
+//                Text("6. Recording will begin immediately")
+//                    .padding([.leading, .bottom, .trailing])
+//                Spacer()
+//            }
             
         }
     }
