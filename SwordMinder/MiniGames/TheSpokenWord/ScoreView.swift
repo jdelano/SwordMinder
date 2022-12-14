@@ -57,11 +57,15 @@ struct ScoreView: View {
                 Text("You scored:")
                     .font(.largeTitle)
                 let alpha = "QWERTYUIOPASDFGHJKLZXCVBNM"
-                let verse = swordMinder.bible.text(for: Reference())
-                let cleanedText = verse.uppercased().filter {
+                let verse = swordMinder.bible.text(for: reference)
+                let cleanedverseText = verse.uppercased().filter {
                     alpha.contains($0)
                 }
-                Text(String(format: "%.0f", (cleanedText.distanceJaroWinkler(between: answer)*100)))
+                
+                let cleanedAnswer = answer.uppercased().filter {
+                    alpha.contains($0)
+                }
+                Text(String(format: "%.0f", (cleanedverseText.distanceJaroWinkler(between: cleanedAnswer)*100)))
                 //                Text("\(swordMinder.bible.text(for: reference).distanceJaroWinkler(between: answer)*100)")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -121,7 +125,7 @@ struct ScoreView: View {
     
     struct ScoreView_Previews: PreviewProvider {
         static var previews: some View {
-            ScoreView(reference: Reference(book: Book(named: "John")!, chapter: 3, verse: 16), answer: "For God so loved the world.").preferredColorScheme(.light)
+            ScoreView(reference: Reference(book: Book(named: "John")!, chapter: 3, verse: 16), answer: "For God so loved the world that he gave his only begotten son that whoever believes in him shall not perish but have eternal life.").preferredColorScheme(.light)
                 .environmentObject(SwordMinder())
             //        ScoreView().preferredColorScheme(.dark)
         }
