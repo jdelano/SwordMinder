@@ -11,7 +11,7 @@ struct JM_MainMenu: View {
     /// Need this in each of your views so that you can access the sword minder view model
     /// You can of course add your own EnvironmentObjects as well to access your own view models
     @EnvironmentObject var swordMinder: SwordMinder
-    //@ObservedObject var justMemorize: JustMemorize
+    @EnvironmentObject var justMemorize: JustMemorize
     
     /// This is what connects your app back to the SwordMinder app. Change this binding to return to Sword Minder
     @Binding var currentApp: Apps
@@ -61,26 +61,28 @@ struct JM_MainMenu: View {
     
     var playAndLearn: some View {
             HStack{
+                Spacer()
                 NavigationLink("Learn", destination: JM_Instructions())
                     .foregroundColor(Color("JMLightGold"))
-                    .padding(.leading)
-                    .padding(.leading)
                 Spacer()
                 NavigationLink("Play", destination: JM_VersePreview(verseReference: Reference()))
                     .foregroundColor(Color("JMLightGold"))
-                    .padding(.trailing)
-                    .padding(.trailing)
-                    .padding(.trailing)
-                    .padding(.trailing)
-                    .padding(.trailing)
+                    .padding()
                 Spacer()
-                
-//                                Button("TestButton") {
-//                                    JustMemorizeView(currentJMView: .instructions)
-//                                }
+//              Button("TestButton") {
+//              JustMemorizeView(currentJMView: .instructions)
+//              }
             }
             .frame(width: 400, height: 50)
             .border(Color("JMDarkGold"))
+                                
+//                func verseNoverse(setting: Bool) -> any View {
+//                if setting == true {
+//                    return JM_VersePreview(verseReference: Reference())
+//                } else {
+//                    return JM_QuizView()
+//                }
+//            }
     }
     
     var bottomMenu: some View {
