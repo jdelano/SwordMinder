@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var gameState = GameState.showingLogo
     
     //Attepting to read the yPosition Variable in createRocks()
-    var collisionYPosition = CGFloat(0)
+    var yCollisionPos = CGFloat(0)
     
     //I was unable to fully implement this. The funtionality should go on line 203
     @Published var difficultyFlappy = DifficultyFlappy.hard
@@ -38,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         createScore()
         createLogos()
 
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
         physicsWorld.contactDelegate = self
 
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "m4a") {
@@ -65,8 +65,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             logo.run(sequence)
 
         case .playing:
-            player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15 ))
+//            player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+//            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15 ))
+            player.position = CGPoint(x: frame.width / 6, y: yCollisionPos + 250)
 
         case .dead:
             let scene = GameScene(fileNamed: "GameScene")!
@@ -74,6 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             self.view?.presentScene(scene, transition: transition)
         }
     }
+
 
     func createPlayer() {
         let playerTexture = SKTexture(imageNamed: "bird")
@@ -191,15 +193,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         let xPosition = frame.width + topRock.frame.width
 
         let max = CGFloat(frame.height / 3)
-        let yPosition = CGFloat.random(in: -50...max)
+        yCollisionPos = CGFloat.random(in: -50...max)
 
         // this next value affects the width of the gap between rocks
         let rockDistance: CGFloat = 70
 
         // 4
-        topRock.position = CGPoint(x: xPosition, y: yPosition + topRock.size.height + rockDistance)
-        bottomRock.position = CGPoint(x: xPosition, y: yPosition - rockDistance)
-        rockCollision.position = CGPoint(x: xPosition + (rockCollision.size.width * 2), y: yPosition + 250)
+        topRock.position = CGPoint(x: xPosition, y: yCollisionPos + topRock.size.height + rockDistance)
+        bottomRock.position = CGPoint(x: xPosition, y: yCollisionPos - rockDistance)
+        rockCollision.position = CGPoint(x: xPosition + (rockCollision.size.width * 2), y: yCollisionPos + 250)
 
         let endPosition = frame.width + (topRock.frame.width * 2)
 
