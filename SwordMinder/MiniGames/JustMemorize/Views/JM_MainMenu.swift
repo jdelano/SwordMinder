@@ -107,14 +107,19 @@ struct JM_MainMenu: View {
                     currentApp = .swordMinder
                 }
             }
+            .font(.system(size: 13))
             .foregroundColor(Color("JMLightGold"))
+            .foregroundColor(Color("JMLightGold"))
+            .padding()
             Spacer()
-            Button("Add High Score Entry") {
+            Button("Add High Score") {
                 /// To add a high score entry, use the view model's highScore function
                 ///  and pass in the name of your app, along with the user's current high score.
                 swordMinder.highScore(app: "Just Memorize", score: 5000)
             }
+            .font(.system(size: 13))
             .foregroundColor(Color("JMLightGold"))
+            .padding()
             Spacer()
         }// HStack
         .frame(width: 400, height: 50)

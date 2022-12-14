@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */; };
 		4D8AA76B2946DB070062BF7E /* JustMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76A2946DB070062BF7E /* JustMemorize.swift */; };
-		4D8AA76D2946DB330062BF7E /* JMDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */; };
 		4DCEDE5C29497A64009120A0 /* JMVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE5B29497A64009120A0 /* JMVerse.swift */; };
 		4DCEDE6B294A4791009120A0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6A294A4791009120A0 /* StringExtension.swift */; };
 		4DCEDE6D294A47B8009120A0 /* StringMetirc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */; };
+		4DCEDE6F294A509F009120A0 /* JMReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6E294A509F009120A0 /* JMReference.swift */; };
+		4DCEDE71294A50B2009120A0 /* JMSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE70294A50B2009120A0 /* JMSettings.swift */; };
 		4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */; };
 		4DF7B4462943BA4D00F15C50 /* JM_QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */; };
 		4DF7B4482943BABB00F15C50 /* JM_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4472943BABB00F15C50 /* JM_Results.swift */; };
@@ -105,10 +106,11 @@
 /* Begin PBXFileReference section */
 		4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeAppIconView.swift; sourceTree = "<group>"; };
 		4D8AA76A2946DB070062BF7E /* JustMemorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorize.swift; sourceTree = "<group>"; };
-		4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMDifficulty.swift; sourceTree = "<group>"; };
 		4DCEDE5B29497A64009120A0 /* JMVerse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMVerse.swift; sourceTree = "<group>"; };
 		4DCEDE6A294A4791009120A0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringMetirc.swift; sourceTree = "<group>"; };
+		4DCEDE6E294A509F009120A0 /* JMReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMReference.swift; sourceTree = "<group>"; };
+		4DCEDE70294A50B2009120A0 /* JMSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMSettings.swift; sourceTree = "<group>"; };
 		4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_MainMenu.swift; sourceTree = "<group>"; };
 		4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_QuizView.swift; sourceTree = "<group>"; };
 		4DF7B4472943BABB00F15C50 /* JM_Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Results.swift; sourceTree = "<group>"; };
@@ -220,8 +222,9 @@
 		4D8AA7652946C6BB0062BF7E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4D8AA76C2946DB330062BF7E /* JMDifficulty.swift */,
 				4DCEDE5B29497A64009120A0 /* JMVerse.swift */,
+				4DCEDE6E294A509F009120A0 /* JMReference.swift */,
+				4DCEDE70294A50B2009120A0 /* JMSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
 				4DF7B44D2943BB0600F15C50 /* JM_Instructions.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
+				4DCEDE6F294A509F009120A0 /* JMReference.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				4DCEDE6B294A4791009120A0 /* StringExtension.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
@@ -658,7 +662,6 @@
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				65C7C81A293E460800301285 /* Tile.swift in Sources */,
-				4D8AA76D2946DB330062BF7E /* JMDifficulty.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
 				65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */,
 				65C7C81E293E79EF00301285 /* Sequence+Extensions.swift in Sources */,
@@ -669,6 +672,7 @@
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
+				4DCEDE71294A50B2009120A0 /* JMSettings.swift in Sources */,
 				4DF7B44F2943BB1100F15C50 /* JM_Settings.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,

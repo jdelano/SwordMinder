@@ -12,8 +12,8 @@ class JustMemorize: ObservableObject {
     @State var verseReference: Reference
     @EnvironmentObject var swordMinder: SwordMinder
     
-    //typealias Verse = JMVerse
-    //@Published private var verse: JMVerse
+    //typealias Verse = JMReference.reference
+//    @Published private var verse: JMVerse
     
     @Published var selectedDifficulty: String
     @Published var selectedInput: String
@@ -58,8 +58,8 @@ class JustMemorize: ObservableObject {
         }
     }
     
-    /// This func accepts a reference and returns a string of the reference.
-    func reference(reference: Reference) -> String {
-        verseReference.toString()
-    }
+//    /// This func accepts a reference and returns a string of the reference.
+//    func reference(reference: Reference) -> String {
+//        Verse.verseReference.toString()
+//    }
 }

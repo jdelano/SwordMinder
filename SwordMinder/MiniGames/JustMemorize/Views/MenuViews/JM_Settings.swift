@@ -26,10 +26,10 @@ struct JM_Settings: View {
         ZStack {
             VStack {
                 VStack{
-                    Text("(Just Memorize Logo)")
-                        .padding()
-                        .border(.black)
-                        .foregroundColor(Color("JMLightGold"))
+                    Image("JMLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100)
                     Spacer()
                     // Difficulty Selection
                     Text("Difficulty")
@@ -55,15 +55,18 @@ struct JM_Settings: View {
                         .foregroundColor(Color("JMLightGold"))
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    Text("Current Difficulty: \(selectedInput)")
+                        .foregroundColor(Color("JMLightGold"))
                     Spacer()
                 }
                 
                 // Show verse?
                 HStack {
                     Toggle(isOn: $toggleVerse) {
-                        JM_MainMenu(justMemorize: justMemorize, currentApp: .constant(.justMemorizeApp), toggleVerse: $toggleVerse, toggleTimer: $toggleTimer)
-                        Text("Show Verse First")
+                        Text("Show Verse Preview")
                             .foregroundColor(Color("JMLightGold"))
+//                        Text("Show Verse Preview: \(String(toggleVerse))")
+//                            .foregroundColor(Color("JMLightGold"))
                     }
                     .tint(Color("JMLightGold"))
                     .padding()

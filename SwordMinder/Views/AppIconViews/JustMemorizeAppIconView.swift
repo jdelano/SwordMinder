@@ -17,6 +17,8 @@ struct JustMemorizeAppIconView: View {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(Color("JMBlack"))
                 Image("JMLogo")
+                    .resizable()
+                    .cornerRadius(15)
             }// this curly brace is unneeded when using image
             }
             .aspectRatio(1, contentMode: .fit)

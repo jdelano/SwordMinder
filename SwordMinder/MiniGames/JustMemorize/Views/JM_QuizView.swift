@@ -52,6 +52,8 @@ struct JM_QuizView: View {
                         .padding()
                 }
             }
+            Text("JustMemorize.")
+                .foregroundColor(Color("JMWhite"))
             .padding()
             Text("\(sampleReference)")
                 .foregroundColor(Color("JMLightGold"))

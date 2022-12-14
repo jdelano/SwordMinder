@@ -26,8 +26,8 @@ struct JM_VersePreview: View {
 //        self.timeRemaining = timeRemaining
 //    }
     
-    ///var sampleVerse = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, and to put on the new self, created after the likeness of God in true righteousness and holiness."
-    ///var sampleReference = "Ephesians 4:20-24"
+    var sampleVerse = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, and to put on the new self, created after the likeness of God in true righteousness and holiness."
+    var sampleReference = "Ephesians 4:20-24"
     
     var body: some View {
         // Give the lazy v-grid a go.
@@ -49,7 +49,7 @@ struct JM_VersePreview: View {
             Text("VERSE PREVIEW")
                 .font(.headline)
                 .padding()
-                .foregroundColor(Color("JMLightGold"))
+                .foregroundColor(Color("JMWhite"))
                  //Text(verseReference.toString())
                 .foregroundColor(Color("JMLightGold"))
             
@@ -60,7 +60,10 @@ struct JM_VersePreview: View {
         //        LazyVGrid(columns: 5) {
         //            ForEach
         //        }
-            
+                Text("\(sampleReference)")
+                .foregroundColor(Color("JMLightGold"))
+                Text("\(sampleVerse)")
+                .foregroundColor(Color("JMLightGold"))
             
                 .padding()
                 .foregroundColor(Color("JMLightGold"))
