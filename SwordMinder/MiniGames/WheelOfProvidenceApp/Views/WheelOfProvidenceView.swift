@@ -32,14 +32,14 @@ struct WheelOfProvidenceView: View {
                             WheelView(pieWheel: wheelOfProvidence.wheel)
                                 .rotationEffect(Angle.degrees(((wheelOfProvidence.spinDouble) * 360)+1080), anchor: UnitPoint(x: 0.5, y: 0.31))
                             HStack{
-                                Button("Spin!(\(wheelOfProvidence.spinDouble))", action: {
+                                Button("Spin!", action: {
                                     withAnimation(.easeInOut(duration: 3), {
                                         if(wheelOfProvidence.wheel.isSpun == false){
                                             wheelOfProvidence.spinWheel()
                                         }
                                     })
                                 })
-                                Button(wheelOfProvidence.wheel.isSpun ? "Start \(wheelOfProvidence.award) gems!" : " ", action: {
+                                Button(wheelOfProvidence.wheel.isSpun ? "Start!" : " ", action: {
                                     if(wheelOfProvidence.wheel.isSpun == true){
                                         currentGameState = .guesser
                                     }
