@@ -18,7 +18,7 @@ struct FlappyMemoryAppIconView: View {
                     .fill(Color.accentColor)
                 Image("logo")
                     .resizable()
-                    .frame(maxWidth: 300, maxHeight: 300)
+                    .frame(maxWidth: 250, maxHeight: 200)
             }
             .aspectRatio(1, contentMode: .fit)
         }

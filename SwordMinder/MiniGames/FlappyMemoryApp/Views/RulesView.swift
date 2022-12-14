@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RulesView: View {
     @Binding var currentApp: Apps
-    @State var passage: Passage
+    var passage: Passage
     @State private var settingsShown: Bool = false
     @ObservedObject var flappyMemoryViewModel: GameScene
     @EnvironmentObject var swordMinder: SwordMinder
@@ -18,7 +18,7 @@ struct RulesView: View {
         NavigationView {
             VStack {
                 HStack{
-                    Spacer(minLength: 170)
+                    Spacer(minLength: 155)
                     rulesLabel
                     Spacer()
                     Button {
@@ -81,7 +81,7 @@ struct RulesView: View {
                 Spacer()
             }
             HStack {
-                Text("5. Recording will begina immediately")
+                Text("5. Recording will begin immediately")
                     .padding([.leading, .bottom, .trailing])
                 Spacer()
             }

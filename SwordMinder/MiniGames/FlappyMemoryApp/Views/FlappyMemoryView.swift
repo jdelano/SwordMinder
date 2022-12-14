@@ -68,13 +68,12 @@ struct FlappyMemoryView: View {
                     .font(.largeTitle)
                     .fontWeight(.medium)
                     .foregroundColor(.green)
-                Text("+300 Gems")
-                    .font(.headline)
                 
                 Button("Return to SwordMinder") {
                     //This will have  the code to return to the main game
                     withAnimation {
                         currentApp = .swordMinder
+                        swordMinder.completeTask(difficulty: 3)
                     }
                 }
             }
