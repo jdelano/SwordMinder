@@ -25,7 +25,7 @@ struct SwordMinderView: View {
         case .swordMinder: swordMinderMainView
         case .sampleApp: SampleAppView(currentApp: $currentApp)
         case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
-        case .flappyMemoryApp: RulesView(currentApp: $currentApp, passage: Passage(), flappyMemoryViewModel: GameScene())
+        case .flappyMemoryApp: RulesView(currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage(), flappyMemoryViewModel: GameScene())
         }
     }
     

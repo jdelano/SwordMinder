@@ -113,7 +113,7 @@ struct RulesView: View {
     }
     
     var toGameView: some View {
-        NavigationLink(destination: FlappyMemoryView(game: GameScene(), currentApp: $currentApp, passage: Passage())) {
+        NavigationLink(destination: FlappyMemoryView(game: GameScene(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())) {
             Text("Continue")
                 .frame(minWidth: 0, maxWidth: 300)
                 .padding()
