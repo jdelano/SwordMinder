@@ -12,6 +12,7 @@ class JustMemorize: ObservableObject {
     @State var verseReference: Reference
     @EnvironmentObject var swordMinder: SwordMinder
     
+    typealias settings = JMSettingsModel
     //typealias Verse = JMReference.reference
 //    @Published private var verse: JMVerse
     
@@ -19,6 +20,10 @@ class JustMemorize: ObservableObject {
     @Published var selectedInput: String
     @Published var toggleVerse: Bool
     @Published var toggleTimer: Bool
+    
+    var difficulties = ["Easy", "Medium", "Hard"]
+    
+    var inputTypes = ["Dictation", "Typing"]
     
     var reference: String {
         verseReference.toString()
@@ -40,6 +45,8 @@ class JustMemorize: ObservableObject {
         self.toggleVerse = toggleVerse
         self.toggleTimer = toggleTimer
     }
+//    private mutating func createJustMemorizeGame() {
+//    }
     
     
     //MARK: Intent

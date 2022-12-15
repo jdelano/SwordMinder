@@ -11,6 +11,9 @@ struct JM_Results: View {
     @ObservedObject var justMemorize: JustMemorize
     @EnvironmentObject var swordMinder: SwordMinder
     
+    @Binding var currentView: JustMemorizeView.viewState
+    @Binding var toggleVerse: Bool
+    
     //var sampleResults = "80%"
     
     var sampleVerse1 = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, "
@@ -26,15 +29,7 @@ struct JM_Results: View {
     
     @State var score: Int = 200 //placeholder value
     
-    @Binding var toggleVerse: Bool
-    @Binding var toggleTimer: Bool
-    
-    
     //lazy var pointsGained: Int = Int((wholeVerse.distanceJaroWinkler(between: answer)*100))
-    
-//    if pointsGained >= 90 {
-//        swordMinder.completeTask(difficulty: 1)
-//    }
     
     var body: some View {
         VStack {
@@ -45,14 +40,13 @@ struct JM_Results: View {
                     .frame(width: 100)
                     Spacer()
                 VStack {
-                    Text("Points: \(score + (Int((wholeVerse.distanceJaroWinkler(between: answer)*100))))")
+                    Text("Score: \(score + (Int((wholeVerse.distanceJaroWinkler(between: answer)*100))))")
                         .foregroundColor(Color("JMLightGold"))
-                    Text("Points Gained: \(Int((wholeVerse.distanceJaroWinkler(between: answer)*100)))")
                         .padding()
-                        .foregroundColor(Color("JMLightGold"))
+                    //Text("Points Gained: \(Int((wholeVerse.distanceJaroWinkler(between: answer)*100)))")
                 }
             }
-            .padding()
+            .padding(.horizontal)
             
             //Text(String(format: "%.0f", (wholeVerse.distanceJaroWinkler(between: answer)*100)))
             //Text(String(format: "%.0f", (swordMinder.bible.text(for: reference).distanceJaroWinkler(between: answer)*100)))
@@ -73,12 +67,20 @@ struct JM_Results: View {
             Spacer()
             HStack {
                 Spacer()
-                NavigationLink("Home", destination: JM_MainMenu(justMemorize: JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true), currentApp: .constant(.justMemorizeApp), toggleVerse: .constant(true), toggleTimer: .constant(true)))
-                    .foregroundColor(Color("JMLightGold"))
+                Button("Main Menu") {
+                    withAnimation {
+                        currentView = .mainMenu
+                    }
+                }
+                .foregroundColor(Color("JMLightGold"))
                     .padding()
                 Spacer()
-                NavigationLink("Play Again", destination: JM_VersePreview(justMemorize: justMemorize, toggleVerse: $toggleVerse, toggleTimer: $toggleTimer))
-                    .foregroundColor(Color("JMLightGold"))
+                Button("Play Again") {
+                    withAnimation {
+                        toggleVerse == true ? (currentView = .versePreview) : (currentView = .quizView)
+                    }
+                }
+                .foregroundColor(Color("JMLightGold"))
                     .padding()
                 Spacer()
             }
@@ -93,6 +95,6 @@ struct JM_Results: View {
 struct Results_Previews: PreviewProvider {
     static var previews: some View {
         let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
-        JM_Results(justMemorize: justMemorize, toggleVerse: .constant(true), toggleTimer: .constant(true))
+        JM_Results(justMemorize: justMemorize, currentView: .constant(.results), toggleVerse: .constant(true))
     }
 }

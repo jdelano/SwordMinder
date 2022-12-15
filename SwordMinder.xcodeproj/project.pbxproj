@@ -106,15 +106,15 @@
 /* Begin PBXFileReference section */
 		4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeAppIconView.swift; sourceTree = "<group>"; };
 		4DB65CAE294AA9BB00C27745 /* JustMemorizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustMemorizeView.swift; sourceTree = "<group>"; };
-		4DB65CB0294AA9C800C27745 /* JM_Instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_Instructions.swift; path = "../../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/MenuViews/JM_Instructions.swift"; sourceTree = "<group>"; };
-		4DB65CB2294AA9E400C27745 /* JM_Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_Settings.swift; path = "../../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/MenuViews/JM_Settings.swift"; sourceTree = "<group>"; };
-		4DB65CB4294AAA0A00C27745 /* JM_MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_MainMenu.swift; path = MenuViews/JM_MainMenu.swift; sourceTree = "<group>"; };
-		4DB65CB6294AAA1C00C27745 /* JM_VersePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_VersePreview.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/JM_VersePreview.swift"; sourceTree = "<group>"; };
-		4DB65CB8294AAA3500C27745 /* JM_QuizView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_QuizView.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/JM_QuizView.swift"; sourceTree = "<group>"; };
-		4DB65CBA294AAA4C00C27745 /* JM_Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_Results.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/JM_Results.swift"; sourceTree = "<group>"; };
-		4DB65CBC294AAA6900C27745 /* JMVerse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMVerse.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Models/JMVerse.swift"; sourceTree = "<group>"; };
+		4DB65CB0294AA9C800C27745 /* JM_Instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JM_Instructions.swift; sourceTree = "<group>"; };
+		4DB65CB2294AA9E400C27745 /* JM_Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JM_Settings.swift; sourceTree = "<group>"; };
+		4DB65CB4294AAA0A00C27745 /* JM_MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JM_MainMenu.swift; sourceTree = "<group>"; };
+		4DB65CB6294AAA1C00C27745 /* JM_VersePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JM_VersePreview.swift; sourceTree = "<group>"; };
+		4DB65CB8294AAA3500C27745 /* JM_QuizView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JM_QuizView.swift; sourceTree = "<group>"; };
+		4DB65CBA294AAA4C00C27745 /* JM_Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JM_Results.swift; sourceTree = "<group>"; };
+		4DB65CBC294AAA6900C27745 /* JMVerse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMVerse.swift; sourceTree = "<group>"; };
 		4DB65CBE294AAA7700C27745 /* JMSettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSettingsModel.swift; sourceTree = "<group>"; };
-		4DB65CC0294AAA8300C27745 /* JustMemorize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JustMemorize.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/ViewModels/JustMemorize.swift"; sourceTree = "<group>"; };
+		4DB65CC0294AAA8300C27745 /* JustMemorize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustMemorize.swift; sourceTree = "<group>"; };
 		4DCEDE6A294A4791009120A0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringMetirc.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
@@ -850,7 +850,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwordMinder/Preview Content\"";
-				DEVELOPMENT_TEAM = ZRJ36BS2MW;
+				DEVELOPMENT_TEAM = CHJVUZ6H9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sword Minder";
@@ -883,7 +883,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwordMinder/Preview Content\"";
-				DEVELOPMENT_TEAM = ZRJ36BS2MW;
+				DEVELOPMENT_TEAM = CHJVUZ6H9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sword Minder";
@@ -914,7 +914,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P2R93EDFRL;
+				DEVELOPMENT_TEAM = CHJVUZ6H9T;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -934,7 +934,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P2R93EDFRL;
+				DEVELOPMENT_TEAM = CHJVUZ6H9T;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -953,7 +953,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P2R93EDFRL;
+				DEVELOPMENT_TEAM = CHJVUZ6H9T;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MARKETING_VERSION = 1.0;
@@ -972,7 +972,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P2R93EDFRL;
+				DEVELOPMENT_TEAM = CHJVUZ6H9T;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MARKETING_VERSION = 1.0;

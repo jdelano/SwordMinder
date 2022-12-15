@@ -12,12 +12,7 @@ struct JM_VersePreview: View {
     @ObservedObject var justMemorize: JustMemorize
     @EnvironmentObject var swordMinder: SwordMinder
     
-    @Binding var toggleVerse: Bool
-    @Binding var toggleTimer: Bool
-    
-    // Timer graciously given by Michael Smithers.
-    @State private var timeRemaining = 5
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @Binding var currentView: JustMemorizeView.viewState
     
 //    init(justMemorize: JustMemorize, toggleVerse: Bool, toggleTimer: Bool, timeRemaining: Int = 5) {
 //        self.justMemorize = justMemorize
@@ -32,6 +27,22 @@ struct JM_VersePreview: View {
     var body: some View {
         // Give the lazy v-grid a go.
         VStack {
+            HStack {
+                Button {
+                    withAnimation {
+                        currentView = .mainMenu
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.title3)
+                        Text("Main Menu")
+                    }
+                }
+                .foregroundColor(Color("JMLightGold"))
+                .padding(.leading)
+                Spacer()
+            }
             //Title and points
             HStack {
                 Image("JMLogo")
@@ -39,7 +50,7 @@ struct JM_VersePreview: View {
                     .scaledToFit()
                     .frame(width: 100)
                 Spacer()
-                Text("Points: 100")
+                Text("Score: 100")
                     .padding()
                     .foregroundColor(Color("JMLightGold"))
             }
@@ -69,15 +80,26 @@ struct JM_VersePreview: View {
                 .foregroundColor(Color("JMLightGold"))
             Spacer()
             HStack {
-                NavigationLink("Instructions", destination: JM_Instructions())
+//                Button("Instructions") {
+//                    withAnimation {
+//                        currentView = .instructions
+//                    }
+//                }
+//                .foregroundColor(Color("JMLightGold"))
+//                .padding(.leading)
+//                .padding(.leading)
+//                Spacer()
+                Button {
+                    withAnimation {
+                        currentView = .quizView
+                    }
+                } label: {
+                    Text("Play")
+                        .foregroundColor(Color("JMLightGold"))
+                }
                 .foregroundColor(Color("JMLightGold"))
-                .padding(.leading)
-                .padding(.leading)
-                Spacer()
-                NavigationLink("Start", destination: JM_QuizView(justMemorize: justMemorize, toggleVerse: $toggleVerse, toggleTimer: $toggleTimer))
-                .foregroundColor(Color("JMLightGold"))
-                .padding(.trailing)
-                .padding(.trailing)
+//                .padding(.trailing)
+//                .padding(.trailing)
             }
             .frame(width: 400, height: 50)
             .border(Color("JMLightGold"))
@@ -90,7 +112,7 @@ struct JM_VersePreview: View {
 struct Game_Previews: PreviewProvider {
     static var previews: some View {
         let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
-        JM_VersePreview(justMemorize: justMemorize, toggleVerse: .constant(true), toggleTimer: .constant(true))
+        JM_VersePreview(justMemorize: justMemorize, currentView: .constant(.versePreview))
             .environmentObject(SwordMinder())
     }
 }

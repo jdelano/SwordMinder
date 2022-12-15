@@ -10,59 +10,65 @@ import SwiftUI
 // later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
 struct JM_Settings: View {
     @ObservedObject var justMemorize: JustMemorize
-    
-    @State private var toggleVerse: Bool = true
-    
-    @State private var toggleTimer: Bool = true
-    
-    var difficulties = ["Easy", "Medium", "Hard"]
-    @State var selectedDifficulty = "Easy"
-    
-    var inputTypes = ["Dictation", "Typing"]
-    @State var selectedInput = "Typing"
+    @Binding var currentView: JustMemorizeView.viewState
     
     // Consider a scroll view if necessary.
     var body: some View {
         ZStack {
             VStack {
+                HStack {
+                    Button {
+                        withAnimation {
+                            currentView = .mainMenu
+                        }
+                    } label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.title3)
+                            Text("Main Menu")
+                        }
+                    }
+                    .foregroundColor(Color("JMLightGold"))
+                    .padding(.leading)
+                    Spacer()
+                }
                 VStack{
                     Image("JMLogo")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100)
-                    Spacer()
+                        .padding()
                     // Difficulty Selection
                     Text("Difficulty")
                         .foregroundColor(Color("JMLightGold"))
-                    Picker ("Difficulty Picker", selection: $selectedDifficulty) {
-                        ForEach(difficulties, id: \.self) {
+                    Picker ("Difficulty Picker", selection: $justMemorize.selectedDifficulty) {
+                        ForEach($justMemorize.difficulties.wrappedValue, id: \.self) {
                             Text($0)
                         }
                         .foregroundColor(Color("JMLightGold"))
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    Text("Current Difficulty: \(selectedDifficulty)")
-                    //Text("Difficulty: \(justMemorize.difficultyMultiplier(difficulty: selectedDifficulty))")
+                    Text("Current Difficulty: \($justMemorize.selectedDifficulty.wrappedValue)")
                         .foregroundColor(Color("JMLightGold"))
                     Spacer()
                     //Input Type
                     Text("Input Type:")
                         .foregroundColor(Color("JMLightGold"))
-                    Picker ("Input Picker", selection: $selectedInput) {
-                        ForEach(inputTypes, id: \.self) {
+                    Picker ("Input Picker", selection: $justMemorize.selectedInput) {
+                        ForEach($justMemorize.inputTypes.wrappedValue, id: \.self) {
                             Text($0)
                         }
                         .foregroundColor(Color("JMLightGold"))
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    Text("Current Difficulty: \(selectedInput)")
+                    Text("Current Difficulty: \($justMemorize.selectedInput.wrappedValue)")
                         .foregroundColor(Color("JMLightGold"))
                     Spacer()
                 }
                 
                 // Show verse?
                 HStack {
-                    Toggle(isOn: $toggleVerse) {
+                    Toggle(isOn: $justMemorize.toggleVerse) {
                         Text("Show Verse Preview")
                             .foregroundColor(Color("JMLightGold"))
 //                        Text("Show Verse Preview: \(String(toggleVerse))")
@@ -70,16 +76,19 @@ struct JM_Settings: View {
                     }
                     .tint(Color("JMLightGold"))
                     .padding()
+                Spacer()
                 }
                 //Show timer?
                 HStack {
-                    Toggle(isOn: $toggleTimer) {
+                    Toggle(isOn: $justMemorize.toggleTimer) {
                         Text("Show Timer")
                             .foregroundColor(Color("JMLightGold"))
                     }
                     .tint(Color("JMLightGold"))
                     .padding()
+                Spacer()
                 }
+                Spacer()
                 .background(Color("JMBlack"))
             }
             .background(Color("JMBlack"))
@@ -96,6 +105,6 @@ private func nothing() {
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
         let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
-        JM_Settings(justMemorize: justMemorize)
+        JM_Settings(justMemorize: justMemorize, currentView: .constant(.settings))
     }
 }
