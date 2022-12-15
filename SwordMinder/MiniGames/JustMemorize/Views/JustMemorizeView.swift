@@ -59,7 +59,7 @@ struct JustMemorizeView: View {
 
 struct JustMemorizeView_Previews: PreviewProvider {
     static var previews: some View {
-        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
+        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), toggleVerse: true, toggleTimer: true)
         JustMemorizeView(justMemorize: justMemorize, currentApp: .constant(.justMemorizeApp), toggleVerse: .constant(true), toggleTimer: .constant(true))
             .environmentObject(SwordMinder())
     }

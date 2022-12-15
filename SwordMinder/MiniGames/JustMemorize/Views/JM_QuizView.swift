@@ -17,6 +17,7 @@ struct JM_QuizView: View {
     
     @State var textFieldText: String = ""
     
+    
     // Timer graciously given by Michael Smithers.
     @State private var timeRemaining = 5
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -25,12 +26,12 @@ struct JM_QuizView: View {
         if timeRemaining <= 0 { currentView = .results }
     }
     
-    var sampleVerse = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, and to put on the new self, created after the likeness of God in true righteousness and holiness."
-    var sampleReference = "Ephesians 4:20-24"
+    ///var sampleVerse = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, and to put on the new self, created after the likeness of God in true righteousness and holiness."
+    ///var sampleReference = "Ephesians 4:20-24"
     
-    var sampleVerseEasy = "But that __ ___ the way you ______ ______! ________ that you have heard about ___ and were taught in him, as the truth is in Jesus, to ___ off your old self, which _______ to your ______ manner of life and is _______ through deceitful ______, and to be renewed in the ______ of your minds, and to put on the ___ ____, created after the ________ of ___ in true righteousness and ________."
+    ///var sampleVerseEasy = "But that __ ___ the way you ______ ______! ________ that you have heard about ___ and were taught in him, as the truth is in Jesus, to ___ off your old self, which _______ to your ______ manner of life and is _______ through deceitful ______, and to be renewed in the ______ of your minds, and to put on the ___ ____, created after the ________ of ___ in true righteousness and ________."
     
-    var sampleVerseMedium = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, ___ __ ___ __ ___ ___ ____, ________ _____ ___ _________ __ ___ __ ____ ______________ ___ __________"
+    ///var sampleVerseMedium = "But that is not the way you learned Christ! Assuming that you have heard about him and were taught in him, as the truth is in Jesus, to put off your old self, which belongs to your former manner of life and is corrupt through deceitful desires, and to be renewed in the spirit of your minds, ___ __ ___ __ ___ ___ ____, ________ _____ ___ _________ __ ___ __ ____ ______________ ___ __________"
 
     
     var body: some View {
@@ -48,17 +49,20 @@ struct JM_QuizView: View {
                             .foregroundColor(Color("JMWhite"))
                             .onReceive(timer) { _ in
                                 if timeRemaining > 0 { timeRemaining -= 1 }
-                                if timeRemaining <= 0 { currentView = .results }
+                                ///If the timer is active and time is less than or equal to 0, the view is switched to the results view.
+                                if timeRemaining <= 0 && toggleTimer == true { currentView = .results }
                             }
+                            ///If the timer is active, the opacity is set to 1. If not, 0.
+                            .opacity(toggleTimer == true ? 1 : 0)
                             .padding()
                     }
                 }
-                Text("JustMemorize.")
+                Text("Just Memorize.")
                     .foregroundColor(Color("JMWhite"))
                     .padding(.bottom)
-                Text("\(sampleReference)")
+                //Text("\(sampleReference)")
                     .foregroundColor(Color("JMLightGold"))
-                Text("\(sampleVerseMedium)")
+                //Text("\(sampleVerseMedium)")
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
             }
@@ -88,7 +92,7 @@ struct JM_QuizView: View {
 
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
-        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
+        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), toggleVerse: true, toggleTimer: true)
         JM_QuizView(justMemorize: justMemorize, currentView: .constant(.quizView), toggleTimer: .constant(true))
     }
 }

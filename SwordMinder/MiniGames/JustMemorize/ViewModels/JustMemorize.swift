@@ -17,7 +17,7 @@ class JustMemorize: ObservableObject {
 //    @Published private var verse: JMVerse
     
     @Published var selectedDifficulty: String
-    @Published var selectedInput: String
+    //@Published var selectedInput: String
     @Published var toggleVerse: Bool
     @Published var toggleTimer: Bool
     
@@ -38,10 +38,10 @@ class JustMemorize: ObservableObject {
         reference.map { String($0) }
     }
     
-    init(difficulty: String, reference: Reference, input: String, toggleVerse: Bool, toggleTimer: Bool) {
+    init(difficulty: String, reference: Reference, /*input: String,*/ toggleVerse: Bool, toggleTimer: Bool) {
         self.verseReference = reference
         self.selectedDifficulty = difficulty
-        self.selectedInput = input
+        //self.selectedInput = input
         self.toggleVerse = toggleVerse
         self.toggleTimer = toggleTimer
     }

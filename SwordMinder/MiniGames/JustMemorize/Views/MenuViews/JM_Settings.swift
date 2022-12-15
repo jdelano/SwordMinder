@@ -105,7 +105,7 @@ private func nothing() {
 
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true)
+        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), toggleVerse: true, toggleTimer: true)
         JM_Settings(justMemorize: justMemorize, currentView: .constant(.settings))
     }
 }

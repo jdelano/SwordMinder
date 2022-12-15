@@ -10,7 +10,7 @@ import SwiftUI
 struct JMSettingsModel {
     
     @Binding var selectedDifficulty: String
-    @Binding var selectedInput: String
+    //@Binding var selectedInput: String
     @Binding var toggleVerse: Bool
     @Binding var toggleTimer: Bool
     

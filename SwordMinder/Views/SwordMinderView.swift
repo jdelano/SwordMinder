@@ -24,7 +24,7 @@ struct SwordMinderView: View {
             case .swordMinder: swordMinderMainView
             case .sampleApp: SampleAppView(currentApp: $currentApp)
             case .wordSearchApp: WordSearchView(wordSearch: WordSearch(), currentApp: $currentApp, passage: swordMinder.passages.randomElement() ?? Passage())
-            case .justMemorizeApp: JustMemorizeView(justMemorize: JustMemorize(difficulty: "Easy", reference: Reference(), input: "Typing", toggleVerse: true, toggleTimer: true), currentApp: $currentApp, toggleVerse: .constant(true), toggleTimer: .constant(true))
+            case .justMemorizeApp: JustMemorizeView(justMemorize: JustMemorize(difficulty: "Easy", reference: Reference(), toggleVerse: true, toggleTimer: true), currentApp: $currentApp, toggleVerse: .constant(true), toggleTimer: .constant(true))
         }
     }
 
