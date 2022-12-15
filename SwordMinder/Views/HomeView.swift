@@ -43,6 +43,7 @@ struct HomeView: View {
                         .gridCellUnsizedAxes([.vertical])
                     }
                 }
+                .clipped()
             }
         }
         .overlay(!swordMinder.isLoaded ? ProgressView() : nil)

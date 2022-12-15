@@ -10,4 +10,5 @@ import Foundation
 struct Tile : Identifiable, Hashable {
     var id = UUID()
     var letter : Character
+    var selected : Bool = false
 }

@@ -85,6 +85,15 @@
 		65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D7C287B9D2E00FAF612 /* MemorizeView.swift */; };
 		65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D7E287B9D4E00FAF612 /* GameView.swift */; };
 		65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB9D80287B9E5600FAF612 /* SettingsView.swift */; };
+		B412F1932943D6E700B7EF0F /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1922943D6E700B7EF0F /* String + Extensions.swift */; };
+		B412F1952943D71500B7EF0F /* WheelOfProvidenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1942943D71500B7EF0F /* WheelOfProvidenceView.swift */; };
+		B412F1972943D78A00B7EF0F /* SpinScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1962943D78A00B7EF0F /* SpinScreenView.swift */; };
+		B412F1992943D7A400B7EF0F /* WheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1982943D7A400B7EF0F /* WheelView.swift */; };
+		B412F19B2943D7BE00B7EF0F /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */; };
+		B412F19D2943E9E700B7EF0F /* WheelOfProvidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */; };
+		B412F19F29440A4F00B7EF0F /* PieWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F19E29440A4F00B7EF0F /* PieWheel.swift */; };
+		B49ADED1294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49ADED0294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift */; };
+		B4F23B8E2945164C00E37C80 /* LetterTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F23B8D2945164C00E37C80 /* LetterTile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +195,15 @@
 		65EB9D7C287B9D2E00FAF612 /* MemorizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeView.swift; sourceTree = "<group>"; };
 		65EB9D7E287B9D4E00FAF612 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		65EB9D80287B9E5600FAF612 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B412F1922943D6E700B7EF0F /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
+		B412F1942943D71500B7EF0F /* WheelOfProvidenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidenceView.swift; sourceTree = "<group>"; };
+		B412F1962943D78A00B7EF0F /* SpinScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinScreenView.swift; sourceTree = "<group>"; };
+		B412F1982943D7A400B7EF0F /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
+		B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
+		B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidence.swift; sourceTree = "<group>"; };
+		B412F19E29440A4F00B7EF0F /* PieWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieWheel.swift; sourceTree = "<group>"; };
+		B49ADED0294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidenceAppIconView.swift; sourceTree = "<group>"; };
+		B4F23B8D2945164C00E37C80 /* LetterTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterTile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +298,7 @@
 				65A5D55729037609001584F2 /* SampleAppIconView.swift */,
 				4CCD4A4A2948D14100DBF037 /* FlappyMemoryAppIconView.swift */,
 				65C7C816293C281500301285 /* WordSearchAppIconView.swift */,
+				B49ADED0294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift */,
 			);
 			path = AppIconViews;
 			sourceTree = "<group>";
@@ -413,6 +432,7 @@
 		65C7C818293D40E100301285 /* MiniGames */ = {
 			isa = PBXGroup;
 			children = (
+				B412F18E2943D6AC00B7EF0F /* WheelOfProvidenceApp */,
 				4CCD4A312948D10E00DBF037 /* FlappyMemoryApp */,
 				65C7C805293BDC5500301285 /* WordSearchApp */,
 			);
@@ -482,6 +502,45 @@
 				650BD13828F11DF7007034EA /* SwordMinder.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B412F18E2943D6AC00B7EF0F /* WheelOfProvidenceApp */ = {
+			isa = PBXGroup;
+			children = (
+				B412F18F2943D6BB00B7EF0F /* Models */,
+				B412F1902943D6C300B7EF0F /* ViewModels */,
+				B412F1912943D6C900B7EF0F /* Views */,
+			);
+			path = WheelOfProvidenceApp;
+			sourceTree = "<group>";
+		};
+		B412F18F2943D6BB00B7EF0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B412F19E29440A4F00B7EF0F /* PieWheel.swift */,
+				B4F23B8D2945164C00E37C80 /* LetterTile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B412F1902943D6C300B7EF0F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B412F19C2943E9E700B7EF0F /* WheelOfProvidence.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B412F1912943D6C900B7EF0F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B412F1922943D6E700B7EF0F /* String + Extensions.swift */,
+				B412F1942943D71500B7EF0F /* WheelOfProvidenceView.swift */,
+				B412F1962943D78A00B7EF0F /* SpinScreenView.swift */,
+				B412F1982943D7A400B7EF0F /* WheelView.swift */,
+				B412F19A2943D7BE00B7EF0F /* PieSliceView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -626,16 +685,21 @@
 			files = (
 				654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */,
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
+				B412F19B2943D7BE00B7EF0F /* PieSliceView.swift in Sources */,
 				65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */,
 				65EB9D7B287B9D1F00FAF612 /* HomeView.swift in Sources */,
+				B412F1952943D71500B7EF0F /* WheelOfProvidenceView.swift in Sources */,
 				4CCD4A4B2948D14100DBF037 /* FlappyMemoryAppIconView.swift in Sources */,
 				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
 				65C7C802293ACD2300301285 /* String+Extensions.swift in Sources */,
 				65C7C812293BE26500301285 /* WordSearchView.swift in Sources */,
+				B4F23B8E2945164C00E37C80 /* LetterTile.swift in Sources */,
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
+				B49ADED1294A2DA800A74A01 /* WheelOfProvidenceAppIconView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
+				B412F19F29440A4F00B7EF0F /* PieWheel.swift in Sources */,
 				4C9B2E3F294996990022B2F8 /* DifficultyFlappy.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
@@ -645,9 +709,12 @@
 				650BD12F28F0C3D2007034EA /* Bible.swift in Sources */,
 				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,
 				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
+				B412F19D2943E9E700B7EF0F /* WheelOfProvidence.swift in Sources */,
+				B412F1932943D6E700B7EF0F /* String + Extensions.swift in Sources */,
 				4CCD4A492948D10E00DBF037 /* FlappyMemoryView.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,
+				B412F1972943D78A00B7EF0F /* SpinScreenView.swift in Sources */,
 				65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */,
 				65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */,
 				65C7C80A293BDCA100301285 /* PlacementType.swift in Sources */,
@@ -669,6 +736,7 @@
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
+				B412F1992943D7A400B7EF0F /* WheelView.swift in Sources */,
 				4CCD4A472948D10E00DBF037 /* GameState.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,

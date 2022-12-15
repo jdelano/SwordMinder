@@ -9,7 +9,23 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        Text("Settings!")
+        NavigationStack {
+            Form {
+                Section("Credits") {
+                    app(name: "SwordMinder", author: "John D. Delano, Ph.D.")
+                    app(name: "Word Search", author: "John D. Delano, Ph.D.")
+                    
+                }
+            }
+        }
+    }
+    
+    func app(name: String, author: String) -> some View {
+        HStack {
+            Text(name)
+            Spacer()
+            Text(author)
+        }
     }
 }
 

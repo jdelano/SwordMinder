@@ -26,9 +26,9 @@ struct GameView: View {
                     }
                 }
                 GridRow {
-                    SampleAppIconView {
+                    WheelOfProvidenceAppIconView {
                         withAnimation {
-                            currentApp = .sampleApp
+                            currentApp = .wheelOfProvidenceApp
                         }
                     }
                     SampleAppIconView {
