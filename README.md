@@ -12,6 +12,7 @@
 </p>
 
 
+
 ## About SwordMinder
 
 SwordMinder is an iPhone app that is designed to support a Christian's spiritual growth and encourage the engagement with Scripture on a regular basis.
