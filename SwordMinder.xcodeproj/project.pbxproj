@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */; };
-		4D8AA76B2946DB070062BF7E /* JustMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8AA76A2946DB070062BF7E /* JustMemorize.swift */; };
-		4DCEDE5C29497A64009120A0 /* JMVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE5B29497A64009120A0 /* JMVerse.swift */; };
+		4DB65CAF294AA9BB00C27745 /* JustMemorizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CAE294AA9BB00C27745 /* JustMemorizeView.swift */; };
+		4DB65CB1294AA9C800C27745 /* JM_Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CB0294AA9C800C27745 /* JM_Instructions.swift */; };
+		4DB65CB3294AA9E400C27745 /* JM_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CB2294AA9E400C27745 /* JM_Settings.swift */; };
+		4DB65CB5294AAA0A00C27745 /* JM_MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CB4294AAA0A00C27745 /* JM_MainMenu.swift */; };
+		4DB65CB7294AAA1C00C27745 /* JM_VersePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CB6294AAA1C00C27745 /* JM_VersePreview.swift */; };
+		4DB65CB9294AAA3500C27745 /* JM_QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CB8294AAA3500C27745 /* JM_QuizView.swift */; };
+		4DB65CBB294AAA4D00C27745 /* JM_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CBA294AAA4C00C27745 /* JM_Results.swift */; };
+		4DB65CBD294AAA6900C27745 /* JMVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CBC294AAA6900C27745 /* JMVerse.swift */; };
+		4DB65CBF294AAA7700C27745 /* JMSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CBE294AAA7700C27745 /* JMSettingsModel.swift */; };
+		4DB65CC1294AAA8300C27745 /* JustMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CC0294AAA8300C27745 /* JustMemorize.swift */; };
 		4DCEDE6B294A4791009120A0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6A294A4791009120A0 /* StringExtension.swift */; };
 		4DCEDE6D294A47B8009120A0 /* StringMetirc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */; };
-		4DCEDE6F294A509F009120A0 /* JMReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6E294A509F009120A0 /* JMReference.swift */; };
-		4DCEDE71294A50B2009120A0 /* JMSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE70294A50B2009120A0 /* JMSettings.swift */; };
-		4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */; };
-		4DF7B4462943BA4D00F15C50 /* JM_QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */; };
-		4DF7B4482943BABB00F15C50 /* JM_Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4472943BABB00F15C50 /* JM_Results.swift */; };
-		4DF7B44A2943BAD500F15C50 /* JM_VersePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B4492943BAD500F15C50 /* JM_VersePreview.swift */; };
-		4DF7B44D2943BB0600F15C50 /* JM_Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B44C2943BB0600F15C50 /* JM_Instructions.swift */; };
-		4DF7B44F2943BB1100F15C50 /* JM_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7B44E2943BB1100F15C50 /* JM_Settings.swift */; };
 		6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC6F28F3101500D8D5B4 /* BibleTests.swift */; };
 		6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */; };
 		6504DC7428F33CA400D8D5B4 /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */; };
@@ -105,18 +105,18 @@
 
 /* Begin PBXFileReference section */
 		4D349EE52942E1D900D9537B /* JustMemorizeAppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorizeAppIconView.swift; sourceTree = "<group>"; };
-		4D8AA76A2946DB070062BF7E /* JustMemorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustMemorize.swift; sourceTree = "<group>"; };
-		4DCEDE5B29497A64009120A0 /* JMVerse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMVerse.swift; sourceTree = "<group>"; };
+		4DB65CAE294AA9BB00C27745 /* JustMemorizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustMemorizeView.swift; sourceTree = "<group>"; };
+		4DB65CB0294AA9C800C27745 /* JM_Instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_Instructions.swift; path = "../../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/MenuViews/JM_Instructions.swift"; sourceTree = "<group>"; };
+		4DB65CB2294AA9E400C27745 /* JM_Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_Settings.swift; path = "../../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/MenuViews/JM_Settings.swift"; sourceTree = "<group>"; };
+		4DB65CB4294AAA0A00C27745 /* JM_MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_MainMenu.swift; path = MenuViews/JM_MainMenu.swift; sourceTree = "<group>"; };
+		4DB65CB6294AAA1C00C27745 /* JM_VersePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_VersePreview.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/JM_VersePreview.swift"; sourceTree = "<group>"; };
+		4DB65CB8294AAA3500C27745 /* JM_QuizView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_QuizView.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/JM_QuizView.swift"; sourceTree = "<group>"; };
+		4DB65CBA294AAA4C00C27745 /* JM_Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JM_Results.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Views/JM_Results.swift"; sourceTree = "<group>"; };
+		4DB65CBC294AAA6900C27745 /* JMVerse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMVerse.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/Models/JMVerse.swift"; sourceTree = "<group>"; };
+		4DB65CBE294AAA7700C27745 /* JMSettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSettingsModel.swift; sourceTree = "<group>"; };
+		4DB65CC0294AAA8300C27745 /* JustMemorize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JustMemorize.swift; path = "../../../../../Downloads/untitled folder/SwordMinder/MiniGames/JustMemorize/ViewModels/JustMemorize.swift"; sourceTree = "<group>"; };
 		4DCEDE6A294A4791009120A0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringMetirc.swift; sourceTree = "<group>"; };
-		4DCEDE6E294A509F009120A0 /* JMReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMReference.swift; sourceTree = "<group>"; };
-		4DCEDE70294A50B2009120A0 /* JMSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JMSettings.swift; sourceTree = "<group>"; };
-		4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_MainMenu.swift; sourceTree = "<group>"; };
-		4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_QuizView.swift; sourceTree = "<group>"; };
-		4DF7B4472943BABB00F15C50 /* JM_Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Results.swift; sourceTree = "<group>"; };
-		4DF7B4492943BAD500F15C50 /* JM_VersePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_VersePreview.swift; sourceTree = "<group>"; };
-		4DF7B44C2943BB0600F15C50 /* JM_Instructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Instructions.swift; sourceTree = "<group>"; };
-		4DF7B44E2943BB1100F15C50 /* JM_Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_Settings.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
 		6504DC7128F3352600D8D5B4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		6504DC7328F33CA400D8D5B4 /* PlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		4D349EDE2942E0A000D9537B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				4D8AA76A2946DB070062BF7E /* JustMemorize.swift */,
+				4DB65CC0294AAA8300C27745 /* JustMemorize.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -222,9 +222,8 @@
 		4D8AA7652946C6BB0062BF7E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4DCEDE5B29497A64009120A0 /* JMVerse.swift */,
-				4DCEDE6E294A509F009120A0 /* JMReference.swift */,
-				4DCEDE70294A50B2009120A0 /* JMSettings.swift */,
+				4DB65CBC294AAA6900C27745 /* JMVerse.swift */,
+				4DB65CBE294AAA7700C27745 /* JMSettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,11 +251,12 @@
 		4DF7B4422943B9E400F15C50 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4DB65CAE294AA9BB00C27745 /* JustMemorizeView.swift */,
 				4DF7B44B2943BAEF00F15C50 /* MenuViews */,
-				4DF7B4432943B9F200F15C50 /* JM_MainMenu.swift */,
-				4DF7B4492943BAD500F15C50 /* JM_VersePreview.swift */,
-				4DF7B4452943BA4D00F15C50 /* JM_QuizView.swift */,
-				4DF7B4472943BABB00F15C50 /* JM_Results.swift */,
+				4DB65CB4294AAA0A00C27745 /* JM_MainMenu.swift */,
+				4DB65CB6294AAA1C00C27745 /* JM_VersePreview.swift */,
+				4DB65CB8294AAA3500C27745 /* JM_QuizView.swift */,
+				4DB65CBA294AAA4C00C27745 /* JM_Results.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,8 +264,8 @@
 		4DF7B44B2943BAEF00F15C50 /* MenuViews */ = {
 			isa = PBXGroup;
 			children = (
-				4DF7B44C2943BB0600F15C50 /* JM_Instructions.swift */,
-				4DF7B44E2943BB1100F15C50 /* JM_Settings.swift */,
+				4DB65CB0294AA9C800C27745 /* JM_Instructions.swift */,
+				4DB65CB2294AA9E400C27745 /* JM_Settings.swift */,
 			);
 			path = MenuViews;
 			sourceTree = "<group>";
@@ -626,60 +626,60 @@
 			files = (
 				654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */,
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
-				4DF7B4462943BA4D00F15C50 /* JM_QuizView.swift in Sources */,
-				4DF7B4482943BABB00F15C50 /* JM_Results.swift in Sources */,
 				65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */,
 				65EB9D7B287B9D1F00FAF612 /* HomeView.swift in Sources */,
 				650BD13D28F3087D007034EA /* Leaderboard.swift in Sources */,
+				4DB65CB3294AA9E400C27745 /* JM_Settings.swift in Sources */,
 				65C7C802293ACD2300301285 /* String+Extensions.swift in Sources */,
 				65C7C812293BE26500301285 /* WordSearchView.swift in Sources */,
 				650BD00E28E52441007034EA /* SMButtonView.swift in Sources */,
-				4D8AA76B2946DB070062BF7E /* JustMemorize.swift in Sources */,
 				6506B2422901D682003FA77C /* SMGaugeView.swift in Sources */,
 				655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */,
 				65A5D55D2906D340001584F2 /* FlashCardify.swift in Sources */,
-				4DF7B44D2943BB0600F15C50 /* JM_Instructions.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
-				4DCEDE6F294A509F009120A0 /* JMReference.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				4DCEDE6B294A4791009120A0 /* StringExtension.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
+				4DB65CB7294AAA1C00C27745 /* JM_VersePreview.swift in Sources */,
 				65C7C7F6293A320000301285 /* Passage.swift in Sources */,
 				65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */,
 				650BD12F28F0C3D2007034EA /* Bible.swift in Sources */,
 				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,
 				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
-				4DF7B4442943B9F200F15C50 /* JM_MainMenu.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,
 				4D349EE62942E1D900D9537B /* JustMemorizeAppIconView.swift in Sources */,
+				4DB65CBB294AAA4D00C27745 /* JM_Results.swift in Sources */,
+				4DB65CB5294AAA0A00C27745 /* JM_MainMenu.swift in Sources */,
 				65A5D55B2903795A001584F2 /* SampleAppView.swift in Sources */,
+				4DB65CBF294AAA7700C27745 /* JMSettingsModel.swift in Sources */,
 				65CB7EF2292D5C2500809F7B /* URL+Extensions.swift in Sources */,
 				65C7C80A293BDCA100301285 /* PlacementType.swift in Sources */,
 				6504DC7228F3352600D8D5B4 /* Date+Extensions.swift in Sources */,
 				4DCEDE6D294A47B8009120A0 /* StringMetirc.swift in Sources */,
 				650BD13B28F24BED007034EA /* Player.swift in Sources */,
 				65C7C810293BDE5400301285 /* WordSearch.swift in Sources */,
+				4DB65CB9294AAA3500C27745 /* JM_QuizView.swift in Sources */,
 				65C7C7F4293A31E300301285 /* Book.swift in Sources */,
 				65C7C81A293E460800301285 /* Tile.swift in Sources */,
+				4DB65CBD294AAA6900C27745 /* JMVerse.swift in Sources */,
 				65C7C7F02939934C00301285 /* Collection+Extensions.swift in Sources */,
 				65C7C81C293E546500301285 /* Set+Extensions.swift in Sources */,
 				65C7C81E293E79EF00301285 /* Sequence+Extensions.swift in Sources */,
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
-				4DCEDE5C29497A64009120A0 /* JMVerse.swift in Sources */,
+				4DB65CAF294AA9BB00C27745 /* JustMemorizeView.swift in Sources */,
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,
+				4DB65CC1294AAA8300C27745 /* JustMemorize.swift in Sources */,
 				65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */,
-				4DCEDE71294A50B2009120A0 /* JMSettings.swift in Sources */,
-				4DF7B44F2943BB1100F15C50 /* JM_Settings.swift in Sources */,
 				650BD13328F0F82E007034EA /* Int+Extensions.swift in Sources */,
 				65C7C7EC2938432900301285 /* VersePickerView.swift in Sources */,
 				65EB9D7F287B9D4E00FAF612 /* GameView.swift in Sources */,
+				4DB65CB1294AA9C800C27745 /* JM_Instructions.swift in Sources */,
 				65EB9D7D287B9D2E00FAF612 /* MemorizeView.swift in Sources */,
 				65C7C820293E7DD500301285 /* Array+Extensions.swift in Sources */,
-				4DF7B44A2943BAD500F15C50 /* JM_VersePreview.swift in Sources */,
 				65A5D55829037609001584F2 /* SampleAppIconView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

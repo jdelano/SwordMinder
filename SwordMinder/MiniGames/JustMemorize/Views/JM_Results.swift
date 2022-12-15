@@ -29,7 +29,12 @@ struct JM_Results: View {
     @Binding var toggleVerse: Bool
     @Binding var toggleTimer: Bool
     
+    
     //lazy var pointsGained: Int = Int((wholeVerse.distanceJaroWinkler(between: answer)*100))
+    
+//    if pointsGained >= 90 {
+//        swordMinder.completeTask(difficulty: 1)
+//    }
     
     var body: some View {
         VStack {
