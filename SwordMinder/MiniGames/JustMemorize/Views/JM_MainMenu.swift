@@ -32,7 +32,7 @@ struct JM_MainMenu: View {
                             .foregroundColor(Color("JMWhite"))
                         Spacer()
                         VStack {
-                            playAndLearn
+                            playAndVerses
                             bottomMenu
                         }
                     }
@@ -84,7 +84,7 @@ struct JM_MainMenu: View {
         }
     }
     
-    var playAndLearn: some View {
+    var playAndVerses: some View {
             HStack{
                 Spacer()
                 Button("Play") {
@@ -93,7 +93,6 @@ struct JM_MainMenu: View {
                     }
                 }
                 .foregroundColor(Color("JMLightGold"))
-                .padding()
                 Spacer()
             }
             .frame(width: 400, height: 50)

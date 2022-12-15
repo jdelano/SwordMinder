@@ -66,7 +66,7 @@ struct JM_QuizView: View {
                     .foregroundColor(Color("JMLightGold"))
                     .padding()
             }
-            //Textfield adapted from
+            //Textfield adapted from Logan Davis's code.
             TextField("Begin typing...", text: $textFieldText, axis: .vertical)
                 .lineLimit(3...)
                 .padding()

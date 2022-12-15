@@ -40,7 +40,10 @@ struct JustMemorizeView: View {
             case .instructions: JM_Instructions(currentView: $currentView)
                 .transition(.opacity)
                 .background(Color("JMBlack"))
-            case .settings: JM_Settings(justMemorize: justMemorize, currentView: $currentView)
+            case .settings: JM_Settings(justMemorize: justMemorize, currentView: $currentView, currentApp: $currentApp)
+                .transition(.opacity)
+                .background(Color("JMBlack"))
+            case .passageView: JM_PassageView(currentView: $currentView)
                 .transition(.opacity)
                 .background(Color("JMBlack"))
         }
@@ -53,6 +56,7 @@ struct JustMemorizeView: View {
         case results
         case instructions
         case settings
+        case passageView
     }
     
 }

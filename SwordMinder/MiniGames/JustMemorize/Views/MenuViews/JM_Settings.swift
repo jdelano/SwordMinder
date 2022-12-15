@@ -13,6 +13,8 @@ struct JM_Settings: View {
     @ObservedObject var justMemorize: JustMemorize
     @Binding var currentView: JustMemorizeView.viewState
     
+    @Binding var currentApp: Apps
+    
     // Consider a scroll view if necessary.
     var body: some View {
         ZStack {
@@ -67,6 +69,17 @@ struct JM_Settings: View {
 //                    Spacer()
                 }
                 
+                Spacer()
+                Button("Tap to view your Memorization List") {
+                    withAnimation {
+                        currentView = .passageView
+                    }
+                }
+                .frame(width: 400, height: 80)
+                .border(Color("JMDarkGold"))
+                .foregroundColor(Color("JMLightGold"))
+                Spacer()
+                
                 // Show verse?
                 HStack {
                     Toggle(isOn: $justMemorize.toggleVerse) {
@@ -106,6 +119,6 @@ private func nothing() {
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
         let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), toggleVerse: true, toggleTimer: true)
-        JM_Settings(justMemorize: justMemorize, currentView: .constant(.settings))
+        JM_Settings(justMemorize: justMemorize, currentView: .constant(.settings), currentApp: .constant(.justMemorizeApp))
     }
 }

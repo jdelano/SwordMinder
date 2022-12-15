@@ -18,6 +18,7 @@
 		4DB65CBD294AAA6900C27745 /* JMVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CBC294AAA6900C27745 /* JMVerse.swift */; };
 		4DB65CBF294AAA7700C27745 /* JMSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CBE294AAA7700C27745 /* JMSettingsModel.swift */; };
 		4DB65CC1294AAA8300C27745 /* JustMemorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CC0294AAA8300C27745 /* JustMemorize.swift */; };
+		4DB65CC3294ABB4200C27745 /* JM_PassageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB65CC2294ABB4200C27745 /* JM_PassageView.swift */; };
 		4DCEDE6B294A4791009120A0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6A294A4791009120A0 /* StringExtension.swift */; };
 		4DCEDE6D294A47B8009120A0 /* StringMetirc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */; };
 		6504DC7028F3101500D8D5B4 /* BibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504DC6F28F3101500D8D5B4 /* BibleTests.swift */; };
@@ -115,6 +116,7 @@
 		4DB65CBC294AAA6900C27745 /* JMVerse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMVerse.swift; sourceTree = "<group>"; };
 		4DB65CBE294AAA7700C27745 /* JMSettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSettingsModel.swift; sourceTree = "<group>"; };
 		4DB65CC0294AAA8300C27745 /* JustMemorize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustMemorize.swift; sourceTree = "<group>"; };
+		4DB65CC2294ABB4200C27745 /* JM_PassageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JM_PassageView.swift; sourceTree = "<group>"; };
 		4DCEDE6A294A4791009120A0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		4DCEDE6C294A47B8009120A0 /* StringMetirc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringMetirc.swift; sourceTree = "<group>"; };
 		6504DC6F28F3101500D8D5B4 /* BibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleTests.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				4DB65CB6294AAA1C00C27745 /* JM_VersePreview.swift */,
 				4DB65CB8294AAA3500C27745 /* JM_QuizView.swift */,
 				4DB65CBA294AAA4C00C27745 /* JM_Results.swift */,
+				4DB65CC2294ABB4200C27745 /* JM_PassageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB65CC3294ABB4200C27745 /* JM_PassageView.swift in Sources */,
 				654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */,
 				65EB9D81287B9E5600FAF612 /* SettingsView.swift in Sources */,
 				65C7C80C293BDD9600301285 /* Difficulty.swift in Sources */,
