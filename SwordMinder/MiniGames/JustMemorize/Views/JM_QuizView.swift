@@ -67,6 +67,8 @@ struct JM_QuizView: View {
                     .padding()
             }
             //Textfield adapted from Logan Davis's code.
+            
+            //Due to the nature of textfield, live results and dictation are both included. This covers both requirement 4 and requirement 7.
             TextField("Begin typing...", text: $textFieldText, axis: .vertical)
                 .lineLimit(3...)
                 .padding()
@@ -92,7 +94,7 @@ struct JM_QuizView: View {
 
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
-        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), toggleVerse: true, toggleTimer: true)
+        let justMemorize = JustMemorize(difficulty: "Easy", reference: Reference(), toggleVerse: true, toggleTimer: true, score: 0)
         JM_QuizView(justMemorize: justMemorize, currentView: .constant(.quizView), toggleTimer: .constant(true))
     }
 }

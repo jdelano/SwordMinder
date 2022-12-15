@@ -8,7 +8,6 @@
 import SwiftUI
 
 class JustMemorize: ObservableObject {
-    
     @State var verseReference: Reference
     @EnvironmentObject var swordMinder: SwordMinder
     
@@ -20,6 +19,8 @@ class JustMemorize: ObservableObject {
     //@Published var selectedInput: String
     @Published var toggleVerse: Bool
     @Published var toggleTimer: Bool
+    
+    @Published var score: Int
     
     var difficulties = ["Easy", "Medium", "Hard"]
     
@@ -38,12 +39,13 @@ class JustMemorize: ObservableObject {
         reference.map { String($0) }
     }
     
-    init(difficulty: String, reference: Reference, /*input: String,*/ toggleVerse: Bool, toggleTimer: Bool) {
+    init(difficulty: String, reference: Reference, /*input: String,*/ toggleVerse: Bool, toggleTimer: Bool, score: Int) {
         self.verseReference = reference
         self.selectedDifficulty = difficulty
         //self.selectedInput = input
         self.toggleVerse = toggleVerse
         self.toggleTimer = toggleTimer
+        self.score = score
     }
 //    private mutating func createJustMemorizeGame() {
 //    }

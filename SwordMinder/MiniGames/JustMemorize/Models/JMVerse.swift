@@ -8,16 +8,40 @@
 import SwiftUI
 
 struct JMVerse {
-    //private(set) var verseArray: Array<Word>
+    @EnvironmentObject var swordMinder: SwordMinder
+    @State var verseReference: Reference
+    private(set) var verseArray: Array<Word>
+    
+    let lowerCase: Set<Character> = Set("qwertyuiopasdfghjklzxcvbnm")
+    let upperCase: Set<Character> = Set("QWERTYUIOPASDFGHJKLZXCVBNM")
 
-    //private var indexOfTheWord: Int?
-
+//    private var indexOfTheWord: Int? {
+//        get {}
+//        set {}
+//    }
+    
+    //adapted from Andrew Wordhouse
     struct Word: Identifiable {
         let id = UUID()
+        let order: Int
         let word: String
+        var isCorrect = true
     }
+    
+    struct blank {
+        var text: String
+        let order: Int
+    }
+    
+//    mutating func toArray(reference: Reference) -> Array<Word> {
+//        let array = (swordMinder.bible.text(for: verseReference)).components(separatedBy: " ")
+//    }
+    
 
-    //init(verseReference: Reference)
+//    init(verseReference: Reference) {
+//        verseArray = Array<Word>()
+//        for Word in 0...<
+//    }
 }
 
 struct JMReference {
@@ -36,9 +60,4 @@ struct JMReference {
     var referenceArray: [String] {
         reference.map { String($0) }
     }
-}
-
-struct blank {
-    var text: String
-    let order: Int
 }
