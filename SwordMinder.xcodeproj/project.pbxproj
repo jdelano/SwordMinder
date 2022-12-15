@@ -17,7 +17,6 @@
 		4CCD4A432948D10E00DBF037 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A362948D10E00DBF037 /* explosion.wav */; };
 		4CCD4A442948D10E00DBF037 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4CCD4A372948D10E00DBF037 /* README.txt */; };
 		4CCD4A452948D10E00DBF037 /* FlappyMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A392948D10E00DBF037 /* FlappyMemoryViewModel.swift */; };
-		4CCD4A462948D10E00DBF037 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3B2948D10E00DBF037 /* Score.swift */; };
 		4CCD4A472948D10E00DBF037 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3C2948D10E00DBF037 /* GameState.swift */; };
 		4CCD4A482948D10E00DBF037 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3E2948D10E00DBF037 /* RulesView.swift */; };
 		4CCD4A492948D10E00DBF037 /* FlappyMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD4A3F2948D10E00DBF037 /* FlappyMemoryView.swift */; };
@@ -125,7 +124,6 @@
 		4CCD4A362948D10E00DBF037 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
 		4CCD4A372948D10E00DBF037 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		4CCD4A392948D10E00DBF037 /* FlappyMemoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyMemoryViewModel.swift; sourceTree = "<group>"; };
-		4CCD4A3B2948D10E00DBF037 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		4CCD4A3C2948D10E00DBF037 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		4CCD4A3E2948D10E00DBF037 /* RulesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		4CCD4A3F2948D10E00DBF037 /* FlappyMemoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyMemoryView.swift; sourceTree = "<group>"; };
@@ -268,7 +266,6 @@
 		4CCD4A3A2948D10E00DBF037 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4CCD4A3B2948D10E00DBF037 /* Score.swift */,
 				4C9B2E40294997250022B2F8 /* RockDistance.swift */,
 				4C9B2E3E294996990022B2F8 /* DifficultyFlappy.swift */,
 				4CCD4A3C2948D10E00DBF037 /* GameState.swift */,
@@ -734,7 +731,6 @@
 				4CCD4A482948D10E00DBF037 /* RulesView.swift in Sources */,
 				65A5D54D2901FA4F001584F2 /* ArmorUpgradeView.swift in Sources */,
 				65AB5268285CC10F00FF1038 /* SwordMinderApp.swift in Sources */,
-				4CCD4A462948D10E00DBF037 /* Score.swift in Sources */,
 				650BD01028E529F7007034EA /* SMButtonStyle.swift in Sources */,
 				65C7C7F8293A321A00301285 /* Verse.swift in Sources */,
 				65C7C80E293BDE1800301285 /* Word.swift in Sources */,

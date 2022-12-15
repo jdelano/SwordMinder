@@ -18,17 +18,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var gameOver: SKSpriteNode!
     var gameState = GameState.showingLogo
     
+    var scoreLabel: SKLabelNode!
+
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "SCORE: \(score)"
+        }
+    }
+    
     //Attepting to read the yPosition Variable in createRocks()
     var yCollisionPos = CGFloat(0)
     
     //I was unable to fully implement this. The funtionality should go on line 203
     @Published var difficultyFlappy = DifficultyFlappy.hard
-    
-    var score = Score() {
-            didSet {
-                score.scoreLabel.text = "SCORE: \(score)"
-            }
-        }
 
     override func didMove(to view: SKView) {
         createPlayer()
@@ -38,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         createScore()
         createLogos()
 
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
         physicsWorld.contactDelegate = self
 
         if let musicURL = Bundle.main.url(forResource: "music", withExtension: "m4a") {
@@ -66,7 +68,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
 
         case .playing:
             //sets location to the location between the rocks. This is supposed to happen when the player speaks
-            player.position = CGPoint(x: frame.width / 6, y: yCollisionPos + 250)
+            player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
+            //This sets the position to the middles of rock opening when spoken
+            //player.position = CGPoint(x: frame.width / 6, y: yCollisionPos + 250)
 
         case .dead:
             let scene = GameScene(fileNamed: "GameScene")!
@@ -150,7 +155,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
 
     func createScore() {
-        score.createScore()
+        scoreLabel = SKLabelNode(fontNamed: "Optima-ExtraBlack")
+        scoreLabel.fontSize = 24
+
+        scoreLabel.position = CGPoint(x: frame.midX, y: frame.maxY - 60)
+        scoreLabel.text = "SCORE: 0"
+        scoreLabel.fontColor = UIColor.black
+
+        addChild(scoreLabel)
     }
 
     func createLogos() {
@@ -245,7 +257,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             let sound = SKAction.playSoundFileNamed("coin.wav", waitForCompletion: false)
             run(sound)
 
-            score.score += 1
+            score += 1
 
             return
         }

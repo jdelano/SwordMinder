@@ -22,7 +22,7 @@ struct FlappyMemorySettingsView: View {
                     }
                 }
             }
-            .navigationTitle("Word Search Settings")
+            .navigationTitle("Flappy Memory Settings")
             .toolbar {
                 ToolbarItem {
                     Button("Done") {
