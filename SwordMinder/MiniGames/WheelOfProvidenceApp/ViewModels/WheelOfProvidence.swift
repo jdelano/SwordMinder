@@ -14,8 +14,8 @@ class WheelOfProvidence: ObservableObject {
     var guessedPhrase: String?
     @Published var wheel: PieWheel
     var grid = [LetterTile]()
-    var score = 1000
-    var award = 1
+    @Published var score = 1000
+    @Published var award = 1
     var spinDouble = 0.0
     
     init() {
