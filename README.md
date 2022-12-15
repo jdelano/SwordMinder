@@ -22,14 +22,9 @@ SwordMinder is an iPhone app that is designed to support a Christian's spiritual
 SwordMinder supports `iOS 16.2+`.
 
 
-## Getting started
-
-The [online documentation][Documentation] has a [getting started][GettingStarted] guide to help you get started with RichTextKit.
-
-
 ## Support
 
-You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support. 
+You can sponsor this project on [GitHub Sponsors][Sponsors]. 
 
 
 ## Contact
@@ -41,15 +36,12 @@ Feel free to reach out if you have questions or if you want to contribute in any
 * Web site: [www.thedigitalpath.org][Website]
 
 
-
 ## License
 
 SwordMinder is available under the MIT license. See the [LICENSE][License] file for more info.
-
-
 
 [Email]: mailto:jdelano@cedarville.edu
 [Twitter]: http://www.twitter.com/johnddelano
 [Website]: http://www.thedigitalpath.org
 [Sponsors]: https://github.com/sponsors/jdelano
-[License]: https://github.com/jdelano/SwordMinder/LICENSE
+[License]: https://github.com/jdelano/SwordMinder/blob/main/LICENSE
