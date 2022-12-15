@@ -57,12 +57,11 @@ struct JM_Results: View {
             
             Text("\(sampleReference)")
                 .foregroundColor(Color("JMLightGold"))
-            
-            //INTERPOLATION!
             Text("\(sampleVerse1)")
                 .foregroundColor(Color("JMLightGold"))
                 + Text("\(sampleVerse2)")
                     .foregroundColor(.green)
+            
             //.padding()
             Spacer()
             HStack {

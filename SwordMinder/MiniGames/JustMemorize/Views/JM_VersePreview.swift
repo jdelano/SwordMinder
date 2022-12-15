@@ -75,9 +75,7 @@ struct JM_VersePreview: View {
                 .foregroundColor(Color("JMLightGold"))
                 Text("\(sampleVerse)")
                 .foregroundColor(Color("JMLightGold"))
-            
                 .padding()
-                .foregroundColor(Color("JMLightGold"))
             Spacer()
             HStack {
 //                Button("Instructions") {

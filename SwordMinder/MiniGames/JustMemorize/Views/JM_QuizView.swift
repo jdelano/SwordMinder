@@ -15,6 +15,8 @@ struct JM_QuizView: View {
     
     @Binding var toggleTimer: Bool
     
+    @State var textFieldText: String = ""
+    
     // Timer graciously given by Michael Smithers.
     @State private var timeRemaining = 5
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -33,31 +35,40 @@ struct JM_QuizView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Image("JMLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100)
+            ScrollView {
+                HStack {
+                    Image("JMLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100)
                     Spacer()
-                VStack {
-                    Text("Timer: \(timeRemaining)")
-                        .font(.title)
-                        .foregroundColor(Color("JMWhite"))
-                        .onReceive(timer) { _ in
-                            if timeRemaining > 0 { timeRemaining -= 1 }
-                            if timeRemaining <= 0 { currentView = .results }
-                        }
-                        .padding()
+                    VStack {
+                        Text("Timer: \(timeRemaining)")
+                            .font(.title)
+                            .foregroundColor(Color("JMWhite"))
+                            .onReceive(timer) { _ in
+                                if timeRemaining > 0 { timeRemaining -= 1 }
+                                if timeRemaining <= 0 { currentView = .results }
+                            }
+                            .padding()
+                    }
                 }
+                Text("JustMemorize.")
+                    .foregroundColor(Color("JMWhite"))
+                    .padding(.bottom)
+                Text("\(sampleReference)")
+                    .foregroundColor(Color("JMLightGold"))
+                Text("\(sampleVerseMedium)")
+                    .foregroundColor(Color("JMLightGold"))
+                    .padding()
             }
-            Text("JustMemorize.")
-                .foregroundColor(Color("JMWhite"))
-            .padding()
-            Text("\(sampleReference)")
-                .foregroundColor(Color("JMLightGold"))
-            Text("\(sampleVerseMedium)")
+            //Textfield adapted from
+            TextField("Begin typing...", text: $textFieldText, axis: .vertical)
+                .lineLimit(3...)
                 .padding()
-                .foregroundColor(Color("JMLightGold"))
+                .foregroundColor(Color("JMWhite"))
+                .background(Color("JMBackground").opacity(0.3).cornerRadius(10))
+                .font(.headline)
             Spacer()
             Button {
                 withAnimation {

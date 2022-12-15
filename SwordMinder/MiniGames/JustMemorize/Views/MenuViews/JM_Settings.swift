@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-// later this struct will serve for ALL of the settings. I'd like to keep all of them in one navigation stack if I can.
+//Note that due to textfields using both dictation and typing, an optional input picker is unnecessary.
+
 struct JM_Settings: View {
     @ObservedObject var justMemorize: JustMemorize
     @Binding var currentView: JustMemorizeView.viewState
@@ -50,20 +51,20 @@ struct JM_Settings: View {
                     .pickerStyle(SegmentedPickerStyle())
                     Text("Current Difficulty: \($justMemorize.selectedDifficulty.wrappedValue)")
                         .foregroundColor(Color("JMLightGold"))
-                    Spacer()
+                        .padding(.bottom)
                     //Input Type
-                    Text("Input Type:")
-                        .foregroundColor(Color("JMLightGold"))
-                    Picker ("Input Picker", selection: $justMemorize.selectedInput) {
-                        ForEach($justMemorize.inputTypes.wrappedValue, id: \.self) {
-                            Text($0)
-                        }
-                        .foregroundColor(Color("JMLightGold"))
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    Text("Current Difficulty: \($justMemorize.selectedInput.wrappedValue)")
-                        .foregroundColor(Color("JMLightGold"))
-                    Spacer()
+//                    Text("Input Type:")
+//                        .foregroundColor(Color("JMLightGold"))
+//                    Picker ("Input Picker", selection: $justMemorize.selectedInput) {
+//                        ForEach($justMemorize.inputTypes.wrappedValue, id: \.self) {
+//                            Text($0)
+//                        }
+//                        .foregroundColor(Color("JMLightGold"))
+//                    }
+//                    .pickerStyle(SegmentedPickerStyle())
+//                    Text("Current Input: \($justMemorize.selectedInput.wrappedValue)")
+//                        .foregroundColor(Color("JMLightGold"))
+//                    Spacer()
                 }
                 
                 // Show verse?
