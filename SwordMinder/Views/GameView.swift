@@ -38,9 +38,9 @@ struct GameView: View {
                     }
                 }
                 GridRow {
-                    SampleAppIconView {
+                    WordSearchAppIconView {
                         withAnimation {
-                            currentApp = .sampleApp
+                            currentApp = .wordSearchApp
                         }
                     }
                     SampleAppIconView {
