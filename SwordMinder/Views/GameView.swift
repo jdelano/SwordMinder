@@ -31,11 +31,6 @@ struct GameView: View {
                             currentApp = .wheelOfProvidenceApp
                         }
                     }
-//                    SampleAppIconView {
-//                        withAnimation {
-//                            currentApp = .sampleApp
-//                        }
-//                    }
                 }
             }
             .padding()
