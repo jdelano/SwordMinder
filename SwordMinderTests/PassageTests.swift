@@ -125,11 +125,18 @@ final class PassageTests: XCTestCase {
         _ = try await passage.text
         let data = try JSONEncoder().encode(passage)
         print(String(data: data, encoding: .utf8)!)
-        var passage2 = try JSONDecoder().decode(Passage.self, from: data)
+        let passage2 = try JSONDecoder().decode(Passage.self, from: data)
         XCTAssert(passage2.startReference.book == .genesis)
-        
-        
-        
+    }
+    
+    func testPassageTranslationModify() async throws {
+        var passage = Passage()
+        _ = try await passage.text
+        XCTAssert(passage.versesLoaded == true)
+        passage.version = .kjv
+        XCTAssert(passage.versesLoaded == false)
+        _ = try await passage.text
+        XCTAssert(passage.versesLoaded == true)
     }
     
 }

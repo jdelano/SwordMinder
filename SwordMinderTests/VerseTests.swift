@@ -56,5 +56,10 @@ final class VerseTests: XCTestCase {
         XCTAssert(json! == "{\"verse\":1,\"chapter\":1,\"book\":\"Genesis\",\"version\":\"ESV\"}")
     }
 
-    
+    func testHasLoaded() async throws {
+        var verse = Verse(reference: Reference())
+        XCTAssert(verse.hasLoadedText == false)
+        _ = try await verse.text
+        XCTAssert(verse.hasLoadedText == true)
+    }
 }

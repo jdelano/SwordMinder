@@ -63,6 +63,9 @@ final class BookTests: XCTestCase {
         XCTAssert(rev.next == nil)
     }
     
-
+    func testBookId() throws {
+        let gen = Book.genesis
+        XCTAssert(gen.id == Book.genesis)
+    }
 
 }
