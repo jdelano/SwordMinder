@@ -21,6 +21,8 @@ struct Player : Codable {
     private(set) var armorMaterial: ArmorMaterial
     private(set) var reviewedPassages: Dictionary<UUID, [Date]> = [:]
 
+    var preferredVersion: Translation
+    
     /// The player's level calculated by the average level of each armor piece, taking into account the material of each armor set
     var level: Int {
         var sum = 0
@@ -75,7 +77,7 @@ struct Player : Codable {
     ///   - armor: An array containing up to four armor pieces.
     ///   - gems: The count of gems that the player has
     ///   - passages: An array of Bible passages that the player has selected for their passage list
-    init(withArmor armor: [Armor] = [], armorMaterial: ArmorMaterial = .linen, gems: Int = 0, passages: [Passage] = []) {
+    init(withArmor armor: [Armor] = [], armorMaterial: ArmorMaterial = .linen, gems: Int = 0, passages: [Passage] = [], version: Translation = .esv) {
         self.armor = []
         // Use only the first of each armor piece; if piece not present, use default armor for that piece
         if let helmet = armor.first(where: { $0.piece == .helmet }) {
@@ -101,6 +103,7 @@ struct Player : Codable {
         self.armorMaterial = armorMaterial
         self.gems = gems
         self.passages = passages
+        self.preferredVersion = version
     }
 
     func json() throws -> Data {
@@ -126,6 +129,7 @@ struct Player : Codable {
         case armor
         case armorMaterial
         case reviewedPassages
+        case preferredVersion
     }
     
     init(from decoder: Decoder) throws {
@@ -137,6 +141,7 @@ struct Player : Codable {
         self.armor = try container.decode([Player.Armor].self, forKey: .armor)
         self.armorMaterial = try container.decode(Player.ArmorMaterial.self, forKey: .armorMaterial)
         self.reviewedPassages = try container.decodeIfPresent(Dictionary<UUID, [Date]>.self, forKey: .reviewedPassages) ?? [:]
+        self.preferredVersion = try container.decodeIfPresent(Translation.self, forKey: .preferredVersion) ?? .esv
     }
     
     func encode(to encoder: Encoder) throws {
@@ -147,6 +152,7 @@ struct Player : Codable {
         try container.encode(armor, forKey: .armor)
         try container.encode(armorMaterial, forKey: .armorMaterial)
         try container.encode(reviewedPassages, forKey: .reviewedPassages)
+        try container.encode(preferredVersion, forKey: .preferredVersion)
     }
         
 //    func costToLevelUp(for piece: Armor.ArmorPiece) -> Int {

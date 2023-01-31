@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject var swordMinder: SwordMinder
+    
     var body: some View {
+
         NavigationStack {
             Form {
                 Section("Credits") {
@@ -32,5 +36,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(SwordMinder())
     }
 }

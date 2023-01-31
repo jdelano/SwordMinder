@@ -105,8 +105,8 @@ struct RulesView: View {
     
     var verse: some View {
         VStack {
-            Text(swordMinder.bible.text(for: passage))
-                .padding()
+//            Text(swordMinder.bible.text(for: passage))
+//                .padding()
             Text(passage.referenceFormatted)
                 .padding()
         }

@@ -18,25 +18,20 @@ final class WordSearchTests: XCTestCase {
 
     
     func testWordSearchMakeGridWithVerse() async throws {
-        var bible = Bible()
-        await bible.loadBible()
-        
-        let verseText = bible.text(for: Passage())
-        let wordSearch = WordSearch()
-        wordSearch.words = verseText.split(separator: " ").map { Word(text: String($0)) }
-        wordSearch.makeGrid()
-        print(wordSearch.grid)
+//        let verseText = bible.text(for: Passage())
+//        let wordSearch = WordSearch()
+//        wordSearch.words = verseText.split(separator: " ").map { Word(text: String($0)) }
+//        wordSearch.makeGrid()
+//        print(wordSearch.grid)
 
     }
     
     func testWordSearchMakeGridWordsUsed() async throws {
-        var bible = Bible()
-        await bible.loadBible()
-        let wordSearch = WordSearch()
-
-        wordSearch.words = bible.words(for: Passage()).map { Word(text: $0) }
-        wordSearch.makeGrid()
-        print(wordSearch.wordsUsed)
+//        let wordSearch = WordSearch()
+//
+//        wordSearch.words = bible.words(for: Passage()).map { Word(text: $0) }
+//        wordSearch.makeGrid()
+//        print(wordSearch.wordsUsed)
 
     }
     

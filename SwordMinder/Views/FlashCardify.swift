@@ -40,7 +40,6 @@ struct FlashCardify: AnimatableModifier {
                 .padding()
         }
         .foregroundColor(rotationAngle < 90 ? .black : .white)
-//        .aspectRatio(5/3, contentMode: .fit)
         .padding()
         .modifier(FlipEffect(flipped: $flipped, angle: rotationAngle))
     }

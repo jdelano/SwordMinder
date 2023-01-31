@@ -25,10 +25,8 @@ struct ArmorUpgradeView: View {
             SMGaugeView(current: Double(currentLevel), minimum: 1, maximum: 40, imageName: imageName)
                 .padding(.horizontal)
             SMButtonView(caption: "Level Up") {
-                if enabled {
-                    GemView(amount: upgradeCost)
-                        .frame(width: DrawingConstants.gemWidth, height: DrawingConstants.gemHeight)
-                }
+                GemView(amount: upgradeCost)
+                    .frame(width: DrawingConstants.gemWidth, height: DrawingConstants.gemHeight)
             } action: {
                 action()
             }

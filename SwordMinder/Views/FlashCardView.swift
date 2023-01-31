@@ -12,13 +12,14 @@ struct FlashCardView: View {
     @State private var isFaceUp: Bool = false
     @State private var flipped: Bool = false
     @State private var flippedCount: Int = 0
-    var passage: Passage
+    @State private var verseText: String = ""
+    @State var passage: Passage
     var body: some View {
         ZStack(alignment: .center) {
             Text(.init(passage.referenceFormatted))
                 .opacity(flipped ? 1 : 0)
             ScrollView {
-                Text(.init(swordMinder.bible.text(for: passage)))
+                Text(.init(self.verseText))
                     .opacity(flipped ? 0 : 1)
             }
         }
@@ -35,6 +36,11 @@ struct FlashCardView: View {
             swordMinder.reviewPassage(passage)
             if count == 3 {
                 swordMinder.completeTask(difficulty: 1)
+            }
+        }
+        .onAppear {
+            Task { @MainActor in
+                self.verseText = (try? await passage.text) ?? ""
             }
         }
     }

@@ -17,28 +17,30 @@ struct VersePickerView: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            wheelPicker(for: Book.names, title: "Book", selection: $reference.book.name)
-                .frame(minWidth: VerseConstants.bookPickerWidth)
-            wheelPicker(for: swordMinder.bible.chapters(in: reference.book), title: "Chapter", selection: $reference.chapter)
-                .frame(minWidth: VerseConstants.chapterPickerWidth)
-            wheelPicker(for: swordMinder.bible.verses(in: reference.book, chapter: reference.chapter), title: "Verse", selection: $reference.verse)
-                .frame(minWidth: VerseConstants.versePickerWidth)
+            Picker("", selection: $reference.book) {
+                ForEach(Book.allCases, id:\.self) { item in
+                    Text(item.rawValue).tag(item)
+                }
+            }
+            .pickerStyle(.menu)
+            .frame(minWidth: VerseConstants.bookPickerWidth)
+            picker(for: Array(1...reference.lastChapter), selection: $reference.chapter)
+            picker(for: Array(1...reference.lastVerse), selection: $reference.verse)
         }
         .onChange(of: reference) { ref in
             fixPicker(for: ref)
             referenceChanged?(ref)
         }
-        .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
     }
     
     private func fixPicker(for reference: Reference) {
-        let maxChapters = swordMinder.bible.chapters(in: reference.book).count
+        let maxChapters = reference.lastChapter
         if maxChapters < reference.chapter && maxChapters != 0 {
             withAnimation {
                 self.reference.chapter = maxChapters
             }
         }
-        let maxVerses = swordMinder.bible.verses(in: reference.book, chapter: reference.chapter).count
+        let maxVerses = reference.lastVerse
         if maxVerses < reference.verse && maxVerses != 0 {
             withAnimation {
                 self.reference.verse = maxVerses
@@ -46,17 +48,17 @@ struct VersePickerView: View {
         }
     }
     
-    private func wheelPicker<Element : Hashable>(for items: [Element], title: String, selection: Binding<Element>) -> some View {
-        Picker(title, selection: selection) {
+    private func picker<Element : Hashable>(for items: [Element], selection: Binding<Element>) -> some View {
+        Picker("", selection: selection) {
             ForEach(items, id:\.self) { item in
                 Text(String(describing: item)).tag(item)
             }
         }
-        .pickerStyle(.wheel)
+        .pickerStyle(.menu)
     }
     
     private struct VerseConstants {
-        static let bookPickerWidth: CGFloat = 200
+        static let bookPickerWidth: CGFloat = 170
         static let chapterPickerWidth: CGFloat = 60
         static let versePickerWidth: CGFloat = 60
     }
@@ -64,7 +66,7 @@ struct VersePickerView: View {
 
 struct VersePicker_Previews: PreviewProvider {
     static var previews: some View {
-        VersePickerView(reference: .constant(Reference(book: Book(named: "Psalms")!, chapter: 119, verse: 100)))
+        VersePickerView(reference: .constant(Reference(book: .psalms, chapter: 119, verse: 100)))
             .environmentObject(SwordMinder())
     }
 }

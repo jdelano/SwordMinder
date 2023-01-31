@@ -12,8 +12,7 @@ import Foundation
 class SwordMinder: ObservableObject {
     typealias ArmorPiece = Player.Armor.ArmorPiece
     typealias Entry = Leaderboard.Entry
-    
-    @Published var bible: Bible
+        
     @Published var player: Player {
         didSet {
             if let url = Autosave.playerURL {
@@ -28,20 +27,15 @@ class SwordMinder: ObservableObject {
             }
         }
     }
-
-    /// Convenience property that indicates when the bible API has finished asynchronously loading
-    var isLoaded: Bool {
-        bible.isLoaded
-    }
-
     
     /// SwordMinder initializer
     /// - Parameters:
     ///   - translation: The bible translation to use for the game; defaults to KJV
     ///   - player: The player object to use for the game; defaults to a new Player object
     ///   - leaderboard: The leaderboard to use for the game; defaults to a new Leaderboard object
-    init(translation: Bible.Translation = .kjv, player: Player = Player(), leaderboard: Leaderboard = Leaderboard()) {
-        if let url = Autosave.playerURL, let savedPlayer = try? Player(url: url) {
+    init(player: Player = Player(), leaderboard: Leaderboard = Leaderboard()) {
+        if let url = Autosave.playerURL,
+           let savedPlayer = try? Player(url: url) {
             self.player = savedPlayer
         } else {
             self.player = player
@@ -50,10 +44,6 @@ class SwordMinder: ObservableObject {
             self.leaderboard = savedLeaderboard
         } else {
             self.leaderboard = leaderboard
-        }
-        self.bible = Bible(translation: translation)
-        Task { @MainActor in
-            await bible.loadBible()
         }
     }
            

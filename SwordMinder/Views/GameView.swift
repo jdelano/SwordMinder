@@ -31,59 +31,6 @@ struct GameView: View {
                             currentApp = .wheelOfProvidenceApp
                         }
                     }
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
-                }
-                GridRow {
-                    WordSearchAppIconView {
-                        withAnimation {
-                            currentApp = .wordSearchApp
-                        }
-                    }
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
-                }
-                GridRow {
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
-                }
-                GridRow {
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
-                }
-                GridRow {
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
-                    SampleAppIconView {
-                        withAnimation {
-                            currentApp = .sampleApp
-                        }
-                    }
                 }
             }
             .padding()
