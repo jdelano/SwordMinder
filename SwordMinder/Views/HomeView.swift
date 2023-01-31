@@ -46,7 +46,6 @@ struct HomeView: View {
                 .clipped()
             }
         }
-        .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
     }
     
     private var background: some View {
@@ -107,10 +106,10 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(SwordMinder(player: Player(withArmor: [
-            Player.Armor(level: 40, piece: .helmet),
-            Player.Armor(level: 40, piece: .breastplate),
-            Player.Armor(level: 40, piece: .belt),
-            Player.Armor(level: 40, piece: .shoes),
+            Player.Armor(level: 29, piece: .helmet),
+            Player.Armor(level: 29, piece: .breastplate),
+            Player.Armor(level: 29, piece: .belt),
+            Player.Armor(level: 29, piece: .shoes),
         ], gems: 5000)))
     }
 }

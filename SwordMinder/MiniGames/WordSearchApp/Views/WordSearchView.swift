@@ -12,7 +12,7 @@ struct WordSearchView: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var currentApp: Apps
     @State private var settingsShown: Bool = false
-    var passage: Passage
+    @State var passage: Passage
     
     @GestureState private var location: CGPoint = .zero
     @State private var highlighted: Set<UUID> = []
@@ -31,10 +31,11 @@ struct WordSearchView: View {
         }
         .background(LinearGradient(colors: [.accentColor2, .accentColor3], startPoint: .topLeading, endPoint: .bottomTrailing))
         .onAppear {
-            wordSearch.words = swordMinder.bible.words(for: passage)
-                .filter { $0.count > 3 }
-                .map { Word(text: $0) }
-            wordSearch.makeGrid()
+            Task { @MainActor in
+                wordSearch.words = (try? await passage.words.filter { $0.count > 3 }
+                    .map { Word(text: $0) }) ?? []
+                wordSearch.makeGrid()
+            }
         }
         .sheet(isPresented: $settingsShown, onDismiss: { settingsShown = false }) {
             WordSearchSettingsView(difficulty: $wordSearch.difficulty)
@@ -139,66 +140,3 @@ struct WordSearchView_Previews: PreviewProvider {
     }
 }
 
-
-//struct PlayerView: View {
-//    var scaled: Bool = false
-//    var player: Player = Player(name: "Phile", color: .green, age: 42)
-//    
-//    var body: some View {
-//        ZStack(alignment: .topLeading) {
-//            Rectangle().frame(width: 100, height: 100).foregroundColor(player.color).cornerRadius(15.0).scaleEffect(scaled ? 1.5 : 1)
-//            
-//            VStack {
-//                Text(player.name)
-//                Text("Age: \(player.age)")
-//            }.padding([.top, .leading], 10)
-//        }.zIndex(scaled ? 2 : 1)
-//    }
-//}
-//
-//
-//struct ContentView: View {
-//    @EnvironmentObject var data: PlayerData
-//    
-//
-//    private var Content: some View {
-//        VStack {
-//            HStack {
-//                ForEach(0..<3) { i in
-//                    PlayerView(scaled: self.highlighted == i, player: self.data.players[i])
-//                        .background(self.rectReader(index: i))
-//                }
-//            }
-//            .zIndex((0..<3).contains(highlighted ?? -1) ? 2 : 1)
-//            
-//            HStack {
-//                ForEach(3..<6) { i in
-//                    PlayerView(scaled: self.highlighted == i, player: self.data.players[i])
-//                        .background(self.rectReader(index: i))
-//                }
-//            }
-//            .zIndex((3..<6).contains(highlighted ?? -1) ? 2 : 1)
-//        }
-//    }
-//    
-//    func rectReader(index: Int) -> some View {
-//        return GeometryReader { (geometry) -> AnyView in
-//            if geometry.frame(in: .global).contains(self.location) {
-//                DispatchQueue.main.async {
-//                    self.highlighted = index
-//                }
-//            }
-//            return AnyView(Rectangle().fill(Color.clear))
-//        }
-//    }
-//    
-//    var body: some View {
-//        Content
-//            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-//                .updating($location) { (value, state, transaction) in
-//                    state = value.location
-//                }.onEnded {_ in
-//                    self.highlighted = nil
-//                })
-//    }
-//}

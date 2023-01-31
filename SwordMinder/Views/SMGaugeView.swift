@@ -20,6 +20,7 @@ struct SMGaugeView: View {
             
         } currentValueLabel: {
             Text("\(current, specifier: "%.0f")")
+                .foregroundColor(.black)
         }
         .gaugeStyle(.accessoryCircular)
         .tint(Gradient(colors: [.accentColor, .accentColor3]))

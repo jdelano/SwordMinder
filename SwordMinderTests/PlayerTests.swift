@@ -19,7 +19,7 @@ final class PlayerTests: XCTestCase {
             Player.Armor(piece: .shoes),
         ], armorMaterial: .linen, gems: 5000, passages: [
             Passage(from: Reference()),
-            Passage(from: Reference(book: Book(named: "John")!, chapter: 3, verse: 16))
+            Passage(from: Reference(book: .john, chapter: 3, verse: 16))
         ])
     }
         
@@ -108,7 +108,7 @@ final class PlayerTests: XCTestCase {
             Player.Armor(piece: .shoes),
         ], gems: 50, passages: [
             Passage(from: Reference()),
-            Passage(from: Reference(book: Book(named: "John")!, chapter: 3, verse: 16))
+            Passage(from: Reference(book: .john, chapter: 3, verse: 16))
             ])
         // Should only accept the first of each armor piece
         XCTAssert(player.armor.count == 4)
@@ -122,7 +122,7 @@ final class PlayerTests: XCTestCase {
         XCTAssert(shoes?.level == 1)
         XCTAssert(player.gems == 50)
         XCTAssert(player.passages.count == 2)
-        XCTAssert(player.passages.first!.referenceFormatted == "Genesis 1:1")
+        XCTAssert(player.passages.first!.referenceFormatted == "Genesis 1:1 (ESV)")
     }
 
     func testInitWithDecoder() throws {

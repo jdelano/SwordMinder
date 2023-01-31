@@ -17,11 +17,22 @@ struct PassagePickerView: View {
     @Binding var editorConfig: EditorConfig
     @Binding var passage: Passage
     @State var passageText: String = ""
-    @State var refreshing: Bool = true
     
     var body: some View {
         NavigationStack {
             Form {
+                Section("Translation") {
+                    Picker("Version", selection: $passage.version) {
+                        ForEach(Translation.allCases, id: \.self) { value in
+                            Text(value.rawValue)
+                                .tag(value)
+                        }
+                    }
+                    .onChange(of: passage.version) { value in
+                        updatePassageText()
+                    }
+                    .pickerStyle(.menu)
+                }
                 Section("Starting Reference") {
                     VersePickerView(reference: $passage.startReference) { _ in
                         updatePassageText()
@@ -33,11 +44,10 @@ struct PassagePickerView: View {
                     }
                 }
                 Section("Passage") {
-                    if !swordMinder.isLoaded {
-                        ProgressView()
-                    } else {
+                    Group {
                         Text(.init(passage.referenceFormatted))
-                        Text(.init(passageText.truncate(to: 100)))
+                        Text(passage.versesLoaded ? .init(passageText) : " ")
+                            .overlay(passage.versesLoaded ? nil : ProgressView())
                     }
                 }
             }
@@ -55,7 +65,9 @@ struct PassagePickerView: View {
     }
     
     private func updatePassageText() {
-        self.passageText = swordMinder.bible.text(for: passage)
+        Task { @MainActor in
+            self.passageText = (try? await passage.text) ?? ""
+        }
     }
 }
 
@@ -63,7 +75,7 @@ struct PassagePickerView: View {
 struct PassageEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PassagePickerView(editorConfig: .constant(EditorConfig()), passage: .constant(Passage(from: Reference(book: Book(named: "Psalms")!, chapter: 119, verse: 100))))
+            PassagePickerView(editorConfig: .constant(EditorConfig()), passage: .constant(Passage(from: Reference(book: .psalms, chapter: 119, verse: 100))))
                 .environmentObject(SwordMinder())
         }
     }

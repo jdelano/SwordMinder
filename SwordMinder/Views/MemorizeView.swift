@@ -10,7 +10,7 @@ import SwiftUI
 struct MemorizeView: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @State private var editorConfig = EditorConfig()
-    @State private var addPassage: Passage = Passage()
+    @State var addPassage: Passage = Passage()
     
     var body: some View {
         NavigationStack {
@@ -32,7 +32,6 @@ struct MemorizeView: View {
             .navigationTitle("My Passages")
             .toolbar { toolbar }
         }
-        .overlay(!swordMinder.isLoaded ? ProgressView() : nil)
         .sheet(isPresented: $editorConfig.isPresented, onDismiss: {
             if editorConfig.needsSaving {
                 swordMinder.addPassage(addPassage)
@@ -56,7 +55,7 @@ struct MemorizeView: View {
     
     private func addItem() {
         withAnimation {
-            addPassage = Passage()
+            addPassage = Passage(version: swordMinder.player.preferredVersion)
             editorConfig.present()
         }
     }

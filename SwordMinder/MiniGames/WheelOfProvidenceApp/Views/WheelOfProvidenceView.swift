@@ -144,7 +144,7 @@ struct WheelOfProvidenceView: View {
                 }
             }
             .onAppear{
-                wheelOfProvidence.words = swordMinder.bible.words(for: passage)
+//                wheelOfProvidence.words = swordMinder.bible.words(for: passage)
                 wheelOfProvidence.convertWordsToVerse()
                 wheelOfProvidence.createGrid(verse: wheelOfProvidence.verse)
             }

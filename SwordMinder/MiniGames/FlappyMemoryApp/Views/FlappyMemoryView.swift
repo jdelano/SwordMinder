@@ -76,8 +76,8 @@ struct FlappyMemoryView: View {
 
                 }
             }
-            Text(swordMinder.bible.text(for: passage))
-                .padding([.leading, .trailing])
+//            Text(swordMinder.bible.text(for: passage))
+//                .padding([.leading, .trailing])
             Text(passage.referenceFormatted)
                 .padding(.bottom)
         }
