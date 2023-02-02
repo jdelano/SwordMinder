@@ -12,16 +12,16 @@ struct HomeView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
-        ZStack {
-            background
-                .ignoresSafeArea(edges: [.top, .leading, .trailing])
-            VStack {
-                if verticalSizeClass == .regular {
-                    levelAndGem
-                }
-                Spacer()
-                Grid(alignment: .bottom) {
-                    GridRow(alignment: .top) {
+        Image(verticalSizeClass == .regular ? "HomeBackground" : "HomeBackgroundLandscape")
+            .resizable()
+            .ignoresSafeArea(edges: [.top, .leading, .trailing])
+            .overlay(
+                VStack {
+                    if verticalSizeClass == .regular {
+                        levelAndGem
+                        Spacer()
+                    }
+                    HStack(alignment: .bottom) {
                         if verticalSizeClass == .compact {
                             levelAndGem
                         }
@@ -39,57 +39,44 @@ struct HomeView: View {
                             }
                         }
                         .padding()
-                        .background(Color("AliceBlue"))
-                        .gridCellUnsizedAxes([.vertical])
+                        .background(Color("AliceBlue").opacity(0.8))
                     }
                 }
                 .clipped()
-            }
-        }
+            )
     }
     
-    private var background: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
-                VStack(spacing: 0) {
-                    LinearGradient(colors: [Color("SkyBlue"), .accentColor], startPoint: .top, endPoint: .bottom)
-                        .frame(height: geometry.size.height * DrawingConstants.skyHeightProportion)
-                    LinearGradient(colors: [Color("GrassGreenDark"), Color("GrassGreen")], startPoint: .topLeading, endPoint: .bottomTrailing)
-
-                }
-                Text("🏰")
-                    .font(.system(size: min(geometry.size.width, geometry.size.height) * DrawingConstants.castleScalingFactor))
-                    .position(x: geometry.size.width * DrawingConstants.castleXLocationScale, y: geometry.size.height * DrawingConstants.castleYLocationScale)
-            }
-        }
-    }
     
     private var levelAndGem: some View {
         HStack {
+            Spacer()
             Text("Level: \(swordMinder.player.level)")
                 .font(.title)
                 .fontWeight(.black)
                 .foregroundColor(.white)
+            Spacer()
             GemView(amount: swordMinder.player.gems)
-                .frame(width: 50, height: 50)
+                .frame(width: 40, height: 40)
+            Spacer()
         }
+        .padding()
     }
     
     private var character: some View {
         VStack {
-            Image(swordMinder.player.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(.leading)
             SMButtonView(caption: "Upgrade", glyph: {
                 GemView(amount: 0)
-                    .frame(width: 35, height: 35)
+                    .frame(width: 25, height: 25)
             }) {
                 swordMinder.player.upgradeArmor()
             }
             .padding()
             .opacity(swordMinder.player.canUpgradeArmorMaterial ? 1 : 0)
-            
+            Image(swordMinder.player.imageName)
+                .resizable()
+                .aspectRatio(0.35, contentMode: .fit)
+                .frame(maxWidth: 175, alignment: .bottom)
+                .padding()
         }
     }
     
@@ -106,11 +93,11 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(SwordMinder(player: Player(withArmor: [
-            Player.Armor(level: 29, piece: .helmet),
-            Player.Armor(level: 29, piece: .breastplate),
-            Player.Armor(level: 29, piece: .belt),
-            Player.Armor(level: 29, piece: .shoes),
-        ], gems: 5000)))
+                Player.Armor(level: 40, piece: .helmet),
+                Player.Armor(level: 40, piece: .breastplate),
+                Player.Armor(level: 40, piece: .belt),
+                Player.Armor(level: 40, piece: .shoes),
+            ], armorMaterial: .leather, gems: 999)))
     }
 }
 

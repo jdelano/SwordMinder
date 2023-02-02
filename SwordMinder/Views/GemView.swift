@@ -15,15 +15,18 @@ struct GemView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
-                GemShape()
-                    .fill(LinearGradient(colors: [.accentColor3, .accentColor2], startPoint: .top, endPoint: .bottom))
-                    .aspectRatio(1, contentMode: .fit)
-                    .shadow(radius: DrawingConstants.shadowRadius)
+//                GemShape()
+//                    .fill(LinearGradient(colors: [.accentColor3, .accentColor2], startPoint: .top, endPoint: .bottom))
+//                    .aspectRatio(1, contentMode: .fit)
+//                    .shadow(radius: DrawingConstants.shadowRadius)
+                Image("gem")
+                    .resizable()
+                    .scaleEffect(scale(thatFits: geometry.size, forValue: 999))
                 Text("\(amount)")
                     .font(.system(size: DrawingConstants.fontSize))
                     .foregroundColor(.white)
                     .fontWeight(.black)
-                    .scaleEffect(scale(thatFits: geometry.size, forValue: amount))
+                    .scaleEffect(scale(thatFits: geometry.size, forValue: 999))
             }
         }
     }
@@ -92,15 +95,8 @@ struct GemView: View {
 struct GemView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            GemView(amount: 9)
-                .frame(width: 35, height: 35)
-            GemView(amount: 99)
-                .frame(width: 35, height: 35)
             GemView(amount: 999)
-                .frame(width: 35, height: 35)
-            GemView(amount: 9999)
-                .frame(width: 35, height: 35)
-
+                .frame(width: 30, height: 25)
         }
     }
 }

@@ -20,4 +20,9 @@ extension String {
     func alphaOnly() -> String {
         self.replacingOccurrences(of:"[^a-zA-Z\\s]", with: "", options: .regularExpression)
     }
+    
+    subscript(i: Int) -> String {
+        return String(self[index(startIndex, offsetBy: i)])
+    }
+
 }

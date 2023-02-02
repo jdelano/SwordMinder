@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct SwordMinderApp: App {
-    @StateObject var swordMinder = SwordMinder()
+    @StateObject var swordMinder = SwordMinder(player: Player(armorMaterial: .gem, gems: 9000))
     var body: some Scene {
         WindowGroup {
             SwordMinderView()

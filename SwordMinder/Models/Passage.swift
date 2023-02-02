@@ -117,13 +117,12 @@ struct Passage: Identifiable, Codable {
     ///   - end: Ending reference in string format to include in the Passage. If nil, then the Passage will only contain the verse at the starting reference.
     /// - Returns: A Passage containing all the verses identified by the range of references specified. Returns nil if references cannot be found or are invalid.
     init?(fromString begin: String, toString end: String? = nil, version: Translation = .esv) {
-        self.version = version
         if let beginReference = Reference(fromString: begin) {
             if let end,
                let endReference = Reference(fromString: end) {
-                self = .init(from: beginReference, to: endReference)
+                self = .init(from: beginReference, to: endReference, version: version)
             } else {
-                self = .init(from: beginReference)
+                self = .init(from: beginReference, version: version)
             }
         } else {
             return nil

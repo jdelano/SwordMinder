@@ -87,7 +87,6 @@
 		A415F03E294CC48900BC6096 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415F03D294CC48900BC6096 /* HomePageView.swift */; };
 		A415F040294CC4B600BC6096 /* gameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415F03F294CC4B600BC6096 /* gameView.swift */; };
 		A415F042294CC4EC00BC6096 /* VerseTappingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415F041294CC4EC00BC6096 /* VerseTappingView.swift */; };
-		B412F1932943D6E700B7EF0F /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1922943D6E700B7EF0F /* String + Extensions.swift */; };
 		B412F1952943D71500B7EF0F /* WheelOfProvidenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1942943D71500B7EF0F /* WheelOfProvidenceView.swift */; };
 		B412F1972943D78A00B7EF0F /* SpinScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1962943D78A00B7EF0F /* SpinScreenView.swift */; };
 		B412F1992943D7A400B7EF0F /* WheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B412F1982943D7A400B7EF0F /* WheelView.swift */; };
@@ -199,7 +198,6 @@
 		A415F03D294CC48900BC6096 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		A415F03F294CC4B600BC6096 /* gameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameView.swift; sourceTree = "<group>"; };
 		A415F041294CC4EC00BC6096 /* VerseTappingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseTappingView.swift; sourceTree = "<group>"; };
-		B412F1922943D6E700B7EF0F /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		B412F1942943D71500B7EF0F /* WheelOfProvidenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelOfProvidenceView.swift; sourceTree = "<group>"; };
 		B412F1962943D78A00B7EF0F /* SpinScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinScreenView.swift; sourceTree = "<group>"; };
 		B412F1982943D7A400B7EF0F /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
@@ -572,7 +570,6 @@
 		B412F1912943D6C900B7EF0F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B412F1922943D6E700B7EF0F /* String + Extensions.swift */,
 				B412F1942943D71500B7EF0F /* WheelOfProvidenceView.swift */,
 				B412F1962943D78A00B7EF0F /* SpinScreenView.swift */,
 				B412F1982943D7A400B7EF0F /* WheelView.swift */,
@@ -749,7 +746,6 @@
 				65C7C817293C281500301285 /* WordSearchAppIconView.swift in Sources */,
 				B412F19D2943E9E700B7EF0F /* WheelOfProvidence.swift in Sources */,
 				A415F042294CC4EC00BC6096 /* VerseTappingView.swift in Sources */,
-				B412F1932943D6E700B7EF0F /* String + Extensions.swift in Sources */,
 				4CCD4A492948D10E00DBF037 /* FlappyMemoryView.swift in Sources */,
 				65A5D55329036983001584F2 /* LeaderboardView.swift in Sources */,
 				65C7C804293ADA8A00301285 /* EditorConfig.swift in Sources */,

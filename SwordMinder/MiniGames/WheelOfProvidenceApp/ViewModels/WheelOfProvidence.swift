@@ -58,7 +58,7 @@ class WheelOfProvidence: ObservableObject {
     
     func updateGrid(_ guess: String) {
         for (tile, _) in grid.enumerated() {
-            if(String(grid[tile].letter).caseInsensitiveCompare(guess) == .orderedSame){
+            if(String(grid[tile].letter).caseInsensitiveCompare(guess) == .orderedSame) {
                 grid[tile].flip()
             }
         }

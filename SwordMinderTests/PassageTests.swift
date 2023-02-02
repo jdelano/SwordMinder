@@ -89,6 +89,8 @@ final class PassageTests: XCTestCase {
     func testBiblePassageFromString() async throws {
         let passage = Passage(fromString: "Genesis 1:1")
         XCTAssert(passage?.referenceFormatted == "Genesis 1:1 (ESV)")
+        let passage2 = Passage(fromString: "John 3:16", version: .niv)
+        XCTAssert(passage2?.referenceFormatted == "John 3:16 (NIV)")
     }
     
     func testBiblePassageFromStringNil() async throws {

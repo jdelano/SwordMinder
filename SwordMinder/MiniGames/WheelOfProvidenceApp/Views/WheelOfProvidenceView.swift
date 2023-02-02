@@ -205,7 +205,9 @@ struct BottomMenu: View{
 
 struct WheelOfProvidenceView_Previews: PreviewProvider {
     static var previews: some View {
-        WheelOfProvidenceView(wheelOfProvidence: WheelOfProvidence(), currentApp: .constant(.wheelOfProvidenceApp), passage: Passage())
+        WheelOfProvidenceView(wheelOfProvidence: WheelOfProvidence(), currentApp:
+            .constant(.wheelOfProvidenceApp), passage: Passage())
+        .environmentObject(SwordMinder())
     }
 }
 

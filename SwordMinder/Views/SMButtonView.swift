@@ -37,7 +37,7 @@ struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
         SMButtonView(caption: "Level Up") {
             GemView(amount: 3)
-                .frame(width: 35, height: 35)
+                .frame(width: 25, height: 25)
         } action: {
             
         }

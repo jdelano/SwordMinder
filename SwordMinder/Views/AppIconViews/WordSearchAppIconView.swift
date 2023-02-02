@@ -13,15 +13,9 @@ struct WordSearchAppIconView: View {
         Button {
             action()
         } label: {
-            ZStack(alignment: .center) {
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color.accentColor)
-                Text("Word Search")
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .font(.largeTitle)
-            }
-            .aspectRatio(1, contentMode: .fit)
+            Image("WordFindIcon")
+                .resizable()
+                .aspectRatio(1, contentMode: .fit)
         }
     }
 }

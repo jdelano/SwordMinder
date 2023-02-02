@@ -16,6 +16,7 @@ struct WordSearchView: View {
     
     @GestureState private var location: CGPoint = .zero
     @State private var highlighted: Set<UUID> = []
+    @State private var currentDragBounds: CGRect?
 
     
     @State var selectedTiles = Set<UUID>()
@@ -60,22 +61,32 @@ struct WordSearchView: View {
     }
     
     private var grid: some View {
-        Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-            ForEach(wordSearch.grid, id: \.self) { row in
-                GridRow {
-                    ForEach(row) { cell in
-                        square(for: cell)
+        ZStack {
+            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+                ForEach(wordSearch.grid, id: \.self) { row in
+                    GridRow {
+                        ForEach(row) { cell in
+                            square(for: cell)
+                        }
                     }
                 }
             }
+            .padding()
+            if self.currentDragBounds != nil {
+                Rectangle()
+                    .stroke(Color.gray, lineWidth: 2)
+                    .frame(width: self.currentDragBounds!.width, height: self.currentDragBounds!.height)
+                    .position(x: self.currentDragBounds!.midX, y: self.currentDragBounds!.midY)
+//                    .rotationEffect(Angle(radians: atan2(self.currentDragBounds!.height, self.currentDragBounds!.width)))
+            }
         }
-        .padding()
+        .gesture(dragGesture())
     }
 
     @ViewBuilder
     private func square(for tile: Tile) -> some View {
         GeometryReader { geometry in
-            let selected = geometry.frame(in: .global).contains(self.location)
+            let selected = false //self.currentDragBounds!.intersects(geometry.frame(in: .global))
             Rectangle()
                 .foregroundColor(selected ? .blue : .white)
                 .border(.black, width: 1)
@@ -84,7 +95,6 @@ struct WordSearchView: View {
                         .font(.largeTitle)
                         .foregroundColor(selected ? .white : .black)
                 )
-                .gesture(dragGesture(tile: tile))
         }
     }
 
@@ -111,14 +121,28 @@ struct WordSearchView: View {
         .buttonStyle(SMButtonStyle())
     }
     
-    private func dragGesture(tile: Tile) -> some Gesture {
-        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .updating($location) { (value, state, transaction) in
-                state = value.location
-            }
-            .onEnded { _ in
+    private func dragGesture() -> some Gesture {
+        DragGesture(minimumDistance: 0)
+            .onChanged { value in
+                let width = 10
+                let height = abs(value.location.y - value.startLocation.y)
+                let xMin = min(value.location.x, value.startLocation.x)
+                let xMax = max(value.location.x, value.startLocation.x)
+                let yMin = min(value.location.y, value.startLocation.y)
+                let yMax = max(value.location.y, value.startLocation.y)
+                let rect = CGRect(x: xMin, y: yMin, width: xMax - xMin, height: yMax - yMin)
+                let angle = atan2(value.location.y - value.startLocation.y, value.location.x - value.startLocation.x)
+                let rotatedRect = rect.applying(CGAffineTransform(rotationAngle: angle))
                 
+                self.currentDragBounds = rect
+                //                self.highlighted = self.rects.enumerated().compactMap { index, rect in
+                //                    return rotatedRect.intersects(rect) ? index : nil
+                //                }
             }
+            .onEnded { value in
+                self.currentDragBounds = nil
+            }
+            
     }
     
     @ViewBuilder
@@ -130,12 +154,13 @@ struct WordSearchView: View {
             AnyView(Rectangle().fill(Color.clear))
         }
     }
+    
 
 }
 
 struct WordSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        WordSearchView(wordSearch: WordSearch(), currentApp: .constant(.wordSearchApp), passage: Passage())
+        WordSearchView(wordSearch: WordSearch(), currentApp: .constant(.wordSearchApp), passage: Passage(fromString: "John 3:17", version: .niv)!)
             .environmentObject(SwordMinder())
     }
 }

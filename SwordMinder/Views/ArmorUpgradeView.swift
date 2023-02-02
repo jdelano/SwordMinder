@@ -34,13 +34,12 @@ struct ArmorUpgradeView: View {
             .disabled(!enabled)
         }
         .padding(.bottom)
-        Spacer(minLength: 0)
     }
     
     private struct DrawingConstants {
-        static let gemWidth: CGFloat = 35
-        static let gemHeight: CGFloat = 35
-        static let buttonWidth: CGFloat = 150
+        static let gemWidth: CGFloat = 25
+        static let gemHeight: CGFloat = 25
+        static let buttonWidth: CGFloat = 125
     }
 }
 
