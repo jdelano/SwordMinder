@@ -25,6 +25,9 @@ class WordSearch : ObservableObject {
     @Published var grid = [[Tile]]()
     @Published var wordsUsed = [Word]()
     
+    var won: Bool {
+        wordsUsed.allSatisfy { $0.found }
+    }
     
     func makeGrid() {
         labels = (0..<gridSize).map { _ in
@@ -100,6 +103,7 @@ class WordSearch : ObservableObject {
                     if let returnValue = labels(fromX: col, y: row, word: word, movement: movement) {
                         for (index, letter) in word.enumerated() {
                             returnValue[index].tile.letter = letter
+                            returnValue[index].tile.associatedWords.append(word)
                         }
                         return true
                     }
@@ -123,24 +127,91 @@ class WordSearch : ObservableObject {
 
     // MARK: - User Intent Functions
     
-    func toggleSelect(_ tile: Tile) {
+//    func toggleSelect(_ tile: Tile) {
+//        for row in 0..<gridSize {
+//            for col in 0..<gridSize {
+//                if grid[row][col].id == tile.id {
+//                    grid[row][col].selected.toggle()
+//                }
+//            }
+//        }
+//    }
+//
+//    func unSelect(_ tile: Tile) {
+//        for row in 0..<gridSize {
+//            for col in 0..<gridSize {
+//                if grid[row][col].id == tile.id {
+//                    grid[row][col].selected = false
+//                }
+//            }
+//        }
+//    }
+    
+    func coordinate(for tile: Tile) -> (Int, Int)? {
         for row in 0..<gridSize {
             for col in 0..<gridSize {
                 if grid[row][col].id == tile.id {
-                    grid[row][col].selected.toggle()
+                    return (row, col)
                 }
             }
         }
+        return nil
     }
-
-    func unSelect(_ tile: Tile) {
+    
+    func markWordFound(_ word: Word) {
+        if let index = wordsUsed.index(matching: word) {
+            wordsUsed[index].found = true
+        }
+    }
+    
+    
+    
+    func tilesForWord(_ word: String) -> [Tile] {
+        var tiles = [Tile]()
         for row in 0..<gridSize {
             for col in 0..<gridSize {
-                if grid[row][col].id == tile.id {
-                    grid[row][col].selected = false
+                if grid[row][col].associatedWords.contains(word.uppercased()) {
+                    tiles.append(grid[row][col])
                 }
             }
         }
+        return tiles
     }
-
+    
+    func tilesInLine(from startPoint: (row: Int, col: Int), to endPoint: (row: Int, col: Int)) -> [Tile] {
+        let deltaCol = endPoint.col - startPoint.col
+        let deltaRow = endPoint.row - startPoint.row
+        let stepCol = deltaCol > 0 ? 1 : -1
+        let stepRow = deltaRow > 0 ? 1 : -1
+        
+        if deltaCol == 0 {
+            return stride(from: startPoint.row, through: endPoint.row, by: stepRow)
+                .map({ grid[$0][startPoint.col] })
+        }
+        
+        if deltaRow == 0 {
+            return stride(from: startPoint.col, through: endPoint.col, by: stepCol)
+                .map({ grid[startPoint.row][$0] })
+        }
+        
+        var tiles: [Tile] = []
+        if abs(deltaCol) > abs(deltaRow) {
+            var row = startPoint.row
+            for col in stride(from: startPoint.col, through: endPoint.col, by: stepCol) {
+                if row >= 0 && row < gridSize && col >= 0 && col < gridSize  {
+                    tiles.append(grid[row][col])
+                    row += stepRow
+                }
+            }
+        } else {
+            var col = startPoint.col
+            for row in stride(from: startPoint.row, through: endPoint.row, by: stepRow) {
+                if row >= 0 && row < gridSize && col >= 0 && col < gridSize  {
+                    tiles.append(grid[row][col])
+                    col += stepCol
+                }
+            }
+        }
+        return tiles
+    }
 }

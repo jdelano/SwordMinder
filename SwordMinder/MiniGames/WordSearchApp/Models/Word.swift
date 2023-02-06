@@ -13,5 +13,6 @@ struct Word : Decodable, Identifiable, Comparable, Hashable {
     }
     
     var text: String
+    var found: Bool = false
     var id = UUID()
 }

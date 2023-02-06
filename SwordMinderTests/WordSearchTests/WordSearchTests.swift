@@ -35,11 +35,45 @@ final class WordSearchTests: XCTestCase {
 
     }
     
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testTilesInAlmostDiagonalLine() throws {
+        let wordSearch = WordSearch()
+        wordSearch.makeGrid()
+        print(wordSearch.grid)
+        let tilesinLine = wordSearch.tilesInLine(from: (row:0, col:0), to: (row: 3, col: 2))
+        XCTAssert(tilesinLine[0].id == wordSearch.grid[0][0].id)
+        XCTAssert(tilesinLine[1].id == wordSearch.grid[1][1].id)
+        XCTAssert(tilesinLine[2].id == wordSearch.grid[2][2].id)
+    }
+
+    func testTilesInVerticalLine() throws {
+        let wordSearch = WordSearch()
+        wordSearch.makeGrid()
+        print(wordSearch.grid)
+        let tilesinLine = wordSearch.tilesInLine(from: (row:0, col:0), to: (row: 7, col: 0))
+        XCTAssert(tilesinLine[0].id == wordSearch.grid[0][0].id)
+        XCTAssert(tilesinLine[1].id == wordSearch.grid[1][0].id)
+        XCTAssert(tilesinLine[2].id == wordSearch.grid[2][0].id)
+        XCTAssert(tilesinLine[3].id == wordSearch.grid[3][0].id)
+        XCTAssert(tilesinLine[4].id == wordSearch.grid[4][0].id)
+        XCTAssert(tilesinLine[5].id == wordSearch.grid[5][0].id)
+        XCTAssert(tilesinLine[6].id == wordSearch.grid[6][0].id)
+        XCTAssert(tilesinLine[7].id == wordSearch.grid[7][0].id)
+    }
+
+    func testTilesInHorizontalLine() throws {
+        let wordSearch = WordSearch()
+        wordSearch.makeGrid()
+        print(wordSearch.grid)
+        let tilesinLine = wordSearch.tilesInLine(from: (row:0, col:0), to: (row: 0, col: 7))
+        XCTAssert(tilesinLine[0].id == wordSearch.grid[0][0].id)
+        XCTAssert(tilesinLine[1].id == wordSearch.grid[0][1].id)
+        XCTAssert(tilesinLine[2].id == wordSearch.grid[0][2].id)
+        XCTAssert(tilesinLine[3].id == wordSearch.grid[0][3].id)
+        XCTAssert(tilesinLine[4].id == wordSearch.grid[0][4].id)
+        XCTAssert(tilesinLine[5].id == wordSearch.grid[0][5].id)
+        XCTAssert(tilesinLine[6].id == wordSearch.grid[0][6].id)
+        XCTAssert(tilesinLine[7].id == wordSearch.grid[0][7].id)
     }
 
 }

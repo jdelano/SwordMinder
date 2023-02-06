@@ -11,14 +11,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PlayerTests.testEligibleLessThan5In24Hours():PlayerTests.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "player.eligible">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #2 in closure #1 in PassagePickerView.body.getter:PassagePickerView.swift">
          <PersistentStrings>
             <PersistentString
@@ -27,10 +19,34 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "PlayerTests.testEligibleLessThan5In24Hours():PlayerTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "player.eligible">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WordSearch.tilesForWord(_:):WordSearch.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "grid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in WordSearchView.body.getter:WordSearchView.swift">
          <PersistentStrings>
             <PersistentString
                value = "wordSearch.words">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WordSearch.won.getter:WordSearch.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "words">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -71,10 +87,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "PassageTests.testPassageOnlyBegin():PassageTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "passage.referenceFormatted">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Player.init(url:):Player.swift">
       </ContextState>
       <ContextState
          contextName = "WordSearchView.body.getter:WordSearchView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.reward(gems:):Player.swift">
       </ContextState>
       <ContextState
          contextName = "Verse.text.getter:Verse.swift">
@@ -88,15 +115,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Player.reward(gems:):Player.swift">
-      </ContextState>
-      <ContextState
-         contextName = "PassageTests.testPassageOnlyBegin():PassageTests.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "passage.referenceFormatted">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #2 in WordSearchView.dragGesture():WordSearchView.swift">
       </ContextState>
       <ContextState
          contextName = "SwordMinder.init(translation:player:leaderboard:):SwordMinder.swift">
@@ -125,6 +144,14 @@
          contextName = "BibleTests.testReferencetoString():BibleTests.swift">
       </ContextState>
       <ContextState
+         contextName = "WordSearch.tilesInLine(from:to:):WordSearch.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "grid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Reference.encode(to:):Reference.swift">
       </ContextState>
       <ContextState
@@ -139,10 +166,10 @@
          contextName = "closure #1 in closure #1 in closure #2 in closure #1 in PassagePicker.body.getter:PassagePicker.swift">
          <PersistentStrings>
             <PersistentString
-               value = "endReference">
+               value = "startReference">
             </PersistentString>
             <PersistentString
-               value = "startReference">
+               value = "endReference">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
