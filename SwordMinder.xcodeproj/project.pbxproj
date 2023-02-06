@@ -33,6 +33,7 @@
 		65423E2628F8B04D007B2C2B /* ArmorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65423E2528F8B04D007B2C2B /* ArmorTests.swift */; };
 		654A2C04285CD3B5006A7652 /* Requirements.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A2C02285CD3B5006A7652 /* Requirements.md */; };
 		654A2C05285CD3B5006A7652 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 654A2C03285CD3B5006A7652 /* README.md */; };
+		654CEA3129918E5E004CB43D /* PixelatedDissolve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CEA3029918E5E004CB43D /* PixelatedDissolve.swift */; };
 		654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */; };
 		655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655800DB293EB97B005B1D9F /* WordSearchSettingsView.swift */; };
 		65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D54A2901E849001584F2 /* Color+Extensions.swift */; };
@@ -145,6 +146,7 @@
 		65423E2528F8B04D007B2C2B /* ArmorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmorTests.swift; sourceTree = "<group>"; };
 		654A2C02285CD3B5006A7652 /* Requirements.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Requirements.md; sourceTree = "<group>"; };
 		654A2C03285CD3B5006A7652 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		654CEA3029918E5E004CB43D /* PixelatedDissolve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelatedDissolve.swift; sourceTree = "<group>"; };
 		654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
 		655800DB293EB97B005B1D9F /* WordSearchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchSettingsView.swift; sourceTree = "<group>"; };
 		65A5D54A2901E849001584F2 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				655800DB293EB97B005B1D9F /* WordSearchSettingsView.swift */,
 				65D06005298B419000BE0B12 /* PipeShape.swift */,
 				65D06009298B424600BE0B12 /* DragState.swift */,
+				654CEA3029918E5E004CB43D /* PixelatedDissolve.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,
+				654CEA3129918E5E004CB43D /* PixelatedDissolve.swift in Sources */,
 				65C7C7F6293A320000301285 /* Passage.swift in Sources */,
 				65EB9D79287B9C6300FAF612 /* SwordMinderView.swift in Sources */,
 				650BD13928F11DF7007034EA /* SwordMinder.swift in Sources */,

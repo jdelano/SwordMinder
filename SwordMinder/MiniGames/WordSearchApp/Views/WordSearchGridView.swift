@@ -83,6 +83,7 @@ struct WordSearchGridView: View {
                     PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth)
                         .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                         .foregroundColor(.yellow)
+                        .transition(AnyTransition.slide)
                 }
                 pipes
             }
@@ -113,7 +114,8 @@ struct WordSearchGridView: View {
     @ViewBuilder
     private func square(for tile: Tile, highlighted: Bool, coord: (row: Int, col: Int)) -> some View {
         Rectangle()
-            .foregroundColor(highlighted ? .blue : .white)
+            .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 212/255, green: 175/255, blue: 55/255), Color(red: 193/255, green: 154/255, blue: 107/255)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+            .shadow(color: .black, radius: 2, x: 2, y: 2)
             .border(.black, width: 1)
             .overlay(
                 Text(String("\(tile.letter)"))
@@ -162,7 +164,9 @@ struct WordSearchGridView: View {
                     if tilesForWord.count == selectedTiles.count && tilesForWord.allSatisfy({ selectedTiles.contains($0) }) {
                         if !word.found {
                             let (start, end) = gridPoints(start: drag.startLocation, end: drag.location, cellSize: cellSize, gridSize: wordSearch.gridSize)
-                            foundPipes.append(PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth))
+                            withAnimation {
+                                foundPipes.append(PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth))
+                            }
                         }
                         wordSearch.markWordFound(word)
                         break

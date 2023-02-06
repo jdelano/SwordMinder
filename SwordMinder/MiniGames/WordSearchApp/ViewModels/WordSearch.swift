@@ -18,9 +18,14 @@ class WordSearch : ObservableObject {
     @Published var difficulty = Difficulty.easy {
         didSet {
             makeGrid()
+            if let url = Autosave.wordSearchPreferencesURL {
+                savePreferences(to: url)
+            }
+
         }
     }
     
+
     private let allLetters = (65...90).map { Character(UnicodeScalar($0)) }
     @Published var grid = [[Tile]]()
     @Published var wordsUsed = [Word]()
@@ -29,6 +34,61 @@ class WordSearch : ObservableObject {
         wordsUsed.allSatisfy { $0.found }
     }
     
+    // MARK: - Persistence
+
+    private struct Autosave {
+        static let wordSearchFolderName = "org.thedigitalpath.swordminder.wordsearch"
+        static var appSupportSubDirectory: URL? {
+            FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+        }
+        static var wordSearchFolderURL: URL? {
+            return appSupportSubDirectory?.appendingPathComponent(wordSearchFolderName, isDirectory: true)
+        }
+        static var wordSearchPreferencesURL: URL? {
+            return wordSearchFolderURL?.appendingPathComponent(wordSearchFolderName)
+        }
+    }
+    
+    
+    /// Saves the leaderboard data to the specified URL
+    /// - Parameter url: The `URL` to save the leaderboard data to
+    private func savePreferences(to url: URL) {
+        let thisFunction = "\(String(describing: self)).\(#function)"
+        do {
+            try verifyWordSearchFolder()
+            let wordSearchPreferences: Data = try json()
+            try wordSearchPreferences.write(to: url)
+        } catch let encodingError where encodingError is EncodingError {
+            print("\(thisFunction) couldn't encode Leaderboard as JSON because \(encodingError.localizedDescription)")
+        } catch {
+            print("\(thisFunction) error = \(error)")
+        }
+    }
+    
+    
+    /// Verifies the creation of the SwordMinder folder in the application support directory; if not created, this method will create it
+    private func verifyWordSearchFolder() throws {
+        if let wsFolderUrl = Autosave.wordSearchFolderURL, !FileManager.default.fileExists(atPath: Autosave.wordSearchFolderName) {
+            try FileManager.default.createDirectory(at: wsFolderUrl, withIntermediateDirectories: true, attributes: nil)
+        }
+    }
+
+    
+    func json() throws -> Data {
+        try JSONEncoder().encode(difficulty)
+    }
+    
+    init() {
+        if let url = Autosave.wordSearchPreferencesURL,
+            let savedPreferencesData = try? Data(contentsOf: url),
+           let savedPreferences = try? JSONDecoder().decode(Difficulty.self, from: savedPreferencesData) {
+            self.difficulty = savedPreferences
+        } else {
+            self.difficulty = .easy
+        }
+    }
+    
+    // MARK: - Grid functionality
     func makeGrid() {
         labels = (0..<gridSize).map { _ in
             (0..<gridSize).map { _ in
