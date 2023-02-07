@@ -37,6 +37,8 @@
 		654CEA352991EAA5004CB43D /* wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 654CEA342991EAA5004CB43D /* wrong.wav */; };
 		654CEA372991ECF0004CB43D /* right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 654CEA362991ECF0004CB43D /* right.wav */; };
 		654CEA392991EEF0004CB43D /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 654CEA382991EEF0004CB43D /* win.wav */; };
+		654CEA3B2991F27A004CB43D /* outoftime.wav in Resources */ = {isa = PBXBuildFile; fileRef = 654CEA3A2991F27A004CB43D /* outoftime.wav */; };
+		654CEA3D2992086D004CB43D /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CEA3C2992086D004CB43D /* Pipe.swift */; };
 		654F7BBF28E27CD100C5EA39 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */; };
 		655800DC293EB97B005B1D9F /* WordSearchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655800DB293EB97B005B1D9F /* WordSearchSettingsView.swift */; };
 		65A5D54B2901E849001584F2 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A5D54A2901E849001584F2 /* Color+Extensions.swift */; };
@@ -153,6 +155,8 @@
 		654CEA342991EAA5004CB43D /* wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong.wav; sourceTree = "<group>"; };
 		654CEA362991ECF0004CB43D /* right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = right.wav; sourceTree = "<group>"; };
 		654CEA382991EEF0004CB43D /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
+		654CEA3A2991F27A004CB43D /* outoftime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = outoftime.wav; sourceTree = "<group>"; };
+		654CEA3C2992086D004CB43D /* Pipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipe.swift; sourceTree = "<group>"; };
 		654F7BBE28E27CD100C5EA39 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
 		655800DB293EB97B005B1D9F /* WordSearchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchSettingsView.swift; sourceTree = "<group>"; };
 		65A5D54A2901E849001584F2 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 				654CEA3029918E5E004CB43D /* PixelatedDissolve.swift */,
 				654CEA362991ECF0004CB43D /* right.wav */,
 				654CEA342991EAA5004CB43D /* wrong.wav */,
+				654CEA3A2991F27A004CB43D /* outoftime.wav */,
 				654CEA382991EEF0004CB43D /* win.wav */,
 			);
 			path = Views;
@@ -441,6 +446,7 @@
 				65C7C80B293BDD9600301285 /* Difficulty.swift */,
 				65C7C80D293BDE1800301285 /* Word.swift */,
 				65C7C819293E460800301285 /* Tile.swift */,
+				654CEA3C2992086D004CB43D /* Pipe.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -711,6 +717,7 @@
 				4CCD4A432948D10E00DBF037 /* explosion.wav in Resources */,
 				65AB526F285CC11100FF1038 /* Preview Assets.xcassets in Resources */,
 				654CEA352991EAA5004CB43D /* wrong.wav in Resources */,
+				654CEA3B2991F27A004CB43D /* outoftime.wav in Resources */,
 				654A2C05285CD3B5006A7652 /* README.md in Resources */,
 				4CCD4A422948D10E00DBF037 /* coin.wav in Resources */,
 				654A2C04285CD3B5006A7652 /* Requirements.md in Resources */,
@@ -766,6 +773,7 @@
 				65D0600A298B424600BE0B12 /* DragState.swift in Sources */,
 				B412F19F29440A4F00B7EF0F /* PieWheel.swift in Sources */,
 				4C9B2E3F294996990022B2F8 /* DifficultyFlappy.swift in Sources */,
+				654CEA3D2992086D004CB43D /* Pipe.swift in Sources */,
 				65A5D54F2902EBFE001584F2 /* GemView.swift in Sources */,
 				65C7C7EE2939482600301285 /* PassagePickerView.swift in Sources */,
 				65C7C7F2293A317800301285 /* Reference.swift in Sources */,

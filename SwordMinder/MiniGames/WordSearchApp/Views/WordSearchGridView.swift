@@ -12,23 +12,43 @@ struct WordSearchGridView: View {
     @ObservedObject var wordSearch: WordSearch
     @EnvironmentObject var swordMinder: SwordMinder
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @State var passage: Passage
     @State var selectedTiles = Set<UUID>()
-    @State var foundPipes = [PipeShape]()
+    @State var foundPipes = [Pipe]()
     @State var cellSize = CGSize.zero
     @GestureState private var dragState = DragState.inactive
     @State private var highlighted: Set<UUID> = []
     @State private var showWin: Bool = false
-    @State var audioPlayer: AVAudioPlayer!
+    @State var audioPlayer = AVPlayer()
+    @State private var countDown = 0
+    @State private var timer: Timer?
+    
+    private var remainingTime: Int {
+        60 * wordSearch.difficultyMultipler - countDown
+    }
     
     var body: some View {
         VStack {
             headerMenu
-            grid
-                .padding(.horizontal, 5)
-            wordList
+            if verticalSizeClass == .regular {
+                grid
+                    .padding(.horizontal, 5)
+                wordList
+            } else {
+                GeometryReader { geometry in
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.fixed(250.0))]) {
+                        grid
+                            .padding(.horizontal, 5)
+                            .frame(height: geometry.size.height)
+                        wordList
+                    }
+                }
+                
+            }
         }
-        .background(Image("WordFindBackground"))
+        .background(Image("WordFindBackground")
+            .rotationEffect(.degrees(verticalSizeClass == .regular ? 0.0 : 90.0)))
         .onAppear {
             Task { @MainActor in
                 
@@ -37,10 +57,11 @@ struct WordSearchGridView: View {
                     .filter { $0.count > 3 }
                     .map { Word(text: $0) }) ?? []
                 wordSearch.makeGrid()
+                startTimer()
             }
         }
         .alert(isPresented: $showWin) {
-            Alert(title: Text("You Won!"))
+            Alert(title: Text("You won!"))
         }
         .foregroundColor(.white)
         .toolbar { toolbar }
@@ -51,6 +72,8 @@ struct WordSearchGridView: View {
     private var headerMenu: some View {
         HStack {
             Text("\(passage.referenceFormatted)")
+            Spacer()
+            Text("\(countDown / 60):\(String(format: "%02d", countDown % 60))")
             Spacer()
             Text("\(wordSearch.difficulty.rawValue)")
         }
@@ -63,8 +86,8 @@ struct WordSearchGridView: View {
             let cellWidth = geometry.size.width / CGFloat(wordSearch.gridSize)
             let cellHeight = geometry.size.height / CGFloat(wordSearch.gridSize)
             let cellSize = CGSize(width: cellWidth, height: cellHeight)
-            let (startRow, startColumn) = gridLocation(point: dragState.startPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
-            let (endRow, endColumn) = gridLocation(point: dragState.endPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
+            let (startRow, startColumn) = gridLocation(for: dragState.startPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
+            let (endRow, endColumn) = gridLocation(for: dragState.endPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
             ZStack {
                 Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                     ForEach(0..<wordSearch.grid.count, id:\.self) { row in
@@ -85,7 +108,6 @@ struct WordSearchGridView: View {
                     PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth)
                         .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                         .foregroundColor(.yellow)
-                        .transition(AnyTransition.slide)
                 }
                 pipes
             }
@@ -94,7 +116,7 @@ struct WordSearchGridView: View {
     }
     
     
-    private func gridLocation(point: CGPoint, cellSize: CGSize, gridSize: Int) -> (row: Int, col: Int) {
+    private func gridLocation(for point: CGPoint, cellSize: CGSize, gridSize: Int) -> (row: Int, col: Int) {
         if cellSize.width == 0.0 || cellSize.height == 0.0 { return (0, 0) }
         let cellY = Int(point.y / cellSize.height)
         let cellRow = cellY < 0 ? 0 : cellY > gridSize-1 ? gridSize-1 : cellY
@@ -103,9 +125,14 @@ struct WordSearchGridView: View {
         return (cellRow, cellCol)
     }
     
+    private func cellCenter(for rowCol: (row: Int, col: Int), cellSize: CGSize, gridSize: Int) -> CGPoint {
+        CGPoint(x: CGFloat(rowCol.col) * cellSize.width + cellSize.width/2,
+                y: CGFloat(rowCol.row) * cellSize.height + cellSize.height/2)
+    }
+    
     private func gridPoints(start: CGPoint, end: CGPoint, cellSize: CGSize, gridSize: Int) -> (CGPoint, CGPoint) {
-        let (startRow, startCol) = gridLocation(point: start, cellSize: cellSize, gridSize: gridSize)
-        let (endRow, endCol) = gridLocation(point: end, cellSize: cellSize, gridSize: gridSize)
+        let (startRow, startCol) = gridLocation(for: start, cellSize: cellSize, gridSize: gridSize)
+        let (endRow, endCol) = gridLocation(for: end, cellSize: cellSize, gridSize: gridSize)
         let startX = CGFloat(startCol) * cellSize.width + cellSize.width/2
         let startY = CGFloat(startRow) * cellSize.height + cellSize.height/2
         let endX = CGFloat(endCol) * cellSize.width  + cellSize.width/2
@@ -146,9 +173,12 @@ struct WordSearchGridView: View {
     @ViewBuilder
     private var pipes: some View {
         ForEach(foundPipes) { pipe in
-            pipe
+            let start = cellCenter(for: (pipe.startRow, pipe.startCol), cellSize: cellSize, gridSize: wordSearch.gridSize)
+            let end = cellCenter(for: (pipe.endRow, pipe.endCol), cellSize: cellSize, gridSize: wordSearch.gridSize)
+            PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth)
                 .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                .foregroundColor(.blue)
+                .foregroundColor(pipe.found ? .blue : .yellow)
+                .transition(AnyTransition.opacity)
         }
     }
     
@@ -158,18 +188,17 @@ struct WordSearchGridView: View {
                 state = .dragging(start: drag.startLocation, current: drag.location)
             }
             .onEnded { drag in
-                let (startRow, startCol) = gridLocation(point: drag.startLocation, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
-                let (endRow, endCol) = gridLocation(point: drag.location, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
+                let (startRow, startCol) = gridLocation(for: drag.startLocation, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
+                let (endRow, endCol) = gridLocation(for: drag.location, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
                 let selectedTiles = wordSearch.tilesInLine(from: (row: startRow, col: startCol), to: (row: endRow, col: endCol))
                 var found = false
                 for word in wordSearch.wordsUsed {
                     let tilesForWord = wordSearch.tilesForWord(word.text)
                     if tilesForWord.count == selectedTiles.count && tilesForWord.allSatisfy({ selectedTiles.contains($0) }) {
                         if !word.found {
-                            let (start, end) = gridPoints(start: drag.startLocation, end: drag.location, cellSize: cellSize, gridSize: wordSearch.gridSize)
                             withAnimation {
-                                playSounds("right.wav")
-                                foundPipes.append(PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth))
+                                playSound("right.wav")
+                                foundPipes.append(Pipe(startRow: startRow, startCol: startCol, endRow: endRow, endCol: endCol, found: true))
                             }
                         }
                         wordSearch.markWordFound(word)
@@ -178,12 +207,13 @@ struct WordSearchGridView: View {
                     }
                 }
                 if !found {
-                    playSounds("wrong.wav")
+                    playSound("wrong.wav")
                 }
                 if wordSearch.won {
                     let gems = wordSearch.difficulty == .easy ? 1 : wordSearch.difficulty == .medium ? 3 : 5
                     swordMinder.completeTask(difficulty: gems)
-                    playSounds("win.wav")
+                    playSound("win.wav")
+                    stopTimer()
                     showWin = true
                 }
             }
@@ -203,21 +233,33 @@ struct WordSearchGridView: View {
             }
         }
     }
-
     
-    func playSounds(_ soundFileName : String) {
-        guard let soundURL = Bundle.main.url(forResource: soundFileName, withExtension: nil) else {
-            fatalError("Unable to find \(soundFileName) in bundle")
+    func startTimer() {
+        countDown = 60 * wordSearch.difficultyMultipler
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if self.countDown == 0 {
+                playSound("outoftime.wav")
+                timer.invalidate()
+            } else {
+                self.countDown -= 1
+            }
         }
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-        } catch {
-            print(error.localizedDescription)
-        }
-        audioPlayer.play()
     }
-
+    
+    func stopTimer() {
+        timer?.invalidate()
+    }
+    
+    
+    func playSound(_ soundFileName : String) {
+        if let url = Bundle.main.url(forResource: soundFileName, withExtension: nil) {
+            audioPlayer.replaceCurrentItem(with: AVPlayerItem(url: url))
+            audioPlayer.play()
+        }
+    }
+    
+        
     struct DrawingConstants {
         static let pipeWidth: CGFloat = 30.0
         static let pipePadding: CGFloat = 10.0

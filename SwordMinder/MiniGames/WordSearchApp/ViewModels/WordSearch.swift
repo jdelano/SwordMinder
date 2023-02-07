@@ -25,6 +25,9 @@ class WordSearch : ObservableObject {
         }
     }
     
+    var difficultyMultipler: Int {
+        difficulty == .easy ? 1 : difficulty == .medium ? 3 : 5
+    }
 
     private let allLetters = (65...90).map { Character(UnicodeScalar($0)) }
     @Published var grid = [[Tile]]()
