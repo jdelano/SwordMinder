@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct WordSearchGridView: View {
     @ObservedObject var wordSearch: WordSearch
@@ -18,6 +19,7 @@ struct WordSearchGridView: View {
     @GestureState private var dragState = DragState.inactive
     @State private var highlighted: Set<UUID> = []
     @State private var showWin: Bool = false
+    @State var audioPlayer: AVAudioPlayer!
     
     var body: some View {
         VStack {
@@ -159,22 +161,29 @@ struct WordSearchGridView: View {
                 let (startRow, startCol) = gridLocation(point: drag.startLocation, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
                 let (endRow, endCol) = gridLocation(point: drag.location, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
                 let selectedTiles = wordSearch.tilesInLine(from: (row: startRow, col: startCol), to: (row: endRow, col: endCol))
+                var found = false
                 for word in wordSearch.wordsUsed {
                     let tilesForWord = wordSearch.tilesForWord(word.text)
                     if tilesForWord.count == selectedTiles.count && tilesForWord.allSatisfy({ selectedTiles.contains($0) }) {
                         if !word.found {
                             let (start, end) = gridPoints(start: drag.startLocation, end: drag.location, cellSize: cellSize, gridSize: wordSearch.gridSize)
                             withAnimation {
+                                playSounds("right.wav")
                                 foundPipes.append(PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth))
                             }
                         }
                         wordSearch.markWordFound(word)
+                        found = true
                         break
                     }
+                }
+                if !found {
+                    playSounds("wrong.wav")
                 }
                 if wordSearch.won {
                     let gems = wordSearch.difficulty == .easy ? 1 : wordSearch.difficulty == .medium ? 3 : 5
                     swordMinder.completeTask(difficulty: gems)
+                    playSounds("win.wav")
                     showWin = true
                 }
             }
@@ -196,6 +205,19 @@ struct WordSearchGridView: View {
     }
 
     
+    func playSounds(_ soundFileName : String) {
+        guard let soundURL = Bundle.main.url(forResource: soundFileName, withExtension: nil) else {
+            fatalError("Unable to find \(soundFileName) in bundle")
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+        } catch {
+            print(error.localizedDescription)
+        }
+        audioPlayer.play()
+    }
+
     struct DrawingConstants {
         static let pipeWidth: CGFloat = 30.0
         static let pipePadding: CGFloat = 10.0
