@@ -12,6 +12,7 @@ class WSLabel {
 }
 
 class WordSearchGame : ObservableObject {
+    /// Initial word list
     var words = [Word]()
     var gridSize = 10
     private var labels = [[WSLabel]]()
@@ -83,7 +84,7 @@ class WordSearchGame : ObservableObject {
         let thisFunction = "\(String(describing: self)).\(#function)"
         do {
             try verifyWordSearchFolder()
-            let wordSearchPreferences: Data = try json()
+            let wordSearchPreferences: Data = try JSONEncoder().encode(game)
             try wordSearchPreferences.write(to: url)
         } catch let encodingError where encodingError is EncodingError {
             print("\(thisFunction) couldn't encode Leaderboard as JSON because \(encodingError.localizedDescription)")
@@ -100,11 +101,7 @@ class WordSearchGame : ObservableObject {
         }
     }
 
-    
-    func json() throws -> Data {
-        try JSONEncoder().encode(game)
-    }
-    
+    // MARK: - Initializer
     init() {
         if let url = Autosave.wordSearchPreferencesURL,
             let savedPreferencesData = try? Data(contentsOf: url),
@@ -116,6 +113,8 @@ class WordSearchGame : ObservableObject {
     }
     
     // MARK: - Grid functionality
+    
+    /// Generates the grid based on the words array
     private func makeGrid() {
         labels = (0..<gridSize).map { _ in
             (0..<gridSize).map { _ in

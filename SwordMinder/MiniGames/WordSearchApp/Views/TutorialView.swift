@@ -9,9 +9,6 @@ import SwiftUI
 
 struct TutorialView: View {
     @Binding var showTutorial: Bool
-    @State private var currentPage = 0
-    
-    let images = ["WordFindTutorialGrid1", "WordFindTutorialGrid2"]
     
     var body: some View {
         ZStack {
@@ -25,7 +22,7 @@ struct TutorialView: View {
                         .foregroundColor(.white)
                         .multilineTextAlignment(.leading)
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, DrawingConstants.pageVerticalPadding)
                 VStack {
                     Spacer()
                     Image("WordFindTutorial2")
@@ -40,16 +37,17 @@ struct TutorialView: View {
                     }
                     .padding()
                 }
-                .padding(.bottom, 60)
+                .padding(.bottom, DrawingConstants.pageVerticalPadding)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-            .padding(.top, 50)
+            .padding(.top, DrawingConstants.pageVerticalPadding)
             closeButton
         }
-        .background(Color.black.cornerRadius(10))
+        .background(Color.black)
         .edgesIgnoringSafeArea(.all)
     }
-    var closeButton: some View {
+    
+    private var closeButton: some View {
         VStack {
             HStack {
                 Button(action: {
@@ -58,17 +56,25 @@ struct TutorialView: View {
                     ZStack {
                         Circle()
                             .fill(Color.gray)
-                            .shadow(color: .gray, radius: 3.0, x: 2.0, y: 2.0)
-                            .frame(width: 35)
+                            .shadow(color: .gray, radius: DrawingConstants.closeButtonShadowRadius, x: DrawingConstants.closeButtonShadowOffset.width, y: DrawingConstants.closeButtonShadowOffset.height)
+                            .frame(width: DrawingConstants.closeButtonSize.width, height: DrawingConstants.closeButtonSize.height)
                         Text("X")
                             .foregroundColor(.white)
-                            .font(.system(size: 20, weight: .bold))
+                            .font(.system(size: DrawingConstants.closeButtonFontSize, weight: .bold))
                     }
                 }.padding()
                 Spacer()
             }
             Spacer()
         }
+    }
+    
+    private struct DrawingConstants {
+        static let pageVerticalPadding: CGFloat = 50.0
+        static let closeButtonShadowRadius: CGFloat = 3.0
+        static let closeButtonShadowOffset = CGSize(width: 2.0, height: 2.0)
+        static let closeButtonSize = CGSize(width: 35, height: 35)
+        static let closeButtonFontSize: CGFloat = 20.0
     }
 }
 

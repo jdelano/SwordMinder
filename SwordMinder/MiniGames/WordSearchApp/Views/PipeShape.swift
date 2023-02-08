@@ -31,19 +31,6 @@ struct PipeShape_Previews: PreviewProvider {
         ZStack {
             PipeShape(startPoint: CGPoint(x: 100, y: 100), endPoint: CGPoint(x: 200.0, y: 200.0), pipeWidth: 30)
                 .stroke(lineWidth: 2.0)
-            PipeShape(startPoint: CGPoint(x: 300, y: 200), endPoint: CGPoint(x: 200.0, y: 100.0), pipeWidth: 30)
-                .stroke(lineWidth: 2.0)
-
-            PipeShape(startPoint: CGPoint(x: 200, y: 300), endPoint: CGPoint(x: 100.0, y: 300.0), pipeWidth: 30)
-                .stroke(lineWidth: 2.0)
-            PipeShape(startPoint: CGPoint(x: 300, y: 300), endPoint: CGPoint(x: 400.0, y: 300.0), pipeWidth: 30)
-                .stroke(lineWidth: 2.0)
-            PipeShape(startPoint: CGPoint(x: 200, y: 400), endPoint: CGPoint(x: 200.0, y: 500.0), pipeWidth: 30)
-                .stroke(lineWidth: 2.0)
-            PipeShape(startPoint: CGPoint(x: 300, y: 500), endPoint: CGPoint(x: 300.0, y: 400.0), pipeWidth: 30)
-                .stroke(lineWidth: 2.0)
-
-
         }
     }
 }

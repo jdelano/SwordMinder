@@ -24,13 +24,13 @@ struct WordSearchGridView: View {
             headerMenu
             if verticalSizeClass == .regular {
                 grid
-                    .padding(.horizontal, 5)
+                    .padding(.horizontal, DrawingConstants.gridPadding)
                 wordList
             } else {
                 GeometryReader { geometry in
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.fixed(250.0))]) {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.fixed(DrawingConstants.wordListLandscapeMinWidth))]) {
                         grid
-                            .padding(.horizontal, 5)
+                            .padding(.horizontal, DrawingConstants.gridPadding)
                             .frame(height: geometry.size.height)
                         wordList
                     }
@@ -39,7 +39,8 @@ struct WordSearchGridView: View {
             }
         }
         .background(Image("WordFindBackground")
-            .rotationEffect(.degrees(verticalSizeClass == .regular ? 0.0 : 90.0)))
+            .rotationEffect(.degrees(verticalSizeClass == .regular ? 0.0 : 90.0))
+        )
         .onAppear {
             wordSearch.startGame(passage: passage) { timer in
                 playSound("outoftime.wav")
@@ -53,7 +54,21 @@ struct WordSearchGridView: View {
         .navigationBarBackButtonHidden(true)
     }
     
-    
+    @ToolbarContentBuilder
+    private var toolbar: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                presentationMode.wrappedValue.dismiss()
+            } label: {
+                HStack {
+                    Image(systemName: "chevron.backward")
+                    Text("Select Passage")
+                }
+                .foregroundColor(.white)
+            }
+        }
+    }
+
     private var headerMenu: some View {
         HStack {
             Text("\(passage.referenceFormatted)")
@@ -92,7 +107,7 @@ struct WordSearchGridView: View {
                     }
                 }
                 .onChange(of: cellSize) { self.cellSize = $0 }
-                let (start, end) = gridPoints(start: dragState.startPoint, end: dragState.endPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
+                let (start, end) = pipeCoordinates(start: dragState.startPoint, end: dragState.endPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
                 PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth)
                     .stroke(style: StrokeStyle(lineWidth: DrawingConstants.pipeBorder, lineCap: .round, lineJoin: .round))
                     .foregroundColor(.blue)
@@ -104,40 +119,16 @@ struct WordSearchGridView: View {
     }
     
     
-    private func gridLocation(for point: CGPoint, cellSize: CGSize, gridSize: Int) -> (row: Int, col: Int) {
-        if cellSize.width == 0.0 || cellSize.height == 0.0 { return (0, 0) }
-        let cellY = Int(point.y / cellSize.height)
-        let cellRow = cellY < 0 ? 0 : cellY > gridSize-1 ? gridSize-1 : cellY
-        let cellX = Int(point.x / cellSize.width)
-        let cellCol = cellX < 0 ? 0 : cellX > gridSize-1 ? gridSize-1 : cellX
-        return (cellRow, cellCol)
-    }
-    
-    private func cellCenter(for rowCol: (row: Int, col: Int), cellSize: CGSize, gridSize: Int) -> CGPoint {
-        CGPoint(x: CGFloat(rowCol.col) * cellSize.width + cellSize.width/2,
-                y: CGFloat(rowCol.row) * cellSize.height + cellSize.height/2)
-    }
-    
-    private func gridPoints(start: CGPoint, end: CGPoint, cellSize: CGSize, gridSize: Int) -> (CGPoint, CGPoint) {
-        let (startRow, startCol) = gridLocation(for: start, cellSize: cellSize, gridSize: gridSize)
-        let (endRow, endCol) = gridLocation(for: end, cellSize: cellSize, gridSize: gridSize)
-        let startX = CGFloat(startCol) * cellSize.width + cellSize.width/2
-        let startY = CGFloat(startRow) * cellSize.height + cellSize.height/2
-        let endX = CGFloat(endCol) * cellSize.width  + cellSize.width/2
-        let endY = CGFloat(endRow) * cellSize.height + cellSize.height/2
-        return (CGPoint(x: startX, y: startY), CGPoint(x: endX, y: endY))
-    }
-    
     @ViewBuilder
     private func square(for tile: Tile, highlighted: Bool, coord: (row: Int, col: Int)) -> some View {
         Rectangle()
-            .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 212/255, green: 175/255, blue: 55/255), Color(red: 193/255, green: 154/255, blue: 107/255)]), startPoint: .topLeading, endPoint: .bottomTrailing))
-            .shadow(color: .black, radius: 2, x: 2, y: 2)
-            .border(.black, width: 1)
+            .fill(LinearGradient(gradient: Gradient(colors: [Color("WordFindTileColor1"), Color("WordFindTileColor2")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+            .shadow(color: .black, radius: DrawingConstants.gridCellShadow, x: DrawingConstants.gridCellShadow, y: DrawingConstants.gridCellShadow)
+            .border(.black, width: DrawingConstants.gridCellBorder)
             .overlay(
                 Text(String("\(tile.letter)"))
                     .font(.largeTitle)
-                    .font(.system(size: 8))
+                    .font(.system(size: DrawingConstants.gridFontSize))
                     .foregroundColor(highlighted ? .white : .black)
             )
     }
@@ -147,7 +138,7 @@ struct WordSearchGridView: View {
         VStack {
             Text("Words to Find")
                 .font(.headline)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: DrawingConstants.minimumWordListColumnWidth))]) {
                 ForEach(wordSearch.wordsUsed) { word in
                     Text(word.text.uppercased())
                         .fontWeight(.medium)
@@ -207,8 +198,10 @@ struct WordSearchGridView: View {
                 }
                 // Check to see if they won the game
                 if wordSearch.won {
-                    // Award gems based on difficulty level
-                    swordMinder.completeTask(difficulty: wordSearch.difficultyMultipler)
+                    // Award gems based on difficulty level and if there is still time remaining
+                    if wordSearch.timeRemaining > 0 {
+                        swordMinder.completeTask(difficulty: wordSearch.difficultyMultipler)
+                    }
                     playSound("win.wav")
                     wordSearch.stopAllTimers()
                     showWin = true
@@ -216,36 +209,74 @@ struct WordSearchGridView: View {
             }
     }
     
-    @ToolbarContentBuilder
-    private var toolbar: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                HStack {
-                    Image(systemName: "chevron.backward")
-                    Text("Select Passage")
-                }
-                .foregroundColor(.white)
-            }
-        }
+    
+    /// Retrieves the row/column of the cell at the specified `CGPoint`
+    /// - Parameters:
+    ///   - point: The `CGPoint` used to find the row/column
+    ///   - cellSize: The size of each grid cell
+    ///   - gridSize: The number of rows/columns in the grid (the grid is assumed to be square)
+    /// - Returns: A tuple of row/column indexes for the grid cell that intersects with the supplied point.
+    private func gridLocation(for point: CGPoint, cellSize: CGSize, gridSize: Int) -> (row: Int, col: Int) {
+        // It's possible the word grid hasn't been formed yet, because word list hasn't loaded yet
+        if cellSize.width == 0.0 || cellSize.height == 0.0 { return (0, 0) }
+        let cellY = Int(point.y / cellSize.height)
+        // Make sure row stays within the bounds of the grid
+        let cellRow = cellY < 0 ? 0 : cellY > gridSize-1 ? gridSize-1 : cellY
+        let cellX = Int(point.x / cellSize.width)
+        // Make sure row stays within the bounds of the grid
+        let cellCol = cellX < 0 ? 0 : cellX > gridSize-1 ? gridSize-1 : cellX
+        return (cellRow, cellCol)
     }
     
-    func playSound(_ soundFileName : String) {
+    /// Returns the coordinate (in pixels) that correspond to the specified cell at the given row and column number
+    /// - Parameters:
+    ///   - rowCol: The row and column index of the cell
+    ///   - cellSize: The size of each grid cell
+    ///   - gridSize: The number of rows/columns in the grid (the grid is assumed to be square)
+    /// - Returns: The `CGPoint` at the center of the specified grid cell
+    private func cellCenter(for rowCol: (row: Int, col: Int), cellSize: CGSize, gridSize: Int) -> CGPoint {
+        CGPoint(x: CGFloat(rowCol.col) * cellSize.width + cellSize.width/2,
+                y: CGFloat(rowCol.row) * cellSize.height + cellSize.height/2)
+    }
+    
+    /// Returns the pipe coordinates for the given start and end coordinates. Pipe coordinates are calculated so that each end of the pipe is centered on the grid cell that intersects with the given point.
+    /// - Parameters:
+    ///   - start: The coordinate (in pixels) of the starting point for the line
+    ///   - end: The coordinate (in pixels) of the ending point for the line
+    ///   - cellSize: The size of each grid cell
+    ///   - gridSize: The number of rows/columns in the grid (the grid is assumed to be square)
+    /// - Returns: A tuple of `CGPoint` representing the coordinates of the line that connects the centers of the cells mapped to the supplied start and end points
+    private func pipeCoordinates(start: CGPoint, end: CGPoint, cellSize: CGSize, gridSize: Int) -> (CGPoint, CGPoint) {
+        let (startRow, startCol) = gridLocation(for: start, cellSize: cellSize, gridSize: gridSize)
+        let (endRow, endCol) = gridLocation(for: end, cellSize: cellSize, gridSize: gridSize)
+        let start = cellCenter(for: (startRow, startCol), cellSize: cellSize, gridSize: gridSize)
+        let end = cellCenter(for: (endRow, endCol), cellSize: cellSize, gridSize: gridSize)
+        return (start, end)
+    }
+    
+    /// Plays the sound file provided, replacing any currently playing sounds.
+    /// - Parameter soundFileName: A string representation of the file name (including extension)
+    private func playSound(_ soundFileName : String) {
         if let url = Bundle.main.url(forResource: soundFileName, withExtension: nil) {
             audioPlayer.replaceCurrentItem(with: AVPlayerItem(url: url))
             audioPlayer.play()
         }
     }
-        
-    struct DrawingConstants {
+    
+    /// "Magic" numbers for this view
+    private struct DrawingConstants {
         static let pipeWidth: CGFloat = 30.0
         static let pipePadding: CGFloat = 10.0
         static let pipeBorder: CGFloat = 3.0
         static let pipeBorderHighlight: CGFloat = 5.0
         static let pipeHighlightAnimationLength: CGFloat = 0.10
+        static let minimumWordListColumnWidth: CGFloat = 100.0
+        static let gridFontSize: CGFloat = 8.0
+        static let gridCellBorder: CGFloat = 1.0
+        static let gridCellShadow: CGFloat = 2.0
+        static let gridPadding: CGFloat = 5.0
+        static let wordListLandscapeMinWidth: CGFloat = 250.0
     }
-
 }
 
 struct WordSearchGridView_Previews: PreviewProvider {
