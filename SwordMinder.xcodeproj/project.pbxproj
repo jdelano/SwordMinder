@@ -318,6 +318,17 @@
 			path = Docs;
 			sourceTree = "<group>";
 		};
+		654CEA442993E51D004CB43D /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				654CEA362991ECF0004CB43D /* right.wav */,
+				654CEA342991EAA5004CB43D /* wrong.wav */,
+				654CEA3A2991F27A004CB43D /* outoftime.wav */,
+				654CEA382991EEF0004CB43D /* win.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		65A5D556290375F2001584F2 /* AppIconViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +375,7 @@
 				65AB526B285CC11100FF1038 /* Assets.xcassets */,
 				654A2C01285CD3B5006A7652 /* Docs */,
 				65C7C818293D40E100301285 /* MiniGames */,
+				654CEA442993E51D004CB43D /* Sounds */,
 				65EB9D60287B3C9500FAF612 /* Extensions */,
 				65EB9D76287B839400FAF612 /* Models */,
 				65EB9D77287B83B900FAF612 /* ViewModels */,
@@ -424,13 +436,9 @@
 				65D0600B298D491900BE0B12 /* WordSearchMainView.swift */,
 				65C7C811293BE26500301285 /* WordSearchGridView.swift */,
 				655800DB293EB97B005B1D9F /* WordSearchSettingsView.swift */,
+				654CEA3E29928DAB004CB43D /* TutorialView.swift */,
 				65D06005298B419000BE0B12 /* PipeShape.swift */,
 				65D06009298B424600BE0B12 /* DragState.swift */,
-				654CEA362991ECF0004CB43D /* right.wav */,
-				654CEA342991EAA5004CB43D /* wrong.wav */,
-				654CEA3A2991F27A004CB43D /* outoftime.wav */,
-				654CEA382991EEF0004CB43D /* win.wav */,
-				654CEA3E29928DAB004CB43D /* TutorialView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
