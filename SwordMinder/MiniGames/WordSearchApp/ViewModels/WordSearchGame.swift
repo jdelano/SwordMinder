@@ -1,5 +1,5 @@
 //
-//  WordSearch.swift
+//  WordSearchGame.swift
 //  SwordMinder
 //
 //  Created by John Delano on 12/3/22.
@@ -11,17 +11,37 @@ class WSLabel {
     var tile: Tile = Tile(letter: " ")
 }
 
-class WordSearch : ObservableObject {
+class WordSearchGame : ObservableObject {
     var words = [Word]()
     var gridSize = 10
     private var labels = [[WSLabel]]()
-    @Published var difficulty = Difficulty.easy {
+    @Published var foundPipes = [Pipe]()
+    @Published var timers = [Timer]()
+    @Published var timeRemaining: Int = 0
+    @Published var game: WordSearch {
         didSet {
-            makeGrid()
             if let url = Autosave.wordSearchPreferencesURL {
                 savePreferences(to: url)
             }
-
+        }
+    }
+    
+    var difficulty: Difficulty {
+        get {
+            game.difficulty
+        }
+        set {
+            game.difficulty = newValue
+            makeGrid()
+        }
+    }
+    
+    var showTutorial: Bool {
+        get {
+            game.showTutorial
+        }
+        set {
+            game.showTutorial = newValue
         }
     }
     
@@ -29,6 +49,10 @@ class WordSearch : ObservableObject {
         difficulty == .easy ? 1 : difficulty == .medium ? 3 : 5
     }
 
+    var totalTime: Int {
+        60 * difficultyMultipler + (wordsUsed.count > 5 ? wordsUsed.count * 5 : 0)
+    }
+    
     private let allLetters = (65...90).map { Character(UnicodeScalar($0)) }
     @Published var grid = [[Tile]]()
     @Published var wordsUsed = [Word]()
@@ -78,21 +102,21 @@ class WordSearch : ObservableObject {
 
     
     func json() throws -> Data {
-        try JSONEncoder().encode(difficulty)
+        try JSONEncoder().encode(game)
     }
     
     init() {
         if let url = Autosave.wordSearchPreferencesURL,
             let savedPreferencesData = try? Data(contentsOf: url),
-           let savedPreferences = try? JSONDecoder().decode(Difficulty.self, from: savedPreferencesData) {
-            self.difficulty = savedPreferences
+           let savedPreferences = try? JSONDecoder().decode(WordSearch.self, from: savedPreferencesData) {
+            self.game = savedPreferences
         } else {
-            self.difficulty = .easy
+            self.game = WordSearch()
         }
     }
     
     // MARK: - Grid functionality
-    func makeGrid() {
+    private func makeGrid() {
         labels = (0..<gridSize).map { _ in
             (0..<gridSize).map { _ in
                 WSLabel()
@@ -190,45 +214,63 @@ class WordSearch : ObservableObject {
 
     // MARK: - User Intent Functions
     
-//    func toggleSelect(_ tile: Tile) {
-//        for row in 0..<gridSize {
-//            for col in 0..<gridSize {
-//                if grid[row][col].id == tile.id {
-//                    grid[row][col].selected.toggle()
-//                }
-//            }
-//        }
-//    }
-//
-//    func unSelect(_ tile: Tile) {
-//        for row in 0..<gridSize {
-//            for col in 0..<gridSize {
-//                if grid[row][col].id == tile.id {
-//                    grid[row][col].selected = false
-//                }
-//            }
-//        }
-//    }
     
-    func coordinate(for tile: Tile) -> (Int, Int)? {
-        for row in 0..<gridSize {
-            for col in 0..<gridSize {
-                if grid[row][col].id == tile.id {
-                    return (row, col)
-                }
-            }
+    /// Starts the word search game
+    /// - Parameter passage: The passage to use for the word search game
+    func startGame(passage: Passage, outOfTime: @escaping (Timer)->Void) {
+        Task { @MainActor in
+            var tempPassage = passage
+            words = (try? await tempPassage.words
+                .unique()
+                .filter { $0.count > 3 }
+                .map { Word(text: $0) }) ?? []
+            makeGrid()
+            foundPipes.removeAll()
+            startTimer(finished: outOfTime)
         }
-        return nil
+    }
+
+    func startTimer(finished: @escaping (Timer)->Void) {
+        timeRemaining = totalTime
+        timers.append(Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            self.timeRemaining -= 1
+            if self.timeRemaining == 0 {
+                finished(timer)
+                timer.invalidate()
+            }
+        })
     }
     
+    func stopAllTimers() {
+        timers.forEach({ timer in
+            timer.invalidate()
+        })
+    }
+
+//    func endGame(timeRemaining: Int) -> GameResult {
+//        
+//    }
+    
+    /// Mark the specified word found in the wordsUsed list
+    /// - Parameter word: The `Word` to be marked found
     func markWordFound(_ word: Word) {
         if let index = wordsUsed.index(matching: word) {
             wordsUsed[index].found = true
         }
     }
+
+    func addPipe(start: (row: Int, col: Int), end: (row: Int, col: Int)) {
+        let pipe = Pipe(startRow: start.row, startCol: start.col, endRow: end.row, endCol: end.col, found: true)
+        foundPipes.append(pipe)
+        timers.append(Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false) { _ in
+            self.foundPipes[pipe].new = false
+        })
+    }
     
     
-    
+    /// Retrieves the `Tile`s that are associated with the specified word
+    /// - Parameter word: A string representation of the word, case-insensitive
+    /// - Returns: An Array of `Tile`s
     func tilesForWord(_ word: String) -> [Tile] {
         var tiles = [Tile]()
         for row in 0..<gridSize {
@@ -241,6 +283,11 @@ class WordSearch : ObservableObject {
         return tiles
     }
     
+    /// Retrieves an array of `Tile`s that lie on the horizontal, vertical, or diagonal line that most nearly connects the start and end points
+    /// - Parameters:
+    ///   - startPoint: The (row,col) tuple that defines the start of the line
+    ///   - endPoint: The (row,col) tuple that defines the end of the line
+    /// - Returns: An array of `Tile`s that lie on the line
     func tilesInLine(from startPoint: (row: Int, col: Int), to endPoint: (row: Int, col: Int)) -> [Tile] {
         let deltaCol = endPoint.col - startPoint.col
         let deltaRow = endPoint.row - startPoint.row
@@ -276,5 +323,18 @@ class WordSearch : ObservableObject {
             }
         }
         return tiles
+    }
+    
+    
+    enum GameResult : Codable {
+        case loss(points: Int)
+        case win(points: Int)
+        
+        var points: Int {
+            switch self {
+                case .loss(let points): return points
+                case .win(let points): return points
+            }
+        }
     }
 }

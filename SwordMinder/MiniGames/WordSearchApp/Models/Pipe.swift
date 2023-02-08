@@ -13,5 +13,6 @@ struct Pipe: Identifiable {
     let startCol: Int
     let endRow: Int
     let endCol: Int
-    var found: Bool = false
+    var found = false
+    var new = true
 }

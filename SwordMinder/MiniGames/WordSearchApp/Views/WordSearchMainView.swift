@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordSearchMainView: View {
     @EnvironmentObject var swordMinder: SwordMinder
-    @StateObject private var wordSearch: WordSearch = WordSearch()
+    @StateObject private var wordSearch: WordSearchGame = WordSearchGame()
     @State private var settingsShown: Bool = false
     @Binding var currentApp: Apps
     
@@ -21,12 +21,7 @@ struct WordSearchMainView: View {
                         NavigationLink {
                             WordSearchGridView(wordSearch: wordSearch, passage: passage)
                         } label: {
-                            HStack {
-                                Text(.init(passage.referenceFormatted))
-                                Spacer()
-                                Image(systemName: swordMinder.isPassageReviewedToday(passage) ? "checkmark" : "")
-                                    .foregroundColor(.green)
-                            }
+                            Text(.init(passage.referenceFormatted))
                         }
                     }
                     HStack(alignment: .bottom) {
@@ -39,10 +34,11 @@ struct WordSearchMainView: View {
                 .toolbar { toolbar }
                 .navigationTitle("Select a Passage")
                 .sheet(isPresented: $settingsShown, onDismiss: { settingsShown = false }) {
-                    WordSearchSettingsView(difficulty: $wordSearch.difficulty)
+                    WordSearchSettingsView(settings: $wordSearch.game)
                 }
             }
         }
+        .overlay(wordSearch.showTutorial ? TutorialView(showTutorial: $wordSearch.showTutorial) : nil)
     }
     
     @ToolbarContentBuilder

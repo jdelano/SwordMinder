@@ -9,24 +9,15 @@ import SwiftUI
 import AVFoundation
 
 struct WordSearchGridView: View {
-    @ObservedObject var wordSearch: WordSearch
+    @ObservedObject var wordSearch: WordSearchGame
     @EnvironmentObject var swordMinder: SwordMinder
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @State var passage: Passage
-    @State var selectedTiles = Set<UUID>()
-    @State var foundPipes = [Pipe]()
     @State var cellSize = CGSize.zero
     @GestureState private var dragState = DragState.inactive
-    @State private var highlighted: Set<UUID> = []
     @State private var showWin: Bool = false
     @State var audioPlayer = AVPlayer()
-    @State private var countDown = 0
-    @State private var timer: Timer?
-    
-    private var remainingTime: Int {
-        60 * wordSearch.difficultyMultipler - countDown
-    }
     
     var body: some View {
         VStack {
@@ -50,14 +41,8 @@ struct WordSearchGridView: View {
         .background(Image("WordFindBackground")
             .rotationEffect(.degrees(verticalSizeClass == .regular ? 0.0 : 90.0)))
         .onAppear {
-            Task { @MainActor in
-                
-                wordSearch.words = (try? await passage.words
-                    .unique()
-                    .filter { $0.count > 3 }
-                    .map { Word(text: $0) }) ?? []
-                wordSearch.makeGrid()
-                startTimer()
+            wordSearch.startGame(passage: passage) { timer in
+                playSound("outoftime.wav")
             }
         }
         .alert(isPresented: $showWin) {
@@ -73,12 +58,16 @@ struct WordSearchGridView: View {
         HStack {
             Text("\(passage.referenceFormatted)")
             Spacer()
-            Text("\(countDown / 60):\(String(format: "%02d", countDown % 60))")
+            timeRemaining
             Spacer()
             Text("\(wordSearch.difficulty.rawValue)")
         }
         .font(.title2)
         .padding(.horizontal)
+    }
+    
+    private var timeRemaining: some View {
+        Text("\(wordSearch.timeRemaining / 60):\(String(format: "%02d", wordSearch.timeRemaining % 60))")
     }
     
     private var grid: some View {
@@ -94,21 +83,20 @@ struct WordSearchGridView: View {
                         GridRow {
                             ForEach(0..<wordSearch.grid.count, id:\.self) { column in
                                 let highlightCell = dragState.isDragging && wordSearch
-                                    .tilesInLine(from: (row: startRow, col: startColumn),
-                                                 to: (row: endRow, col: endColumn))
+                                    .tilesInLine(from: (startRow, startColumn),
+                                                 to: (endRow, endColumn))
                                     .contains(wordSearch.grid[row][column])
-                                square(for: wordSearch.grid[row][column], highlighted: highlightCell, coord: (row: row, col: column))
+                                square(for: wordSearch.grid[row][column], highlighted: highlightCell, coord: (row, column))
                             }
                         }
                     }
                 }
                 .onChange(of: cellSize) { self.cellSize = $0 }
-                if dragState.isDragging {
-                    let (start, end) = gridPoints(start: dragState.startPoint, end: dragState.endPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
-                    PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth)
-                        .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
-                        .foregroundColor(.yellow)
-                }
+                let (start, end) = gridPoints(start: dragState.startPoint, end: dragState.endPoint, cellSize: cellSize, gridSize: wordSearch.gridSize)
+                PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth)
+                    .stroke(style: StrokeStyle(lineWidth: DrawingConstants.pipeBorder, lineCap: .round, lineJoin: .round))
+                    .foregroundColor(.blue)
+                    .opacity(dragState.isDragging ? 1.0 : 0.0)                    
                 pipes
             }
             .gesture(dragGesture())
@@ -172,48 +160,57 @@ struct WordSearchGridView: View {
     
     @ViewBuilder
     private var pipes: some View {
-        ForEach(foundPipes) { pipe in
+        ForEach(wordSearch.foundPipes) { pipe in
             let start = cellCenter(for: (pipe.startRow, pipe.startCol), cellSize: cellSize, gridSize: wordSearch.gridSize)
             let end = cellCenter(for: (pipe.endRow, pipe.endCol), cellSize: cellSize, gridSize: wordSearch.gridSize)
             PipeShape(startPoint: start, endPoint: end, pipeWidth: DrawingConstants.pipeWidth)
-                .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                .stroke(style: StrokeStyle(lineWidth: pipe.new ? DrawingConstants.pipeBorderHighlight : DrawingConstants.pipeBorder, lineCap: .round, lineJoin: .round))
+                .animation(.linear(duration: DrawingConstants.pipeHighlightAnimationLength), value: pipe.new)
                 .foregroundColor(pipe.found ? .blue : .yellow)
-                .transition(AnyTransition.opacity)
         }
     }
     
+    /// Drag gesture for word search game to allow user to select words in the grid
+    /// - Returns: The `Gesture` to use
     private func dragGesture() -> some Gesture {
         DragGesture(minimumDistance: 0)
             .updating($dragState) { drag, state, transaction in
                 state = .dragging(start: drag.startLocation, current: drag.location)
             }
             .onEnded { drag in
+                // Get the tiles that the user selected during the drag gesture; need the (row,col) coordinates that correspond to the drag gesture first.
                 let (startRow, startCol) = gridLocation(for: drag.startLocation, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
                 let (endRow, endCol) = gridLocation(for: drag.location, cellSize: self.cellSize, gridSize: wordSearch.gridSize)
                 let selectedTiles = wordSearch.tilesInLine(from: (row: startRow, col: startCol), to: (row: endRow, col: endCol))
+                // This is used to know which sound effect to play later on; default is no match
                 var found = false
+                // Search through each word in the wordsUsed array to see if the tiles that were selected during the drag match all the tiles in any of the words
                 for word in wordSearch.wordsUsed {
                     let tilesForWord = wordSearch.tilesForWord(word.text)
+                    // As long as we have the same number of tiles selected as are in the word, and all selected tiles contain the tiles for the word, then the user has found this word in the grid.
                     if tilesForWord.count == selectedTiles.count && tilesForWord.allSatisfy({ selectedTiles.contains($0) }) {
+                        // Make sure the user didn't already find this word
                         if !word.found {
                             withAnimation {
                                 playSound("right.wav")
-                                foundPipes.append(Pipe(startRow: startRow, startCol: startCol, endRow: endRow, endCol: endCol, found: true))
+                                wordSearch.addPipe(start: (startRow, startCol), end: (endRow, endCol))
                             }
+                            wordSearch.markWordFound(word)
+                            found = true
                         }
-                        wordSearch.markWordFound(word)
-                        found = true
+                        // Don't need to continue looking through the list if this word matches their selection
                         break
                     }
                 }
                 if !found {
                     playSound("wrong.wav")
                 }
+                // Check to see if they won the game
                 if wordSearch.won {
-                    let gems = wordSearch.difficulty == .easy ? 1 : wordSearch.difficulty == .medium ? 3 : 5
-                    swordMinder.completeTask(difficulty: gems)
+                    // Award gems based on difficulty level
+                    swordMinder.completeTask(difficulty: wordSearch.difficultyMultipler)
                     playSound("win.wav")
-                    stopTimer()
+                    wordSearch.stopAllTimers()
                     showWin = true
                 }
             }
@@ -234,41 +231,26 @@ struct WordSearchGridView: View {
         }
     }
     
-    func startTimer() {
-        countDown = 60 * wordSearch.difficultyMultipler
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.countDown == 0 {
-                playSound("outoftime.wav")
-                timer.invalidate()
-            } else {
-                self.countDown -= 1
-            }
-        }
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-    }
-    
-    
     func playSound(_ soundFileName : String) {
         if let url = Bundle.main.url(forResource: soundFileName, withExtension: nil) {
             audioPlayer.replaceCurrentItem(with: AVPlayerItem(url: url))
             audioPlayer.play()
         }
     }
-    
         
     struct DrawingConstants {
         static let pipeWidth: CGFloat = 30.0
         static let pipePadding: CGFloat = 10.0
+        static let pipeBorder: CGFloat = 3.0
+        static let pipeBorderHighlight: CGFloat = 5.0
+        static let pipeHighlightAnimationLength: CGFloat = 0.10
     }
+
 }
 
 struct WordSearchGridView_Previews: PreviewProvider {
     static var previews: some View {
-        WordSearchGridView(wordSearch: WordSearch(), passage: Passage(fromString: "John 3:17", version: .niv)!)
+        WordSearchGridView(wordSearch: WordSearchGame(), passage: Passage(fromString: "John 3:16", toString: "John 3:17", version: .niv)!)
             .environmentObject(SwordMinder())
     }
 }

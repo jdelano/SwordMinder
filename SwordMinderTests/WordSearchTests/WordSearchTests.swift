@@ -11,7 +11,7 @@ import XCTest
 final class WordSearchTests: XCTestCase {
 
     func testWordSearchMakeGrid() throws {
-        let wordSearch = WordSearch()
+        let wordSearch = WordSearchGame()
         wordSearch.makeGrid()
         print(wordSearch.grid)
     }
@@ -37,7 +37,7 @@ final class WordSearchTests: XCTestCase {
     
     
     func testTilesInAlmostDiagonalLine() throws {
-        let wordSearch = WordSearch()
+        let wordSearch = WordSearchGame()
         wordSearch.makeGrid()
         print(wordSearch.grid)
         let tilesinLine = wordSearch.tilesInLine(from: (row:0, col:0), to: (row: 3, col: 2))
@@ -47,7 +47,7 @@ final class WordSearchTests: XCTestCase {
     }
 
     func testTilesInVerticalLine() throws {
-        let wordSearch = WordSearch()
+        let wordSearch = WordSearchGame()
         wordSearch.makeGrid()
         print(wordSearch.grid)
         let tilesinLine = wordSearch.tilesInLine(from: (row:0, col:0), to: (row: 7, col: 0))
@@ -62,7 +62,7 @@ final class WordSearchTests: XCTestCase {
     }
 
     func testTilesInHorizontalLine() throws {
-        let wordSearch = WordSearch()
+        let wordSearch = WordSearchGame()
         wordSearch.makeGrid()
         print(wordSearch.grid)
         let tilesinLine = wordSearch.tilesInLine(from: (row:0, col:0), to: (row: 0, col: 7))
