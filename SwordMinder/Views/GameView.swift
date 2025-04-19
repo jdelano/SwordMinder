@@ -14,23 +14,30 @@ struct GameView: View {
         ScrollView {
             Grid(horizontalSpacing: 10, verticalSpacing: 10) {
                 GridRow {
-                    WordSearchAppIconView {
+                    AppIconView(title: "Word Find", iconImageName: "WordFindIcon") {
                         withAnimation {
                             currentApp = .wordSearchApp
                         }
                     }
-                    FlappyMemoryAppIconView {
+                    AppIconView(title: "Memory Tile", iconImageName: "MemoryTileIcon") {
                         withAnimation {
-                            currentApp = .flappyMemoryApp
+                            currentApp = .memoryTileApp
                         }
                     }
+
                 }
                 GridRow {
-                    WheelOfProvidenceAppIconView {
+                    AppIconView(title: "Wheel of Providence", iconImageName: "WheelOfProvidenceIcon") {
                         withAnimation {
                             currentApp = .wheelOfProvidenceApp
                         }
                     }
+                    AppIconView(title: "Flappy Memory", iconImageName: "FlappyMemoryIcon") {
+                        withAnimation {
+                            currentApp = .flappyMemoryApp
+                        }
+                    }
+
                 }
             }
             .padding()

@@ -43,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -5.0)
         physicsWorld.contactDelegate = self
 
-        if let musicURL = Bundle.main.url(forResource: "music", withExtension: "m4a") {
+        if let musicURL = Bundle.main.url(forResource: "FlappyMemorySoundtrack", withExtension: "wav") {
             backgroundMusic = SKAudioNode(url: musicURL)
             addChild(backgroundMusic)
         }
@@ -254,7 +254,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
                 contact.bodyA.node?.removeFromParent()
             }
 
-            let sound = SKAction.playSoundFileNamed("coin.wav", waitForCompletion: false)
+            let sound = SKAction.playSoundFileNamed("right.wav", waitForCompletion: false)
             run(sound)
 
             score += 1
@@ -267,12 +267,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         }
 
         if contact.bodyA.node == player || contact.bodyB.node == player {
-            if let explosion = SKEmitterNode(fileNamed: "PlayerExplosion") {
-                explosion.position = player.position
-                addChild(explosion)
+            if let crash = SKEmitterNode(fileNamed: "PlayerCrash") {
+                crash.position = player.position
+                addChild(crash)
             }
 
-            let sound = SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false)
+            let sound = SKAction.playSoundFileNamed("crash.wav", waitForCompletion: false)
             run(sound)
 
             gameState = .dead

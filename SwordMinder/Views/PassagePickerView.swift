@@ -11,72 +11,95 @@ import SwiftUI
 /// This view will only allow the passage to span within a single book.
 /// It also prevents the selection of an ending reference to occur before a starting reference; if that is attempted, the ending reference is made equal to the starting reference.
 /// When an ending reference is changed to occur before the starting reference, the view will adjust the starting reference to equal the ending reference.
-/// View also displays the KJV text for the chosen passage at the bottom section of the form.
+/// View also displays the selected Bible version's text for the chosen passage at the bottom section of the form.
 struct PassagePickerView: View {
     @EnvironmentObject var swordMinder: SwordMinder
     @Binding var editorConfig: EditorConfig
     @Binding var passage: Passage
-    @State var passageText: String = ""
     
     var body: some View {
         NavigationStack {
             Form {
-                Section("Translation") {
-                    Picker("Version", selection: $passage.version) {
-                        ForEach(Translation.allCases, id: \.self) { value in
-                            Text(value.rawValue)
-                                .tag(value)
-                        }
-                    }
-                    .onChange(of: passage.version) { value in
-                        updatePassageText()
-                    }
-                    .pickerStyle(.menu)
-                }
+                translationSection
+                
                 Section("Starting Reference") {
-                    VersePickerView(reference: $passage.startReference) { _ in
-                        updatePassageText()
+                    VersePickerView(reference: passage.startReference) { ref in
+                        passage.updateReferences(start: ref)
+                        swordMinder.loadPassageText(for: passage)
                     }
+                    
                 }
+                
                 Section("Ending Reference") {
-                    VersePickerView(reference: $passage.endReference) { _ in
-                        updatePassageText()
+                    VersePickerView(reference: passage.endReference) { ref in
+                        passage.updateReferences(end: ref)
+                        swordMinder.loadPassageText(for: passage)
                     }
                 }
+                
                 Section("Passage") {
                     Group {
                         Text(.init(passage.referenceFormatted))
-                        Text(passage.versesLoaded ? .init(passageText) : " ")
-                            .overlay(passage.versesLoaded ? nil : ProgressView())
+                        
+                        passageContent
                     }
                 }
             }
-            .onAppear {
-                updatePassageText()
-            }
-            .navigationBarItems(leading: Button("Cancel") {
-                editorConfig.dismiss(save: false)
-            }, trailing: Button("Done") {
-                editorConfig.dismiss(save: true)
-            })
+            .navigationBarItems(
+                leading: Button("Cancel") {
+                    editorConfig.dismiss(save: false)
+                },
+                trailing: Button("Done") {
+                    editorConfig.dismiss(save: true)
+                }
+            )
             .navigationTitle("Select Passage")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear {
+            print("⏳ Task started for: \(passage.referenceFormatted)")
+            swordMinder.loadPassageText(for: passage)
+        }
     }
     
-    private func updatePassageText() {
-        Task { @MainActor in
-            self.passageText = (try? await passage.text) ?? ""
+    @ViewBuilder
+    private var translationSection: some View {
+        Section("Translation") {
+            Picker("Version", selection: $passage.translation) {
+                ForEach(Translation.allCases, id: \.self) { value in
+                    Text(value.rawValue)
+                        .tag(value)
+                }
+            }
+            .onChange(of: passage.translation) { _, translation in
+                passage.updateReferences(translation: translation)
+                swordMinder.loadPassageText(for: passage)
+            }
+            .pickerStyle(.menu)
+        }
+    }
+  
+    @ViewBuilder
+    private var passageContent: some View {
+        VStack(spacing: 16) {
+            if swordMinder.isLoadingPassage {
+                ProgressView()
+            } else if let error = swordMinder.passageLoadError {
+                Text("⚠️ Error loading passage: \(error.localizedDescription)")
+                    .foregroundColor(.red)
+            } else {
+                Text(.init(swordMinder.currentPassageText))
+            }
         }
     }
 }
 
 
-struct PassageEditorView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            PassagePickerView(editorConfig: .constant(EditorConfig()), passage: .constant(Passage(from: Reference(book: .psalms, chapter: 119, verse: 100))))
-                .environmentObject(SwordMinder())
-        }
+#Preview {
+    @Previewable @State var passage = Passage(from: Reference(book: .psalms, chapter: 119, verse: 100))
+    NavigationView {
+        PassagePickerView(editorConfig: .constant(EditorConfig()), passage: $passage)
+            .environmentObject(SwordMinder())
     }
 }
+

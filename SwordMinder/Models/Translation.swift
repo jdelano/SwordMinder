@@ -8,7 +8,6 @@
 import Foundation
 
 /// Translation enumeration containing the different possible translations that this API intends to support over time
-/// Currently, the KJV translation is the only one supported.
 enum Translation: String, Codable, Hashable, CaseIterable, Equatable {
     case kjv = "KJV"
     case esv = "ESV"

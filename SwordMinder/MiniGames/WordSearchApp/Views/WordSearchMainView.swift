@@ -60,15 +60,14 @@ struct WordSearchMainView: View {
             }
         }
     }
-
+    
 }
 
 
 
 
-struct WordSearchMainView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordSearchMainView(currentApp: .constant(.wordSearchApp))
-            .environmentObject(SwordMinder(player: Player(passages: [Passage(), Passage(fromString: "John 3:16")!])))
-    }
+#Preview {
+    WordSearchMainView(currentApp: .constant(.wordSearchApp))
+        .environmentObject(SwordMinder(player: Player(passages: [Passage(), Passage(fromString: "John 3:16")!])))
+    
 }

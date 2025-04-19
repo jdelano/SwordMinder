@@ -10,7 +10,7 @@ import SwiftUI
 /// The pickers will display the correct number of chapters for each book selected, and the correct number of verses for each book and chapter that was selected
 struct VersePickerView: View {
     @EnvironmentObject var swordMinder: SwordMinder
-    @Binding var reference: Reference
+    @State var reference: Reference
         
     // onChanged event handlers for each part of the reference
     var referenceChanged: ((_ reference: Reference) -> Void)?
@@ -27,9 +27,9 @@ struct VersePickerView: View {
             picker(for: Array(1...reference.lastChapter), selection: $reference.chapter)
             picker(for: Array(1...reference.lastVerse), selection: $reference.verse)
         }
-        .onChange(of: reference) { ref in
-            fixPicker(for: ref)
-            referenceChanged?(ref)
+        .onChange(of: reference) { _, newref in
+            fixPicker(for: newref)
+            referenceChanged?(newref)
         }
     }
     
@@ -66,7 +66,7 @@ struct VersePickerView: View {
 
 struct VersePicker_Previews: PreviewProvider {
     static var previews: some View {
-        VersePickerView(reference: .constant(Reference(book: .psalms, chapter: 119, verse: 100)))
+        VersePickerView(reference: Reference(book: .psalms, chapter: 119, verse: 100))
             .environmentObject(SwordMinder())
     }
 }

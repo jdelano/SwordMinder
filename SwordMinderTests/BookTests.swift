@@ -14,58 +14,58 @@ final class BookTests: XCTestCase {
     
     func testBookInit() throws {
         var book = Book(rawValue: "Genesis")!
-        XCTAssert(book == .genesis)
+        XCTAssertEqual(book, .genesis)
         
         book = Book.joshua
-        XCTAssert(book == Book.joshua)
-                
+        XCTAssertEqual(book, .joshua)
+        
         let xyzBook = Book(rawValue: "XYZBook")
-        XCTAssert(xyzBook == nil)
+        XCTAssertNil(xyzBook)
         
         let firstJohn = Book.firstJohn
-        XCTAssert(firstJohn == .firstJohn)
+        XCTAssertEqual(firstJohn, .firstJohn)
     }
     
-
+    
     func testBookLessThan() throws {
         let book1 = Book.genesis
         let book2 = Book.exodus
         XCTAssert(book1 < book2)
-        XCTAssert(!(book2 < book1))
+        XCTAssertFalse(book2 < book1)
     }
     
     func testBookGreaterThan() throws {
         let book1 = Book.genesis
         let book2 = Book.exodus
         XCTAssert(book2 > book1)
-        XCTAssert(!(book1 > book2))
+        XCTAssertFalse(book1 > book2)
     }
     
     func testBookEqualTo() throws {
         let book1 = Book.genesis
         let book2 = Book.genesis
-        XCTAssert(book1 == book2)
+        XCTAssertEqual(book1, book2)
     }
-
+    
     func testBookChangeName() throws {
         var book = Book.genesis
         book = .joshua
-        XCTAssert(book == .joshua)
+        XCTAssertEqual(book, .joshua)
     }
     
     
     func testBookNext() throws {
         let gen = Book.genesis
-        XCTAssert(gen.next! == .exodus)
+        XCTAssertEqual(gen.next, .exodus)
         let psa = Book.psalms
-        XCTAssert(psa.next! == .proverbs)
+        XCTAssertEqual(psa.next, .proverbs)
         let rev = Book.revelation
-        XCTAssert(rev.next == nil)
+        XCTAssertNil(rev.next)
     }
     
     func testBookId() throws {
         let gen = Book.genesis
-        XCTAssert(gen.id == Book.genesis)
+        XCTAssertEqual(gen.id, Book.genesis)
     }
-
+    
 }

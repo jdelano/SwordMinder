@@ -55,7 +55,7 @@ struct MemorizeView: View {
     
     private func addItem() {
         withAnimation {
-            addPassage = Passage(version: swordMinder.player.preferredVersion)
+            addPassage = Passage(translation: swordMinder.player.preferredVersion)
             editorConfig.present()
         }
     }

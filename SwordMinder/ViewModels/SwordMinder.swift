@@ -28,6 +28,46 @@ class SwordMinder: ObservableObject {
         }
     }
     
+    // Passage loading state (used by PassagePickerView)
+    @Published var currentPassageText: String = ""
+    @Published var passageLoadError: Error?
+    @Published var isLoadingPassage: Bool = false
+    
+    private var passageLoadTask: Task<Void, Never>? = nil
+    
+    @MainActor
+    func loadPassageText(for passage: Passage, debounceDelay: UInt64 = 300_000_000) {
+        passageLoadTask?.cancel()
+        
+        passageLoadTask = Task {
+            // Debounce: gives time for pickers to settle
+            try? await Task.sleep(nanoseconds: debounceDelay)
+            
+            guard !Task.isCancelled else {
+                print("🟡 Passage load cancelled before start")
+                return
+            }
+            
+            isLoadingPassage = true
+            passageLoadError = nil
+            
+            do {
+                let text = try await passage.text()
+                currentPassageText = text
+            } catch {
+                if !(error is CancellationError) {
+                    passageLoadError = error
+                    currentPassageText = ""
+                } else {
+                    print("🟡 Passage load was cancelled mid-flight")
+                }
+            }
+            
+            isLoadingPassage = false
+        }
+    }
+    
+    
     /// SwordMinder initializer
     /// - Parameters:
     ///   - translation: The bible translation to use for the game; defaults to KJV

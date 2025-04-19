@@ -115,7 +115,7 @@ class WordSearchGame : ObservableObject {
     // MARK: - Grid functionality
     
     /// Generates the grid based on the words array
-    private func makeGrid() {
+    func makeGrid() {
         labels = (0..<gridSize).map { _ in
             (0..<gridSize).map { _ in
                 WSLabel()
@@ -218,8 +218,8 @@ class WordSearchGame : ObservableObject {
     /// - Parameter passage: The passage to use for the word search game
     func startGame(passage: Passage, outOfTime: @escaping (Timer)->Void) {
         Task { @MainActor in
-            var tempPassage = passage
-            words = (try? await tempPassage.words
+            let tempPassage = passage
+            words = (try? await tempPassage.words()
                 .unique()
                 .filter { $0.count > 3 }
                 .map { Word(text: $0) }) ?? []

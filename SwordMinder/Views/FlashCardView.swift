@@ -40,7 +40,7 @@ struct FlashCardView: View {
         }
         .onAppear {
             Task { @MainActor in
-                self.verseText = (try? await passage.text) ?? ""
+                self.verseText = (try? await passage.text()) ?? ""
             }
         }
     }

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a Bible reference containing book, chapter, and verse for a **single** verse
-struct Reference: Codable, Equatable, Comparable {
+struct Reference: Codable, Equatable, Comparable, Hashable {
     /// The Bible book name represented in the reference. The book name should be the full name of the Bible book in string format.
     var book: Book
     
@@ -18,17 +18,17 @@ struct Reference: Codable, Equatable, Comparable {
     /// The verse number represented in the reference
     var verse: Int
         
+    /// The reference of the verse that appears immediately after this reference, or if this is the last reference in the Bible, it returns nil.
     var next: Reference? {
-        if verse == lastVerse {
-            if chapter == lastChapter {
-                if let nextBook = book.next {
-                    return Reference(book: nextBook, chapter: 1, verse: 1)
-                }
-                return nil
-            }
+        if verse < lastVerse {
+            return Reference(book: book, chapter: chapter, verse: verse + 1)
+        } else if chapter < lastChapter {
             return Reference(book: book, chapter: chapter + 1, verse: 1)
+        } else if let nextBook = book.next {
+            return Reference(book: nextBook, chapter: 1, verse: 1)
+        } else {
+            return nil
         }
-        return Reference(book: book, chapter: chapter, verse: verse + 1)
     }
     
     /// Array of verse counts for each book of the Bible; based on KJV verse counts.
@@ -104,14 +104,14 @@ struct Reference: Codable, Equatable, Comparable {
     /// Returns the last chapter number of the current Book
     /// - Returns: final chapter number in book
     var lastChapter: Int {
-        return Reference.verseCounts[book.rawValue]!.count
+        Self.verseCounts[book.rawValue]!.count
     }
     
     /// Returns the last verse number in the specified chapter for the current book
     /// - Parameter chapter: The chapter number
     /// - Returns: final verse number in the specified chapter for the current book
     var lastVerse: Int {
-        return Reference.verseCounts[book.rawValue]![chapter - 1]
+        Self.verseCounts[book.rawValue]![chapter - 1]
     }
     
     
@@ -123,20 +123,18 @@ struct Reference: Codable, Equatable, Comparable {
     ///   - verse: Should contain the verse number of the reference
     init(book: Book = .genesis, chapter: Int = 1, verse: Int = 1) {
         self.book = book
-        self.chapter = chapter
-        self.verse = verse
-        // Default chapter to 1 if out of bounds
-        if self.chapter < 1 || self.chapter > lastChapter {
-            self.chapter = 1
-        }
-        // Default verse to 1 if out of bounds
-        if self.verse < 1 || self.verse > lastVerse {
-            self.verse = 1
-        }
+        
+        let chapterCounts = Self.verseCounts[book.rawValue] ?? [1] // fallback: 1 chapter with 1 verse
+        let validChapter = max(1, min(chapter, chapterCounts.count))
+        let validVerseCount = chapterCounts[validChapter - 1]
+        let validVerse = max(1, min(verse, validVerseCount))
+        
+        self.chapter = validChapter
+        self.verse = validVerse
     }
     
     
-   /// Initializes a new `Reference` based on a String representation of a verse's reference
+    /// Initializes a `Reference` from a formatted string like `"John 3:16"` or `"1 John 1:9"`
     ///
     /// Only supports a reference to a single verse in the Bible (i.e., ranges are not supported and will return nil)
     ///
@@ -144,24 +142,17 @@ struct Reference: Codable, Equatable, Comparable {
     /// and then the chapter number, followed by a colon, and then the verse number.
     init?(fromString reference: String) {
         let pattern = /\b(?:(?<seq>[123]) )?(?<bk>\w+)\b(?:[ .)\n|](?<ch>\d+)(?::(?<vs>\d+)){0,2}\b)?/
-        if let result = try? pattern.wholeMatch(in: reference),
-           let chap = result.ch,
-           let ch = Int(chap),
-           let vrs = result.vs,
-           let vs = Int(vrs) {
-            let bk = String((result.seq == nil ? "" : result.seq! + " ") + result.bk)
-            if let book = Book(rawValue: bk) {
-                self = Reference(book: book, chapter: ch, verse: vs)
-            } else {
-                return nil
-            }
-        } else {
+        guard let result = try? pattern.wholeMatch(in: reference),
+            let ch = Int(result.ch ?? ""),
+            let vs = Int(result.vs ?? "")
+        else {
             return nil
         }
+        let fullBookName = ((result.seq ?? "") + " " + result.bk).trimmingCharacters(in: .whitespaces)
+        guard let book = Book(rawValue: fullBookName) else { return nil }
+        self.init(book: book, chapter: ch, verse: vs)
     }
-
-    
-    
+   
     /// Produces a String representation of the Reference
     ///
     /// - Returns: A String representation of the verse's reference (e.g., "John 3:16")
