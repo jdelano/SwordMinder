@@ -57,7 +57,6 @@ struct PassagePickerView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            print("⏳ Task started for: \(passage.referenceFormatted)")
             swordMinder.loadPassageText(for: passage)
         }
     }
@@ -71,6 +70,7 @@ struct PassagePickerView: View {
                         .tag(value)
                 }
             }
+            .accessibilityLabel("Bible translation version")
             .onChange(of: passage.translation) { _, translation in
                 passage.updateReferences(translation: translation)
                 swordMinder.loadPassageText(for: passage)
@@ -84,13 +84,17 @@ struct PassagePickerView: View {
         VStack(spacing: 16) {
             if swordMinder.isLoadingPassage {
                 ProgressView()
+                    .transition(.opacity)
             } else if let error = swordMinder.passageLoadError {
                 Text("⚠️ Error loading passage: \(error.localizedDescription)")
                     .foregroundColor(.red)
+                    .transition(.opacity)
             } else {
                 Text(.init(swordMinder.currentPassageText))
+                    .transition(.opacity)
             }
         }
+        .animation(.easeInOut, value: swordMinder.isLoadingPassage || swordMinder.passageLoadError != nil)
     }
 }
 

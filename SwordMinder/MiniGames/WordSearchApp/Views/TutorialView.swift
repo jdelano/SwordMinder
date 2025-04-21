@@ -32,7 +32,7 @@ struct TutorialView: View {
                         .foregroundColor(.white)
                         .multilineTextAlignment(.leading)
                         .padding()
-                    SMButtonView(caption: "Start Playing", glyph: {}) {
+                    SMButtonView(title: "Start Playing") {
                         self.showTutorial = false
                     }
                     .padding()

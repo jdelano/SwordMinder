@@ -61,9 +61,8 @@ struct SwordMinderView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        SwordMinderView()
-            .environmentObject(SwordMinder())
-    }
+#Preview {
+    SwordMinderView()
+        .environmentObject(SwordMinder())
+    
 }

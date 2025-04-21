@@ -8,46 +8,74 @@
 import SwiftUI
 
 struct SMButtonStyle: ButtonStyle {
-//    func makeBody(configuration: Configuration) -> some View {
-//        configuration
-//            .label
-//            .font(.body)
-//            .fontWeight(.black)
-//            .foregroundColor(.white)
-//            .background(Color.accentColor)
-//            .cornerRadius(5)
-//            .shadow(color:.black, radius:1)
-//            .opacity(configuration.isPressed ? 0.6 : 1.0)
-//            .scaleEffect(configuration.isPressed ? 0.90 : 1.0)
-//    }
+    
+    @Environment(\.isEnabled) private var isEnabled
     
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.system(size: 17, weight: .semibold))
-            .foregroundColor(.white)
-            .padding(.horizontal, 24)
-            .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
+        ZStack {
+            configuration.label
+                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: isEnabled
+                        ? [Color.white, Color.white.opacity(0.70)]
+                        : [Color.white.opacity(0.70), Color.white.opacity(0.40)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .shadow(color: .black.opacity(0.4), radius: 1, x: 1, y: 1)
+        }
+        .padding(.horizontal, 15)
+        .padding(.vertical, 5)
+        .background(
+            ZStack {
+                // Base gradient
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(
                         LinearGradient(
-                            gradient: Gradient(colors: [
-                                Color(red: 0.32, green: 0.53, blue: 1.0), // light top blue
-                                Color(red: 0.12, green: 0.32, blue: 0.85)  // deeper bottom blue
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
+                            gradient: Gradient(colors: isEnabled
+                                               ? (configuration.isPressed
+                                                  ? [.blue.opacity(0.85), .blue.opacity(0.85)]
+                                                  : [.blue, .blue.opacity(0.90)])
+                                               : [.gray, .gray]
+                                              ),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
                         )
                     )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                    )
-                    .shadow(color: .black.opacity(configuration.isPressed ? 0.1 : 0.25),
-                            radius: configuration.isPressed ? 1 : 3,
-                            x: 0, y: configuration.isPressed ? 1 : 2)
-            )
-            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
-            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+                if !configuration.isPressed {
+                    // Inner shadow
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                        .offset(x: 0.5, y: 0.5)
+                }
+            }
+        )
+        .shadow(color: isEnabled
+                ? .black.opacity(configuration.isPressed ? 0.1 : 0.25)
+                : .black.opacity(0.05),
+                radius: configuration.isPressed ? 1 : 2,
+                x: 0,
+                y: configuration.isPressed ? 1 : 2)
+        .offset(x: configuration.isPressed ? -1 : 0, y: configuration.isPressed ? -1 : 0)
+        .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
+}
+
+
+#Preview {
+    Button {
+    } label: {
+        Text("Demo")
+    }
+    .buttonStyle(SMButtonStyle())
+    .disabled(false)
+    
+    Button {
+    } label: {
+        Text("Demo")
+    }
+    .buttonStyle(SMButtonStyle())
+    .disabled(true)
 }

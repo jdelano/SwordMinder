@@ -67,10 +67,7 @@ struct MemorizeView: View {
     }
 }
 
-struct MemorizeView_Previews: PreviewProvider {
-    static var previews: some View {
-        let swordMinder = SwordMinder(player: Player(passages: [Passage()]))
-        return MemorizeView()
-            .environmentObject(swordMinder)
-    }
+#Preview {
+    return MemorizeView()
+        .environmentObject(SwordMinder(player: Player(passages: [Passage()])))
 }

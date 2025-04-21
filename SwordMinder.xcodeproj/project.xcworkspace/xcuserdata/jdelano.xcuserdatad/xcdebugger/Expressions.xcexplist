@@ -19,6 +19,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "WordSearch.init():WordSearch.swift">
+      </ContextState>
+      <ContextState
          contextName = "PlayerTests.testEligibleLessThan5In24Hours():PlayerTests.swift">
          <PersistentStrings>
             <PersistentString
@@ -35,7 +38,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "WordSearch.init():WordSearch.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in HomeView.body.getter:HomeView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "swordMinder.armor(piece: .helmet)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #2 in WordSearchView.body.getter:WordSearchView.swift">
@@ -149,6 +157,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Player.levelUp(piece:):Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gems">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Player.Armor.levelUp():Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "level">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in WordSearchView.body.getter:WordSearchView.swift">
       </ContextState>
       <ContextState
@@ -177,10 +201,10 @@
          contextName = "closure #1 in closure #1 in closure #2 in closure #1 in PassagePicker.body.getter:PassagePicker.swift">
          <PersistentStrings>
             <PersistentString
-               value = "endReference">
+               value = "startReference">
             </PersistentString>
             <PersistentString
-               value = "startReference">
+               value = "endReference">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

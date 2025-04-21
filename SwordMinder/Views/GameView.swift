@@ -45,8 +45,6 @@ struct GameView: View {
     }
 }
 
-struct GameView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView(currentApp: .constant(.swordMinder))
-    }
+#Preview {
+    GameView(currentApp: .constant(.swordMinder))
 }

@@ -1,111 +1,94 @@
-//
-//  Player.swift
-//  Player
-//
-//  Created by John Delano on 10/8/22.
-//
-
 import Foundation
 
-
-/// Represents the Player within the SwordMinder game
-struct Player : Codable {
+struct Player: Codable, Identifiable {
+    typealias ArmorPiece = Armor.ArmorPiece
+    typealias ArmorMaterial = Armor.ArmorMaterial
+    
+    var id = UUID()
+    
+    // MARK: - Player State
     private(set) var gems: Int = 0
     private var lastRewardReset: Date?
-    private var hoursSinceLastRewardsReset: Int? {
-        lastRewardReset?.hours(since: Date())
-    }
     private var rewardsSinceReset: Int = 0
     private(set) var passages: [Passage]
     private(set) var armor: [Armor]
-    private(set) var armorMaterial: ArmorMaterial
-    private(set) var reviewedPassages: Dictionary<UUID, [Date]> = [:]
-
+    private(set) var reviewedPassages: [UUID: [Date]] = [:]
     var preferredVersion: Translation
     
-    /// The player's level calculated by the average level of each armor piece, taking into account the material of each armor set
+    // MARK: - Computed Properties
+    private var hoursSinceLastRewardsReset: Int? {
+        lastRewardReset?.hours(since: Date())
+    }
+    
     var level: Int {
-        var sum = 0
-        armor.forEach { sum += $0.level }
-        return sum / 4 + (armorMaterial.rawValue * PlayerConstants.maxLevel)
+        let materialValueTotal = armor.reduce(0) { $0 + $1.material.value }
+        let materialScore = materialValueTotal / armor.count * Constants.maxLevel
+        let levelScore = armor.reduce(0) { $0 + $1.level }
+        return materialScore + levelScore
     }
     
-    /// Represents the asset name of the corresponding armor in the game
-    var imageName: String {
-        var materialName = "";
-        switch armorMaterial {
-            case .linen: materialName = "linen"
-            case .leather: materialName = "leather"
-            case .damascusSteel: materialName = "damascusSteel"
-            case .gem: materialName = "gem"
+    var characterAssetName: String {
+        guard let lowestMaterial = armor.min(by: { $0.material < $1.material })?.material else {
+            return "peasant_character"
         }
-        return materialName + "Body"
+        
+        switch lowestMaterial {
+            case .linen:
+                return "peasant_character"
+            case .leather:
+                return "linen_character"
+            case .damascusSteel:
+                return "leather_character"
+            case .gem:
+                let allMaxLevel = armor.allSatisfy { $0.level == Constants.maxLevel }
+                return allMaxLevel ? "gem_character" : "damascus_character"
+        }
     }
-
-    /// Determines whether the player is able to receive a reward from completing a task
-    ///
-    /// Players who are ineligible and still complete a task will receive no gems.
-    /// Players are considered eligible to receive a reward if they have earned fewer than 5 rewards in the past 24 hours.
+    
     var eligible: Bool {
-        if let hoursSinceLastRewardReset = hoursSinceLastRewardsReset {
-            if hoursSinceLastRewardReset >= 24 || (hoursSinceLastRewardReset < 24 && rewardsSinceReset < 5) {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return true
-        }
+        guard let hours = hoursSinceLastRewardsReset else { return true }
+        return hours >= 24 || rewardsSinceReset < 5
     }
-
     
-    /// Identifies the different types of armor that a Player can wear. The armor pieces that a player wears must all come from the same set (i.e., the same material)
-    /// The raw value assigned to each case is a multiplier used in determining the overall player level.
-    enum ArmorMaterial: Int, Codable {
-        case linen = 0
-        case leather = 1
-        case damascusSteel = 2
-        case gem = 3
-    }
-
-    /// Initializer that creates a new Player with specified armor array and gem count.
-    ///
-    /// If the armor array contains fewer than four pieces, the initializer will fill in the remaining pieces at level 1.
-    /// If the armor array contains duplicate armor pieces, the initializer will only use the first armor of each piece type.
-    ///
-    /// - Parameters:
-    ///   - armor: An array containing up to four armor pieces.
-    ///   - gems: The count of gems that the player has
-    ///   - passages: An array of Bible passages that the player has selected for their passage list
-    init(withArmor armor: [Armor] = [], armorMaterial: ArmorMaterial = .linen, gems: Int = 0, passages: [Passage] = [], version: Translation = .esv) {
-        self.armor = []
-        // Use only the first of each armor piece; if piece not present, use default armor for that piece
-        if let helmet = armor.first(where: { $0.piece == .helmet }) {
-            self.armor.append(helmet)
+    
+    // MARK: - Initialization
+    init(withArmor armor: [Armor] = [], gems: Int = 0, passages: [Passage] = [], version: Translation = .esv) {
+        if armor.isEmpty {
+            self.armor = ArmorPiece.allCases.map { Armor(piece: $0) }
         } else {
-            self.armor.append(Armor(piece: .helmet))
+            self.armor = armor
         }
-        if let breastplate = armor.first(where: { $0.piece == .breastplate }) {
-            self.armor.append(breastplate)
-        } else {
-            self.armor.append(Armor(piece: .breastplate))
-        }
-        if let belt = armor.first(where: { $0.piece == .belt }) {
-            self.armor.append(belt)
-        } else {
-            self.armor.append(Armor(piece: .belt))
-        }
-        if let shoes = armor.first(where: { $0.piece == .shoes }) {
-            self.armor.append(shoes)
-        } else {
-            self.armor.append(Armor(piece: .shoes))
-        }
-        self.armorMaterial = armorMaterial
         self.gems = gems
         self.passages = passages
         self.preferredVersion = version
     }
-
+    
+    // MARK: - Codable
+    enum CodingKeys: String, CodingKey {
+        case gems, lastRewardReset, rewardsSinceReset, passages, armor, armorMaterial, reviewedPassages, preferredVersion
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.gems = try container.decode(Int.self, forKey: .gems)
+        self.lastRewardReset = try container.decodeIfPresent(Date.self, forKey: .lastRewardReset)
+        self.rewardsSinceReset = try container.decodeIfPresent(Int.self, forKey: .rewardsSinceReset) ?? 0
+        self.passages = try container.decode([Passage].self, forKey: .passages)
+        self.armor = try container.decode([Armor].self, forKey: .armor)
+        self.reviewedPassages = try container.decodeIfPresent([UUID: [Date]].self, forKey: .reviewedPassages) ?? [:]
+        self.preferredVersion = try container.decodeIfPresent(Translation.self, forKey: .preferredVersion) ?? .esv
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(gems, forKey: .gems)
+        try container.encode(lastRewardReset, forKey: .lastRewardReset)
+        try container.encode(passages, forKey: .passages)
+        try container.encode(armor, forKey: .armor)
+        try container.encode(reviewedPassages, forKey: .reviewedPassages)
+        try container.encode(preferredVersion, forKey: .preferredVersion)
+    }
+    
     func json() throws -> Data {
         try JSONEncoder().encode(self)
     }
@@ -118,220 +101,154 @@ struct Player : Codable {
         let data = try Data(contentsOf: url)
         self = try Player(json: data)
     }
-
-    // MARK: - Codable
     
-    private enum CodingKeys: String, CodingKey {
-        case gems
-        case lastRewardReset
-        case rewardsSinceReset
-        case passages
-        case armor
-        case armorMaterial
-        case reviewedPassages
-        case preferredVersion
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.gems = try container.decode(Int.self, forKey: .gems)
-        self.lastRewardReset = try container.decodeIfPresent(Date.self, forKey: .lastRewardReset)
-        self.rewardsSinceReset = try container.decodeIfPresent(Int.self, forKey: .rewardsSinceReset) ?? 0
-        self.passages = try container.decode([Passage].self, forKey: .passages)
-        self.armor = try container.decode([Player.Armor].self, forKey: .armor)
-        self.armorMaterial = try container.decode(Player.ArmorMaterial.self, forKey: .armorMaterial)
-        self.reviewedPassages = try container.decodeIfPresent(Dictionary<UUID, [Date]>.self, forKey: .reviewedPassages) ?? [:]
-        self.preferredVersion = try container.decodeIfPresent(Translation.self, forKey: .preferredVersion) ?? .esv
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(gems, forKey: .gems)
-        try container.encode(lastRewardReset, forKey: .lastRewardReset)
-        try container.encode(passages, forKey: .passages)
-        try container.encode(armor, forKey: .armor)
-        try container.encode(armorMaterial, forKey: .armorMaterial)
-        try container.encode(reviewedPassages, forKey: .reviewedPassages)
-        try container.encode(preferredVersion, forKey: .preferredVersion)
-    }
-        
-//    func costToLevelUp(for piece: Armor.ArmorPiece) -> Int {
-//        armor.filter( { $0.piece == piece }).first?.costToLevelUp() ?? 9999
-//    }
-    
-    var canUpgradeArmorMaterial: Bool {
-        // Can only upgrade armor when all pieces are at max level and when the player has not already reached the highest armor material
-        armor.allSatisfy({ $0.level == PlayerConstants.maxLevel }) && armorMaterial != .gem
-    }
-    
-    /// Upgrade current armor set to next highest material type
-    ///
-    /// Armor can only be upgraded if all armor pieces are at max level
-    /// Calling upgradeArmor when even one armor piece is less than max level will do nothing
-    /// When all armor pieces are at max level when upgradeArmor is called, the armorMaterial of the Player is changed to the next highest material type (based on raw value), and each armor piece is reset to level 1.
-    mutating func upgradeArmor() {
-        if canUpgradeArmorMaterial {
-            self.armorMaterial = ArmorMaterial(rawValue: self.armorMaterial.rawValue + 1) ?? .gem
-            // Reset each armor piece back to level 1
-            armor.indices.forEach({ armor[$0].reset() })
-            print(self.armorMaterial)
-        }
-    }
-    
-    
-    /// Reward the player by giving them the specified number of gems
-    ///
-    /// Rewards can only be between 1 and 5 gems.
-    /// Players must wait 24 hours after earning 5 rewards
-    ///
-    /// - Parameter gems: The number of gems to give the player
-    mutating func reward(gems: Int) {
-        // Only allow rewards of between 1 and 5 gems at a time
-        if gems >= 1 && gems <= 5 && eligible {
-            // See if last reward was earned
-            self.gems += gems
-            
-            // < 24 hours and < 5 rewards, then just add 1 to rewards
-            // no reset, then set reset and set rewards = 1
-            if let hoursSinceLastRewardsReset = hoursSinceLastRewardsReset,
-               hoursSinceLastRewardsReset < 24,
-               rewardsSinceReset < 5 {
-                rewardsSinceReset += 1
-            } else {
-                lastRewardReset = Date()
-                rewardsSinceReset = 1
-            }
-        }
-    }
-
-    
-    /// Determines whether or not a specified piece of armor can be leveled up
-    /// - Parameter piece: Armor piece to level up
-    /// - Returns: Whether or not the player has sufficient gems to level up the armor piece and/or whether or not the armor piece is still below max level
-    func canLevelUp(armorPiece piece: Armor.ArmorPiece) -> Bool {
-        guard let armorIndex = index(forPiece: piece) else {
-            return false
-        }
-        let levelUpCost = armor[armorIndex].costToLevelUp()
-        return levelUpCost <= self.gems && armor[armorIndex].level < PlayerConstants.maxLevel
-    }
-    
-    
-    /// Level's up the specified armor piece if the player has the resources and if the armor piece is eligible to be leveled up
-    /// - Parameter piece: The armor piece to level up
-    mutating func levelUp(piece: Armor.ArmorPiece) {
-        guard let armorIndex = index(forPiece: piece) else {
-            return
-        }
-        let levelUpCost = armor[armorIndex].costToLevelUp()
-        if canLevelUp(armorPiece: piece) {
-            armor[armorIndex].levelUp()
-            gems -= levelUpCost
-        }
-    }
-    
-    
-    mutating func charge(gems: Int) {
-        // Don't allow spending more than the player has
-        if self.gems > gems {
-            self.gems -= gems
-        }
-    }
+    // MARK: - Armor Management
     
     /// Retrieves the index value of the requested armor piece
     /// - Parameter piece: The armor piece to lookup
     /// - Returns: The index position of the specified armor piece; returns nil if armor piece is not found
-    private func index(forPiece piece: Armor.ArmorPiece) -> Int? {
-        self.armor.firstIndex(where: { $0.piece == piece })
+    private func index(piece: ArmorPiece) -> Int? {
+        armor.firstIndex(where: { $0.piece == piece })
     }
     
+    func canLevelUp(piece: ArmorPiece) -> Bool {
+        guard let i = index(piece: piece) else { return false }
+        let a = armor[i]
+        return a.costToLevelUp() <= gems && a.level < Constants.maxLevel
+    }
     
-    // MARK: - Passages
+    mutating func levelUp(piece: ArmorPiece) {
+        guard let i = index(piece: piece), canLevelUp(piece: piece) else { return }
+        gems -= armor[i].costToLevelUp()
+        var upgraded = armor[i]
+        upgraded.levelUp()
+        armor[i].levelUp() // = upgraded
+    }
     
-    /// Adds a `Passage` to the player's list of selected Bible passages for memorization
-    /// - Parameter passage: The `Passage` object to add to the player's list of selected passages
+    func canUpgrade(piece: ArmorPiece) -> Bool {
+        guard let i = index(piece: piece) else { return false }
+        return armor[i].level == Constants.maxLevel && armor[i].material < .gem
+    }
+    
+    mutating func upgrade(piece: ArmorPiece) {
+        guard let i = index(piece: piece), canUpgrade(piece: piece) else { return }
+        armor[i].material = armor[i].material.next
+        armor[i].reset()
+    }
+    
+    // MARK: - Currency Management
+    
+    mutating func charge(gems: Int) {
+        if self.gems > gems { self.gems -= gems }
+    }
+    
+    // MARK: - Reward Logic
+    mutating func reward(gems: Int) {
+        guard (1...5).contains(gems), eligible else { return }
+        self.gems += gems
+        if let hours = hoursSinceLastRewardsReset, hours < 24, rewardsSinceReset < 5 {
+            rewardsSinceReset += 1
+        } else {
+            lastRewardReset = Date()
+            rewardsSinceReset = 1
+        }
+    }
+    
+    // MARK: - Passage Management
     mutating func addPassage(_ passage: Passage) {
         passages.append(passage)
     }
     
-        
-    /// Removes the `Passage` objects from the player's list of selected passages at the specified offsets
-    /// - Parameter offsets: The index offsets corresponding to the selected passages to remove
     mutating func removePassages(atOffsets offsets: IndexSet) {
         passages.remove(atOffsets: offsets)
     }
-
     
     mutating func reviewPassage(_ passage: Passage) {
-        if reviewedPassages[passage.id] != nil {
-            reviewedPassages[passage.id]!.append(Date())
-        } else {
-            reviewedPassages[passage.id] = [Date()]
-        }
+        reviewedPassages[passage.id, default: []].append(Date())
     }
     
-    /// Indicates whether or not the player has reviewed the specified passage at least the minimum number of times today
-    /// - Parameter passage: The `Passage` being reviewed
-    /// - Returns: A `Bool` indicating whether or not the player has reviewed the passage the minimum number of times today.
     func passageReviewedToday(_ passage: Passage) -> Bool {
         let today = Calendar.current.startOfDay(for: Date())
-        return (reviewedPassages[passage.id]?.filter( { $0 > today}).count ?? 0) >= PlayerConstants.minReviewsPerDay
+        return (reviewedPassages[passage.id]?.filter { $0 > today }.count ?? 0) >= Constants.minReviewsPerDay
     }
     
-    // MARK: - Armor
+    // MARK: - Armor Types
     struct Armor: Identifiable, Codable {
         var id = UUID()
         private(set) var level: Int = 1
         private(set) var charged = false
         private(set) var piece: ArmorPiece
-        var imageName: String {
+        fileprivate(set) var material: ArmorMaterial = .linen
+        
+        
+        var description: String {
             switch piece {
-                case .helmet: return "brain.head.profile"
-                case .breastplate: return "heart.fill"
-                case .belt: return "figure.walk"
-                case .shoes: return "shoeprints.fill"
+                case .helmet: "Helmet of Salvation"
+                case .breastplate: "Breastplate of Righteousness"
+                case .belt: "Belt of Truth"
+                case .shoes: "Shoes of Peace"
             }
         }
-                
-        enum ArmorPiece: String, Codable {
-            case helmet = "helmet"
-            case breastplate = "breastplate"
-            case belt = "belt"
-            case shoes = "shoes"
+        
+        var assetName: String {
+            "\(material.rawValue)_\(piece.rawValue)"
         }
         
         func costToLevelUp() -> Int {
-            let nextLevel = Double(level + 1)
-            let numerator = PlayerConstants.levelUpFactor * (pow(PlayerConstants.baseLevelUp, nextLevel) + nextLevel)
-            let denominator = PlayerConstants.levelInfationFactor * nextLevel + PlayerConstants.levelDampening
-            return Int((numerator / denominator))
+            guard level < Constants.maxLevel else { return 0 }
+            let next = Double(level + 1)
+            let top = Constants.levelUpFactor * (pow(Constants.baseLevelUp, next) + next)
+            let bottom = Constants.levelInfationFactor * next + Constants.levelDampening
+            return Int(top / bottom)
         }
         
-        mutating fileprivate func levelUp() {
-            if (level < PlayerConstants.maxLevel) {
-                level += 1
+        fileprivate mutating func levelUp() {
+            guard level < Constants.maxLevel else { return }
+            level += 1
+        }
+        
+        fileprivate mutating func reset() {
+            level = 1
+        }
+        
+        enum ArmorMaterial: String, Codable, Comparable {
+            static func < (lhs: Player.Armor.ArmorMaterial, rhs: Player.Armor.ArmorMaterial) -> Bool {
+                lhs.value < rhs.value
+            }
+            
+            case linen = "linen", leather = "leather", damascusSteel = "damascus", gem = "gem"
+            
+            var next: ArmorMaterial {
+                switch self {
+                    case .linen: .leather
+                    case .leather: .damascusSteel
+                    case .damascusSteel: .gem
+                    case .gem: .gem
+                }
+            }
+            
+            var value: Int {
+                switch self {
+                    case .linen: 1
+                    case .leather: 2
+                    case .damascusSteel: 3
+                    case .gem: 4
+                }
             }
         }
         
-        mutating fileprivate func reset() {
-            level = 1
+        enum ArmorPiece: String, Codable, CaseIterable {
+            case helmet = "helmet", breastplate = "chest", belt = "pants", shoes = "boots"
         }
     }
     
-    // MARK: - PlayerConstants
-    struct PlayerConstants : Codable {
-        // Larger numbers increase difficulty early; lower numbers flattens the growth curve
+    // MARK: - Constants
+    struct Constants {
         static let levelUpFactor: Double = 3.0
-        // Even small increases dramatically increase cost of leveling up
         static let baseLevelUp: Double = 1.15
-        // Smaller numbers increases inflation
         static let levelInfationFactor: Double = 0.5
-        // Larger numbers shifts the curve downard
         static let levelDampening: Double = 2.0
         static let maxLevel: Int = 40
         static let minReviewsPerDay: Int = 3
     }
-    
-    
-    
 }

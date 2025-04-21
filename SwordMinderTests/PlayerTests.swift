@@ -147,19 +147,19 @@ final class PlayerTests: XCTestCase {
     
     func testPlayerLevel() throws {
         XCTAssert(player.level == 1)
-        for _ in 0..<(Player.PlayerConstants.maxLevel - 1) {
+        for _ in 0..<(Player.Constants.maxLevel - 1) {
             player.levelUp(piece: .helmet)
         }
         XCTAssert(player.level == 10)
-        for _ in 0..<(Player.PlayerConstants.maxLevel - 1) {
+        for _ in 0..<(Player.Constants.maxLevel - 1) {
             player.levelUp(piece: .breastplate)
         }
         XCTAssert(player.level == 20)
-        for _ in 0..<(Player.PlayerConstants.maxLevel - 1) {
+        for _ in 0..<(Player.Constants.maxLevel - 1) {
             player.levelUp(piece: .belt)
         }
         XCTAssert(player.level == 30)
-        for _ in 0..<(Player.PlayerConstants.maxLevel - 1) {
+        for _ in 0..<(Player.Constants.maxLevel - 1) {
             player.levelUp(piece: .shoes)
         }
         XCTAssert(player.level == 40)
@@ -196,7 +196,7 @@ final class PlayerTests: XCTestCase {
     }
     
     func testCanLevelUp() throws {
-        for _ in 0..<(Player.PlayerConstants.maxLevel - 2) {
+        for _ in 0..<(Player.Constants.maxLevel - 2) {
             player.levelUp(piece: .helmet)
         } // Gets player's helmet to 1 level below max (armor always starts at level 1)
         XCTAssert(player.canLevelUp(armorPiece: .helmet)) // should still be able to upgrade it

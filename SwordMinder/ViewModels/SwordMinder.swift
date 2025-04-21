@@ -10,6 +10,7 @@ import Foundation
 
 /// The SwordMinder view model class
 class SwordMinder: ObservableObject {
+    typealias Armor = Player.Armor
     typealias ArmorPiece = Player.Armor.ArmorPiece
     typealias Entry = Leaderboard.Entry
         
@@ -20,6 +21,7 @@ class SwordMinder: ObservableObject {
             }
         }
     }
+       
     @Published var leaderboard: Leaderboard {
         didSet {
             if let url = Autosave.leaderboardURL {
@@ -74,12 +76,12 @@ class SwordMinder: ObservableObject {
     ///   - player: The player object to use for the game; defaults to a new Player object
     ///   - leaderboard: The leaderboard to use for the game; defaults to a new Leaderboard object
     init(player: Player = Player(), leaderboard: Leaderboard = Leaderboard()) {
-        if let url = Autosave.playerURL,
-           let savedPlayer = try? Player(url: url) {
-            self.player = savedPlayer
-        } else {
+//        if let url = Autosave.playerURL,
+//           let savedPlayer = try? Player(url: url) {
+//            self.player = savedPlayer
+//        } else {
             self.player = player
-        }
+//        }
         if let url = Autosave.leaderboardURL, let savedLeaderboard = try? Leaderboard(url: url) {
             self.leaderboard = savedLeaderboard
         } else {
@@ -154,21 +156,19 @@ class SwordMinder: ObservableObject {
         player.eligible
     }
     
-    
+    func armor(piece: ArmorPiece) -> Armor {
+        guard let index = player.armor.firstIndex(where: { $0.piece == piece }) else {
+            return .init(piece: piece, material: .linen)
+        }
+        return player.armor[index]
+    }
+       
     /// Complete a user task
     /// - Parameter difficulty: The level of difficulty of the task on a scale of 1 to 5. Values outside this range will be ignored.
     func completeTask(difficulty: Int) {
         player.reward(gems: difficulty)
     }
     
-    
-    /// Retrieves the armor level for the specified piece of armor
-    /// - Parameter piece: The piece of armor from the `Player.Armor.ArmorPiece` enum
-    /// - Returns: The level number of the armor (between 1 and 40, inclusive)
-    func armorLevel(piece: ArmorPiece) -> Int {
-        player.armor.first(where: { $0.piece == piece })?.level ?? 1
-    }
-
     /// The Bible passages that the user has selected to focus on for engagement
     var passages: [Passage] {
         player.passages
