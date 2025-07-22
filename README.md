@@ -1,5 +1,5 @@
 <p align="center">
-    <img src ="Resources/SwordMinder1024.png" alt="SwordMinder Logo" title="SwordMinder" width=600 />
+    <img src ="Resources/AppIcon(new).png" alt="SwordMinder Logo" title="SwordMinder" width=600 />
 </p>
 
 <p align="center">
